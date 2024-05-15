@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+});
+
 
 export const metadata: Metadata = {
   title: "Rheinland Jobs - Your Premier Job Consultancy",
@@ -22,7 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/rheinlandLogoHeader.png" />
       </head>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Header />
         {children}</body>
     </html>
