@@ -16,7 +16,8 @@ const JobCard = () => {
             <div className='flex justify-start items-center font-light text-sm gap-2 w-full py-1'>
                 <span className='flex items-center justify-center gap-[6px]'>
                     <HiOutlineBuildingOffice2 />
-                    Duoph</span>
+                    Rheinland
+                </span>
                 <span></span>
                 <span className='flex items-center justify-center gap-[6px]'>
                     <CiLocationOn />
