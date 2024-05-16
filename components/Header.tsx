@@ -9,7 +9,7 @@ import SliderMenu from './SliderMenu';
 const Header = () => {
 
     return (
-        <div className='flex bg-white fixed top-0 left-0 w-full items-center justify-between pl-10 pr-5 py-3' >
+        <div className='flex bg-white fixed top-0 left-0 w-full items-center justify-between pl-10 pr-5 py-3 z-10' >
             <div className='flex items-center justify-between'>
                 <div className='flex items-center justify-center gap-10 '>
                     <Link href={'/'} className='flex items-center min-w-1/3'>
