@@ -39,16 +39,18 @@ const FeaturedJobs = () => {
     };
 
     return (
-        <div className=' flex items-center justify-center gap-7 flex-col w-full px-5 md:px-10 md:py-12 py-7 '>
-            <div className='flex items-center justify-center  w-full'>
-                <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px]  font-semibold">Featured <span className="text-rheinland-yellow">Jobs</span> </h1>
-            </div>
-            <div className='relative w-full'>
-                <GoChevronLeft onClick={handleScrollLeft} className='md:hover:scale-110 z-10 absolute top-[170px] bg-black text-white  left-2 rounded-full cursor-pointer' size={30} />
-                <GoChevronRight onClick={handleScrollRight} className='md:hover:scale-110 z-10 absolute top-[170px] bg-black text-white right-2 rounded-full cursor-pointer' size={30} />
+        <div className='relative flex items-center justify-center gap-7 flex-col w-full px-5 md:px-7 md:py-12 py-7'>
+            <div className='flex items-center justify-center w-full'>
+                <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] font-semibold">Featured <span className="text-rheinland-yellow">Jobs</span></h1>
             </div>
 
-            <div ref={scrollContainerRef} className={`relative flex py-5 overflow-scroll justify-start items-center gap-2 w-full hideScrollBar `}>
+            <GoChevronLeft onClick={handleScrollLeft} className='z-10 absolute top-[230px] bg-black text-white md:left-8 left-3 rounded-full cursor-pointer' size={30} />
+            <GoChevronRight onClick={handleScrollRight} className='z-10 absolute top-[230px] bg-black text-white right-3 md:right-8 rounded-full cursor-pointer' size={30} />
+
+            <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex py-5 overflow-scroll justify-start items-center gap-2 w-full hideScrollBar'>
+                <JobCard />
+                <JobCard />
+                <JobCard />
                 <JobCard />
                 <JobCard />
                 <JobCard />
@@ -58,7 +60,7 @@ const FeaturedJobs = () => {
                 <JobCard />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default FeaturedJobs
+export default FeaturedJobs;

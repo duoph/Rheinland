@@ -5,7 +5,7 @@ import { HiOutlineBuildingOffice2 } from 'react-icons/hi2'
 
 const JobCard = () => {
     return (
-        <div className='border flex-col items-start justify-between w-[300px]  min-h-[200px] group rounded-sm px-3 py-6  cursor-pointer '>
+        <div className='border shadow-sm flex-col items-start justify-between min-w-[300px]  min-h-[200px] group rounded-sm px-3 py-6  cursor-pointer '>
             <div className='flex justify-between items-center w-full'>
                 <Image src={'/RheinlandLogoHeader.png'} alt='Logo' height={60} width={60} />
                 <span className='border px-2 py-1 rounded-sm'>Full Time</span>
