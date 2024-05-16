@@ -15,7 +15,7 @@ const HeroContainer = () => {
                     <Image src={'/sketchSplash.png'} height={500} width={300} alt={"sketchSplash"} />
                 </div>
                 <p className="text-rheinland-gray text-sm font-light py-5 break-all">Great platform for the job seeker that searching for new career heights and passionate about startups.</p>
-                <div className="w-full shadow-2xl lg:w-[70vw] flex items-center justify-end lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
+                <div className="w-full shadow-lg lg:w-[70vw] flex items-center justify-end lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiSearch size={24} />
                         <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Job Title or Keyword" />
