@@ -9,7 +9,7 @@ const Footer = () => {
 
             <div className="flex flex-col items-center justify-center md:justify-between md:flex-row gap-4 w-full" >
                 <div className='md:w-1/2 w-full flex flex-col items-center md:justify-start'>
-                    <Image src={'/RheinlandWhiteLogo.png'} className='cursor-pointer' alt='Logo' height={100} width={100} />
+                    <Image src={'/rheinlandWhiteLogo.png'} className='cursor-pointer' alt='Logo' height={100} width={100} />
                     <span>Great platform for the job seeker that passionate about startups. Find your dream job easier.</span>
                 </div>
                 <div className='md:w-1/2 w-full  flex flex-col items-center md:justify-start'>
