@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -23,15 +24,16 @@ const SliderMenu = () => {
                     />
                 )}
                 <div
-                    className={`absolute right-0 top-[80px] flex items-start justify-start flex-col gap-3  px-5 py-3 bg-rheinland-yellow w-full h-[calc(100vh-80px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
+                    className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-3  px-5 py-3 bg-rheinland-yellow w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
                         }`}
                 >
-                    <div>
-                        <h1>RheinLand</h1>
+                    <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <Link href={'/login'}>Login</Link>
                     </div>
-                    <div>
-                        <h1>RheinLand</h1>
+                    <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <Link href={'/create-account'}>Create Account</Link>
                     </div>
+
                     <div>
                         <h1>RheinLand</h1>
                     </div>

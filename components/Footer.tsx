@@ -5,8 +5,7 @@ import React from 'react'
 const Footer = () => {
     return (
 
-        <div className='bg-rheinland-gray flex flex-col items-center justify-center gap-10 pt-7 pb-3 text-slate-200 px-5 font-light'>
-
+        <div className='bg-rheinland-gray flex flex-col items-center justify-center gap-10 pt-10 pb-3 text-slate-200 px-5 font-light'>
             <div className="flex flex-col items-center justify-center md:justify-between md:flex-row gap-4 w-full" >
                 <div className='md:w-1/2 w-full flex flex-col items-center md:justify-start'>
                     <Image src={'/rheinlandWhiteLogo.png'} className='cursor-pointer' alt='Logo' height={100} width={100} />
