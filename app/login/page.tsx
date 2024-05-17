@@ -1,6 +1,5 @@
 "use client"
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React from 'react'
@@ -11,15 +10,15 @@ const LoginPage = () => {
     const router = useRouter()
 
     return (
-        <div className='relative h-screen flex flex-col items-center justify-center'>
-            <div className='absolute top-[80px] left-[10px]'>
+        <div className='relative min-h-screen flex flex-col items-center justify-center'>
+            <div className='absolute top-[80px] left-[10px] cursor-pointer md:flex hidden'>
                 <span onClick={() => router.push("/")} className='flex items-center justify-center gap-2'> <IoMdArrowBack /> Back</span>
             </div>
 
             <div className='rounded-sm flex flex-col items-center justify-center gap-4 sm:w-[400px]  w-full px-4 py-7 '>
-                <div className='flex items-start justify-start w-full'>
+                {/* <div className='flex items-start justify-start w-full'>
                     <Image src={'/RheinlandLogoHeader.png'} alt='Logo' height={100} width={100} />
-                </div>
+                </div> */}
                 <div className='flex flex-col items-start justify-center w-full'>
                     <span className='text-[30px] font-semibold'>Login to your account.</span>
                     <span className='text-sm font-light'>Explore open career opportunities</span>
