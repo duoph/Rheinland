@@ -25,7 +25,7 @@ const Header = () => {
                 <Link href={'/login'} className='rounded-sm px-3 py-2 text-rheinland-red'>Login</Link>
                 <Link href={'/create-account'} className='rounded-sm bg-rheinland-red text-white px-3 py-2'>Sign Up</Link>
             </div>
-            <div className='sm:w-1/6 flex lg:hidden items-end justify-end  gap-3 font-light cursor-pointer' >
+            <div className='sm:w-[40px] flex lg:hidden items-end justify-end  gap-3 font-light cursor-pointer' >
                 <SliderMenu />
             </div>
         </div>

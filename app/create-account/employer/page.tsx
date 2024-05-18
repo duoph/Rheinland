@@ -1,17 +1,13 @@
 "use client"
 
-
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
 
-const CreateAccountPage = () => {
-
+const CreateEmployerAccount = () => {
 
     const router = useRouter()
-
 
     return (
         <div className='relative min-h-screen flex flex-col items-center justify-center'>
@@ -46,4 +42,4 @@ const CreateAccountPage = () => {
     )
 }
 
-export default CreateAccountPage
+export default CreateEmployerAccount

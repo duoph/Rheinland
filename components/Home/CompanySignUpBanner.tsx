@@ -11,7 +11,7 @@ const CompanySignUpBanner = () => {
                     <h1 className="text-[24px]">Start posting jobs today</h1>
                     <span className="font-light text-sm">Start posting jobs for only $10</span>
                 </div>
-                <Link className="bg-white px-5 py-3 rounded-sm text-rheinland-red " href={'/'}>Sign Up For Free</Link>
+                <Link className="bg-white px-5 py-3 rounded-sm text-rheinland-red " href={'/create-account'}>Sign Up For Free</Link>
             </div>
         </div>
     )

@@ -17,7 +17,10 @@ const Jobs = () => {
                     <CiLocationOn size={24} />
                     <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Eg: Berlin" />
                 </div>
-                <button className="w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3">Search My job</button>
+                <button className="w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center">
+                    Search
+                    {/* <CiSearch size={24} /> */}
+                </button>
             </div>
 
 
