@@ -33,6 +33,9 @@ const SliderMenu = () => {
                     <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <Link href={'/create-account'}>Create Account</Link>
                     </div>
+                    <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <Link href={'/jobs'}>Jobs</Link>
+                    </div>
 
                     <div>
                         <h1>RheinLand</h1>

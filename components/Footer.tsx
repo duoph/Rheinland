@@ -19,8 +19,8 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className=''>
-                <span>2024 @ Rheinland Consultancy. Designed and Developed by <Link target='_blank' href={'https://www.duoph.com/'} className='cursor-pointer'>Duoph</Link> </span>
+            <div className='flex items-center justify-center'>
+                <span className='text-center'>2024 @ Rheinland Consultancy. Designed and Developed by <Link target='_blank' href={'https://www.duoph.com/'} className='cursor-pointer text-center'>Duoph</Link> </span>
             </div>
 
         </div>
