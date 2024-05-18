@@ -28,8 +28,8 @@ const JobCard = () => {
             <div className='flex justify-start items-center  gap-2 w-full py-2l'>
                 <p className=''>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum, assumenday Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, earum. ...</p>
             </div>
-            <div>
-
+            <div className='pt-2 font-extralight text-sm'>
+                <span>Posted on 18/05/22</span>
             </div>
         </Link>
     )

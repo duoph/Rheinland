@@ -38,6 +38,10 @@ const CreateEmployerAccount = () => {
         e.preventDefault();
         try {
 
+            if (!formData.employerName || !formData.email || !formData.confirmPassword || !formData.phone || !formData.password) {
+                toast.error("Fill all the inputs")
+            }
+
             setIsError(false);
             console.log('Form submitted:', formData);
             // You can send formData to your backend or handle it as per your application logic

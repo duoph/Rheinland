@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import React from 'react'
-import { CiLocationOn } from 'react-icons/ci'
+import { CiBookmark, CiLocationOn } from 'react-icons/ci'
 
 const SingleJobPage = () => {
 
@@ -10,8 +10,9 @@ const SingleJobPage = () => {
 
     return (
         <div className="relavtive min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
-            <div className='flex flex-col items-start justify-center w-full'>
+            <div className='flex items-start justify-between w-full'>
                 <h1 className='font-semibold text-2xl'>Full Stack Developer</h1>
+                <CiBookmark className='text-red-500' size={30}/>
             </div>
 
             <div className='flex flex-col items-start justify-center w-full gap-2'>
