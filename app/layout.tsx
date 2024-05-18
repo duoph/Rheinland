@@ -32,7 +32,16 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <Header />
-        <Toaster />
+        <Toaster toastOptions={{
+          className: '',
+          style: {
+            backgroundColor: "red",
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            color: 'white',
+            borderRadius: '2px',
+          },
+        }} />
         {children}
         <Footer />
       </body>
