@@ -37,7 +37,7 @@ const CreateAccountPage = () => {
                 <button className='px-5 py-3 w-full bg-rheinland-red text-white'>Create Account</button>
                 <div className='flex flex-col items-center justify-center text-sm gap-1'>
                     <span className='font-light'>Already have an account? <Link href={'/login'} className='text-blue-500 underline'>Login</Link></span>
-                    <span className='font-light'>Register as a company? <Link href={'/create-account/employer'} className='text-blue-500 underline'>Register</Link></span>
+                    <span className='font-light'>Register as a employer? <Link href={'/create-account/employer'} className='text-blue-500 underline'>Register</Link></span>
                     <span className='text-blue-500 underline cursor-pointer font-light'>Forgot Password</span>
 
                 </div>

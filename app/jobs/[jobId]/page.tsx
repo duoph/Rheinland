@@ -9,7 +9,7 @@ const SingleJobPage = () => {
     const { jobId } = useParams()
 
     return (
-        <div className="relavtive min-h-screen flex flex-col gap-3 items-center justify-center px-3 sm:px-5 pt-[95px]">
+        <div className="relavtive min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
             <div className='flex flex-col items-start justify-center w-full'>
                 <h1 className='font-semibold text-2xl'>Full Stack Developer</h1>
             </div>
@@ -22,20 +22,26 @@ const SingleJobPage = () => {
                 </span>
             </div>
 
+            <div className='flex flex-col items-start justify-center w-full gap-2'>
+                <h1 className='font-medium'>Salary</h1>
+                <span className='flex gap-2 font-light'>
+                    Undefined
+                </span>
+            </div>
+
             <div className="flex flex-col items-start justify-center w-full gap-3 ">
                 <h1 className='font-medium'>Preferred Skills</h1>
                 <div className='font-light text-sm text-white flex gap-2 flex-wrap pb-3'>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>React Js</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>React Native</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>MySQL</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>AWS</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>TailwindCSS</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>Typescript</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>Problem Solving Skill</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>Django</span>
-                    <span className='px-3 py-3 bg-rheinland-gray rounded-sm cursor-pointer'>NextJs</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>React Js</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>React Native</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>MySQL</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>AWS</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>TailwindCSS</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>Typescript</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>Problem Solving Skill</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>Django</span>
+                    <span className='px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer'>NextJs</span>
                     <span className='text-gray-400 cursor-pointer px-3 py-3 underline'>3+ Show More </span>
-
                 </div>
             </div>
             <div className="flex flex-col gap-2 items-start justify-center w-full">
