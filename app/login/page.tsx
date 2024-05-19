@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io'
-import { PuffLoader } from 'react-spinners';
+import { PropagateLoader, PuffLoader } from 'react-spinners';
 import { useAccount } from '@/context/useAccount';
 
 const LoginPage = () => {
@@ -81,17 +81,15 @@ const LoginPage = () => {
                     <input type="password" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 </div>
 
-                {
-                    isLoading &&
-                    <button onClick={handleSubmit} className='px-5 py-3 w-full bg-rheinland-red text-white'>
-                        <PuffLoader color='white' />
-                    </button>
-                }
+                <button
+                    onClick={handleSubmit}
+                    className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Logging in...' : 'Login'}
+                </button>
 
-                {
-                    !isLoading &&
-                    <button onClick={handleSubmit} className='px-5 py-3 w-full bg-rheinland-red text-white'>Login</button>
-                }
+
 
                 <div className='flex flex-col items-center justify-center text-sm'>
                     <span className='font-light'>Don&apos;t have an account yet? <Link href={'/create-account'} className='text-blue-500 underline'>Register</Link></span>

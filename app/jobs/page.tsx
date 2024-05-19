@@ -8,7 +8,7 @@ const Jobs = () => {
 
             {/* Search bar */}
 
-            <div className="w-full  md:w-full flex items-center justify-end lg:flex-row flex-col gap-3 bg-slate px-5 py-5 rounded-sm">
+            <div className="w-full  md:w-full flex items-center justify-end lg:flex-row flex-col gap-3 bg-slate py-5 rounded-sm">
                 <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                     <CiSearch size={24} />
                     <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Job Title or Keyword" />
