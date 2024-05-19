@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { AccountProvider } from "@/context/useAccount";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,19 +32,23 @@ export default function RootLayout({
         <link rel="icon" href="/rheinlandLogoHeader.png" />
       </head>
       <body className={poppins.className}>
-        <Header />
-        <Toaster toastOptions={{
-          className: '',
-          style: {
-            backgroundColor: "red",
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            color: 'white',
-            borderRadius: '2px',
-          },
-        }} />
-        {children}
-        <Footer />
+        <AccountProvider>
+
+          <Header />
+          <Toaster toastOptions={{
+            className: '',
+            style: {
+              backgroundColor: "red",
+              paddingLeft: '10px',
+              paddingRight: '10px',
+              color: 'white',
+              borderRadius: '2px',
+            },
+          }} />
+          {children}
+          <Footer />
+        </AccountProvider>
+
       </body>
     </html>
   );

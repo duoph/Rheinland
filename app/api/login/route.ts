@@ -1,46 +1,61 @@
 import employerModel from "@/models/employerSchema";
 import userModel from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import JWT from "jsonwebtoken";
+import connectMongoDB from "@/lib/dbConnect";
 
 
 export async function POST(req: NextRequest) {
     try {
-        // Parse the request body as JSON
+        await connectMongoDB();
+
         const { email, password } = await req.json();
 
-        // Check if email and password are present
         if (!email || !password) {
             return NextResponse.json({ message: "Email and password are required", success: false, status: 400 });
         }
 
-        // Find the user or employer account by email
-        const userAccount = await userModel.findOne({ email });
-        const employeeAccount = await employerModel.findOne({ email });
+        const userAccountPromise = userModel.findOne({ email }).exec();
+        const employeeAccountPromise = employerModel.findOne({ email }).exec();
 
-        // Check if either user or employer account exists
+        const [userAccount, employeeAccount] = await Promise.all([userAccountPromise, employeeAccountPromise]);
+
         if (!userAccount && !employeeAccount) {
             return NextResponse.json({ message: "Check your email", success: false, status: 200 });
         }
 
         const account = userAccount || employeeAccount;
 
-        // Assuming the account object has a method to verify the password
         const isPasswordValid = await bcrypt.compare(password, account.password);
-
 
         if (!isPasswordValid) {
             return NextResponse.json({ message: "Invalid password", success: false, status: 200 });
         }
 
-        const response = NextResponse.json({ message: "Login successfully", success: true, status: 200, account });
+        const token = JWT.sign({ id: account._id }, process.env.NEXT_PUBLIC_JWT_SECRET!, { expiresIn: '7d' });
 
-        return response
+        const response = NextResponse.json({
+            message: "Login successfully",
+            success: true,
+            status: 200,
+            isAdmin: account.IsAdmin,
+            accountId: account._id,
+            token
+        });
 
+        response.cookies.set('token', token, {
+            httpOnly: true,
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        });
+        response.cookies.set('isAdmin', account.isAdmin ? "1" : "0", {
+            httpOnly: true,
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        });
 
-    } catch (error) {
-        console.error(error);
-
-        return NextResponse.json({ message: "Error while login", success: false, status: 400 });
+        return response;
+    } catch (error: any) {
+        console.error("Login error:", error);
+        return NextResponse.json({ message: "Error while login", success: false, status: 500, error: error.message });
     }
 }
