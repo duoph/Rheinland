@@ -21,45 +21,39 @@ const LoginPage = () => {
     const router = useRouter()
 
     const handleSubmit = async () => {
-        setIsLoading(true)
+        setIsLoading(true);
         try {
-
             if (!email || !password) {
-                setIsLoading(false)
-                return toast.error("Fill all inputs")
+                setIsLoading(false);
+                return toast.error("Fill all inputs");
             }
 
             const res = await axios.post('/api/login', {
-                email, password
-            })
+                email,
+                password
+            });
 
-            if (res.data.success === true && res.data.isAdmin === true) {
-                toast.success(res.data.message)
-                router.push('/admin-panel')
-                setAccountData(res.data.accountId, res.data.accountType, res.data.token)
-                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, accountType: res.data.accountType, token: res.data.token }));
+            if (res.data.success) {
+                toast.success(res.data.message);
+                router.push('/jobs');
+                const accountData = {
+                    id: res.data.accountId,
+                    type: res.data.accountType,
+                    token: res.data.token
+                };
+                setAccountData(accountData.id, accountData.token, accountData.type);
+                localStorage.setItem('currentAccount', JSON.stringify(accountData));
+            } else {
+                toast.error(res.data.message);
             }
 
-            if (res.data.success === true && !res.data.isAdmin) {
-                toast.success(res.data.message)
-                router.push('/jobs')
-                setAccountData(res.data.accountId, res.data.accountType, res.data.token)
-                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, accountType: res.data.accountType, token: res.data.token }));
-            }
-
-
-            if (res.data.success === false) {
-                toast.error(res.data.message)
-            }
-
-            console.log(res.data)
-
-            setIsLoading(false)
+            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false)
-            console.log(error)
+            setIsLoading(false);
+            console.error('Error logging in:', error);
+            toast.error('An error occurred. Please try again.');
         }
-    }
+    };
 
     return (
         <div className='relative min-h-screen flex flex-col items-center justify-center'>

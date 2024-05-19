@@ -1,12 +1,17 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
+import toast from "react-hot-toast";
 
 // Define the interface for the context value
 interface AccountProps {
-    currentAccountId: string | undefined;
-    token: string | undefined;
-    accountType: string | undefined;
+    account: {
+        id: string;
+        token: string;
+        type: string;
+    };
+    LogOut: () => void;
     setAccountData: (accountId: string, token: string, accountType: string) => void;
 }
 
@@ -19,31 +24,37 @@ interface AccountProviderProps {
 
 // Define the provider component
 export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
-    const [currentAccountId, setCurrentAccountId] = useState<string | undefined>(undefined);
-    const [token, setToken] = useState<string | undefined>(undefined);
-    const [accountType, setAccountType] = useState<string | undefined>(undefined);
+    const [account, setAccount] = useState({
+        id: "",
+        token: "",
+        type: ""
+    });
 
-    const setAccountData = (accountId: string, token: string, accountType: string) => {
-        setCurrentAccountId(accountId);
-        setAccountType(accountType)
-        setToken(token);
+    const setAccountData = (id: string, token: string, type: string) => {
+        const newAccount = { id, token, type };
+        setAccount(newAccount);
+        localStorage.setItem('currentAccount', JSON.stringify(newAccount));
     };
 
     useEffect(() => {
         const storedAccount = localStorage.getItem('currentAccount');
         if (storedAccount) {
             const parsedAccount = JSON.parse(storedAccount);
-            setAccountData(parsedAccount.accountId, parsedAccount.accountType, parsedAccount.token);
+            setAccount(parsedAccount);
         }
     }, []);
 
+    const router = useRouter();
 
     const LogOut = () => {
         localStorage.removeItem('currentAccount');
+        setAccount({ id: "", token: "", type: "" });
+        toast.success('Logged Out')
+        router.push('/login');
     };
 
     return (
-        <AccountContext.Provider value={{ currentAccountId, token, accountType, setAccountData }}>
+        <AccountContext.Provider value={{ account, setAccountData, LogOut }}>
             {children}
         </AccountContext.Provider>
     );

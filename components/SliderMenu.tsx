@@ -1,15 +1,28 @@
 "use client"
 
+import { useAccount } from '@/context/useAccount';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiCloseLargeFill } from 'react-icons/ri';
 
+
 const SliderMenu = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
+    const { LogOut, account } = useAccount()
+
+    const AccountLogout = async () => {
+        try {
+            LogOut()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
+
         <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
             <div className="flex items-center justify-center w-full">
                 {isMenuOpen ? (
@@ -26,7 +39,7 @@ const SliderMenu = () => {
                     />
                 )}
                 <div
-                    className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-3  px-5 py-3 bg-rheinland-yellow w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
+                    className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-3  px-5 py-3 bg-rheinland-yellow sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
                         }`}
                 >
                     <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -39,11 +52,13 @@ const SliderMenu = () => {
                         <Link href={'/jobs'}>Jobs</Link>
                     </div>
 
-                    <div>
-                        <h1>RheinLand</h1>
+                    <div onClick={() => setIsMenuOpen(!isMenuOpen)} className='w-full'>
+                        <button className='bg-rheinland-red w-full py-3 ' onClick={AccountLogout}>
+                            Logout
+                        </button>
                     </div>
                     <div>
-                        <h1>RheinLand</h1>
+                        <h1>{account.type}</h1>
                     </div>
                 </div>
             </div>

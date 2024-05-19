@@ -1,5 +1,5 @@
 import employerModel from "@/models/employerSchema";
-import userModel from "@/models/user";
+import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
 import JWT from "jsonwebtoken";
