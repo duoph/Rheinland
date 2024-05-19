@@ -39,8 +39,8 @@ export async function POST(req: NextRequest) {
             message: "Login successfully",
             success: true,
             status: 200,
-            isAdmin: account.IsAdmin,
             accountId: account._id,
+            accountType: account.accountType,
             token
         });
 

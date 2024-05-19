@@ -6,7 +6,8 @@ import React, { createContext, useContext, useState, ReactNode, FC, useEffect } 
 interface AccountProps {
     currentAccountId: string | undefined;
     token: string | undefined;
-    setAccountData: (accountId: string, token: string) => void;
+    accountType: string | undefined;
+    setAccountData: (accountId: string, token: string, accountType: string) => void;
 }
 
 // Create the context with an undefined default value
@@ -20,9 +21,11 @@ interface AccountProviderProps {
 export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
     const [currentAccountId, setCurrentAccountId] = useState<string | undefined>(undefined);
     const [token, setToken] = useState<string | undefined>(undefined);
+    const [accountType, setAccountType] = useState<string | undefined>(undefined);
 
-    const setAccountData = (accountId: string, token: string) => {
+    const setAccountData = (accountId: string, token: string, accountType: string) => {
         setCurrentAccountId(accountId);
+        setAccountType(accountType)
         setToken(token);
     };
 
@@ -30,7 +33,7 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
         const storedAccount = localStorage.getItem('currentAccount');
         if (storedAccount) {
             const parsedAccount = JSON.parse(storedAccount);
-            setAccountData(parsedAccount.accountId, parsedAccount.token);
+            setAccountData(parsedAccount.accountId, parsedAccount.accountType, parsedAccount.token);
         }
     }, []);
 
@@ -40,7 +43,7 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
     };
 
     return (
-        <AccountContext.Provider value={{ currentAccountId, token, setAccountData }}>
+        <AccountContext.Provider value={{ currentAccountId, token, accountType, setAccountData }}>
             {children}
         </AccountContext.Provider>
     );

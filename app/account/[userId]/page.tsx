@@ -8,7 +8,7 @@ const UserProfile = () => {
     const { userId } = useParams()
 
     return (
-        <div>THis is Profile id{userId}</div>
+        <div className="pt-[80px]">THis is Profile id{userId}</div>
     )
 }
 

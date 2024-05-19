@@ -9,6 +9,9 @@ import { IoMdArrowBack } from 'react-icons/io'
 
 const CreateEmployerAccount = () => {
 
+
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const [formData, setFormData] = useState({
         employerName: '',
         email: '',
@@ -40,6 +43,7 @@ const CreateEmployerAccount = () => {
         e.preventDefault();
         try {
 
+            setIsLoading(true)
 
             if (!formData.employerName || !formData.email || !formData.confirmPassword || !formData.phone || !formData.password) {
                 toast.error("Fill all the inputs")
@@ -58,15 +62,20 @@ const CreateEmployerAccount = () => {
 
             if (res.data.success === false) {
                 toast.error("Error")
+                setIsLoading(false)
             }
             if (res.data.success === true) {
                 toast.success(res.data.message)
                 router.push('/login')
+                setIsLoading(false)
+
             }
 
             setIsError(false);
 
         } catch (error) {
+            setIsLoading(false)
+
             console.error('Error submitting form:', error);
         }
     };
@@ -90,7 +99,16 @@ const CreateEmployerAccount = () => {
                     <input type="number" name="phone" value={formData.phone} onChange={handleChange} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Phone" />
                     <input type="password" name="password" value={formData.password} onChange={handleChange} className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none`} placeholder="Password" />
                     <input type="text" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none ${!passwordsMatch() && formData.confirmPassword ? 'border-rheinland-red' : ''}`} placeholder="Confirm Password" />
-                    <button type="submit" className='px-5 py-3 w-full bg-rheinland-red text-white'>Create Account</button>
+
+
+                    <button
+                        className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Creating Account...' : 'Create Account'}
+                    </button>
+
+
                 </form>
                 <div className='flex flex-col items-center justify-center text-sm gap-1'>
                     <span className='font-light'>Already have an account? <Link href={'/login'} className='text-blue-500 underline'>Login</Link></span>

@@ -1,16 +1,81 @@
 "use client"
 
 
+import axios from 'axios';
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io'
 
 const CreateAccountPage = () => {
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: ''
+    });
 
     const router = useRouter()
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+
+    // creating employee account
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            setIsLoading(true)
+
+            if (!formData.name || !formData.email || !formData.confirmPassword || !formData.phone || !formData.password) {
+                toast.error("Fill all the inputs")
+            }
+
+            const formDataToSend = new FormData();
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('phone', formData.phone);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('password', formData.password);
+
+
+            const res = await axios.post('/api/user/account/create-account', formDataToSend)
+
+            if (res.data.success === false) {
+                toast.error("Error")
+                setIsLoading(false)
+            }
+            if (res.data.success === true) {
+                toast.success(res.data.message)
+                router.push('/login')
+                setIsLoading(false)
+
+            }
+
+        } catch (error) {
+            setIsLoading(false)
+
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    const passwordsMatch = () => {
+        return formData.password === formData.confirmPassword;
+    };
+
 
 
     return (
@@ -27,14 +92,27 @@ const CreateAccountPage = () => {
                     <span className='text-sm font-light'>Explore open career opportunities</span>
                 </div>
                 <div className='flex flex-col gap-2 w-full'>
-                    <input type="text" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Full Name" />
-                    <input type="text" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Email" />
-                    <input type="nummber" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Phone" />
-                    <input type="text" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Password" />
-                    <input type="text" className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Cofirm Password" />
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full'>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Full Name" />
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Email" />
+                        <input type="number" name="phone" value={formData.phone} onChange={handleChange} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Phone" />
+                        <input type="password" name="password" value={formData.password} onChange={handleChange} className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none`} placeholder="Password" />
+                        <input type="text" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none ${!passwordsMatch() && formData.confirmPassword ? 'border-rheinland-red' : ''}`} placeholder="Confirm Password" />
+
+                        <button
+                            className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
+                            disabled={isLoading}
+                        >
+                            {isLoading ? 'Creating Account...' : 'Create Account'}
+                        </button>
+
+
+                    </form>
                 </div>
 
-                <button className='px-5 py-3 w-full bg-rheinland-red text-white'>Create Account</button>
+
+
+
                 <div className='flex flex-col items-center justify-center text-sm gap-1'>
                     <span className='font-light'>Already have an account? <Link href={'/login'} className='text-blue-500 underline'>Login</Link></span>
                     <span className='font-light'>Register as a employer? <Link href={'/create-account/employer'} className='text-blue-500 underline'>Register</Link></span>

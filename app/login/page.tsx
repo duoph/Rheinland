@@ -33,19 +33,18 @@ const LoginPage = () => {
                 email, password
             })
 
-
             if (res.data.success === true && res.data.isAdmin === true) {
                 toast.success(res.data.message)
                 router.push('/admin-panel')
-                setAccountData(res.data.accountId, res.data.token)
-                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, token: res.data.token }));
+                setAccountData(res.data.accountId, res.data.accountType, res.data.token)
+                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, accountType: res.data.accountType, token: res.data.token }));
             }
 
             if (res.data.success === true && !res.data.isAdmin) {
                 toast.success(res.data.message)
                 router.push('/jobs')
-                setAccountData(res.data.accountId, res.data.token)
-                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, token: res.data.token }));
+                setAccountData(res.data.accountId, res.data.accountType, res.data.token)
+                localStorage.setItem('currentAccount', JSON.stringify({ accountId: res.data.accountId, accountType: res.data.accountType, token: res.data.token }));
             }
 
 
