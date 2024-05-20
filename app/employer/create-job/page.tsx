@@ -10,11 +10,24 @@ const CreateJob = () => {
         category: '',
         description: '',
         skills: '',
-        currentLocation: '',
+        state: '',
         location: '',
         requirements: '',
         gender: '',
     });
+
+    const cities = [
+        "New York",
+        "Los Angeles",
+        "Chicago",
+        "Houston",
+        "Phoenix",
+        "Philadelphia",
+        "San Antonio",
+        "San Diego",
+        "Dallas",
+        "San Jose"
+    ];
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -45,7 +58,7 @@ const CreateJob = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5'>
+        <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5 pb-20'>
 
             <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-semibold">Create Job</h1>
 
@@ -86,20 +99,28 @@ const CreateJob = () => {
                 />
                 <input
                     type='text'
-                    name='currentLocation'
-                    value={job.currentLocation}
+                    name='state'
+                    value={job.state}
                     onChange={handleChange}
-                    placeholder='Current Location'
+                    placeholder='State'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
                 <input
                     type='text'
                     name='location'
                     value={job.location}
+                    list="cities"
                     onChange={handleChange}
                     placeholder='Location'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
+
+                <datalist className='w-full' id="cities">
+                    {cities.map((city, index) => (
+                        <option key={index} value={city} />
+                    ))}
+                </datalist>
+
                 <textarea
                     name='requirements'
                     value={job.requirements}

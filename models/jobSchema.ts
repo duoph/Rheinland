@@ -7,8 +7,8 @@ const jobSchema = new Schema({
     isOpen: { type: Boolean, default: true },
     description: { type: String, required: true },
     skills: [{ type: String }],
-    currentLocation: { type: String },
     location: { type: String },
+    state: { type: String },
     requirements: { type: String },
     gender: { type: String },
     employerId: { type: mongoose.Schema.ObjectId, required: true }
