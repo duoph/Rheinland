@@ -8,6 +8,11 @@ const userSchema = new Schema({
     dateOfBirth: { type: Date, required: true },
     highestEducation: { type: String },
     workExperience: { type: Number, default: 0 },
+    phone: { type: Number },
+    resumeURL: { type: String },
+    address: { type: String },
+    knowLanguages: [{ type: String }],
+    germanLanguageLevel: { type: String },
     savedJobs: [{ type: mongoose.Schema.ObjectId }],
     appliedJobs: [{ type: mongoose.Schema.ObjectId }],
     accountType: { type: String, default: "user", required: true }

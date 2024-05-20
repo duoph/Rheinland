@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io'
-import { PropagateLoader, PuffLoader } from 'react-spinners';
 import { useAccount } from '@/context/useAccount';
 
 const LoginPage = () => {
@@ -35,7 +34,23 @@ const LoginPage = () => {
 
             if (res.data.success) {
                 toast.success(res.data.message);
-                router.push('/jobs');
+
+                if (res.data.accountType === 'user') {
+                    router.push('/jobs');
+                }
+
+                if (res.data.accountType === 'employer') {
+                    router.push('/employer');
+                }
+
+                if (res.data.accountType === 'admin') {
+                    router.push('/admin');
+                }
+
+                if (res.data.accountType === 'student') {
+                    router.push('/student');
+                }
+
                 const accountData = {
                     id: res.data.accountId,
                     type: res.data.accountType,

@@ -117,7 +117,7 @@ const CreateAccountPage = () => {
                     <input
                         type="password"
                         name="password"
-                        value={formData.password}
+                    value={formData.password}
                         onChange={handleChange}
                         className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none`}
                         placeholder="Password"
@@ -132,7 +132,7 @@ const CreateAccountPage = () => {
                     />
                     <button
                         type="submit"
-                        className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
+                        className='px-5 py-3 w-full bg-rheinland-red text-white'
                         disabled={isLoading}
                     >
                         {isLoading ? 'Creating Account...' : 'Create Account'}

@@ -8,7 +8,9 @@ const jobSchema = new Schema({
     description: { type: String, required: true },
     skills: [{ type: String }],
     currentLocation: { type: String },
-    resumeURL: { type: String },
+    location: { type: String },
+    requirements: { type: String },
+    gender: { type: String },
     employerId: { type: mongoose.Schema.ObjectId, required: true }
 
 }, { timestamps: true })
