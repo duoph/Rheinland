@@ -1,11 +1,12 @@
 "use client"
 
 
+import { useAccount } from '@/context/useAccount'
 import { Job } from '@/types'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { CiBookmark, CiLocationOn } from 'react-icons/ci'
+import { CiBookmark, CiBookmarkCheck, CiLocationOn } from 'react-icons/ci'
 
 const SingleJobPage = () => {
 
@@ -13,6 +14,8 @@ const SingleJobPage = () => {
     const [job, setJob] = useState<Job | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
+
+    const { account } = useAccount()
 
     const fetchJob = async () => {
         try {
@@ -39,7 +42,9 @@ const SingleJobPage = () => {
 
     const handleSave = async () => {
         try {
-
+            const res = await axios.post(`/api/job/${jobId}/save`)
+            fetchJob()
+            console.log(res)
         } catch (error) {
             console.error(error)
             setError('An error occurred while handling save job.')
@@ -60,7 +65,14 @@ const SingleJobPage = () => {
         <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
             <div className='flex items-start justify-between w-full'>
                 <h1 className='font-semibold text-2xl'>{job?.title}</h1>
-                <CiBookmark onClick={handleSave} className='text-red-500' size={30} />
+                <div onClick={handleSave} className='cursor-pointer'>
+                    {job?.savedUsers?.includes(account.id) ? (
+                        <CiBookmarkCheck className='text-red-500' size={30} />
+                    ) : (
+                        <CiBookmark className='text-red-500' size={30} />
+                    )}
+                </div>
+
             </div>
 
             <div className='flex flex-col items-start justify-center w-full gap-2'>

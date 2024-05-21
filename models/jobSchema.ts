@@ -14,6 +14,7 @@ const jobSchema = new Schema({
     requirements: { type: String },
     gender: { type: String },
     appliedUsers: { type: mongoose.Schema.ObjectId },
+    savedUsers: { type: mongoose.Schema.ObjectId },
     employerId: { type: mongoose.Schema.ObjectId, required: true }
 
 }, { timestamps: true })

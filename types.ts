@@ -13,7 +13,8 @@ export interface Job {
     state?: string;
     requirements?: string;
     gender?: string;
-    appliedUsers: [];
+    appliedUsers: string[];
+    savedUsers: string[];
     createdAt: string;
     updatedAt: string;
     employerId: Types.ObjectId;

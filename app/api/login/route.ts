@@ -32,6 +32,7 @@ export async function POST(req: NextRequest) {
         if (!isPasswordValid) {
             return NextResponse.json({ message: "Invalid password", success: false, status: 200 });
         }
+        
 
         const token = JWT.sign({ id: account._id }, process.env.NEXT_PUBLIC_JWT_SECRET!, { expiresIn: '7d' });
 
