@@ -11,10 +11,10 @@ export async function GET() {
 
         const jobs = await jobModel.find()
 
-        return NextResponse.json({ message: 'Fetched All Jobs successfully', jobs });
+        return NextResponse.json({ message: 'Fetched All Jobs successfully', success: true, jobs });
     } catch (error) {
         console.error('Error Fetching jobs:', error);
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
     }
 }
 
@@ -37,9 +37,9 @@ export async function POST(req: NextRequest) {
             title, description, category, skills, employerId, state, location, requirements, gender, minAge, maxAge
         });
 
-        return NextResponse.json({ message: 'Job created successfully', job: createJob });
+        return NextResponse.json({ message: 'Job created successfully', success: true, job: createJob });
     } catch (error) {
         console.error('Error creating job:', error);
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
     }
 }

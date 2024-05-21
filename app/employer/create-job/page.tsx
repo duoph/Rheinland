@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { title } from 'process';
 import { useAccount } from '@/context/useAccount';
+import toast from 'react-hot-toast';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>()
@@ -57,20 +58,23 @@ const CreateJob = () => {
         console.log(jobData)
 
         try {
-            const response = await axios.post('/api/employer/jobs', {
+            const res = await axios.post('/api/job', {
                 title: jobData.title,
-                description: jobData.title,
+                description: jobData.description,
                 category: jobData.category,
                 skills: jobData.skills,
                 employerId: account.id,
                 state: jobData.state,
                 location: jobData.location,
-                requirements:jobData.requirements,
+                requirements: jobData.requirements,
                 gender: jobData.gender,
                 minAge: jobData.minAge,
                 maxAge: jobData.maxAge,
+
             });
-            console.log('Job created successfully:', response.data);
+
+            toast.success("Job created successfully")
+            console.log('Job created successfully:', res.data);
             setIsLoading(false)
 
         } catch (error) {
