@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { title } from 'process';
+import { useAccount } from '@/context/useAccount';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>()
@@ -14,7 +16,11 @@ const CreateJob = () => {
         location: '',
         requirements: '',
         gender: '',
+        minAge: '',
+        maxAge: '',
     });
+
+    const { account } = useAccount()
 
     const cities = [
         "New York",
@@ -38,15 +44,32 @@ const CreateJob = () => {
     };
 
     const handleSubmit = async (e: any) => {
+
         setIsLoading(true)
+
         e.preventDefault();
+
         const jobData = {
             ...job,
             skills: job.skills.split(',').map(skill => skill.trim())
         };
 
+        console.log(jobData)
+
         try {
-            const response = await axios.post('/api/jobs', jobData);
+            const response = await axios.post('/api/employer/job', {
+                title: jobData.title,
+                description: jobData.title,
+                category: jobData.category,
+                skills: jobData.skills,
+                employerId: account.id,
+                state: jobData.state,
+                location: jobData.location,
+                requirements:jobData.requirements,
+                gender: jobData.gender,
+                minAge: jobData.minAge,
+                maxAge: jobData.maxAge,
+            });
             console.log('Job created successfully:', response.data);
             setIsLoading(false)
 
@@ -63,6 +86,7 @@ const CreateJob = () => {
             <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-semibold">Create Job</h1>
 
             <form className=' sm:w-[500px] w-full flex flex-col items-center justify-center gap-5' onSubmit={handleSubmit}>
+
                 <input
                     type='text'
                     name='title'
@@ -72,6 +96,7 @@ const CreateJob = () => {
                     required
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
+
                 <input
                     type='text'
                     name='category'
@@ -89,6 +114,21 @@ const CreateJob = () => {
                     required
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
+
+                <select
+                    name='gender'
+                    value={job.gender}
+                    onChange={handleChange}
+                    required
+                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                >
+                    <option value='' disabled>Select Gender</option>
+                    <option value='Male'>Male</option>
+                    <option value='Female'>Female</option>
+                    <option value='Any'>Any</option>
+
+                </select>
+
                 <input
                     type='text'
                     name='skills'
@@ -97,6 +137,25 @@ const CreateJob = () => {
                     placeholder='Skills (comma-separated)'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
+
+                <input
+                    type='text'
+                    name='minAge'
+                    value={job.minAge}
+                    onChange={handleChange}
+                    placeholder='Minimum Age'
+                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                />
+
+                <input
+                    type='text'
+                    name='maxAge'
+                    value={job.maxAge}
+                    onChange={handleChange}
+                    placeholder='Maximum Age'
+                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                />
+
                 <input
                     type='text'
                     name='state'
@@ -105,6 +164,7 @@ const CreateJob = () => {
                     placeholder='State'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
+
                 <input
                     type='text'
                     name='location'
@@ -121,27 +181,6 @@ const CreateJob = () => {
                     ))}
                 </datalist>
 
-                <textarea
-                    name='requirements'
-                    value={job.requirements}
-                    onChange={handleChange}
-                    placeholder='Requirements'
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-                />
-
-                <select
-                    name='gender'
-                    value={job.gender}
-                    onChange={handleChange}
-                    required
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-                >
-                    <option value='' disabled>Select Gender</option>
-                    <option value='Male'>Male</option>
-                    <option value='Female'>Female</option>
-                    <option value='Any'>Any</option>
-
-                </select>
 
                 <button
                     type='submit'

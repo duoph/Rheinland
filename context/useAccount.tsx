@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -46,8 +47,9 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
 
     const router = useRouter();
 
-    const LogOut = () => {
+    const LogOut = async () => {
         localStorage.removeItem('currentAccount');
+        await axios.get('/api/logout')
         setAccount({ id: "", token: "", type: "" });
         toast.success('Logged Out')
         router.push('/login');

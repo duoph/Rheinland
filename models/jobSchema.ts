@@ -7,6 +7,8 @@ const jobSchema = new Schema({
     isOpen: { type: Boolean, default: true },
     description: { type: String, required: true },
     skills: [{ type: String }],
+    minAge: { type: String },
+    maxAge: { type: String },
     location: { type: String },
     state: { type: String },
     requirements: { type: String },
