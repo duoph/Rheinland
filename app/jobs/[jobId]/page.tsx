@@ -35,6 +35,19 @@ const SingleJobPage = () => {
         fetchJob()
     }, [jobId])
 
+
+
+    const handleSave = async () => {
+        try {
+
+        } catch (error) {
+            console.error(error)
+            setError('An error occurred while handling save job.')
+        }
+    }
+
+
+
     if (loading) {
         return <div className="relative min-h-screen flex items-center justify-center">Loading...</div>
     }
@@ -47,7 +60,7 @@ const SingleJobPage = () => {
         <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
             <div className='flex items-start justify-between w-full'>
                 <h1 className='font-semibold text-2xl'>{job?.title}</h1>
-                <CiBookmark className='text-red-500' size={30} />
+                <CiBookmark onClick={handleSave} className='text-red-500' size={30} />
             </div>
 
             <div className='flex flex-col items-start justify-center w-full gap-2'>
@@ -64,6 +77,18 @@ const SingleJobPage = () => {
                     Undefined
                 </span>
             </div>
+
+            {(job?.minAge || job?.minAge) && (
+                <div className='flex flex-col items-start justify-center w-full gap-2'>
+                    <h1 className='font-medium'>Prefered Age</h1>
+                    <span className='flex flex-col gap-2 text-sm font-light'>
+                        <span>Minimum - {job?.minAge}</span>
+                        <span>Maximum - {job?.maxAge}</span>
+                    </span>
+                </div>
+
+            )}
+
 
             <div className="flex flex-col items-start justify-center w-full gap-3">
                 <h1 className='font-medium'>Preferred Skills</h1>

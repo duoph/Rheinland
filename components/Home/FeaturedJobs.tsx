@@ -1,12 +1,31 @@
 "use client"
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import JobCard from '../JobCard'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import { Job } from '@/types';
+import axios from 'axios';
 
 const FeaturedJobs = () => {
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const [jobs, setJobs] = useState<Job[] | []>(); // Correct type for jobs
+
+    const fetchJobs = async () => {
+        try {
+            const res = await axios.get('/api/job');
+            if (res.data.success === true) {
+                setJobs(res.data.jobs);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchJobs();
+    }, []);
 
 
     const handleScrollRight = () => {
@@ -47,16 +66,9 @@ const FeaturedJobs = () => {
                 <GoChevronRight onClick={handleScrollRight} className='z-10 absolute top-[160px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
 
                 <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex  overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
+                    {jobs?.map((job) => (
+                        <JobCard key={job?._id} job={job} /> 
+                    ))}
                 </div>
             </div>
         </div >
