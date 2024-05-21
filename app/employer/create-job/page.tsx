@@ -57,7 +57,7 @@ const CreateJob = () => {
         console.log(jobData)
 
         try {
-            const response = await axios.post('/api/employer/job', {
+            const response = await axios.post('/api/employer/jobs', {
                 title: jobData.title,
                 description: jobData.title,
                 category: jobData.category,

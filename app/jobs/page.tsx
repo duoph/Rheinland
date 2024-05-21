@@ -1,8 +1,29 @@
 import JobCard from '@/components/JobCard'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { CiLocationOn, CiSearch } from 'react-icons/ci'
 
 const Jobs = () => {
+
+
+    const [jobs, setJobs] = useState()
+
+    const fetchJobs = async () => {
+        try {
+            const res = await axios.get('/api/employer/jobs')
+            if (res.data.success === true) {
+                setJobs(res.data.jobs)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchJobs()
+    }, [])
+
+
     return (
         <div className='flex flex-col  items-center justify-start pt-[80px] px-3 '>
 
