@@ -7,10 +7,15 @@ import { FaPowerOff } from "react-icons/fa6";
 import Sidebar from "./sidebar/page";
 
 const EmployerPage = () => {
-
-  
   return (
-  <Sidebar/>
+    <>
+      <div className="flex flex-row">
+        <Sidebar />
+        <div className="bg-[#f5f7fc] w-screen h-screen">
+          
+        </div>
+      </div>
+    </>
   );
 };
 
