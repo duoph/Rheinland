@@ -7,19 +7,19 @@ import { Toaster } from "react-hot-toast";
 import { AccountProvider } from "@/context/useAccount";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
 
 export const metadata: Metadata = {
   title: "Rheinland Jobs - Your Premier Job Consultancy",
-  description: "Discover tailored career solutions and expert guidance for your next career move with Rheinland Jobs, the premier job consultancy connecting talent with opportunities. Let us navigate the path to your professional success together.",
-  keywords: "jobs, career, consultancy, opportunities, professional success, Rheinland Jobs, Germany, job search, employment, recruitment, HR services",
+  description:
+    "Discover tailored career solutions and expert guidance for your next career move with Rheinland Jobs, the premier job consultancy connecting talent with opportunities. Let us navigate the path to your professional success together.",
+  keywords:
+    "jobs, career, consultancy, opportunities, professional success, Rheinland Jobs, Germany, job search, employment, recruitment, HR services",
 };
-
 
 export default function RootLayout({
   children,
@@ -33,22 +33,22 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <AccountProvider>
-
           <Header />
-          <Toaster toastOptions={{
-            className: '',
-            style: {
-              backgroundColor: "red",
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              color: 'white',
-              borderRadius: '2px',
-            },
-          }} />
+          <Toaster
+            toastOptions={{
+              className: "",
+              style: {
+                backgroundColor: "red",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                color: "white",
+                borderRadius: "2px",
+              },
+            }}
+          />
           {children}
           <Footer />
         </AccountProvider>
-
       </body>
     </html>
   );

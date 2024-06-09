@@ -2,11 +2,11 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="pt-20 w-screen md: px-5 md:px-10 ">
+    <div className="pt-20  md: px-5 md:px-10 ">
       <h1 className="font-semibold text-xl">My Profile</h1>
       {/* Logo  */}
       <div className="flex flex-row w-[100%] items-center cursor-pointer  gap-3 py-5">
-        <img src="/person-icon.jpg" alt="" className="w-16 rounded-[50px]" />
+        <img src="/person-icon.jpg" alt="" className="w-24 rounded-[50px]" />
         <button className="px-2 py-1 h-[40px] bg-rheinland-red text-white">
           Browse
         </button>
