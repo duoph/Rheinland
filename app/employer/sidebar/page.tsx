@@ -16,12 +16,12 @@ const Sidebar = () => {
 
   return (
     <div className="flex  flex-row ">
-      <div className="fixed flex items-start  justify-start  h-screen ">
+      <div className=" flex items-start  justify-center  h-screen ">
         <div className="flex flex-col items-center justify-center gap-3 text-white">
           {/* Sidebar  */}
-          <div className="flex flex-col justify-start items-center w-[300px] bg-[#ffffe4] h-screen text-black">
+          <div className="flex flex-col justify-center t items-center w-screen bg-[#ffffe4] h-screen text-black">
             {/* Profile  */}
-            <div className="flex flex-row w-[100%] justify-center items-center cursor-pointer pt-32 gap-3 ">
+            <div className="flex flex-row w-[100%] justify-center items-center cursor-pointer  gap-3 ">
               <img
                 src="/person-icon.jpg"
                 alt=""
@@ -32,14 +32,13 @@ const Sidebar = () => {
 
             {/* Options  */}
 
-            <div className="flex flex-col pt-10 w-full pl-9">
+            <div className="flex flex-col pt-10 w-full justify-center items-center pl-9">
               <Link href={""} className=" px-4 py-3 rounded-sm ">
                 <button className=" flex flex-row justify-center text-[20px] font-normal items-center gap-5">
                   <LiaUserTieSolid className="text-[30px]" />
                   Profile
                 </button>
               </Link>
-              <hr className="w-[100%]" />
               <Link href={""} className=" px-4 py-3 rounded-sm">
                 <button className=" flex flex-row justify-center text-[20px] font-normalitems-center gap-5">
                   <HiOutlineBriefcase className="text-[30px]" />
@@ -71,10 +70,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className="ml-[300px] w-full h-screen overflow-auto">
-
-     <Profile />
-      </div>
+  
     </div>
   );
 };

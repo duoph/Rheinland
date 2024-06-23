@@ -9,12 +9,7 @@ import Sidebar from "./sidebar/page";
 const EmployerPage = () => {
   return (
     <>
-      <div className="flex flex-row w-screen">
-        <Sidebar />
-        <div className="bg-[#f5f7fc] w-screen h-screen">
-          
-        </div>
-      </div>
+         <Sidebar />
     </>
   );
 };
