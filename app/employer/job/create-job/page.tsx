@@ -5,6 +5,7 @@ import axios from 'axios';
 import { title } from 'process';
 import { useAccount } from '@/context/useAccount';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>()
@@ -22,6 +23,8 @@ const CreateJob = () => {
     });
 
     const { account } = useAccount()
+
+    const router = useRouter()
 
     const cities = [
         "New York",

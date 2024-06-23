@@ -65,20 +65,20 @@ const page = () => {
             />
           </div>
         </div>
-     
-          {/* About*/}
-          <div className="flex flex-col justify-start">
-            <label htmlFor="" className="font-semibold">
-              About
-            </label>
-            <textarea
-              rows="10"
-              cols="50"
-              placeholder="Write about your company..."
-              className="border-2 w-[380px] md:w-[760px] outline-none rounded-md px-2 py-2"
-            />
-          </div>
-        
+
+        {/* About*/}
+        <div className="flex flex-col justify-start">
+          <label htmlFor="" className="font-semibold">
+            About
+          </label>
+          <textarea
+            rows={10}
+            cols={50}
+            placeholder="Write about your company..."
+            className="border-2 w-[380px] md:w-[760px] outline-none rounded-md px-2 py-2"
+          />
+        </div>
+
         {/* Location  */}
 
         <div className="flex flex-col justify-start">

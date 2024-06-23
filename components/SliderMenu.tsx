@@ -57,8 +57,8 @@ const SliderMenu = () => {
                             Logout
                         </button>
                     </div>
-                  
-                    {account.type === "employer" && (<div>
+
+                    {account.type === "employer" && (<div onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <Link href={'/employer'}>{account.type}</Link>
                     </div>)}
 
