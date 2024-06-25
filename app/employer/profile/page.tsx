@@ -12,6 +12,16 @@ const ProfilePage = () => {
   const [aboutText, setAboutText] = useState("");
   const [location, setLocation] = useState("Berlin");
 
+
+  const handleSubmit = async () => {
+    try {
+      console.log("Test")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <div className=" flex flex-col justify-center  items-center pt-[90px] px-5 md:px-10 ">
       <h1 className="font-semibold text-xl">My Profile</h1>
@@ -22,7 +32,7 @@ const ProfilePage = () => {
           Browse
         </button>
       </div>
-      <form action="" className="flex flex-col gap-5 md:gap-8">
+      <form onSubmit={handleSubmit} action="" className="flex flex-col gap-5 md:gap-8">
         {/* Company Details */}
         <div className="flex flex-col gap-5 md:flex-row md:gap-10 ">
           {/* Employer Name */}
@@ -108,7 +118,7 @@ const ProfilePage = () => {
           />
         </div>
         <div className="py-5 w-full flex items-center justify-center">
-          <button className="px-2 w-[100px] py-1 h-[50px] rounded-md bg-rheinland-red text-white">
+          <button type="submit" className="px-2 w-[100px] py-1 h-[50px] rounded-md bg-rheinland-red text-white">
             Save
           </button>
         </div>
