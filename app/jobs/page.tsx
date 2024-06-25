@@ -22,7 +22,7 @@ const Jobs = () => {
     }, []);
 
     return (
-        <div className='flex flex-col items-center justify-start pt-[80px] px-3 h-screen'>
+        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-4 py-10'>
             <div className='w-full md:w-full flex items-center justify-end lg:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
                 <div className='flex items-center justify-center bg-white px-2 w-full rounded-sm'>
                     <input
