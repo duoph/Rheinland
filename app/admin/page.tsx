@@ -5,14 +5,12 @@ import { HiMiniBuildingOffice2 } from "react-icons/hi2";
 import { MdWork } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
 
-
 function adminPage() {
   return (
     // Sidebar
 
-    <div className="pt-[110px] w-[300px] h-screen bg-[#fcfaf6] flex flex-col px-5 ">
-
-        {/* Logo and Name  */}
+    <div className="pt-[110px] w-[300px] h-screen bg-[#fcfaf6] flex flex-col px-5">
+      {/* Logo and Name  */}
 
       <div className="flex flex-col justify-center items-center pb-20 gap-5">
         <img src="/RheinlandLogoHeader.png" alt="" className="w-[150px]" />
@@ -21,9 +19,8 @@ function adminPage() {
 
       {/* Options  */}
       <div className="flex flex-col gap-5 px-5">
-        
         <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-          <FaUserGraduate className="text-[28px] "/>
+          <FaUserGraduate className="text-[28px] " />
           Candidates
         </p>
         <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
