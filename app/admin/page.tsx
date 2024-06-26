@@ -10,7 +10,7 @@ function adminPage() {
   return (
     // Sidebar
 
-    <div className="pt-[110px] w-[300px] h-screen bg-[#fcfaf6] flex flex-col px-5">
+    <div className="pt-[110px] w-[300px] h-screen bg-[#fcfaf6] flex flex-col px-5 ">
 
         {/* Logo and Name  */}
 
