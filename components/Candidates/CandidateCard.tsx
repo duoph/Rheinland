@@ -5,7 +5,7 @@ import { FaFileDownload } from "react-icons/fa";
 
 function CandidateCard() {
   return (
-    <div className="w-[300px] flex flex-col rounded-lg justify-center items-center py-5 px-2 border-2 shadow-xl shadow-rheinland-red">
+    <div className="w-[300px] flex flex-col rounded-lg justify-center items-center py-5 px-2 border-2 shadow-md shadow-rheinland-gray">
       <div className="flex flex-col justify-center items-center ">
         <Image
           src="/person-icon.jpg"
@@ -35,7 +35,10 @@ function CandidateCard() {
         </p>
       </div>
       <div className="pt-5 flex flex-col justify-center items-center gap-2">
-        <button className=" flex flex-row justify-center gap-2 items-center w-[200px] bg-rheinland-black text-white rounded-lg py-2">Download Resume<FaFileDownload  className="text-[20px]"/></button>
+        <button className=" flex flex-row justify-center gap-2 items-center w-[200px] bg-rheinland-black text-white rounded-lg py-2">
+          Download Resume
+          <FaFileDownload className="text-[20px]" />
+        </button>
         <p className="cursor-pointer">View Profile...</p>
       </div>
     </div>
