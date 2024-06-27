@@ -9,7 +9,7 @@ import Image from "next/image";
 import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 
-function adminPage() {
+function AdminPage() {
   const [sliderOpen, setSliderOpen] = useState(false);
 
   return (
@@ -39,7 +39,6 @@ function adminPage() {
             />
             <button onClick={() => setSliderOpen(false)}>
               <RxCross2 className="text-[30px] md:hidden" />
-              
             </button>
           </div>
           <h1 className="font-bold text-[25px]">Dashboard</h1>
@@ -81,4 +80,4 @@ function adminPage() {
   );
 }
 
-export default adminPage;
+export default AdminPage;
