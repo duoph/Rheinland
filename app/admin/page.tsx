@@ -6,7 +6,7 @@ import { MdWork } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
 import { useState } from "react";
 import Image from "next/image";
-import { IoMenuSharp } from "react-icons/io5";
+import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 
 function adminPage() {
@@ -14,12 +14,12 @@ function adminPage() {
 
   return (
     <>
-      <div>
+      <div className="pt-[80px] md:hidden">
         <button
-          className=" z-50  bg-red-50 cursor-pointer md:hidden"
+          className="z-50  bg-red-50 p-2 cursor-pointer md:hidden"
           onClick={() => setSliderOpen(!sliderOpen)}
         >
-          <IoMenuSharp className="text-[50px] pt-[150px] text-black -z-50" />
+          <RiMenu4Line className="text-[30px]  text-black z-50" />
         </button>
       </div>
 
@@ -37,10 +37,10 @@ function adminPage() {
               height={150}
               width={150}
             />
-            <RxCross2
-              className="text-[30px] md:hidden"
-              onClick={() => setSliderOpen(false)}
-            />
+            <button onClick={() => setSliderOpen(false)}>
+              <RxCross2 className="text-[30px] md:hidden" />
+              
+            </button>
           </div>
           <h1 className="font-bold text-[25px]">Dashboard</h1>
         </div>
