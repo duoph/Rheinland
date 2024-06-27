@@ -3,7 +3,7 @@ import React from 'react'
 
 function CandidatesPage() {
   return (
-    <div>
+    <div className='pt-[120px]'>
       <CandidateCard/>
     </div>
   )
