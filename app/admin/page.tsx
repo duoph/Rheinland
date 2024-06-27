@@ -8,6 +8,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import Link from "next/link";
 
 function AdminPage() {
   const [sliderOpen, setSliderOpen] = useState(false);
@@ -46,10 +47,12 @@ function AdminPage() {
 
         {/* Options  */}
         <div className="flex flex-col gap-5 px-5">
-          <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-            <FaUserGraduate className="text-[28px] " />
-            Candidates
-          </p>
+          <Link href={"/admin/candidates"}>
+            <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
+              <FaUserGraduate className="text-[28px] " />
+              Candidates
+            </p>
+          </Link>
           <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
             <IoDocumentTextSharp className="text-[28px] " />
             Applications
