@@ -5,8 +5,9 @@ import { HiMiniBuildingOffice2 } from "react-icons/hi2";
 import { MdWork } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
 import { useState } from "react";
-import { RiMenu5Line } from "react-icons/ri";
+import Image from "next/image";
 import { IoMenuSharp } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
 
 function adminPage() {
   const [sliderOpen, setSliderOpen] = useState(false);
@@ -14,11 +15,11 @@ function adminPage() {
   return (
     <>
       <div>
-        <button className="md:hidden z-50">
-          <IoMenuSharp
-            className="text-[50px] pt-[150px] bg-red-50 cursor-pointer md:hidden text-black"
-            onClick={() => setSliderOpen(!sliderOpen)}
-          />
+        <button
+          className=" z-50  bg-red-50 cursor-pointer md:hidden"
+          onClick={() => setSliderOpen(!sliderOpen)}
+        >
+          <IoMenuSharp className="text-[50px] pt-[150px] text-black -z-50" />
         </button>
       </div>
 
@@ -29,7 +30,18 @@ function adminPage() {
       >
         {/* Logo and Name  */}
         <div className="flex flex-col justify-center items-center pt-[110px] pb-20 gap-5">
-          <img src="/RheinlandLogoHeader.png" alt="" className="w-[150px]" />
+          <div className="flex flex-row justify-center items-center gap-10">
+            <Image
+              src="/RheinlandLogoHeader.png"
+              alt="Rheinland Logo"
+              height={150}
+              width={150}
+            />
+            <RxCross2
+              className="text-[30px] md:hidden"
+              onClick={() => setSliderOpen(false)}
+            />
+          </div>
           <h1 className="font-bold text-[25px]">Dashboard</h1>
         </div>
 
