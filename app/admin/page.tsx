@@ -72,38 +72,38 @@ function AdminPage() {
 
             {/* Options  */}
             <div className="flex flex-col gap-5 px-5">
-              <p
+              <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("candidates")}
               >
                 <FaUserGraduate className="text-[28px]" />
                 Candidates
-              </p>
-              <p
+              </button>
+              <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("applications")}
               >
                 <IoDocumentTextSharp className="text-[28px]" />
                 Applications
-              </p>
-              <p
+              </button>
+              <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("companies")}
               >
                 <HiMiniBuildingOffice2 className="text-[28px]" />
                 Companies
-              </p>
-              <p
+              </button>
+              <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("jobs")}
               >
                 <MdWork className="text-[28px]" />
                 Jobs
-              </p>
-              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]">
+              </button>
+              <button className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]">
                 <FaPowerOff className="text-[28px]" />
                 Logout
-              </p>
+              </button>
             </div>
           </div>
         </div>
