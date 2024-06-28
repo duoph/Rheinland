@@ -39,7 +39,7 @@ function CandidateCard() {
           Download Resume
           <FaFileDownload className="text-[20px]" />
         </button>
-        <p className="cursor-pointer">View Profile...</p>
+        <p className="cursor-pointer ">View Profile...</p>
       </div>
     </div>
   );
