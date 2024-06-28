@@ -43,7 +43,7 @@ function CandidatesPage() {
         activeClassName={"active"}
         disabledClassName={"disabled"}
 
-        className="flex flex-row"
+        className="flex flex-row gap-2"
       />
     </div>
   );
