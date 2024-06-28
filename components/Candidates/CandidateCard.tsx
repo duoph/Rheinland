@@ -4,6 +4,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaFileDownload } from "react-icons/fa";
 
 function CandidateCard() {
+  
   return (
     <div className="w-[300px] flex flex-col rounded-lg justify-center items-center py-5 px-2 border-2 shadow-md shadow-rheinland-gray">
       <div className="flex flex-col justify-center items-center ">

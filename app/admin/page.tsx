@@ -10,21 +10,42 @@ import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import CandidatesPage from "./candidates/page";
+import LoginPage from "../login/page";
+// Import other components for Applications, Companies, and Jobs
+// import ApplicationsPage from "./applications/page";
+// import CompaniesPage from "./companies/page";
+// import JobsPage from "./jobs/page";
 
 function AdminPage() {
   const [sliderOpen, setSliderOpen] = useState(false);
+  const [currentComponent, setCurrentComponent] = useState("candidates");
+
+  const renderComponent = () => {
+    switch (currentComponent) {
+      case "candidates":
+        return <CandidatesPage />;
+      case "applications":
+        return <CandidatesPage />;
+      case "companies":
+        return <CandidatesPage />;
+      case "jobs":
+        return <LoginPage />;
+      default:
+        return <CandidatesPage />;
+    }
+  };
 
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-row h-screen">
         {/* Sidebar  */}
         <div>
           <div className="pt-[80px] md:hidden">
             <button
-              className="z-50  bg-red-50 p-2 cursor-pointer md:hidden"
+              className="z-50 bg-red-50 p-2 cursor-pointer md:hidden"
               onClick={() => setSliderOpen(!sliderOpen)}
             >
-              <RiMenu4Line className="text-[30px]  text-black z-50" />
+              <RiMenu4Line className="text-[30px] text-black z-50" />
             </button>
           </div>
 
@@ -51,26 +72,36 @@ function AdminPage() {
 
             {/* Options  */}
             <div className="flex flex-col gap-5 px-5">
-              <Link href={"/admin/candidates"}>
-                <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-                  <FaUserGraduate className="text-[28px] " />
-                  Candidates
-                </p>
-              </Link>
-              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-                <IoDocumentTextSharp className="text-[28px] " />
+              <p
+                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+                onClick={() => setCurrentComponent("candidates")}
+              >
+                <FaUserGraduate className="text-[28px]" />
+                Candidates
+              </p>
+              <p
+                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+                onClick={() => setCurrentComponent("applications")}
+              >
+                <IoDocumentTextSharp className="text-[28px]" />
                 Applications
               </p>
-              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-                <HiMiniBuildingOffice2 className="text-[28px] " />
+              <p
+                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+                onClick={() => setCurrentComponent("companies")}
+              >
+                <HiMiniBuildingOffice2 className="text-[28px]" />
                 Companies
               </p>
-              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-                <MdWork className="text-[28px] " />
+              <p
+                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+                onClick={() => setCurrentComponent("jobs")}
+              >
+                <MdWork className="text-[28px]" />
                 Jobs
               </p>
-              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px] ">
-                <FaPowerOff className="text-[28px] " />
+              <p className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]">
+                <FaPowerOff className="text-[28px]" />
                 Logout
               </p>
             </div>
@@ -78,10 +109,7 @@ function AdminPage() {
         </div>
 
         {/* Interchanging Components */}
-
-        <div>
-          <CandidatesPage />
-        </div>
+        <div className="flex-grow p-5 overflow-y-auto">{renderComponent()}</div>
       </div>
 
       {/* Overlay for mobile view */}
