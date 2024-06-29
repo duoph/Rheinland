@@ -45,9 +45,9 @@ function CandidatesPage() {
         previousLinkClassName={"page-link"}
         nextClassName={"page-item"}
         nextLinkClassName={"page-link"}
-        activeClassName={"active"}
-        disabledClassName={"disabled"}
-        className="flex flex-row gap-2 py-10 items-center"
+        activeClassName={"activePage"}
+        disabledClassName={"disabledPage"}
+        className="flex flex-row gap-8 py-10 items-center text-[18px] "
       />
     </div>
   );
