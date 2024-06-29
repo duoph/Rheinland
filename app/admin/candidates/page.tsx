@@ -26,8 +26,12 @@ function CandidatesPage() {
         ))}
       </div>
       <ReactPaginate
-        previousLabel={<FaArrowCircleLeft />}
-        nextLabel={<FaArrowCircleRight />}
+        previousLabel={
+          <FaArrowCircleLeft className="text-[30px] text-rheinland-blue" />
+        }
+        nextLabel={
+          <FaArrowCircleRight className="text-[30px] text-rheinland-blue" />
+        }
         breakLabel={"..."}
         breakClassName={"break-me"}
         pageCount={pageCount}
@@ -43,7 +47,7 @@ function CandidatesPage() {
         nextLinkClassName={"page-link"}
         activeClassName={"active"}
         disabledClassName={"disabled"}
-        className="flex flex-row gap-2"
+        className="flex flex-row gap-2 py-10 items-center"
       />
     </div>
   );
