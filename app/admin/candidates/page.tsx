@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import CandidateCard from "@/components/Candidates/CandidateCard";
 import ReactPaginate from "react-paginate";
-
+import { FaArrowCircleLeft } from "react-icons/fa";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 const candidates = Array(20).fill(null); // Assuming you have 20 candidates for this example
 
@@ -25,8 +26,8 @@ function CandidatesPage() {
         ))}
       </div>
       <ReactPaginate
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
+        previousLabel={<FaArrowCircleLeft />}
+        nextLabel={<FaArrowCircleRight />}
         breakLabel={"..."}
         breakClassName={"break-me"}
         pageCount={pageCount}
@@ -42,7 +43,6 @@ function CandidatesPage() {
         nextLinkClassName={"page-link"}
         activeClassName={"active"}
         disabledClassName={"disabled"}
-
         className="flex flex-row gap-2"
       />
     </div>
