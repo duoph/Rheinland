@@ -22,7 +22,7 @@ function CandidateCard() {
         </p>
         <p className="flex flex-row justify-center items-center text-[14px] cursor-default">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          asperiores, nemo esse eum obcaecati tempora.
+          asperiores, nemo esse eum obcaecati.
         </p>
       </div>
       <div className="flex flex-row gap-5 pt-5">
