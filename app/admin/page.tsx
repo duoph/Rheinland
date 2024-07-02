@@ -11,6 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import CandidatesPage from "./candidates/page";
 import LoginPage from "../login/page";
+import { FaRegFileAlt } from "react-icons/fa";
 // Import other components for Applications, Companies, and Jobs
 // import ApplicationsPage from "./applications/page";
 // import CompaniesPage from "./companies/page";
@@ -83,7 +84,7 @@ function AdminPage() {
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("applications")}
               >
-                <IoDocumentTextSharp className="text-[28px]" />
+                <FaRegFileAlt className="text-[28px]" />
                 Applications
               </button>
               <button
