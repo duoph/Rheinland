@@ -8,7 +8,7 @@ const candidates = Array(20).fill(null); // Assuming you have 20 candidates for 
 
 function CandidatesPage() {
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);

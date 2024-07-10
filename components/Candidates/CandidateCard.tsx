@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { IoLocationSharp } from "react-icons/io5";
-import { FaFileDownload } from "react-icons/fa";
+
+import { FaRegFilePdf } from "react-icons/fa";
 
 function CandidateCard() {
   return (
@@ -37,10 +38,10 @@ function CandidateCard() {
       </div>
       <div className="pt-5 flex flex-col justify-center items-center gap-2">
         <button className=" flex flex-row justify-center gap-2 items-center w-[200px] bg-rheinland-black text-white rounded-lg py-2">
-          Download Resume
-          <FaFileDownload className="text-[20px]" />
+        View Resume...
+          <FaRegFilePdf className="text-[20px]" />
         </button>
-        <p className="cursor-pointer text-rheinland-blue">View Profile...</p>
+
       </div>
     </div>
   );
