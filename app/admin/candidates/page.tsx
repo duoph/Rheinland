@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CandidateCard from "@/components/Candidates/CandidateCard";
 import ReactPaginate from "react-paginate";
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { FaArrowCircleRight } from "react-icons/fa";
+import { FaArrowCircleRight } from "react-icons/fa"; 
 
 const candidates = Array(20).fill(null); // Assuming you have 20 candidates for this example
 
