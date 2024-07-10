@@ -10,6 +10,7 @@ import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import Link from "next/link";
 import CandidatesPage from "./candidates/page";
+import ApplicationPage from "./applications/page"
 import LoginPage from "../login/page";
 import { FaRegFileAlt } from "react-icons/fa";
 // Import other components for Applications, Companies, and Jobs
@@ -26,7 +27,7 @@ function AdminPage() {
       case "candidates":
         return <CandidatesPage />;
       case "applications":
-        return <CandidatesPage />;
+        return <ApplicationPage />;
       case "companies":
         return <CandidatesPage />;
       case "jobs":
