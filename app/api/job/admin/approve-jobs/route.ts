@@ -8,7 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PUT(req: NextRequest, params: any) {
 
     try {
-
         const decodedToken = getDataFromToken(req);
 
         const jobId = params.jobId
