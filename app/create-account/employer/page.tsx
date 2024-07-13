@@ -56,7 +56,7 @@ const CreateEmployerAccount = () => {
             formDataToSend.append('password', formData.password);
 
 
-            const res = await axios.post('/api/employer/account/create-account', formDataToSend, {
+            const res = await axios.post('/api/employer/account', formDataToSend, {
 
             })
 
