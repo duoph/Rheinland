@@ -1,4 +1,5 @@
 "use client";
+
 import { FaUserGraduate } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { HiMiniBuildingOffice2 } from "react-icons/hi2";

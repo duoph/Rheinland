@@ -16,7 +16,6 @@ const LoginPage = () => {
 
     const { setAccountData } = useAccount()
 
-
     const router = useRouter()
 
     const handleSubmit = async () => {

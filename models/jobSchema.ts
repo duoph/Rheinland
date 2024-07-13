@@ -15,7 +15,8 @@ const jobSchema = new Schema({
     gender: { type: String },
     appliedUsers: { type: mongoose.Schema.ObjectId },
     savedUsers: { type: mongoose.Schema.ObjectId },
-    employerId: { type: mongoose.Schema.ObjectId, required: true }
+    employerId: { type: mongoose.Schema.ObjectId, required: true },
+    approvedByAdmin: { type: Boolean, default: false }
 
 }, { timestamps: true })
 

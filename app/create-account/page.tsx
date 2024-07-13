@@ -59,7 +59,7 @@ const CreateAccountPage = () => {
       formDataToSend.append("password", formData.password);
 
       const res = await axios.post(
-        "/api/user/account/create-account",
+        "/api/user/account",
         formDataToSend
       );
 

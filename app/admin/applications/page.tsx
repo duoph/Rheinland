@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaArrowCircleLeft } from "react-icons/fa";
