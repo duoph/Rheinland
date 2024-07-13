@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import jobModel from '@/models/jobSchema'; // Ensure this path is correct
 import connectMongoDB from '@/lib/dbConnect';
 
-
+// GET ALL JOBS
 
 export async function GET() {
     try {
@@ -17,6 +17,9 @@ export async function GET() {
         return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
     }
 }
+
+
+// JOB CREATE
 
 
 export async function POST(req: NextRequest) {
@@ -43,3 +46,4 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
     }
 }
+
