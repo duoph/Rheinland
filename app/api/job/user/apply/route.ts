@@ -1,18 +1,20 @@
+import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
-import jobModel from "@/models/jobSchema";
+import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 
-// APPLY FOR JOB
+// GET APPLIED JOBS BY USER ID
 
 export async function GET(req: NextRequest, { params }: any) {
 
     try {
         await connectMongoDB()
 
-        const jobId = params.jobId
 
-        const job = await jobModel.findById({ _id: jobId })
+        const decodedToken = getDataFromToken(req);
+
+        const job = await userModel.findById({ _id: decodedToken.id })
 
         console.log(job)
 
@@ -24,5 +26,4 @@ export async function GET(req: NextRequest, { params }: any) {
         return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
 
     }
-    
 }

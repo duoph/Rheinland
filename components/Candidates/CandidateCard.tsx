@@ -38,7 +38,7 @@ function CandidateCard() {
       </div>
       <div className="pt-5 flex flex-col justify-center items-center gap-2">
         <button className=" flex flex-row justify-center gap-2 items-center w-[200px] bg-rheinland-black text-white rounded-lg py-2">
-        View Resume...
+          View Resume...
           <FaRegFilePdf className="text-[20px]" />
         </button>
 

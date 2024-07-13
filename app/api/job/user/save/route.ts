@@ -3,7 +3,6 @@ import connectMongoDB from "@/lib/dbConnect";
 import jobModel from "@/models/jobSchema";
 import { NextRequest, NextResponse } from "next/server";
 
-
 // HANDLE SAVE/UNSAVE OF JOBS
 
 export async function POST(req: NextRequest, { params }: any) {
@@ -13,7 +12,6 @@ export async function POST(req: NextRequest, { params }: any) {
         const decodedToken = getDataFromToken(req);
 
         console.log("This is the user id : " + decodedToken)
-
 
         const userId = decodedToken.id
 
