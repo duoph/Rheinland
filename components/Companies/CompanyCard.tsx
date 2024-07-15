@@ -46,7 +46,7 @@ function CompanyCard() {
               <p>lufthansasystems@gamil.com</p>
               <p>+49 97 25917 3740</p>
             </div>
-            <button className="flex justify-center items-center bg-">Jobs <span>10</span></button>
+            <button className="flex justify-center items-center bg-rheinland-blue text-white px-10 py-2 rounded-sm gap-2">Jobs <span>(10)</span></button>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
