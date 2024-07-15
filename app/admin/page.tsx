@@ -14,6 +14,7 @@ import CandidatesPage from "./candidates/page";
 import ApplicationPage from "./applications/page"
 import LoginPage from "../login/page";
 import { FaRegFileAlt } from "react-icons/fa";
+import CompaniesPage from "./companies/page";
 // Import other components for Applications, Companies, and Jobs
 // import ApplicationsPage from "./applications/page";
 // import CompaniesPage from "./companies/page";
@@ -30,7 +31,7 @@ function AdminPage() {
       case "applications":
         return <ApplicationPage />;
       case "companies":
-        return <CandidatesPage />;
+        return <CompaniesPage />;
       case "jobs":
         return <LoginPage />;
       default:
