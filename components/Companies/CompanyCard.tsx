@@ -1,6 +1,12 @@
 import React from "react";
 import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 function CompanyCard() {
   return (
@@ -31,6 +37,16 @@ function CompanyCard() {
           asperiores, nemo esse eum obcaecati.
         </p>
       </div>
+      {/* Accordion  */}
+      <Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
     </div>
   );
 }
