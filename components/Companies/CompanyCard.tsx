@@ -32,21 +32,24 @@ function CompanyCard() {
           <IoLocationSharp />
           Raunheim,Germany
         </p>
-        <p className="flex flex-row justify-center items-center text-[14px] cursor-default">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          asperiores, nemo esse eum obcaecati.
-        </p>
       </div>
       {/* Accordion  */}
       <Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
-
+        <AccordionItem value="item-1">
+          <AccordionTrigger></AccordionTrigger>
+          <AccordionContent className="flex flex-col justify-center items-center">
+            <p className="flex flex-row justify-center items-center text-[14px] cursor-default">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+              asperiores, nemo esse eum obcaecati.
+            </p>
+            <div className="flex flex-col py-5">
+              <p>lufthansasystems@gamil.com</p>
+              <p>+49 97 25917 3740</p>
+            </div>
+            <button className="flex justify-center items-center bg-">Jobs <span>10</span></button>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }
