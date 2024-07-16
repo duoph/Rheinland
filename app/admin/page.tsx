@@ -57,7 +57,7 @@ function AdminPage() {
 
           <div
             className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
-              } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] md:h-screen bg-[#fcfaf6]`}
+              } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] bg-[#fcfaf6]`}
           >
 
             <div className="relative flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
