@@ -1,7 +1,7 @@
 "use client";
 
 import { FaUserGraduate } from "react-icons/fa";
-import { IoDocumentTextSharp } from "react-icons/io5";
+import { IoCloseSharp, IoDocumentTextSharp } from "react-icons/io5";
 import { HiMiniBuildingOffice2 } from "react-icons/hi2";
 import { MdWork } from "react-icons/md";
 import { FaPowerOff } from "react-icons/fa";
@@ -58,51 +58,54 @@ function AdminPage() {
             className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
               } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] md:h-screen bg-[#fcfaf6]`}
           >
-            {/* Logo and Name  */}
-            {/* <div className="flex flex-col justify-center items-center pt-[80px] pb-10 gap-5">
-              <div className="flex flex-row justify-center items-center gap-5">
-                <Image
-                  src="/RheinlandLogoHeader.png"
-                  alt="Rheinland Logo"
-                  height={150}
-                  width={150}
-                />
-                <button onClick={() => setSliderOpen(false)}>
-                  <RxCross2 className="text-[30px] md:hidden" />
-                </button>
+
+            <div className="relative flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
+
+              <div onClick={() => setSliderOpen(false)} className="absolute top-5 right-5 cursor-pointer md:hidden">
+                <IoCloseSharp />
               </div>
-              <h1 className="font-bold text-[25px]">Dashboard</h1>
-            </div> */}
 
-            {/* Options  */}
-
-            <div className="flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
 
               <h1 className="font-bold text-[25px]">Dashboard</h1>
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => setCurrentComponent("candidates")}
+                onClick={() => {
+                  setCurrentComponent("candidates")
+                  setSliderOpen(false)
+                }}
               >
                 <FaUserGraduate className="text-[28px]" />
                 Candidates
               </button>
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => setCurrentComponent("applications")}
+                onClick={() => {
+                  setCurrentComponent("applications")
+                  setSliderOpen(false)
+
+                }}
               >
                 <FaRegFileAlt className="text-[28px]" />
                 Applications
               </button>
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => setCurrentComponent("companies")}
+                onClick={() => {
+                  setCurrentComponent("companies")
+                  setSliderOpen(false)
+
+                }}
               >
                 <HiMiniBuildingOffice2 className="text-[28px]" />
                 Companies
               </button>
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => setCurrentComponent("jobs")}
+                onClick={() => {
+                  setCurrentComponent("jobs")
+                  setSliderOpen(false)
+
+                }}
               >
                 <MdWork className="text-[28px]" />
                 Jobs
@@ -112,21 +115,23 @@ function AdminPage() {
                 Logout
               </button>
             </div>
-            
+
           </div>
         </div>
 
         {/* Interchanging Components */}
         <div className="flex-grow p-5 overflow-y-auto">{renderComponent()}</div>
-      </div>
+      </div >
 
       {/* Overlay for mobile view */}
-      {sliderOpen && (
-        <div
-          className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
-          onClick={() => setSliderOpen(false)}
-        />
-      )}
+      {
+        sliderOpen && (
+          <div
+            className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
+            onClick={() => setSliderOpen(false)}
+          />
+        )
+      }
     </>
   );
 }
