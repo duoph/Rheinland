@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
 
-    const employerAccount = await employerModel.create({
+    const employerAccount = await employerModel.create({ 
       employerName,
       email,
       password: hashedPassword,

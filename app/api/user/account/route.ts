@@ -5,7 +5,7 @@ import userModel from "@/models/userSchema";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 
 
-// create account for employer 
+// create account for user 
 
 export async function POST(req: NextRequest) {
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
 }
 
-// Update user account
+// edit user account
 
 export async function PUT(req: NextRequest) {
     try {
