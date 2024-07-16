@@ -11,14 +11,18 @@ export async function GET(req: NextRequest, { params }: any) {
     try {
         await connectMongoDB()
 
+        const jobId = params.jobId
 
         const decodedToken = getDataFromToken(req);
 
-        const job = await userModel.findById({ _id: decodedToken.id })
+        const user = await userModel.findByIdAndUpdate({ _id: decodedToken.id }, {
+            $push: {}
+        })
 
-        console.log(job)
 
-        return NextResponse.json({ message: 'Fetched Job successfully', success: true, job });
+        console.log(user)
+
+        return NextResponse.json({ message: 'Fetched Job successfully', success: true, user });
 
     } catch (error) {
 

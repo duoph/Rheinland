@@ -20,7 +20,9 @@ import { FaRegFileAlt } from "react-icons/fa";
 // import JobsPage from "./jobs/page";
 
 function AdminPage() {
+
   const [sliderOpen, setSliderOpen] = useState(false);
+
   const [currentComponent, setCurrentComponent] = useState("candidates");
 
   const renderComponent = () => {
@@ -53,9 +55,8 @@ function AdminPage() {
           </div>
 
           <div
-            className={`fixed inset-0 z-[99] md:z-0 transform ${
-              sliderOpen ? "translate-x-0" : "-translate-x-full"
-            } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] md:h-screen bg-[#fcfaf6]`}
+            className={`fixed inset-0 z-[99] md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
+              } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] md:h-screen bg-[#fcfaf6]`}
           >
             {/* Logo and Name  */}
             <div className="flex flex-col justify-center items-center pt-[110px] pb-20 gap-5">
