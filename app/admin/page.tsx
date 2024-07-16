@@ -55,12 +55,12 @@ function AdminPage() {
           </div>
 
           <div
-            className={`fixed inset-0 z-[99] md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
+            className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
               } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] md:h-screen bg-[#fcfaf6]`}
           >
             {/* Logo and Name  */}
-            <div className="flex flex-col justify-center items-center pt-[110px] pb-20 gap-5">
-              <div className="flex flex-row justify-center items-center gap-10">
+            {/* <div className="flex flex-col justify-center items-center pt-[80px] pb-10 gap-5">
+              <div className="flex flex-row justify-center items-center gap-5">
                 <Image
                   src="/RheinlandLogoHeader.png"
                   alt="Rheinland Logo"
@@ -72,10 +72,10 @@ function AdminPage() {
                 </button>
               </div>
               <h1 className="font-bold text-[25px]">Dashboard</h1>
-            </div>
+            </div> */}
 
             {/* Options  */}
-            <div className="flex flex-col gap-5 px-5">
+            <div className="flex flex-col gap-5 px-5 pt-[70px]">
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("candidates")}
