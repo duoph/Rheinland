@@ -75,7 +75,10 @@ function AdminPage() {
             </div> */}
 
             {/* Options  */}
-            <div className="flex flex-col gap-5 px-5 pt-[70px]">
+
+            <div className="flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
+
+              <h1 className="font-bold text-[25px]">Dashboard</h1>
               <button
                 className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
                 onClick={() => setCurrentComponent("candidates")}
@@ -109,6 +112,7 @@ function AdminPage() {
                 Logout
               </button>
             </div>
+            
           </div>
         </div>
 
