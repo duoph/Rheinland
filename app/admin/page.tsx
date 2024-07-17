@@ -1,140 +1,104 @@
 "use client";
 
-import { FaUserGraduate } from "react-icons/fa";
+import { FaUserGraduate, FaRegFileAlt, FaPowerOff } from "react-icons/fa";
 import { IoCloseSharp, IoDocumentTextSharp } from "react-icons/io5";
 import { HiMiniBuildingOffice2 } from "react-icons/hi2";
 import { MdWork } from "react-icons/md";
-import { FaPowerOff } from "react-icons/fa";
-import { useState } from "react";
-import Image from "next/image";
-import { RiMenu4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import { RiMenu4Line } from "react-icons/ri";
 import Link from "next/link";
 import CandidatesPage from "./candidates/page";
-import ApplicationPage from "./applications/page"
+import ApplicationPage from "./applications/page";
 import LoginPage from "../login/page";
-import { FaRegFileAlt } from "react-icons/fa";
 import CompaniesPage from "./companies/page";
-// Import other components for Applications, Companies, and Jobs
-// import ApplicationsPage from "./applications/page";
-// import CompaniesPage from "./companies/page";
-// import JobsPage from "./jobs/page";
+import { ReactNode, useState } from "react";
+import Image from "next/image";
 
-function AdminPage() {
-
-  const [sliderOpen, setSliderOpen] = useState(false);
-
-  const [currentComponent, setCurrentComponent] = useState("candidates");
-
-  const renderComponent = () => {
-    switch (currentComponent) {
-      case "candidates":
-        return <CandidatesPage />;
-      case "applications":
-        return <ApplicationPage />;
-      case "companies":
-        return <CompaniesPage />;
-      case "jobs":
-        return <LoginPage />;
-      default:
-        return <CandidatesPage />;
-    }
-  };
+/**
+ * Component for the admin page slider layout.
+ * @param children - Child components to render within the layout.
+ * @returns The rendered admin page slider layout.
+ */
+const AdminSliderLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+  
+  const [sliderOpen, setSliderOpen] = useState<boolean>(false);
 
   return (
     <>
-      <div className="flex flex-row h-screen">
-        {/* Sidebar  */}
-        <div>
-          <div className="pt-[80px] md:hidden">
-            <button
-              className="z-50 bg-red-50 p-2 cursor-pointer md:hidden"
-              onClick={() => setSliderOpen(!sliderOpen)}
-            >
-              <RiMenu4Line className="text-[30px] text-black z-50" />
-            </button>
-          </div>
-
-          <div
-            className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
-              } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] bg-[#fcfaf6]`}
+      {/* Sidebar  */}
+      <div>
+        <div className="pt-[80px] md:hidden">
+          <button
+            className="z-50 bg-red-50 p-2 cursor-pointer md:hidden"
+            onClick={() => setSliderOpen(!sliderOpen)}
           >
-
-            <div className="relative flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
-
-              <div onClick={() => setSliderOpen(false)} className="absolute top-5 right-5 cursor-pointer md:hidden">
-                <IoCloseSharp />
-              </div>
-
-
-              <h1 className="font-bold text-[25px]">Dashboard</h1>
-              <button
-                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => {
-                  setCurrentComponent("candidates")
-                  setSliderOpen(false)
-                }}
-              >
-                <FaUserGraduate className="text-[28px]" />
-                Candidates
-              </button>
-              <button
-                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => {
-                  setCurrentComponent("applications")
-                  setSliderOpen(false)
-
-                }}
-              >
-                <FaRegFileAlt className="text-[28px]" />
-                Applications
-              </button>
-              <button
-                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => {
-                  setCurrentComponent("companies")
-                  setSliderOpen(false)
-
-                }}
-              >
-                <HiMiniBuildingOffice2 className="text-[28px]" />
-                Companies
-              </button>
-              <button
-                className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                onClick={() => {
-                  setCurrentComponent("jobs")
-                  setSliderOpen(false)
-
-                }}
-              >
-                <MdWork className="text-[28px]" />
-                Jobs
-              </button>
-              <button className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]">
-                <FaPowerOff className="text-[28px]" />
-                Logout
-              </button>
-            </div>
-
-          </div>
+            <RiMenu4Line className="text-[30px] text-black z-50" />
+          </button>
         </div>
 
-        {/* Interchanging Components */}
-        <div className="flex-grow p-5 overflow-y-auto">{renderComponent()}</div>
-      </div >
+        <div
+          className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
+            } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] bg-[#fcfaf6]`}
+        >
+          <div className="relative flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
+            <div onClick={() => setSliderOpen(false)} className="absolute top-5 right-5 cursor-pointer md:hidden">
+              <IoCloseSharp />
+            </div>
 
-      {/* Overlay for mobile view */}
-      {
-        sliderOpen && (
-          <div
-            className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
-            onClick={() => setSliderOpen(false)}
-          />
-        )
-      }
+            <h1 className="font-bold text-[25px]">Dashboard</h1>
+            <button
+              className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+              onClick={() => {
+                setSliderOpen(false);
+              }}
+            >
+              <FaUserGraduate className="text-[28px]" />
+              Candidates
+            </button>
+            <button
+              className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+              onClick={() => {
+                setSliderOpen(false);
+              }}
+            >
+              <FaRegFileAlt className="text-[28px]" />
+              Applications
+            </button>
+            <button
+              className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+              onClick={() => {
+                setSliderOpen(false);
+              }}
+            >
+              <HiMiniBuildingOffice2 className="text-[28px]" />
+              Companies
+            </button>
+            <button
+              className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+              onClick={() => {
+                setSliderOpen(false);
+              }}
+            >
+              <MdWork className="text-[28px]" />
+              Jobs
+            </button>
+            <button
+              className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
+              onClick={() => {
+                setSliderOpen(false);
+              }}
+            >
+              <FaPowerOff className="text-[28px]" />
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {children}
     </>
   );
-}
+};
 
-export default AdminPage;
+export default AdminSliderLayout;
+

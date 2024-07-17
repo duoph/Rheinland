@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa6";
 import { MdNotInterested } from "react-icons/md";
 
 function ApplicationCard() {
+
   return (
     // Main container
     <div className="flex flex-col w-[300px] h-[380px]   justify-around bg-[#f6eed8] rounded-sm pt-5 px-3">
