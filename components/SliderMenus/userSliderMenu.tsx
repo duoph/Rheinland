@@ -24,6 +24,9 @@ const SliderMenu = () => {
     return (
 
         <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
+
+            {/* Global Slider Layout */}
+
             <div className="flex items-center justify-center w-full">
                 {isMenuOpen ? (
                     <RiCloseLargeFill
@@ -64,6 +67,13 @@ const SliderMenu = () => {
 
                 </div>
             </div>
+
+
+
+
+
+
+
 
         </ClickAwayListener>
     );

@@ -10,8 +10,6 @@ import {
 
 function CompanyCard() {
   return (
-    //Main Container
-
     <div
       className="w-[300px] flex flex-col rounded-sm justify-center items-center py-5 px-2 border-2 shadow-sm\]
      shadow-rheinland-gray"
@@ -35,16 +33,16 @@ function CompanyCard() {
       </div>
       {/* Accordion  */}
       <Accordion type="single" collapsible>
-        <AccordionItem value="item-1">
-          <AccordionTrigger></AccordionTrigger>
+        <AccordionItem className="flex flex-col items-center justify-center" value="item-1">
+          <AccordionTrigger className="text-center"></AccordionTrigger>
           <AccordionContent className="flex flex-col justify-center items-center">
             <p className="flex flex-row justify-center items-center text-[14px] cursor-default">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
               asperiores, nemo esse eum obcaecati.
             </p>
             <div className="flex flex-col py-5">
-              <p>lufthansasystems@gamil.com</p>
-              <p>+49 97 25917 3740</p>
+              <p className="text-center">lufthansasystems@gamil.com</p>
+              <p className="text-center">+49 97 25917 3740</p>
             </div>
             <button className="flex justify-center items-center bg-rheinland-blue text-white px-10 py-2 rounded-sm gap-2">Jobs <span>(10)</span></button>
           </AccordionContent>

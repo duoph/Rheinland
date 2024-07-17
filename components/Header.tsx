@@ -2,11 +2,11 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import SliderMenu from './SliderMenu';
+import SliderMenu from './SliderMenus/userSliderMenu';
 import { useAccount } from '@/context/useAccount';
 import { CgProfile } from 'react-icons/cg';
 import { Router } from 'next/router';
-import AdminSliderMenu from './admin/adminSliderLayout';
+import AdminSliderMenu from './SliderMenus/adminSliderMenu';
 import { usePathname } from 'next/navigation';
 
 
