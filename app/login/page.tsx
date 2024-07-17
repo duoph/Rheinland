@@ -46,17 +46,16 @@ const LoginPage = () => {
                     router.push('/admin');
                 }
 
-                if (res.data.accountType === 'student') {
-                    router.push('/student');
-                }
-
                 const accountData = {
                     id: res.data.accountId,
                     type: res.data.accountType,
                     token: res.data.token
                 };
+                
                 setAccountData(accountData.id, accountData.token, accountData.type);
+
                 localStorage.setItem('currentAccount', JSON.stringify(accountData));
+
             } else {
                 toast.error(res.data.message);
             }
