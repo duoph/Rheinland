@@ -1,97 +1,89 @@
-"use client";
+import React, { useState } from 'react'
+import Link from "next/link"
+import ClickAwayListener from 'react-click-away-listener'
+import { CiCirclePlus, CiCircleRemove, CiMenuBurger, CiShop, CiShoppingCart } from 'react-icons/ci'
+import { AiOutlineLogout } from 'react-icons/ai'
+import { usePathname, useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
-import { FaUserGraduate, FaRegFileAlt, FaPowerOff } from "react-icons/fa";
-import { IoCloseSharp } from "react-icons/io5";
-import { HiMiniBuildingOffice2 } from "react-icons/hi2";
-import { MdWork } from "react-icons/md";
-import { RiMenu4Line } from "react-icons/ri";
-import { ReactNode, useState } from "react";
 
-/**
- * Component for the admin page slider layout.
- * @param children - Child components to render within the layout.
- * @returns The rendered admin page slider layout.
- */
-const AdminSliderLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+const AdminSliderMenu = () => {
 
-    const [sliderOpen, setSliderOpen] = useState<boolean>(false);
+    const [isMenu, setIsMenu] = useState<boolean>(true);
+
+    const router = useRouter();
+
+    const pathname = usePathname()
+
+    const handleLogout = async () => {
+        try {
+            toast.success("LogOut Successfully");
+            router.push('/account/login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
-        <>
-            {/* Sidebar  */}
-            <div>
-                <div className="pt-[80px] md:hidden">
-                    <button
-                        className="z-50 bg-red-50 p-2 cursor-pointer md:hidden"
-                        onClick={() => setSliderOpen(!sliderOpen)}
-                    >
-                        <RiMenu4Line className="text-[30px] text-black z-50" />
+        <ClickAwayListener onClickAway={() => setIsMenu(true)}>
+            <div className="flex  items-center justify-center">
+                {isMenu ? (
+                    <button className=' rounded-md' onClick={() => setIsMenu(!isMenu)}>
+                        <CiMenuBurger className='cursor-pointer' size={24} />
                     </button>
+                ) : (
+                    <button className='rounded-md' onClick={() => setIsMenu(!isMenu)}>
+                        <CiCircleRemove className='cursor-pointer' size={24} />
+                    </button>
+                )}
+
+
+                <div onClick={() => setIsMenu(true)} className={`font-light fixed top-[81px] h-full right-0 flex flex-col items-start justify-start z-50 shadow-2xl  bg-td-secondary md:w-[300px] w-full  translate-x-[0%]  transition-all duration-300 bg-black ease-in-out ${isMenu && 'translate-x-[100%]'}`}>
+                    <Link href="/admin-panel/orders" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/orders") && "bg-td-primary"}`}>
+                        <span className="flex items-center justify-start gap-8">
+                            <CiShoppingCart />
+                            <p>
+                                Orders
+                            </p>
+                        </span>
+                    </Link>
+                    <Link href="/admin-panel/create-product" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/create-product") && "bg-td-primary"}`}>
+                        <span className="flex items-center justify-start gap-8">
+                            <CiCirclePlus />
+                            <p>
+                                Add Product
+                            </p>
+                        </span>
+                    </Link>
+                    <Link href="/admin-panel/create-category" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/create-category") && "bg-td-primary"}`}> <span className="flex items-center justify-start gap-8">
+                        <CiCirclePlus />
+                        <p>
+                            Add Category
+                        </p>
+                    </span>
+                    </Link>
+                    <Link href="/admin-panel/view-products" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/view-products") && "bg-td-primary"} ${pathname?.startsWith("/admin-panel/edit-product/") && "bg-td-primary"}`}>
+                        <span className="flex items-center justify-start gap-8">
+                            <CiShop />
+                            <p>
+                                View All Products
+                            </p>
+                        </span>
+                    </Link>
+                    <Link href="/admin-panel/view-categories" className={` w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin-panel/edit-category") && "bg-td-primary"} ${pathname?.startsWith("/admin-panel/view-categories") && "bg-td-primary"}`}>
+                        <span className="flex items-center justify-start gap-8">
+                            <CiShop />
+                            <p>
+                                View All Categories
+                            </p>
+                        </span>
+                    </Link>
+                    <button className='bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3' onClick={handleLogout}> LogOut<AiOutlineLogout /></button>
                 </div>
+            </div >
+        </ClickAwayListener>
+    )
+}
 
-                <div
-                    className={`absolute top-[75px] z-50 inset-0 md:z-0 transform ${sliderOpen ? "translate-x-0" : "-translate-x-full"
-                        } w-[280px] transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:flex-col md:w-[300px] bg-[#fcfaf6]`}
-                >
-                    <div className="relative flex flex-col items-start bg-gray-100 h-full gap-5 px-5 ">
-                        <div onClick={() => setSliderOpen(false)} className="absolute top-5 right-5 cursor-pointer md:hidden">
-                            <IoCloseSharp />
-                        </div>
-
-                        <h1 className="font-bold text-[25px]">Dashboard</h1>
-                        <button
-                            className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                            onClick={() => {
-                                setSliderOpen(false);
-                            }}
-                        >
-                            <FaUserGraduate className="text-[28px]" />
-                            Candidates
-                        </button>
-                        <button
-                            className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                            onClick={() => {
-                                setSliderOpen(false);
-                            }}
-                        >
-                            <FaRegFileAlt className="text-[28px]" />
-                            Applications
-                        </button>
-                        <button
-                            className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                            onClick={() => {
-                                setSliderOpen(false);
-                            }}
-                        >
-                            <HiMiniBuildingOffice2 className="text-[28px]" />
-                            Companies
-                        </button>
-                        <button
-                            className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                            onClick={() => {
-                                setSliderOpen(false);
-                            }}
-                        >
-                            <MdWork className="text-[28px]" />
-                            Jobs
-                        </button>
-                        <button
-                            className="flex justify-start items-center gap-2 cursor-pointer font-regular hover:text-rheinland-red text-[22px]"
-                            onClick={() => {
-                                setSliderOpen(false);
-                            }}
-                        >
-                            <FaPowerOff className="text-[28px]" />
-                            Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {children}
-        </>
-    );
-};
-
-export default AdminSliderLayout;
-
+export default AdminSliderMenu;

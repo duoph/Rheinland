@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaArrowCircleRight } from "react-icons/fa";
 import CompanyCard from "@/components/Companies/CompanyCard";
-import AdminSliderLayout from "../page";
+import AdminSliderLayout from "@/components/admin/adminSliderLayout";
 
 const candidates = Array(20).fill(null);
 
@@ -22,15 +22,13 @@ function CompaniesPage() {
   const pageCount = Math.ceil(candidates.length / itemsPerPage);
 
   return (
-    <AdminSliderLayout>
-      <div className="py-[80px] flex flex-col items-center">
-        <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-          {currentCandidates.map((_, index) => (
-            <CompanyCard key={index} />
-          ))}
-        </div>
+    <div className="py-[80px] flex flex-col items-center">
+      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
+        {currentCandidates.map((_, index) => (
+          <CompanyCard key={index} />
+        ))}
       </div>
-    </AdminSliderLayout>
+    </div>
   );
 }
 

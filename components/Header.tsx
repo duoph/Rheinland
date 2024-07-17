@@ -6,12 +6,16 @@ import SliderMenu from './SliderMenu';
 import { useAccount } from '@/context/useAccount';
 import { CgProfile } from 'react-icons/cg';
 import { Router } from 'next/router';
+import AdminSliderMenu from './admin/adminSliderLayout';
+import { usePathname } from 'next/navigation';
 
 
 
 const Header = () => {
 
     const { account } = useAccount()
+
+    const pathname = usePathname()
 
     return (
 
@@ -38,15 +42,18 @@ const Header = () => {
             )}
 
 
-            {account.token && account.id && (
+            {account.token && account.id && !pathname.startsWith('/admin') && (
                 <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
                     <SliderMenu />
                 </div>
             )}
-            {/* 
-            <div className='sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer' >
-                <SliderMenu />
-            </div> */}
+
+            {account.token && account.id && pathname.startsWith('/admin') && (
+                <div className='sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer' >
+                    <AdminSliderMenu />
+                </div>
+            )}
+
 
 
         </div>
