@@ -25,11 +25,13 @@ const Header = () => {
                     <Link href={'/'} className='flex items-center min-w-1/3'>
                         <Image src={'/RheinlandLogoHeader.png'} alt='Logo' height={100} width={100} />
                     </Link>
-                    <div className="hidden lg:flex justify-center items-center gap-4 font-light`">
-                        <Link href={'/jobs'}>Find Jobs</Link>
-                        <Link href={'/'}>Browse Companies</Link>
-                        <Link href={'/'}>Are you a student?</Link>
-                    </div>
+                    {
+                        !account.token && !account.id && <div className="hidden lg:flex justify-center items-center gap-4 font-light`">
+                            <Link href={'/jobs'}>Find Jobs</Link>
+                            <Link href={'/'}>Browse Companies</Link>
+                            <Link href={'/'}>Are you a student?</Link>
+                        </div>
+                    }
                 </div>
             </div>
 
