@@ -8,7 +8,6 @@ export async function GET(req: NextRequest) {
 
         await connectMongoDB()
 
-
         const jobs = await jobModel.find()
 
 

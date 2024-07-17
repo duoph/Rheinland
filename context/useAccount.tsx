@@ -16,12 +16,12 @@ interface AccountProps {
     setAccountData: (accountId: string, token: string, accountType: string) => void;
 }
 
-// Create the context with an undefined default value
-const AccountContext = createContext<AccountProps | undefined>(undefined);
-
 interface AccountProviderProps {
     children: ReactNode;
 }
+
+// Create the context with an undefined default value
+const AccountContext = createContext<AccountProps | undefined>(undefined);
 
 // Define the provider component
 export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
