@@ -25,7 +25,9 @@ const AdminSliderMenu = () => {
 
     return (
         <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
+
             <div className="flex items-center justify-center">
+
                 {isMenuOpen ? (
                     <RiCloseLargeFill
                         onClick={() => setIsMenuOpen(false)}
@@ -98,6 +100,7 @@ const AdminSliderMenu = () => {
                         <AiOutlineLogout />
                     </button>
                 </div>
+                
             </div>
         </ClickAwayListener>
     )
