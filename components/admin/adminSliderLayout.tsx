@@ -39,12 +39,12 @@ const AdminSliderMenu = () => {
                 )}
 
 
-                <div onClick={() => setIsMenu(true)} className={`font-light fixed top-[81px] h-full right-0 flex flex-col items-start justify-start z-50 shadow-2xl  bg-td-secondary md:w-[300px] w-full  translate-x-[0%]  transition-all duration-300 bg-black ease-in-out ${isMenu && 'translate-x-[100%]'}`}>
+                <div onClick={() => setIsMenu(true)} className={`font-light fixed top-[75px] h-full right-0 flex flex-col items-start justify-start z-50 shadow-2xl  bg-td-secondary md:w-[300px] w-full  translate-x-[0%]  transition-all duration-300 bg-black ease-in-out ${isMenu && 'translate-x-[100%]'}`}>
                     <Link href="/admin-panel/orders" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/orders") && "bg-td-primary"}`}>
                         <span className="flex items-center justify-start gap-8">
                             <CiShoppingCart />
                             <p>
-                                Orders
+                                Applicants
                             </p>
                         </span>
                     </Link>
@@ -52,15 +52,13 @@ const AdminSliderMenu = () => {
                         <span className="flex items-center justify-start gap-8">
                             <CiCirclePlus />
                             <p>
-                                Add Product
-                            </p>
+                                Candidates                            </p>
                         </span>
                     </Link>
                     <Link href="/admin-panel/create-category" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/create-category") && "bg-td-primary"}`}> <span className="flex items-center justify-start gap-8">
                         <CiCirclePlus />
                         <p>
-                            Add Category
-                        </p>
+                            Companies                        </p>
                     </span>
                     </Link>
                     <Link href="/admin-panel/view-products" className={` w-full px-10 py-2 text-white  text-center ${pathname?.startsWith("/admin-panel/view-products") && "bg-td-primary"} ${pathname?.startsWith("/admin-panel/edit-product/") && "bg-td-primary"}`}>
