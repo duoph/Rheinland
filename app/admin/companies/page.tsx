@@ -18,7 +18,7 @@ function CompaniesPage() {
   const pageCount = Math.ceil(candidates.length / itemsPerPage);
 
   return (
-    <div className="pt-[85px] flex gap-5 flex-col items-center">
+    <div className="pt-[95px] flex gap-5 flex-col items-center">
       <h1 className="font-semibold text-[30px]">Listed Companies</h1>
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {currentCandidates.map((_, index) => (

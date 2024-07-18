@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import SliderMenu from './SliderMenus/userSliderMenu';
 import { useAccount } from '@/context/useAccount';
 import { CgProfile } from 'react-icons/cg';
 import { Router } from 'next/router';
 import AdminSliderMenu from './SliderMenus/adminSliderMenu';
 import { usePathname } from 'next/navigation';
+import UserSliderMenu from './SliderMenus/userSliderMenu';
 
 
 
@@ -52,15 +52,23 @@ const Header = () => {
             )}
 
 
-            {account.token && account.id && !pathname.startsWith('/admin') && (
+            {account.token && account.id && !pathname.startsWith('/admin') && account.type === 'user' && (
 
                 <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
-                    <SliderMenu />
+                    <UserSliderMenu />
                 </div>
 
             )}
 
-            {account.token && account.id && pathname.startsWith('/admin') && (
+            {account.token && account.id && pathname.startsWith('/employer') && account.type === 'employer' && (
+
+                <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
+                    <AdminSliderMenu />
+                </div>
+
+            )}
+
+            {account.token && account.id && pathname.startsWith('/admin') && account.type === 'admin' && (
 
                 <div className='sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer' >
                     <AdminSliderMenu />

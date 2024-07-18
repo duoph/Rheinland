@@ -10,7 +10,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiCloseLargeFill } from 'react-icons/ri';
 
 
-const UserSliderMenu = () => {
+const EmployerSliderMenu = () => {
+
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     const pathname = usePathname()
@@ -92,7 +93,7 @@ const UserSliderMenu = () => {
 
                     <div className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        <Link href={'/jobs'}>User Account</Link>
+                        <Link href={'/employer'}>User Account</Link>
                     </div>
 
                 </div>
@@ -107,4 +108,4 @@ const UserSliderMenu = () => {
     );
 };
 
-export default UserSliderMenu;
+export default EmployerSliderMenu;

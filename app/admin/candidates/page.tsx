@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import CandidateCard from "@/components/Candidates/CandidateCard";
 
-const candidates = Array(20).fill(null); 
+const candidates = Array(20).fill(null);
 
 function CandidatesPage() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -18,13 +18,13 @@ function CandidatesPage() {
   // const pageCount = Math.ceil(candidates.length / itemsPerPage);
 
   return (
-    <div className="py-[120px] flex flex-col items-center">
+    <div className="pt-[95px] flex flex-col items-center">
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {currentCandidates.map((_, index) => (
           <CandidateCard key={index} />
         ))}
       </div>
-     
+
     </div>
   );
 }
