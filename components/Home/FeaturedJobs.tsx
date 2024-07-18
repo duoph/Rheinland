@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react';
-import JobCard from '../JobCard';
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import React, { useEffect, useRef, useState } from 'react'
+import JobCard from '../JobCard'
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { Job } from '@/types';
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ const FeaturedJobs = () => {
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const [jobs, setJobs] = useState<Job[] | []>([]);
+    const [jobs, setJobs] = useState<Job[] | []>(); // Correct type for jobs
 
     const fetchJobs = async () => {
         try {
@@ -27,21 +27,32 @@ const FeaturedJobs = () => {
         fetchJobs();
     }, []);
 
+
     const handleScrollRight = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({
-                left: 300,
-                behavior: 'smooth',
-            });
+        try {
+            const scrollAmount = 300;
+            if (scrollContainerRef.current) {
+                scrollContainerRef.current.scrollBy({
+                    left: +scrollAmount,
+                    behavior: 'smooth',
+                });
+            }
+        } catch (error) {
+            console.error('Error scrolling:', error);
         }
     };
 
     const handleScrollLeft = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollBy({
-                left: -300,
-                behavior: 'smooth',
-            });
+        try {
+            const scrollAmount = 300;
+            if (scrollContainerRef.current) {
+                scrollContainerRef.current.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth',
+                });
+            }
+        } catch (error) {
+            console.error('Error scrolling:', error);
         }
     };
 
@@ -54,17 +65,13 @@ const FeaturedJobs = () => {
                 <GoChevronLeft onClick={handleScrollLeft} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
                 <GoChevronRight onClick={handleScrollRight} className='z-10 absolute top-[140px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
 
-                <div ref={scrollContainerRef} style={{ scrollBehavior: 'smooth' }} className='flex overflow-x-auto hideScrollBar w-full'>
-                    <div className='flex gap-2 w-full'>
-                        {jobs?.map((job) => (
-                            <div key={job._id} className='sm:min-w-[400px] w-full sm:max-w-[400px] '>
-                                <JobCard job={job} />
-                            </div>
-                        ))}
-                    </div>
+                <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex  overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
+                    {jobs?.map((job) => (
+                        <JobCard key={job?._id} job={job} /> 
+                    ))}
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
