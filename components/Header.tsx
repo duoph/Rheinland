@@ -8,6 +8,7 @@ import { Router } from 'next/router';
 import AdminSliderMenu from './SliderMenus/adminSliderMenu';
 import { usePathname } from 'next/navigation';
 import UserSliderMenu from './SliderMenus/userSliderMenu';
+import EmployerSliderMenu from './SliderMenus/employerSliderMenu';
 
 
 
@@ -52,7 +53,7 @@ const Header = () => {
             )}
 
 
-            {account.token && account.id && !pathname.startsWith('/admin') && account.type === 'user' && (
+            {account.token && account.type == 'user' && (
 
                 <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
                     <UserSliderMenu />
@@ -60,16 +61,17 @@ const Header = () => {
 
             )}
 
-            {account.token && account.id && pathname.startsWith('/employer') && account.type === 'employer' && (
+            {account.token && pathname.startsWith('/employer') && account.type === 'employer' && (
 
                 <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
-                    <AdminSliderMenu />
+                    <EmployerSliderMenu />
                 </div>
 
             )}
 
-            {account.token && account.id && pathname.startsWith('/admin') && account.type === 'admin' && (
+            {/* { account.type === 'admin' }  */}
 
+            {account.token && account.id && pathname.startsWith('/admin') && (
                 <div className='sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer' >
                     <AdminSliderMenu />
                 </div>
@@ -78,7 +80,7 @@ const Header = () => {
 
 
 
-        </div>
+        </div >
     )
 }
 
