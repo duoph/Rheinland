@@ -28,6 +28,7 @@ const SliderMenu = () => {
             {/* Global Slider Layout */}
 
             <div className="flex items-center justify-center w-full">
+
                 {isMenuOpen ? (
                     <RiCloseLargeFill
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -41,6 +42,7 @@ const SliderMenu = () => {
                         size={28}
                     />
                 )}
+
                 <div
                     className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-3  px-5 py-3 bg-rheinland-yellow sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
                         }`}

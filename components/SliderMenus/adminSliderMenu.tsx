@@ -44,7 +44,7 @@ const AdminSliderMenu = () => {
 
                 <div
                     onClick={() => setIsMenuOpen(false)}
-                    className={`font-light fixed top-[75px] h-full right-0 flex flex-col items-start justify-start z-50 shadow-2xl  md:w-[300px] w-full translate-x-[100%] transition-all duration-300 bg-rheinland-blue ease-in-out ${isMenuOpen && 'translate-x-0'
+                    className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-1 py-3 bg-rheinland-blue sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? 'translate-x-[0%]' : 'translate-x-[100%]'
                         }`}
                 >
                     <Link
@@ -81,16 +81,6 @@ const AdminSliderMenu = () => {
                         </span>
                     </Link>
 
-                    <Link
-                        href="/admin/categories"
-                        className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith('/admin/categories') && 'bg-red-600'
-                            }`}
-                    >
-                        <span className="flex items-center justify-start gap-8">
-                            <CiShop />
-                            <p>View All Categories</p>
-                        </span>
-                    </Link>
 
                     <button
                         className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
@@ -100,7 +90,7 @@ const AdminSliderMenu = () => {
                         <AiOutlineLogout />
                     </button>
                 </div>
-                
+
             </div>
         </ClickAwayListener>
     )

@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import ReactPaginate from "react-paginate";
-import { FaArrowCircleLeft } from "react-icons/fa";
-import { FaArrowCircleRight } from "react-icons/fa";
 import CompanyCard from "@/components/Companies/CompanyCard";
-import AdminSliderLayout from "@/components/SliderMenus/adminSliderMenu";
 
 const candidates = Array(20).fill(null);
 
