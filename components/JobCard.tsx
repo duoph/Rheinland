@@ -10,7 +10,7 @@ interface JobCardProps {
 }
 
 const JobCard = ({ job }: JobCardProps) => {
-    
+
 
     return (
         <Link href={`/jobs/${job._id}`} className='border shadow-md flex flex-col items-start justify-between sm:min-w-[400px] w-full sm:max-w-[400px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer'>

@@ -61,7 +61,7 @@ const Header = () => {
 
             )}
 
-            {account.token && pathname.startsWith('/employer') && account.type === 'employer' && (
+            {account.token && account.type === 'employer' && (
 
                 <div className='sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer' >
                     <EmployerSliderMenu />
@@ -71,7 +71,7 @@ const Header = () => {
 
             {/* { account.type === 'admin' }  */}
 
-            {account.token && account.id && pathname.startsWith('/admin') && (
+            {account.token && account.id && account.type === 'admin' && (
                 <div className='sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer' >
                     <AdminSliderMenu />
                 </div>
