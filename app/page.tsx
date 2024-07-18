@@ -7,7 +7,7 @@ import LatestJobs from "@/components/Home/LatestJobs";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <HeroContainer />
       <HelpedCompanies />
       <ExploteBycategory />
