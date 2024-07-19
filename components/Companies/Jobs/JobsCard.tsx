@@ -2,30 +2,34 @@ import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { MdNotInterested } from "react-icons/md";
+import { IoLocationSharp } from "react-icons/io5";
 
 function JobsCard() {
-
   return (
     // Main container
     <div className="flex flex-col w-[300px] h-[380px]   justify-around bg-[#f6eed8] rounded-sm pt-5 px-3">
       {/* Job and Company  */}
       <div className="flex flex-col gap-1">
         <h1 className="text-[28px]">Full Stack Developer</h1>
-        <h3 className="text-[20px] text-rheinland-blue">Microsoft</h3>
+        <div className="flex flex-row justify-between">
+          <h3 className="text-[20px] text-rheinland-blue">Microsoft</h3>
+          <h1 className="flex flex-row items-center">
+            <FaMapMarkerAlt />
+            Berlin
+          </h1>
+        </div>
       </div>
       {/* Personal Details  */}
       <div className="flex flex-col gap-4 pt-7">
         {/* Name and Highest German language level  */}
         <div className="flex  flex-row justify-between ">
-          <h1 className="text-[18px] text-rheinland-red font-semibold">Hadi Razal</h1>
+          <h1 className="text-[18px] text-rheinland-red font-semibold">
+            Hadi Razal
+          </h1>
           <p>A2</p>
         </div>
         {/* Location & Experience */}
         <div className="flex  flex-row justify-between">
-          <h1 className="flex flex-row items-center">
-            <FaMapMarkerAlt />
-            Ponnani
-          </h1>
           <p>Fresher</p>
         </div>
       </div>
