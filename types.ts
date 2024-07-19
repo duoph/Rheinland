@@ -1,4 +1,4 @@
-import { Date, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
 export interface Job {
     _id: string;
@@ -14,6 +14,7 @@ export interface Job {
     requirements?: string;
     gender?: string;
     appliedUsers: string[];
+    isFeatured: boolean,
     savedUsers: string[];
     createdAt: string;
     updatedAt: string;

@@ -13,6 +13,7 @@ const jobSchema = new Schema({
     state: { type: String },
     requirements: { type: String },
     gender: { type: String },
+    isFeatured: { type: Boolean, default: false },
     appliedUsers: { type: mongoose.Schema.ObjectId },
     savedUsers: { type: mongoose.Schema.ObjectId },
     employerId: { type: mongoose.Schema.ObjectId, required: true },

@@ -35,7 +35,6 @@ export default function RootLayout({
       <body className={poppins.className}>
         <AccountProvider>
           <Header />
-          <AlertMessageSlider />
           <Toaster
             toastOptions={{
               className: "",

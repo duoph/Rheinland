@@ -20,8 +20,8 @@ const Header = () => {
 
     return (
 
-        <div className='flex bg-white border-b shadow-sm fixed top-0 left-0 w-full items-center justify-between lg:px-5 pl-3 pr-3 py-3 z-50' >
-            
+        <div className='flex bg-white border-b shadow-sm fixed top-0 left-0 w-full items-center justify-between lg:px-5 px-3 h-[70px] z-50' >
+
             <div className='flex items-center justify-between'>
 
                 <div className='flex items-center justify-center gap-10 '>

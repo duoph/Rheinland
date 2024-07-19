@@ -1,12 +1,12 @@
 "use client"
 
-
 import { useAccount } from '@/context/useAccount'
 import { Job } from '@/types'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from 'react-icons/ci'
+
 
 const SingleJobPage = () => {
 
@@ -17,7 +17,7 @@ const SingleJobPage = () => {
 
     const { account } = useAccount()
 
-    const fetchJob = async () => {
+    const fetchJob = useCallback(async () => {
         try {
             const res = await axios.get(`/api/job/${jobId}`)
             console.log(jobId)
@@ -32,17 +32,15 @@ const SingleJobPage = () => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [jobId])
 
     useEffect(() => {
         fetchJob()
-    }, [jobId])
+    }, [fetchJob])
 
-
-
-    const handleSave = async () => {
+    async function handleSave() {
         try {
-            const res = await axios.post(`/api/job/${jobId}/save`)
+            const res = await axios.post(`/api/job/${jobId}/user/save`)
             fetchJob()
             console.log(res)
         } catch (error) {
@@ -50,7 +48,6 @@ const SingleJobPage = () => {
             setError('An error occurred while handling save job.')
         }
     }
-
 
 
     if (loading) {
@@ -65,7 +62,7 @@ const SingleJobPage = () => {
         <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
             <div className='flex items-start justify-between w-full'>
                 <h1 className='font-semibold text-2xl'>{job?.title}</h1>
-                <div onClick={handleSave} className='cursor-pointer'>
+                <div onClick={() => handleSave()} className='cursor-pointer'>
                     {job?.savedUsers?.includes(account.id) ? (
                         <CiBookmarkCheck className='text-red-500' size={30} />
                     ) : (
@@ -73,7 +70,7 @@ const SingleJobPage = () => {
                     )}
                 </div>
 
-            </div>
+            </div >
 
             <div className='flex flex-col items-start justify-center w-full gap-2'>
                 <h1 className='font-medium'>Location</h1>
@@ -90,16 +87,18 @@ const SingleJobPage = () => {
                 </span>
             </div>
 
-            {(job?.minAge || job?.minAge) && (
-                <div className='flex flex-col items-start justify-center w-full gap-2'>
-                    <h1 className='font-medium'>Prefered Age</h1>
-                    <span className='flex flex-col gap-2 text-sm font-light'>
-                        <span>Minimum - {job?.minAge}</span>
-                        <span>Maximum - {job?.maxAge}</span>
-                    </span>
-                </div>
+            {
+                (job?.minAge || job?.minAge) && (
+                    <div className='flex flex-col items-start justify-center w-full gap-2'>
+                        <h1 className='font-medium'>Prefered Age</h1>
+                        <span className='flex flex-col gap-2 text-sm font-light'>
+                            <span>Minimum - {job?.minAge}</span>
+                            <span>Maximum - {job?.maxAge}</span>
+                        </span>
+                    </div>
 
-            )}
+                )
+            }
 
 
             <div className="flex flex-col items-start justify-center w-full gap-3">
@@ -119,7 +118,7 @@ const SingleJobPage = () => {
             <div className='w-full h-full flex justify-center py-10'>
                 <button className='bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm'>Apply Now</button>
             </div>
-        </div>
+        </div >
     )
 }
 

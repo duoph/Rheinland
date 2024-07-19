@@ -1,7 +1,15 @@
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 
 const AlertMessageSlider = () => {
+
+    const pathname = usePathname()
+
+    if (pathname !== "/") {
+        return null
+    }
+
     return (
         <div className='bg-rheinland-red pt-[75px] w-full'>
             <Marquee loop={0} speed={50} pauseOnHover={true}>
