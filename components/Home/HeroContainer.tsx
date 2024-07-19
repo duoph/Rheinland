@@ -1,12 +1,13 @@
 
 import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
+import AlertMessageSlider from "../AlertMessageSlider";
 
 
 const HeroContainer = () => {
 
     return (
-        <div className='flex items-center justify-center gap-5 pt-[10px] lg:px-16 px-5 md:px-5  min-h-screen'>
+        <div className='flex items-center justify-center gap-5 lg:px-16 px-5 md:px-5  min-h-screen'>
             <div className='lg:w-1/2 w-full flex flex-col gap-5'>
                 <div className="text-[50px] xs:text-[55px]  md:text-[80px]  font-bold flex flex-col items-center justify-start flex-wrap  leading-[45px] md:leading-[80px] w-full h-full">
                     <span className="text-start">Discover</span>
