@@ -34,7 +34,7 @@ function JobsCard() {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center ">
-        <p className="italic underline cursor-pointer">View Resume...</p>
+        <p className="italic underline cursor-pointer">More Details...</p>
       </div>
       {/* Buttons  */}
       <div className="flex flex-row gap-5 justify-between bg-white p-5 m-2 rounded-sm ">
