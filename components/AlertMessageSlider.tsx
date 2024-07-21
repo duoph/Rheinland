@@ -5,6 +5,7 @@ import React from 'react';
 import Marquee from 'react-fast-marquee';
 
 const AlertMessageSlider = () => {
+
     const pathname = usePathname();
 
     // Only show the alert slider on the homepage
