@@ -19,20 +19,7 @@ function JobsCard() {
           </h1>
         </div>
       </div>
-      {/* Personal Details  */}
-      <div className="flex flex-col gap-4 pt-7">
-        {/* Name and Highest German language level  */}
-        <div className="flex  flex-row justify-between ">
-          <h1 className="text-[18px] text-rheinland-red font-semibold">
-            Hadi Razal
-          </h1>
-          <p>A2</p>
-        </div>
-        {/* Location & Experience */}
-        <div className="flex  flex-row justify-between">
-          <p>Fresher</p>
-        </div>
-      </div>
+
       <div className="flex flex-col justify-center items-center ">
         <p className="italic underline cursor-pointer">More Details...</p>
       </div>
