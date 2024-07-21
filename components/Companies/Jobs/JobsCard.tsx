@@ -2,7 +2,7 @@ import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { MdNotInterested } from "react-icons/md";
-import { IoLocationSharp } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 
 function JobsCard() {
   return (
@@ -17,6 +17,13 @@ function JobsCard() {
             <FaMapMarkerAlt />
             Berlin
           </h1>
+        </div>
+        {/* Number of Openings */}
+        <div className="flex flex-row">
+          <p className="flex flex-row items-center justify-center gap-2 text-gray-500">
+            <FaRegUser />
+            <span>10</span>openings
+          </p>
         </div>
       </div>
 
