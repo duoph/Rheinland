@@ -10,9 +10,13 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
+import { format } from "date-fns";
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { CiUser } from "react-icons/ci";
+import { HiOutlineBanknotes } from "react-icons/hi2";
+import { SlCalender } from "react-icons/sl";
+import { MdAccessTime } from "react-icons/md";
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
@@ -21,6 +25,9 @@ const SingleJobPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { account } = useAccount();
+  const formattedDate = job?.createdAt
+    ? format(new Date(job.createdAt), "dd/MM/yyyy")
+    : "Gender data failed to load";
 
   const fetchJob = useCallback(async () => {
     try {
@@ -85,7 +92,7 @@ const SingleJobPage = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-start  w-full gap-2">
+      <div className="flex flex-row items-start  w-full gap-5 last:">
         <span className="flex gap-2 font-light">
           <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
           {job?.category || "Unable to load category"}
@@ -98,12 +105,24 @@ const SingleJobPage = () => {
           <CiUser className="text-rheinland-red" size={24} />
           {job?.gender || "Gender data failed to load"}
         </span>
+        <span className="flex gap-2 font-light">
+          <HiOutlineBanknotes className="text-rheinland-red" size={24} />
+          Salary
+        </span>
+        <span className="flex gap-2 font-light">
+          <SlCalender className="text-rheinland-red" size={24} />
+          {formattedDate}
+        </span>
+        <span className="flex gap-2 font-light">
+          <SlCalender className="text-rheinland-red" size={24} />
+          {formattedDate}
+        </span>
       </div>
 
-      <div className="flex flex-col items-start justify-center w-full gap-2">
+      {/* <div className="flex flex-col items-start justify-center w-full gap-2">
         <h1 className="font-medium">Salary</h1>
         <span className="flex gap-2 font-light">Undefined</span>
-      </div>
+      </div> */}
 
       {(job?.minAge || job?.minAge) && (
         <div className="flex flex-col items-start justify-center w-full gap-2">
