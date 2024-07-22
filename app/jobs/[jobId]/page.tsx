@@ -79,20 +79,13 @@ const SingleJobPage = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
-      <div className="flex items-start justify-between w-full">
+      <div className="flex items-start w-full">
         <h1 className="font-semibold text-[30px] md:text-[50px]">
           {job?.title}
         </h1>
-        <div onClick={() => handleSave()} className="cursor-pointer">
-          {job?.savedUsers?.includes(account.id) ? (
-            <CiBookmarkCheck className="text-red-500" size={30} />
-          ) : (
-            <CiBookmark className="text-red-500" size={30} />
-          )}
-        </div>
       </div>
 
-      <div className="flex flex-row items-start  w-full gap-5 last:">
+      <div className="flex flex-row items-start  w-full gap-5 flex-wrap">
         <span className="flex gap-2 font-light">
           <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
           {job?.category || "Unable to load category"}
@@ -142,10 +135,17 @@ const SingleJobPage = () => {
         </p>
       </div>
 
-      <div className="w-full h-full flex justify-center py-10">
+      <div className="w-full h-full flex items-center gap-5 justify-center py-10">
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
+        <div onClick={() => handleSave()} className="cursor-pointer">
+          {job?.savedUsers?.includes(account.id) ? (
+            <CiBookmarkCheck className="text-red-500" size={30} />
+          ) : (
+            <CiBookmark className="text-red-500" size={30} />
+          )}
+        </div>
       </div>
     </div>
   );
