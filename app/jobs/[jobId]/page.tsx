@@ -12,6 +12,7 @@ import React, {
 } from "react";
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
+import { CiUser } from "react-icons/ci";
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
@@ -92,6 +93,10 @@ const SingleJobPage = () => {
         <span className="flex gap-2 font-light">
           <CiLocationOn className="text-rheinland-red" size={24} />
           {job?.location || "Location not specified"}
+        </span>
+        <span className="flex gap-2 font-light">
+          <CiUser className="text-rheinland-red" size={24} />
+          {job?.gender || "Gender data failed to load"}
         </span>
       </div>
 
