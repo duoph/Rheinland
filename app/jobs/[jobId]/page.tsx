@@ -135,7 +135,7 @@ const SingleJobPage = () => {
         </p>
       </div>
 
-      <div className="w-full h-full flex items-center gap-5 justify-center py-10">
+      <div className="w-full h-full flex items-center gap-5 justify-start py-10">
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
