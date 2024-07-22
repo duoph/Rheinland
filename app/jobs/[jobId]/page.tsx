@@ -113,26 +113,13 @@ const SingleJobPage = () => {
           <SlCalender className="text-rheinland-red" size={24} />
           {formattedDate}
         </span>
-        <span className="flex gap-2 font-light">
-          <SlCalender className="text-rheinland-red" size={24} />
-          {formattedDate}
-        </span>
-      </div>
-
-      {/* <div className="flex flex-col items-start justify-center w-full gap-2">
-        <h1 className="font-medium">Salary</h1>
-        <span className="flex gap-2 font-light">Undefined</span>
-      </div> */}
-
-      {(job?.minAge || job?.minAge) && (
-        <div className="flex flex-col items-start justify-center w-full gap-2">
-          <h1 className="font-medium">Prefered Age</h1>
-          <span className="flex flex-col gap-2 text-sm font-light">
-            <span>Minimum - {job?.minAge}</span>
-            <span>Maximum - {job?.maxAge}</span>
+        {(job?.minAge || job?.minAge) && (
+          <span className="flex gap-2 font-light">
+            <MdAccessTime className="text-rheinland-red" size={24} /> Age:
+            {""} {job?.minAge} - {job?.maxAge}
           </span>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="flex flex-col items-start justify-center w-full gap-3">
         <h1 className="font-medium">Preferred Skills</h1>
