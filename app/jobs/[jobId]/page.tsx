@@ -11,6 +11,7 @@ import React, {
   useState,
 } from "react";
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
+import { PiSuitcaseSimpleFill } from "react-icons/pi";
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
@@ -83,7 +84,11 @@ const SingleJobPage = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-start justify-center w-full gap-2">
+      <div className="flex flex-row items-start  w-full gap-2">
+        <span className="flex gap-2 font-light">
+          <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
+          {job?.category || "Unable to load category"}
+        </span>
         <span className="flex gap-2 font-light">
           <CiLocationOn className="text-rheinland-red" size={24} />
           {job?.location || "Location not specified"}
