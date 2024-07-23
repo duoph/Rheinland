@@ -1,16 +1,16 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react'
-import JobCard from '../JobCard'
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import React, { useEffect, useRef, useState } from 'react';
+import JobCard from '../JobCard';
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
 import { Job } from '@/types';
 import axios from 'axios';
 
 const FeaturedJobs = () => {
-
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const [jobs, setJobs] = useState<Job[] | []>(); // Correct type for jobs
+    const [jobs, setJobs] = useState<Job[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchJobs = async () => {
         try {
@@ -18,7 +18,9 @@ const FeaturedJobs = () => {
             if (res.data.success === true) {
                 setJobs(res.data.jobs);
             }
+            setIsLoading(false);
         } catch (error) {
+            setIsLoading(false);
             console.log(error);
         }
     };
@@ -26,7 +28,6 @@ const FeaturedJobs = () => {
     useEffect(() => {
         fetchJobs();
     }, []);
-
 
     const handleScrollRight = () => {
         try {
@@ -64,14 +65,18 @@ const FeaturedJobs = () => {
             <div className='relative w-full'>
                 <GoChevronLeft onClick={handleScrollLeft} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
                 <GoChevronRight onClick={handleScrollRight} className='z-10 absolute top-[140px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
-
-                <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex  overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
-                    {jobs?.map((job) => (
-                        <JobCard key={job?._id} job={job} /> 
-                    ))}
+                <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
+                    {isLoading
+                        ? Array.from({ length: 3 }).map((_, index) => (
+                            <JobCard key={index} isLoading={isLoading} job={null} />
+                        ))
+                        : jobs.map((job) => (
+                            <JobCard key={job._id} isLoading={isLoading} job={job} />
+                        ))
+                    }
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

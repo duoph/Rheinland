@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
 
         const jobs = await jobModel.find()
 
-
         return NextResponse.json({ message: 'Fetched Job successfully', success: true, jobs });
 
     } catch (error) {

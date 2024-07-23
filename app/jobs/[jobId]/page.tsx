@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useState,
 } from "react";
 import { format } from "date-fns";
@@ -17,6 +16,10 @@ import { CiUser } from "react-icons/ci";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
+
+
+import { Skeleton } from '../../../components/ui/skeleton';
+
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
@@ -63,8 +66,17 @@ const SingleJobPage = () => {
 
   if (loading) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center">
-        Loading...
+      <div className="flex flex-col items-center justify-start gap-3 min-h-screen px-3 sm:px-5 pt-[90px]">
+        <Skeleton className="w-full h-[40px] mb-3" />
+        <div className="flex flex-row items-start w-full gap-5 flex-wrap">
+          <Skeleton className="w-full h-[30px]" />
+          <Skeleton className="w-[200px] h-[30px]" />
+          <Skeleton className="w-[200px] h-[30px]" />
+          <Skeleton className="w-[200px] h-[30px]" />
+        </div>
+        <Skeleton className="w-full h-[30px] mt-5 mb-3" />
+        <Skeleton className="w-full h-[150px]" />
+        <Skeleton className="w-[100px] h-[30px] mt-10" />
       </div>
     );
   }
@@ -116,15 +128,19 @@ const SingleJobPage = () => {
 
       <div className="flex flex-col items-start justify-center w-full gap-3">
         <h1 className="font-medium">Preferred Skills</h1>
-        <div className="font-light text-sm text-white flex gap-2 flex-wrap pb-3">
-          {job?.skills?.map((skill, index) => (
+        <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
+
+          {job?.skills?.length > 0 && job?.skills?.map((skill, index) => (
             <span
               key={index}
-              className="px-3 py-3 bg-rheinland-blue rounded-sm cursor-pointer"
+              className="px-3 py-3 bg-rheinland-blue rounded-sm"
             >
               {skill}
             </span>
-          )) || <span>No skills specified</span>}
+          ))}
+
+          {(!job?.skills || job?.skills.length === 0) && <span>No skills specified</span>}
+
         </div>
       </div>
 
@@ -135,7 +151,7 @@ const SingleJobPage = () => {
         </p>
       </div>
 
-      <div className="w-full h-full flex items-center gap-5 justify-start py-10">
+      <div className="w-full h-full flex items-center gap-5 justify-center py-10">
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
@@ -147,7 +163,7 @@ const SingleJobPage = () => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

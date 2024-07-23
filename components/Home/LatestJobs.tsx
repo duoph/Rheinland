@@ -8,6 +8,7 @@ import axios from 'axios';
 const LatestJobs = () => {
 
     const [jobs, setJobs] = useState<Job[] | []>(); // Correct type for jobs
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchJobs = async () => {
         try {
@@ -15,7 +16,9 @@ const LatestJobs = () => {
             if (res.data.success === true) {
                 setJobs(res.data.jobs);
             }
+            setIsLoading(false)
         } catch (error) {
+            setIsLoading(false)
             console.log(error);
         }
     };
@@ -31,9 +34,9 @@ const LatestJobs = () => {
                 <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] font-semibold">Latest <span className="text-rheinland-yellow">Job Openings</span></h1>
             </div>
 
-            <div className='relative flex items-center justify-center flex-wrap gap-3 w-full'>
-                {jobs?.map((job) => (
-                    <JobCard key={job?._id} job={job} />
+            <div className="relative flex items-center justify-center flex-wrap gap-3 w-full">
+                {jobs?.slice(0, 6).map((latestJob) => (
+                    <JobCard key={latestJob._id} job={latestJob} isLoading={isLoading} />
                 ))}
             </div>
 
