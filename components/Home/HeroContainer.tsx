@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import AlertMessageSlider from "../AlertMessageSlider";
+import SearchSuggestions from "../Search/SearchSuggestions";
 
 
 const HeroContainer = () => {
@@ -25,7 +25,9 @@ const HeroContainer = () => {
                         <CiLocationOn size={24} />
                         <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Eg: Berlin" />
                     </div>
-                    <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">Search My job</button>
+                    <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">Search My job
+
+                    </button>
                 </div>
                 <span className="font-light text-center" >Popular : UI Designer, UX Researcher, Android, Admin</span>
             </div>
