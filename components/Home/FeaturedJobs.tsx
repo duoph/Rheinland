@@ -67,7 +67,7 @@ const FeaturedJobs = () => {
                 <GoChevronRight onClick={handleScrollRight} className='z-10 absolute top-[140px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
                 <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
                     {isLoading
-                        ? Array.from({ length: 3 }).map((_, index) => (
+                        ? Array.from({ length: 9 }).map((_, index) => (
                             <JobCard key={index} isLoading={isLoading} job={null} />
                         ))
                         : jobs.map((job) => (

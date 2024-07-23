@@ -35,9 +35,14 @@ const LatestJobs = () => {
             </div>
 
             <div className="relative flex items-center justify-center flex-wrap gap-3 w-full">
-                {jobs?.slice(0, 6).map((latestJob) => (
-                    <JobCard key={latestJob._id} job={latestJob} isLoading={isLoading} />
-                ))}
+                {isLoading
+                    ? Array.from({ length: 9 }).map((_, index) => (
+                        <JobCard key={index} isLoading={isLoading} job={null} />
+                    ))
+                    : jobs?.slice(0, 9).map((job) => (
+                        <JobCard key={job._id} isLoading={isLoading} job={job} />
+                    ))
+                }
             </div>
 
         </div >
