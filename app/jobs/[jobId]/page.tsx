@@ -4,11 +4,7 @@ import { useAccount } from "@/context/useAccount";
 import { Job } from "@/types";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
@@ -17,9 +13,7 @@ import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
 
-
 import { Skeleton } from '../../../components/ui/skeleton';
-
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
@@ -30,13 +24,12 @@ const SingleJobPage = () => {
   const { account } = useAccount();
   const formattedDate = job?.createdAt
     ? format(new Date(job.createdAt), "dd/MM/yyyy")
-    : "Gender data failed to load";
+    : "Date data failed to load";
 
   const fetchJob = useCallback(async () => {
     try {
       const res = await axios.get(`/api/job/${jobId}`);
-      console.log(jobId);
-      if (res.data.success === true) {
+      if (res.data.success) {
         setJob(res.data.job);
       } else {
         setError("Failed to load job data.");
@@ -53,7 +46,7 @@ const SingleJobPage = () => {
     fetchJob();
   }, [fetchJob]);
 
-  async function handleSave() {
+  const handleSave = async () => {
     try {
       const res = await axios.post(`/api/job/${jobId}/user/save`);
       fetchJob();
@@ -62,7 +55,7 @@ const SingleJobPage = () => {
       console.error(error);
       setError("An error occurred while handling save job.");
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -97,7 +90,7 @@ const SingleJobPage = () => {
         </h1>
       </div>
 
-      <div className="flex flex-row items-start  w-full gap-5 flex-wrap">
+      <div className="flex flex-row items-start w-full gap-5 flex-wrap">
         <span className="flex gap-2 font-light">
           <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
           {job?.category || "Unable to load category"}
@@ -118,7 +111,7 @@ const SingleJobPage = () => {
           <SlCalender className="text-rheinland-red" size={24} />
           {formattedDate}
         </span>
-        {(job?.minAge || job?.minAge) && (
+        {(job?.minAge || job?.maxAge) && (
           <span className="flex gap-2 font-light">
             <MdAccessTime className="text-rheinland-red" size={24} /> Age:
             {""} {job?.minAge} - {job?.maxAge}
@@ -129,18 +122,18 @@ const SingleJobPage = () => {
       <div className="flex flex-col items-start justify-center w-full gap-3">
         <h1 className="font-medium">Preferred Skills</h1>
         <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
-
-          {job && job?.skills?.length > 0 && job?.skills?.map((skill, index) => (
-            <span
-              key={index}
-              className="px-3 py-3 bg-rheinland-blue rounded-sm"
-            >
-              {skill}
-            </span>
-          ))}
-
-          {(!job?.skills || job?.skills?.length === 0) && <span>No skills specified</span>}
-
+          {job?.skills?.length ? (
+            job.skills.map((skill, index) => (
+              <span
+                key={index}
+                className="px-3 py-3 bg-rheinland-blue rounded-sm"
+              >
+                {skill}
+              </span>
+            ))
+          ) : (
+            <span>No skills specified</span>
+          )}
         </div>
       </div>
 
@@ -155,7 +148,7 @@ const SingleJobPage = () => {
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
-        <div onClick={() => handleSave()} className="cursor-pointer">
+        <div onClick={handleSave} className="cursor-pointer">
           {job?.savedUsers?.includes(account.id) ? (
             <CiBookmarkCheck className="text-red-500" size={30} />
           ) : (
@@ -163,7 +156,7 @@ const SingleJobPage = () => {
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
