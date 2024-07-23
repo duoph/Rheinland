@@ -18,13 +18,18 @@ import { Skeleton } from '../../../components/ui/skeleton';
 const SingleJobPage = () => {
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
+  const [jobs, setJobs] = useState<Job[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const { account } = useAccount();
+
   const formattedDate = job?.createdAt
     ? format(new Date(job.createdAt), "dd/MM/yyyy")
     : "Date data failed to load";
+
+
+    // fetching job from id 
 
   const fetchJob = useCallback(async () => {
     try {
@@ -42,8 +47,30 @@ const SingleJobPage = () => {
     }
   }, [jobId]);
 
+
+  // Getting related jobs
+
+  const relatedJobs = async () => {
+    try {
+      const res = await axios.get(`/api/job`);
+      if (res.data.success) {
+        setJobs(res.data.job);
+      } else {
+        setError("Failed to load job data.");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while fetching job data.");
+    }
+  }
+
+
+
+
+
   useEffect(() => {
     fetchJob();
+    relatedJobs()
   }, [fetchJob]);
 
   const handleSave = async () => {
