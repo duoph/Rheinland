@@ -130,7 +130,7 @@ const SingleJobPage = () => {
         <h1 className="font-medium">Preferred Skills</h1>
         <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
 
-          {job?.skills?.length > 0 && job?.skills?.map((skill, index) => (
+          {job && job?.skills?.length > 0 && job?.skills?.map((skill, index) => (
             <span
               key={index}
               className="px-3 py-3 bg-rheinland-blue rounded-sm"
@@ -139,7 +139,7 @@ const SingleJobPage = () => {
             </span>
           ))}
 
-          {(!job?.skills || job?.skills.length === 0) && <span>No skills specified</span>}
+          {(!job?.skills || job?.skills?.length === 0) && <span>No skills specified</span>}
 
         </div>
       </div>

@@ -73,7 +73,7 @@ const Jobs = () => {
                     ? Array.from({ length: 9 }).map((_, index) => (
                         <JobCard key={index} isLoading={isLoading} job={null} />
                     ))
-                    : displayedJobs?.slice(0, 9).map((job) => (
+                    : displayedJobs?.map((job) => (
                         <JobCard key={job._id} isLoading={isLoading} job={job} />
                     ))
                 }
