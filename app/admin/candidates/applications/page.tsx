@@ -20,7 +20,7 @@ function ApplicationPage() {
 
   return (
     <div className="pt-[95px] flex flex-col gap-5 items-center">
-      <h1 className="font-semibold text-[30px]">Listed Companies</h1>
+      <h1 className="font-semibold text-[30px]">All Applications</h1>
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {currentCandidates.map((_, index) => (
           <ApplicationCard key={index} />

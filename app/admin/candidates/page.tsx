@@ -19,6 +19,7 @@ function CandidatesPage() {
 
   return (
     <div className="pt-[95px] flex flex-col items-center">
+      <h1 className="font-semibold text-[30px]">All Candidates</h1>
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {currentCandidates.map((_, index) => (
           <CandidateCard key={index} />
