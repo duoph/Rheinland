@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import CandidateCard from "@/components/Candidates/CandidateCard";
+import CandidateCard from "@/components/Admin/Candidates/CandidateCard";
 
 const candidates = Array(20).fill(null);
 

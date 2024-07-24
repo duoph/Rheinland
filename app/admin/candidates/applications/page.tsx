@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 
-import ApplicationCard from "@/components/Candidates/Applications/ApplicationCard";
+import ApplicationCard from "@/components/Admin/Candidates/Applications/ApplicationCard";
 
 const candidates = Array(20).fill(null); // Assuming you have 20 candidates for this example
 
