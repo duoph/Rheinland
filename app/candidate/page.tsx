@@ -2,7 +2,7 @@ import React from 'react'
 
 function CandidatePanel() {
   return (
-    <div>
+    <div className="pt-[95px] flex items-center justify-center">
       <h1>Candidate Panel</h1>
     </div>
   )
