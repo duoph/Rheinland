@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import CompanyCard from "@/components/Companies/CompanyCard";
+import CompanyCard from "@/components/Employer/EmployerMyJobs";
 
 const candidates = Array(20).fill(null);
 
