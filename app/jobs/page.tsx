@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import JobCard from '@/components/JobCard';
 import { Job } from '@/types';
 import axios from 'axios';
-import SearchSuggestions from '@/components/Search/SearchSuggestions';
+import JobSearchSuggestions from '@/components/Search/JobSearchSuggestions';
 
 const Jobs = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
@@ -56,7 +56,7 @@ const Jobs = () => {
                         className='w-full px-3 py-3 border-b rounded-sm focus:outline-none'
                         placeholder='Job title or keyword'
                     />
-                    {searchInput && <SearchSuggestions searchInput={searchInput} setSearchInput={setSearchInput} />}
+                    {searchInput && <JobSearchSuggestions searchInput={searchInput} setSearchInput={setSearchInput} />}
                 </div>
                 <div className='flex items-center justify-center bg-white px-2 w-full rounded-sm'>
                     <input

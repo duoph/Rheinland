@@ -7,7 +7,7 @@ interface SearchSuggestionsProps {
     searchInput: string
 }
 
-const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ setSearchInput, searchInput }) => {
+const JobSearchSuggestions: React.FC<SearchSuggestionsProps> = ({ setSearchInput, searchInput }) => {
 
 
 
@@ -22,11 +22,11 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ setSearchInput, s
             {filteredJobCategory.slice(0, 4).map((jobCategory: any) => (
                 <div
                     onClick={
-                    () => setSearchInput(jobCategory.name)
+                        () => setSearchInput(jobCategory.name)
 
                     }
                     key={jobCategory.id}
-                    className='w-full py-1 px-4 bg-gray-200 text-black cursor-pointer'
+                    className='w-full py-2 px-4 bg-gray-200 text-black cursor-pointer'
                 >
                     <h1>{jobCategory.name}</h1>
                 </div>
@@ -35,4 +35,4 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({ setSearchInput, s
     );
 };
 
-export default SearchSuggestions;
+export default JobSearchSuggestions;
