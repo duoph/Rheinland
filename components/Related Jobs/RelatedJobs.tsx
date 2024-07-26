@@ -1,21 +1,46 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import RelatedJobCard from "./Related Job Card/RelatedJobCard";
 import { Job } from "@/types";
+import JobCard from "../JobCard";
+import axios from "axios";
 
 function RelatedJobs() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [jobsToDisplay, setJobsToDisplay] = useState<number>(10);
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const fetchJobs = async () => {
+    try {
+      const { data } = await axios.get("/api/job");
+      if (data.success) {
+        setJobs(data.jobs);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <>
       <h1 className="text-2xl font-semibold">Related Jobs</h1>
-      <div className="bg-[#f0f8ff] w-full p-5 md:p-20 lg:1/3 flex flex-row md:flex-col justify-center items-center">
-        <div className="flex items-start w-full ">
-          <RelatedJobCard />
-        </div>
+
+      <div className="bg-[#f0f8ff] w-full p-5 md:p-20 gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
+        {isLoading
+          ? Array.from({ length: 9 }).map((_, index) => (
+              <JobCard key={index} isLoading={isLoading} job={null} />
+            ))
+          : jobs
+              .slice(0, jobsToDisplay)
+              .map((job, index) => (
+                <JobCard key={index} isLoading={isLoading} job={job} />
+              ))}
       </div>
     </>
   );
