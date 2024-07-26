@@ -7,7 +7,7 @@ import axios from "axios";
 
 function RelatedJobs() {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [jobsToDisplay, setJobsToDisplay] = useState<number>(10);
+  const [jobsToDisplay, setJobsToDisplay] = useState<number>(9);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchJobs = async () => {
