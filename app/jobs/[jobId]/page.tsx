@@ -28,7 +28,6 @@ const SingleJobPage = () => {
     ? format(new Date(job.createdAt), "dd/MM/yyyy")
     : "Date data failed to load";
 
-
     // fetching job from id 
 
   const fetchJob = useCallback(async () => {
@@ -183,6 +182,10 @@ const SingleJobPage = () => {
           )}
         </div>
       </div>
+
+      {/* Related Jobs Section */}
+
+
     </div>
   );
 };
