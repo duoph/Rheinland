@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import SearchSuggestions from "../Search/JobSearchSuggestions";
+import SearchSuggestions from "../Search/SearchInput";
 
 
 const HeroContainer = () => {
