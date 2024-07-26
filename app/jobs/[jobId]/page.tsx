@@ -29,7 +29,7 @@ const SingleJobPage = () => {
     ? format(new Date(job.createdAt), "dd/MM/yyyy")
     : "Date data failed to load";
 
-    // fetching job from id 
+  // fetching job from id 
 
   const fetchJob = useCallback(async () => {
     try {
@@ -110,7 +110,7 @@ const SingleJobPage = () => {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pt-[90px]">
+    <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pb-[50px] pt-[90px]">
       <div className="flex items-start w-full">
         <h1 className="font-semibold text-[30px] md:text-[50px]">
           {job?.title}
@@ -186,7 +186,9 @@ const SingleJobPage = () => {
 
       {/* Related Jobs Section */}
 
-<RelatedJobs />
+      <RelatedJobs />
+
+
     </div>
   );
 };

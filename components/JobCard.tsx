@@ -38,7 +38,7 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
     }
 
     return (
-        <Link href={`/jobs/${job._id}`} className='border shadow-sm border-opacity-35 flex flex-col items-start justify-between sm:min-w-[400px] w-full sm:max-w-[400px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer'>
+        <Link href={`/jobs/${job._id}`} className='border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer'>
             <div className='flex justify-between items-center w-full py-2'>
                 <Image src={'/RheinlandLogoHeader.png'} alt='Logo' height={60} width={60} />
                 <span className='border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue'>Full Time</span>

@@ -7,7 +7,6 @@ import axios from "axios";
 
 function RelatedJobs() {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [jobsToDisplay, setJobsToDisplay] = useState<number>(9);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchJobs = async () => {
@@ -31,13 +30,13 @@ function RelatedJobs() {
     <>
       <h1 className="text-2xl font-semibold">Related Jobs</h1>
 
-      <div className="bg-[#f0f8ff] w-full p-5 md:p-20 gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
+      <div className="w-full gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
         {isLoading
-          ? Array.from({ length: 9 }).map((_, index) => (
+          ? Array.from({ length: 4 }).map((_, index) => (
               <JobCard key={index} isLoading={isLoading} job={null} />
             ))
           : jobs
-              .slice(0, jobsToDisplay)
+              .slice(0, 4)
               .map((job, index) => (
                 <JobCard key={index} isLoading={isLoading} job={job} />
               ))}

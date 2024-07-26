@@ -1,5 +1,4 @@
 import { jobCategories } from '@/data/jobCategory';
-import { Job } from '@/types';
 import React from 'react';
 
 interface SearchSuggestionsProps {
