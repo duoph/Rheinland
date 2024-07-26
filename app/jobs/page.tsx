@@ -8,7 +8,7 @@ import JobSearchSuggestions from '@/components/Search/JobSearchSuggestions';
 
 const Jobs = () => {
     const [jobs, setJobs] = useState<Job[]>([]);
-    const [jobsToDisplay, setJobsToDisplay] = useState<number>(18);
+    const [jobsToDisplay, setJobsToDisplay] = useState<number>(16);
     const [searchInput, setSearchInput] = useState<string>('');
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -76,7 +76,7 @@ const Jobs = () => {
             <div className='flex items-center justify-center flex-wrap gap-3'>
                 {
                     isLoading
-                        ? Array.from({ length: 9 }).map((_, index) => (
+                        ? Array.from({ length: 16 }).map((_, index) => (
                             <JobCard key={index} isLoading={isLoading} job={null} />
                         ))
                         : displayedJobs?.map((job) => (

@@ -14,7 +14,7 @@ interface JobCardProps {
 const JobCard = ({ job, isLoading }: JobCardProps) => {
     if (isLoading) {
         return (
-            <div className='shadow-sm border border-opacity-35 flex flex-col items-start justify-between sm:min-w-[400px] w-full sm:max-w-[400px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 '>
+            <div className='border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group  cursor-pointer group rounded-sm px-3 py-2 '>
                 <Skeleton className="w-full h-[20px] mb-2" />
                 <div className="flex flex-row items-center gap-2">
                     <Skeleton className="w-[20px] h-[20px]" />
