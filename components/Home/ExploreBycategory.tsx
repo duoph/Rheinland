@@ -1,7 +1,13 @@
 import { CiCircleChevRight } from "react-icons/ci"
 import CategoryCard from "../CategoryCard"
+import { jobCategories } from "@/data/jobCategory"
 
 const ExploteBycategory = () => {
+
+
+
+
+
     return (
         <div className='flex items-center justify-center gap-7 flex-col w-full px-3 md:px-10 md:py-12 py-7 '>
             <div className='flex items-center sm:justify-between justify-center  w-full'>
@@ -12,17 +18,12 @@ const ExploteBycategory = () => {
                 </span>
             </div>
             <div className="flex items-center justify-center gap-2 flex-wrap">
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
-                <div className="hidden sm:flex items-center justify-center gap-2 flex-wrap">
-                    <CategoryCard />
-                    <CategoryCard />
-                    <CategoryCard />
-                </div>
+
+                {jobCategories.slice(0, 6).map((jobCategory: any) => (
+
+                    <CategoryCard key={jobCategory.id} category={jobCategory} />
+                ))}
+
 
             </div>
             <span className="text-rheinland-yellow flex items-center justify-center flex-wrap gap-2 cursor-pointer sm:hidden text-[18px] ">

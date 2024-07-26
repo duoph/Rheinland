@@ -7,17 +7,20 @@ import { usePathname, useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { RiCloseLargeFill } from 'react-icons/ri'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { useAccount } from '@/context/useAccount'
 
 
 const AdminSliderMenu = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const router = useRouter();
     const pathname = usePathname();
+
+
+    const { LogOut, account } = useAccount()
+
 
     const handleLogout = async () => {
         try {
-            toast.success('LogOut Successfully');
-            router.push('/account/login');
+            LogOut()
         } catch (error) {
             console.log(error);
         }
