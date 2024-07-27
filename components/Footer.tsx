@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,12 +6,10 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 const Footer = () => {
+  const path = usePathname();
 
-
-  const path = usePathname()
-
-  if (path.startsWith("/admin")) return null
-  if (path.startsWith("/employer")) return null
+  if (path.startsWith("/admin")) return null;
+  if (path.startsWith("/employer")) return null;
 
   return (
     <div className="bg-rheinland-gray flex flex-col items-center justify-center  gap-10 pt-10 pb-3 text-slate-200 px-5 font-light ">
