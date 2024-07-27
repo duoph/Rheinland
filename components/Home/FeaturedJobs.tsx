@@ -68,10 +68,16 @@ const FeaturedJobs = () => {
                 <div ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }} className='relative flex overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
                     {isLoading
                         ? Array.from({ length: 9 }).map((_, index) => (
-                            <JobCard key={index} isLoading={isLoading} job={null} />
+                            <div key={index} className='min-w-[320px]'>
+
+                                <JobCard isLoading={isLoading} job={null} />
+
+                            </div>
                         ))
                         : jobs.map((job) => (
-                            <JobCard key={job._id} isLoading={isLoading} job={job} />
+                            <div key={job._id} className='min-w-[320px]'>
+                                <JobCard isLoading={isLoading} job={job} />
+                            </div>
                         ))
                     }
                 </div>
