@@ -12,6 +12,7 @@ interface SearchInputProps {
   setSearchInput: (input: string) => void;
   searchInput: string;
   type?: 'job' | 'location';
+  placeholder?: string
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, type = 'job' }) => {
@@ -83,7 +84,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, 
                 role="option"
                 aria-selected="false"
               >
-                
+
                 <h1>{item.name}</h1>
 
               </div>
