@@ -25,13 +25,14 @@ const HeroContainer = () => {
                 <div className="w-full shadow-lg lg:w-[70vw] flex items-center justify-center lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiSearch size={24} />
-                        <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} type='job' />                    </div>
+                        <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} type='job' />
+                    </div>
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiLocationOn size={24} />
                         <SearchInput searchInput={location} setSearchInput={setLocation} type='location' />
                     </div>
-                    <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">Search My job
-
+                    <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">
+                        Search My job
                     </button>
                 </div>
                 <span className="font-light text-center" >Popular : UI Designer, UX Researcher, Android, Admin</span>
