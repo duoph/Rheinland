@@ -50,9 +50,9 @@ const Jobs = () => {
             {/* Search Bar */}
             <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
 
-                <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} />
+                <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} type='job' />
 
-                <SearchInput searchInput={location} setSearchInput={setLocation} />
+                <SearchInput searchInput={location} setSearchInput={setLocation} type='location' />
 
                 <button
                     // onClick={}
