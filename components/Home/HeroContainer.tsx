@@ -1,10 +1,16 @@
+"use client"
+
 
 import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import SearchSuggestions from "../Search/SearchInput";
+import SearchInput from "../Search/SearchInput";
+import { useState } from "react";
 
 
 const HeroContainer = () => {
+
+    const [JobTitle, setJobTitle] = useState<string>('');
+    const [location, setLocation] = useState<string>('');
 
     return (
         <div className='flex items-center justify-center gap-2 sm:gap-5 lg:px-16 px-5 md:px-5  min-h-screen'>
@@ -19,11 +25,10 @@ const HeroContainer = () => {
                 <div className="w-full shadow-lg lg:w-[70vw] flex items-center justify-center lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiSearch size={24} />
-                        <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Job Title or Keyword" />
-                    </div>
+                        <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} type='job' />                    </div>
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiLocationOn size={24} />
-                        <input type="text" className="w-full px-3 py-3 border-b rounded-sm focus:outline-none" placeholder="Eg: Berlin" />
+                        <SearchInput searchInput={location} setSearchInput={setLocation} type='location' />
                     </div>
                     <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">Search My job
 

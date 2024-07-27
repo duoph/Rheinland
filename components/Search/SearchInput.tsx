@@ -16,6 +16,7 @@ interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, type = 'job' }) => {
+  
   const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
