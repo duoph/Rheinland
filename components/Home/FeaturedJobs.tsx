@@ -69,9 +69,7 @@ const FeaturedJobs = () => {
                     {isLoading
                         ? Array.from({ length: 9 }).map((_, index) => (
                             <div key={index} className='min-w-[320px]'>
-
                                 <JobCard isLoading={isLoading} job={null} />
-
                             </div>
                         ))
                         : jobs.map((job) => (

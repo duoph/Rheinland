@@ -14,27 +14,31 @@ interface JobCardProps {
 const JobCard = ({ job, isLoading }: JobCardProps) => {
   if (isLoading) {
     return (
-      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group  cursor-pointer group rounded-sm px-3 py-2 ">
+      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2">
+        <div className="flex justify-between items-center w-full py-2">
+          <Skeleton className="w-[60px] h-[60px]" />
+          <Skeleton className="w-[70px] h-[30px]" />
+        </div>
         <Skeleton className="w-full h-[20px] mb-2" />
-        <div className="flex flex-row items-center gap-2">
-          <Skeleton className="w-[20px] h-[20px]" />
-          <Skeleton className="w-[100px] h-[20px]" />
-        </div>
-        <div className="flex flex-row items-center gap-2">
-          <Skeleton className="w-[20px] h-[20px]" />
-          <Skeleton className="w-[100px] h-[20px]" />
-        </div>
-        <div className="flex flex-row items-center gap-2">
-          <Skeleton className="w-[20px] h-[20px]" />
-          <Skeleton className="w-[100px] h-[20px]" />
+
+        <div className="flex flex-row items-center justify-between gap-2 w-full">
+          <div className="flex flex-row items-center gap-2">
+            <Skeleton className="w-[20px] h-[20px]" />
+            <Skeleton className="w-[100px] h-[20px]" />
+          </div>
+          <div className="flex flex-row items-center gap-2">
+            <Skeleton className="w-[20px] h-[20px]" />
+            <Skeleton className="w-[100px] h-[20px]" />
+          </div>
         </div>
         <Skeleton className="w-full h-[60px] mt-3" />
+        <Skeleton className="w-[100px] h-[20px] mt-2" />
       </div>
     );
   }
 
   if (!job) {
-    return null; // or you can return a placeholder
+    return null;
   }
 
   return (
