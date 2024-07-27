@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import { AccountProvider } from "@/context/useAccount";
 import AlertMessageSlider from "@/components/AlertMessageSlider";
+import ProgressBar from "@/components/ProgressBar";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,6 +37,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <AccountProvider>
           <Header />
+          <ProgressBar />
           <AlertMessageSlider />
           <Toaster
             toastOptions={{
