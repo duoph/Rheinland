@@ -20,7 +20,8 @@ function AppliedJobsCard() {
         </div>
         <div>
           <button className="flex flex-row items-center p-2 text-white rounded-sm bg-red-500 gap-3">
-            Delete Application <FaRegTrashAlt />
+            Delete Application
+            <FaRegTrashAlt />
           </button>
         </div>
       </div>
