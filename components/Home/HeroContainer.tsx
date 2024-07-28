@@ -14,7 +14,7 @@ const HeroContainer = () => {
 
     return (
         <div className='flex items-center justify-center gap-2 sm:gap-5 lg:px-16 px-5 md:px-5  min-h-screen'>
-            <div className='lg:w-2/3 w-full flex items-center justify-center flex-col gap-2 md:gap-5'>
+            <div className=' w-full flex items-center justify-center flex-col gap-2 md:gap-5'>
                 <div className="text-[35px] xs:text-[50px] sm:text-[55px]  md:text-[90px]  font-bold flex flex-col items-center justify-start flex-wrap  leading-[27px] xs:leading-[40px] sm:leading-[46px] md:leading-[70px] w-full h-full">
                     <span className="text-start">Discover</span>
                     <span>More Than</span>
