@@ -1,10 +1,20 @@
-"use client"
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { IoLocationSharp } from "react-icons/io5";
 
-function CandidateProfile() {
+const CandidateProfile = () => {
+  const [address, setAddress] = useState("The best penthouse in Kerala owned by Hadi Razal");
+  const [experience, setExperience] = useState("5 Years");
+  const [skills, setSkills] = useState("React, Next JS, Goat, TypeScript");
+  const [education, setEducation] = useState("Masters in Computer Engineering From IIT Bombay");
+  const [mobile, setMobile] = useState("+91123457894");
+  const [email, setEmail] = useState("hadigoat@duoph.com");
+  const [germanLevel, setGermanLevel] = useState("A1");
+  const [languages, setLanguages] = useState("English, Malayalam, Spanish, German, Latin");
+  const [resumeLink, setResumeLink] = useState("https://www.rheinlandconsultancy.com/");
+
   return (
     <div className="pt-[95px] flex flex-col items-center justify-center pb-10">
       {/* Profile Picture & Basic Info */}
@@ -30,24 +40,28 @@ function CandidateProfile() {
           <label className="text-gray-500 mb-1">Address:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="The best penthouse in Kerala owned by Hadi Razal"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Experience:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="5 Years"
+            value={experience}
+            onChange={(e) => setExperience(e.target.value)}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Skills:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="React, Next JS, Goat, TypeScript"
+            value={skills}
+            onChange={(e) => setSkills(e.target.value)}
           />
           <label className="text-gray-500 mt-4 mb-1">Highest Education:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="Masters in Computer Engineering From IIT Bombay"
+            value={education}
+            onChange={(e) => setEducation(e.target.value)}
           />
         </div>
 
@@ -56,27 +70,29 @@ function CandidateProfile() {
           <label className="text-gray-500 mb-1">Mobile:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="+91123457894"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Email:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="hadigoat@duoph.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <label className="text-gray-500 mt-4 mb-1">German language Level:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="A1"
+            value={germanLevel}
+            onChange={(e) => setGermanLevel(e.target.value)}
           />
-
-
 
           <label className="text-gray-500 mt-4 mb-1">Languages:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            defaultValue="English, Malayalam, Spanish, German, Latin"
+            value={languages}
+            onChange={(e) => setLanguages(e.target.value)}
           />
         </div>
       </div>
@@ -86,7 +102,8 @@ function CandidateProfile() {
         <label className="text-gray-500 mb-1">Resume Link:</label>
         <input
           className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-          defaultValue="https://www.rheinlandconsultancy.com/"
+          value={resumeLink}
+          onChange={(e) => setResumeLink(e.target.value)}
         />
       </div>
 
