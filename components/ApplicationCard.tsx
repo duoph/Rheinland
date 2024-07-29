@@ -1,24 +1,42 @@
 import React from "react";
 import { MdNotInterested } from "react-icons/md";
 import { FaMapMarkerAlt, FaCheck } from "react-icons/fa";
+import { Skeleton } from "./ui/skeleton";
 
 interface ApplicationCardProps {
-  job?: {
-    title: string;
-    company: string;
-    location: string;
-    applicant: {
-      name: string;
-      languageLevel: string;
-      experience: string;
-    };
-  };
+  applicant?: any;
+  isLoading?: boolean;
 }
 
-const ApplicationCard: React.FC<ApplicationCardProps> = ({ job }) => {
+const ApplicationCard: React.FC<ApplicationCardProps> = ({ applicant, isLoading }) => {
 
-  // const { title, company, location, applicant } = job;
-  // const { name, languageLevel, experience } = applicant;
+
+  if (isLoading) {
+    return (
+      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px]  group cursor-pointer rounded-sm px-3 py-2">
+        <div className="flex justify-between items-center w-full py-2">
+          <Skeleton className="w-[60px] h-[60px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+        </div>
+        <Skeleton className="w-full h-[20px] mb-2" />
+
+        <div className="flex flex-col items-center justify-center w-full gap-1">
+          <Skeleton className="w-[150px] h-[20px]" />
+          <Skeleton className="w-[200px] h-[20px]" />
+          <Skeleton className="w-[250px] h-[20px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+        </div>
+
+        <div className="flex justify-between items-center w-full py-2">
+          <Skeleton className="w-[100px] h-[20px]" />
+          <Skeleton className="w-[100px] h-[20px]" />
+        </div>
+      </div>
+    );
+
+  }
+
 
   return (
     <div className="bg-slate-400 border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] group cursor-pointer rounded-sm px-3 py-2">
@@ -66,6 +84,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ job }) => {
 
     </div >
   );
-};
+
+}
 
 export default ApplicationCard;

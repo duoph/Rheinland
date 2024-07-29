@@ -5,7 +5,7 @@ import ApplicationCard from "@/components/ApplicationCard";
 
 const ApplicationPage = () => {
   const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [applicants, setApplicants] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
@@ -35,25 +35,24 @@ const ApplicationPage = () => {
   return (
     <div className="pt-[95px] flex flex-col gap-5 items-center px-3 pb-10">
       <h1 className="font-semibold text-[30px]">All Applications</h1>
-      <div className="flex flex-wrap justify-center gap-5">
-        {Array.from({ length: 9 }).map((_, index) => (
-          <ApplicationCard key={index} />
-        ))}
-      </div>
+
       <div className="flex items-center justify-center flex-wrap gap-3">
         {isLoading
-          ? Array.from({ length: 100 }).map((_, index) => (
+          ? Array.from({ length: 18 }).map((_, index) => (
             <ApplicationCard key={index} />
           ))
-          : Array.from({ length: 100 })?.map((applicant, index) => (
-            <ApplicationCard key={index} />
+          : Array.from({ length: 18 })?.map((applicant, index) => (
+            <ApplicationCard key={index}  />
           ))}
       </div>
+
       {displayedApplicants?.length > 0 && applicants?.length > applicantsToDisplay && (
         <button onClick={handleLoadMore} className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3">
           Load more
         </button>
       )}
+
+
     </div>
   );
 };
