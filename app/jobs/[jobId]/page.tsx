@@ -14,7 +14,7 @@ import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
 
 import { Skeleton } from '../../../components/ui/skeleton';
-import RelatedJobs from "@/components/Related Jobs/RelatedJobs";
+import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 
 const SingleJobPage = () => {
   const { jobId } = useParams();
