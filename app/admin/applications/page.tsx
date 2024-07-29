@@ -1,33 +1,61 @@
 "use client";
 
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import ApplicationCard from "@/components/ApplicationCard";
 
-const candidates = Array(20).fill(null); // Assuming you have 20 candidates for this example
+const ApplicationPage = () => {
+  const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [applicants, setApplicants] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
 
-function ApplicationPage() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 9;
+  const fetchApplications = async () => {
+    try {
+      const response = await fetch("/api/applications");
+      const data = await response.json();
+      setApplicants(data);
+      setSearchResults(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching applications:", error);
+      setIsLoading(false);
+    }
+  };
 
-  // const handlePageClick = (data: { selected: number }) => {
-  //   setCurrentPage(data.selected);
-  // };
+  useEffect(() => {
+    fetchApplications();
+  }, []);
 
-  const offset = currentPage * itemsPerPage;
-  const currentCandidates = candidates.slice(offset, offset + itemsPerPage);
-  // const pageCount = Math.ceil(candidates.length / itemsPerPage);
+  const handleLoadMore = () => {
+    setApplicantsToDisplay((prev) => prev + 18);
+  };
+
+  const displayedApplicants = searchResults?.slice(0, applicantsToDisplay);
 
   return (
-    <div className="pt-[95px] flex flex-col gap-5 items-center px-3 ">
+    <div className="pt-[95px] flex flex-col gap-5 items-center px-3 pb-10">
       <h1 className="font-semibold text-[30px]">All Applications</h1>
-      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-        {currentCandidates.map((_, index) => (
+      <div className="flex flex-wrap justify-center gap-5">
+        {Array.from({ length: 9 }).map((_, index) => (
           <ApplicationCard key={index} />
         ))}
       </div>
+      <div className="flex items-center justify-center flex-wrap gap-3">
+        {isLoading
+          ? Array.from({ length: 100 }).map((_, index) => (
+            <ApplicationCard key={index} />
+          ))
+          : Array.from({ length: 100 })?.map((applicant, index) => (
+            <ApplicationCard key={index} />
+          ))}
+      </div>
+      {displayedApplicants?.length > 0 && applicants?.length > applicantsToDisplay && (
+        <button onClick={handleLoadMore} className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3">
+          Load more
+        </button>
+      )}
     </div>
   );
-}
+};
 
 export default ApplicationPage;

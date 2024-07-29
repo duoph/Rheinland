@@ -14,6 +14,7 @@ const Jobs = () => {
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
     const fetchJobs = async () => {
         try {
             const { data } = await axios.get('/api/job');
@@ -27,6 +28,8 @@ const Jobs = () => {
             console.error(error);
         }
     };
+
+    
 
     useEffect(() => {
         fetchJobs();
