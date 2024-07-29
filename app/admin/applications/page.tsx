@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import ApplicationCard from "@/components/Admin/Candidates/Applications/ApplicationCard";
+import ApplicationCard from "@/components/ApplicationCard";
 
 const candidates = Array(20).fill(null); // Assuming you have 20 candidates for this example
 
@@ -19,7 +19,7 @@ function ApplicationPage() {
   // const pageCount = Math.ceil(candidates.length / itemsPerPage);
 
   return (
-    <div className="pt-[95px] flex flex-col gap-5 items-center">
+    <div className="pt-[95px] flex flex-col gap-5 items-center px-3 ">
       <h1 className="font-semibold text-[30px]">All Applications</h1>
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {currentCandidates.map((_, index) => (
