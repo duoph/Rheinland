@@ -21,7 +21,7 @@ function RelatedJobs() {
       console.error(error);
     }
   };
-
+ 
   useEffect(() => {
     fetchJobs();
   }, []);
