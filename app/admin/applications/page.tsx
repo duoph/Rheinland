@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import ApplicationCard from "@/components/ApplicationCard";
+import { CiSearch } from "react-icons/ci";
 
 const ApplicationPage = () => {
   const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applicants, setApplicants] = useState<any[]>([]);
+  const [search, setSearch] = useState<string>('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('all');
 
@@ -63,6 +65,17 @@ const ApplicationPage = () => {
         >
           Rejected Applicants
         </span>
+      </div>
+
+      <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3'>
+        <input
+          type='text'
+          placeholder='Name,Phone,Order Id,Product'
+          className='border px-4 py-4 rounded-md w-full'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <CiSearch className='rounded-md text-[30px] cursor-pointer text-white' />
       </div>
 
       <div className="flex items-center justify-center flex-wrap gap-3">
