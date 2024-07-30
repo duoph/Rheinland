@@ -41,14 +41,15 @@ export default function RootLayout({
           <AlertMessageSlider />
           <Toaster
             toastOptions={{
+              position: 'bottom-right',
               className: "",
-              style: {
-                backgroundColor: "red",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                color: "white",
-                borderRadius: "2px",
-              },
+              // style: {
+              //   backgroundColor: "red",
+              //   paddingLeft: "10px",
+              //   paddingRight: "10px",
+              //   color: "white",
+              //   borderRadius: "2px",
+              // },
             }}
           />
           {children}

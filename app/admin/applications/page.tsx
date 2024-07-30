@@ -5,7 +5,7 @@ import ApplicationCard from "@/components/ApplicationCard";
 
 const ApplicationPage = () => {
   const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applicants, setApplicants] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('all');
