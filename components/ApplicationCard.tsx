@@ -52,10 +52,10 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ applicant, isLoading 
         <p className="italic underline cursor-pointer text-blue-500">View Resume</p>
       </div>
       <div className="flex gap-2 justify-between rounded-md w-full mt-3">
-        <button className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-green-500 hover:bg-green-600 transition-colors duration-200 gap-2">
+        <button className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-green-700 hover:bg-green-600 transition-colors duration-200 gap-2">
           Shorlist <FaCheck />
         </button>
-        <button className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-red-500 hover:bg-red-600 transition-colors duration-200 gap-2">
+        <button className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-rheinland-red hover:bg-red-600 transition-colors duration-200 gap-2">
           Reject <MdNotInterested />
         </button>
       </div>
