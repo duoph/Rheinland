@@ -20,3 +20,14 @@ export interface Job {
     updatedAt: string;
     employerId: Types.ObjectId;
 }
+
+export interface user {
+    _id: string;
+    name: string;
+    location?: string;
+    gender?: string;
+    appliedJobs?: Types.ObjectId[];
+    createdAt: string;
+    updatedAt: string;
+    savedJobs?: Types.ObjectId[];
+}

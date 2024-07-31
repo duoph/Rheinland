@@ -1,10 +1,12 @@
 import { Job } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineBuildingOffice2, HiOutlineBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
+import axios from "axios";
+import { user } from "@/types";
 
 interface JobCardProps {
   job: Job | null;
@@ -12,6 +14,37 @@ interface JobCardProps {
 }
 
 const JobCard = ({ job, isLoading }: JobCardProps) => {
+
+
+  const [isSaved, setIsSaved] = useState<boolean>(false)
+  const [user, setUser] = useState<user[] | []>([])
+
+
+
+  const fetchUser = async () => {
+    try {
+
+      const res = await axios.get('/api/user')
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
+  const handleSave = async () => {
+    try {
+
+      const res = axios.post('/api/job/user/save')
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
   if (isLoading) {
     return (
       <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2">
