@@ -40,7 +40,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ applicant, isLoading 
     return (
       <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] group cursor-pointer rounded-lg px-4 py-3 bg-white">
         <div className="flex justify-between items-center w-full py-2">
-          <Skeleton className="w-[60px] h-[60px] rounded-full" />
+          <Skeleton className="w-[60px] h-[60px] rounded-md" />
           <Skeleton className="w-[100px] h-[20px]" />
         </div>
         <Skeleton className="w-full h-[20px] mb-2" />

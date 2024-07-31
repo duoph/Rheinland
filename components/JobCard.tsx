@@ -1,10 +1,9 @@
-
 import { Job } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CiLocationOn } from "react-icons/ci";
-import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import { HiOutlineBuildingOffice2, HiOutlineBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
 
 interface JobCardProps {
@@ -47,6 +46,8 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
       href={`/jobs/${job._id}`}
       className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer"
     >
+
+
       <div className="flex justify-between items-center w-full py-2">
         <Image
           src={"/RheinlandLogoHeader.png"}
@@ -58,9 +59,13 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
           Full Time
         </span>
       </div>
+
+
       <div className="flex justify-start items-center font-semibold gap-2 w-full">
         <span>{job.title}</span>
       </div>
+
+
       <div className="flex justify-start items-center font-light text-sm gap-2 w-full py-1">
         <span className="flex items-center justify-center gap-[6px]">
           <HiOutlineBuildingOffice2 />
@@ -71,6 +76,8 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
           {`${job.location}, ${job.state}`}
         </span>
       </div>
+
+
       <div className="h-[80px] w-full py-1">
         <p
           className="font-light h-full overflow-hidden"
@@ -84,9 +91,26 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
           {job.description}
         </p>
       </div>
-      <div className="pt-2 font-extralight flex items-end justify-start text-sm w-full">
+
+
+      <div className="pt-2 font-extralight flex items-end justify-between text-sm w-full">
         <span>{new Date(job.createdAt).toLocaleDateString()}</span>
+        <HiOutlineBookmark className="text-xl cursor-pointer" />
       </div>
+
+
+
+      {/* <button
+        className="mt-2 w-full py-2 bg-rheinland-blue text-white rounded-sm text-center"
+        onClick={(e) => {
+          e.preventDefault();
+          // Add your apply logic here
+        }}
+      >
+        Apply
+      </button> */}
+
+
     </Link>
   );
 };

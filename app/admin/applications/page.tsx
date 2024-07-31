@@ -70,7 +70,7 @@ const ApplicationPage = () => {
       <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3'>
         <input
           type='text'
-          placeholder='Name,Phone,Order Id,Product'
+          placeholder='Name,Job,Location'
           className='border px-4 py-4 rounded-md w-full'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
