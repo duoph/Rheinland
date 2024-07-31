@@ -1,49 +1,58 @@
+"use client";
+
 import { Job } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiLocationOn } from "react-icons/ci";
-import { HiOutlineBuildingOffice2, HiOutlineBookmark } from "react-icons/hi2";
+import { HiOutlineBuildingOffice2, HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
 import axios from "axios";
-import { user } from "@/types";
+import toast from "react-hot-toast";
 
 interface JobCardProps {
   job: Job | null;
   isLoading?: boolean;
 }
 
-const JobCard = ({ job, isLoading }: JobCardProps) => {
-
-
-  const [isSaved, setIsSaved] = useState<boolean>(false)
-  const [user, setUser] = useState<user[] | []>([])
-
-
+const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
+  const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
   const fetchUser = async () => {
     try {
-
-      const res = await axios.get('/api/user')
-
+      const res = await axios.get('/api/user');
+      setSavedJobs(res.data.user.savedJobs || []);
+      console.log(res.data.user);
     } catch (error) {
-      console.log(error)
+      console.error('Error fetching user data:', error);
     }
-  }
+  };
 
+  const handleSave = async (e: React.MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+    if (!job) return;
 
-
-  const handleSave = async () => {
     try {
+      const response = await axios.put(`/api/job/${job._id}/user/save`);
+      console.log(response.data);
 
-      const res = axios.post('/api/job/user/save')
+      if (job._id && savedJobs.includes(job._id)) {
+        setSavedJobs((prev) => prev.filter((id) => id !== job._id));
+        toast.success("Job Removed");
+      } else {
+        setSavedJobs((prev) => [...prev, job._id]);
+        toast.success("Job saved");
+      }
 
+      fetchUser();
     } catch (error) {
-      console.log(error)
+      console.error('Error saving job:', error);
     }
-  }
+  };
 
-
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   if (isLoading) {
     return (
@@ -53,7 +62,6 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
           <Skeleton className="w-[70px] h-[30px]" />
         </div>
         <Skeleton className="w-full h-[20px] mb-2" />
-
         <div className="flex flex-row items-center justify-between gap-2 w-full">
           <div className="flex flex-row items-center gap-2">
             <Skeleton className="w-[20px] h-[20px]" />
@@ -75,76 +83,55 @@ const JobCard = ({ job, isLoading }: JobCardProps) => {
   }
 
   return (
-    <Link
-      href={`/jobs/${job._id}`}
-      className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer"
-    >
-
-
-      <div className="flex justify-between items-center w-full py-2">
-        <Image
-          src={"/RheinlandLogoHeader.png"}
-          alt="Logo"
-          height={60}
-          width={60}
-        />
-        <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
-          Full Time
-        </span>
-      </div>
-
-
-      <div className="flex justify-start items-center font-semibold gap-2 w-full">
-        <span>{job.title}</span>
-      </div>
-
-
-      <div className="flex justify-start items-center font-light text-sm gap-2 w-full py-1">
-        <span className="flex items-center justify-center gap-[6px]">
-          <HiOutlineBuildingOffice2 />
-          Rheinland
-        </span>
-        <span className="flex items-center justify-center gap-[6px] w-full">
-          <CiLocationOn />
-          {`${job.location}, ${job.state}`}
-        </span>
-      </div>
-
-
-      <div className="h-[80px] w-full py-1">
-        <p
-          className="font-light h-full overflow-hidden"
-          style={{
-            display: "-webkit-box",
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: "vertical",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {job.description}
-        </p>
-      </div>
-
-
+    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer">
+      <Link href={`/jobs/${job._id}`}>
+        <div className="flex justify-between items-center w-full py-2">
+          <Image
+            src={"/RheinlandLogoHeader.png"}
+            alt="Logo"
+            height={60}
+            width={60}
+          />
+          <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
+            Full Time
+          </span>
+        </div>
+        <div className="flex justify-start items-center font-semibold gap-2 w-full">
+          <span>{job.title}</span>
+        </div>
+        <div className="flex justify-start items-center font-light text-sm gap-2 w-full py-1">
+          <span className="flex items-center justify-center gap-[6px]">
+            <HiOutlineBuildingOffice2 />
+            Rheinland
+          </span>
+          <span className="flex items-center justify-center gap-[6px] w-full">
+            <CiLocationOn />
+            {`${job.location}, ${job.state}`}
+          </span>
+        </div>
+        <div className="h-[80px] w-full py-1">
+          <p
+            className="font-light h-full overflow-hidden"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {job.description}
+          </p>
+        </div>
+      </Link>
       <div className="pt-2 font-extralight flex items-end justify-between text-sm w-full">
         <span>{new Date(job.createdAt).toLocaleDateString()}</span>
-        <HiOutlineBookmark className="text-xl cursor-pointer" />
+        {savedJobs.includes(job._id) ? (
+          <HiBookmark onClick={handleSave} className="text-xl cursor-pointer" />
+        ) : (
+          <HiOutlineBookmark className="text-xl cursor-pointer" onClick={handleSave} />
+        )}
       </div>
-
-
-
-      {/* <button
-        className="mt-2 w-full py-2 bg-rheinland-blue text-white rounded-sm text-center"
-        onClick={(e) => {
-          e.preventDefault();
-          // Add your apply logic here
-        }}
-      >
-        Apply
-      </button> */}
-
-
-    </Link>
+    </div>
   );
 };
 

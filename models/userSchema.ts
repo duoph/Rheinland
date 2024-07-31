@@ -11,7 +11,7 @@ const userSchema = new Schema({
     phone: { type: Number },
     resumeURL: { type: String },
     address: { type: String },
-    knowLanguages: [{ type: String }],
+    knownLanguages: [{ type: String }],
     germanLanguageLevel: { type: String },
     savedJobs: [{ type: mongoose.Schema.ObjectId }],
     appliedJobs: [{ type: mongoose.Schema.ObjectId }],

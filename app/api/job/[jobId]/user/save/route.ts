@@ -1,33 +1,57 @@
 import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
-import jobModel from "@/models/jobSchema";
+import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, { params }: any) {
+export async function PUT(req: NextRequest, { params }: { params: { jobId: string } }) {
   try {
     await connectMongoDB();
 
-    const decodedToken = getDataFromToken(req);
-    const userId = decodedToken.id;
-    const jobId = params.jobId;
+    const { id } = await getDataFromToken(req);
+    const { jobId } = params;
 
-    const updatedJob = await jobModel.findByIdAndUpdate(
-      { _id: jobId },
-      { $push: { savedUsers: userId } },
+    if (!id || !jobId) {
+      return NextResponse.json({
+        message: "Missing user ID or job ID",
+        success: false,
+        status: 400,
+      });
+    }
+
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      return NextResponse.json({
+        message: "User not found",
+        success: false,
+        status: 404,
+      });
+    }
+
+    const updateOperation = user.savedJobs.includes(jobId)
+      ? { $pull: { savedJobs: jobId } } // Remove job if already saved
+      : { $push: { savedJobs: jobId } }; // Add job if not saved
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      id,
+      updateOperation,
       { new: true }
     );
 
     return NextResponse.json({
-      message: "Job save/unsave operation successful",
+      message: `Job ${user.savedJobs.includes(jobId) ? 'unsave' : 'save'} operation successful`,
       success: true,
-      job: updatedJob,
+      savedJobs: updatedUser?.savedJobs || [],
     });
-  } catch (error) {
-    console.error("Error saving/unsaving job:", error);
+
+  } catch (error: any) {
+    console.error("Error in job save operation:", error);
+
     return NextResponse.json({
-      error: "Internal server error",
+      error: "Failed to save job",
       success: false,
       status: 500,
+      message: error.message,
     });
   }
 }
