@@ -1,17 +1,17 @@
 "use client";
 
-import { useAccount } from "@/context/useAccount";
 import { Job } from "@/types";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
-import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
+import {  CiLocationOn } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { CiUser } from "react-icons/ci";
 import { HiBookmark, HiOutlineBanknotes, HiOutlineBookmark } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
+
 
 import { Skeleton } from '../../../components/ui/skeleton';
 import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";

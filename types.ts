@@ -25,6 +25,9 @@ export interface Job {
 export interface user {
     _id: string;
     name: string;
+    countryCode: string;
+    email: string;
+    phone: string;
     location?: string;
     gender?: string;
     appliedJobs?: Types.ObjectId[];

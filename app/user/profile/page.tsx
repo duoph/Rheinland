@@ -1,23 +1,71 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { IoLocationSharp } from "react-icons/io5";
+import axios from "axios";
 
-const CandidateProfile = () => {
+const UserProfile = () => {
+
   const [address, setAddress] = useState("The best penthouse in Kerala owned by Hadi Razal");
   const [experience, setExperience] = useState("5 Years");
   const [skills, setSkills] = useState("React, Next JS, Goat, TypeScript");
   const [education, setEducation] = useState("Masters in Computer Engineering From IIT Bombay");
-  const [mobile, setMobile] = useState("+91123457894");
+  const [phone, setPhone] = useState("+91123457894");
   const [email, setEmail] = useState("hadigoat@duoph.com");
+  const [about, setAbout] = useState("lorem23fefewa");
   const [germanLevel, setGermanLevel] = useState("A1");
   const [languages, setLanguages] = useState("English, Malayalam, Spanish, German, Latin");
   const [resumeLink, setResumeLink] = useState("https://www.rheinlandconsultancy.com/");
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get("/api/user");
+      const userData = response.data.user;
+      setAddress(userData.address);
+      setExperience(userData.experience);
+      setSkills(userData.skills);
+      setEducation(userData.education);
+      setPhone(userData.phone);
+      setAbout(userData.about);
+      setEmail(userData.email);
+      setGermanLevel(userData.germanLevel);
+      setLanguages(userData.languages);
+      setResumeLink(userData.resumeLink);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const handleSaveChanges = async () => {
+    try {
+      setIsEditable(false);
+      const updatedUser = {
+        address,
+        experience,
+        skills,
+        education,
+        phone,
+        email,
+        germanLevel,
+        languages,
+        resumeLink
+      };
+      await axios.put('/api/user', updatedUser);
+      setIsEditable(true);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
 
   return (
     <div className="pt-[95px] flex flex-col items-center justify-center pb-10">
       {/* Profile Picture & Basic Info */}
+      <h1 className="text-xl font-semibold">My Profile</h1>
       <div className="flex flex-col justify-center items-center mb-8">
         <Image
           src="/person-icon.jpg"
@@ -27,10 +75,6 @@ const CandidateProfile = () => {
           className="rounded-full"
         />
         <h1 className="text-[22px] font-semibold cursor-default mt-4">Hadi Razal</h1>
-        <p className="flex flex-row justify-center items-center text-[14px] text-gray-500 cursor-default mt-2">
-          <IoLocationSharp className="mr-1" />
-          Ponnani, Kerala
-        </p>
       </div>
 
       {/* Form Section */}
@@ -42,6 +86,7 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            disabled={!isEditable}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Experience:</label>
@@ -49,6 +94,7 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
+            disabled={!isEditable}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Skills:</label>
@@ -56,12 +102,15 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
+            disabled={!isEditable}
           />
+
           <label className="text-gray-500 mt-4 mb-1">Highest Education:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={education}
             onChange={(e) => setEducation(e.target.value)}
+            disabled={!isEditable}
           />
         </div>
 
@@ -70,8 +119,9 @@ const CandidateProfile = () => {
           <label className="text-gray-500 mb-1">Mobile:</label>
           <input
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            disabled={!isEditable}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Email:</label>
@@ -79,6 +129,7 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={!isEditable}
           />
 
           <label className="text-gray-500 mt-4 mb-1">German language Level:</label>
@@ -86,6 +137,7 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={germanLevel}
             onChange={(e) => setGermanLevel(e.target.value)}
+            disabled={!isEditable}
           />
 
           <label className="text-gray-500 mt-4 mb-1">Languages:</label>
@@ -93,6 +145,7 @@ const CandidateProfile = () => {
             className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
             value={languages}
             onChange={(e) => setLanguages(e.target.value)}
+            disabled={!isEditable}
           />
         </div>
       </div>
@@ -104,13 +157,31 @@ const CandidateProfile = () => {
           className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
           value={resumeLink}
           onChange={(e) => setResumeLink(e.target.value)}
+          disabled={!isEditable}
+        />
+      </div>
+
+      {/* About Section */}
+      <div className="flex flex-col w-full px-8 mb-4">
+        <label className="text-gray-500 mb-1">About:</label>
+        <textarea
+          className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+          value={about}
+          minLength={10}
+          onChange={(e) => setAbout(e.target.value)}
+          disabled={!isEditable}
         />
       </div>
 
       {/* Edit Profile Button */}
-      <button className="bg-rheinland-red px-4 py-3 rounded-sm text-white mt-4">Edit Profile</button>
+      <button
+        className="bg-rheinland-red px-4 py-3 rounded-sm text-white mt-4"
+        onClick={() => (isEditable ? handleSaveChanges() : setIsEditable(!isEditable))}
+      >
+        {isEditable ? "Save Changes" : "Edit Profile"}
+      </button>
     </div>
   );
-}
+};
 
-export default CandidateProfile;
+export default UserProfile;

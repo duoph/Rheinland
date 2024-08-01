@@ -12,11 +12,11 @@ export async function GET(req: NextRequest) {
 
         const user = await userModel.findById({ _id: id })
 
-        return NextResponse.json({ message: 'Fetched Job successfully', success: true, user });
+        return NextResponse.json({ message: 'Fetched user successfully', success: true, user, status: 200 });
 
     } catch (error) {
 
-        console.error('Error Fetching job:', error);
+        console.error('Error Fetching user:', error);
         return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
 
     }

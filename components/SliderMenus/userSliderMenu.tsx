@@ -50,7 +50,7 @@ const UserSliderMenu = () => {
         >
 
           <Link
-            href={"/login"}
+            href={`/user/profile`}
             className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
               }`}
           >
