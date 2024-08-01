@@ -65,7 +65,7 @@ const UserProfile = () => {
   return (
     <div className="pt-[95px] flex flex-col items-center justify-center pb-10">
       {/* Profile Picture & Basic Info */}
-      <h1 className="text-xl font-semibold">My Profile</h1>
+      <h1 className="text-[40px] font-semibold">My Profile</h1>
       <div className="flex flex-col justify-center items-center mb-8">
         <Image
           src="/person-icon.jpg"
