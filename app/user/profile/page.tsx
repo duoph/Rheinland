@@ -5,9 +5,9 @@ import Image from "next/image";
 import axios from "axios";
 
 const UserProfile = () => {
-
   const [address, setAddress] = useState("The best penthouse in Kerala owned by Hadi Razal");
   const [experience, setExperience] = useState("5 Years");
+  const [username, setUsername] = useState("Razal");
   const [skills, setSkills] = useState("React, Next JS, Goat, TypeScript");
   const [education, setEducation] = useState("Masters in Computer Engineering From IIT Bombay");
   const [phone, setPhone] = useState("+91123457894");
@@ -53,7 +53,7 @@ const UserProfile = () => {
         email,
         germanLevel,
         languages,
-        resumeLink
+        resumeLink,
       };
       await axios.put('/api/user', updatedUser);
       setIsEditable(true);
@@ -63,7 +63,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="pt-[95px] flex flex-col items-center justify-center pb-10">
+    <div className="pt-[95px] flex flex-col items-center justify-center pb-10 w-full" >
       {/* Profile Picture & Basic Info */}
       <h1 className="text-[40px] font-semibold">My Profile</h1>
       <div className="flex flex-col justify-center items-center mb-8">
@@ -74,16 +74,22 @@ const UserProfile = () => {
           width={100}
           className="rounded-full"
         />
-        <h1 className="text-[22px] font-semibold cursor-default mt-4">Hadi Razal</h1>
       </div>
 
       {/* Form Section */}
-      <div className="flex flex-col md:flex-row justify-around w-full px-8">
+      <div className="flex gap-2 flex-col md:flex-row justify-around w-full md:px-8 px-3">
         {/* Left Section */}
-        <div className="flex flex-col w-full md:w-1/2 px-3 mb-4">
+        <div className="flex flex-col w-full md:w-1/2 mb-4">
+          <label className="text-gray-500 mb-1">Name :</label>
+          <input
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            disabled={!isEditable}
+          />
           <label className="text-gray-500 mb-1">Address:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             disabled={!isEditable}
@@ -91,7 +97,7 @@ const UserProfile = () => {
 
           <label className="text-gray-500 mt-4 mb-1">Experience:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
             disabled={!isEditable}
@@ -99,7 +105,7 @@ const UserProfile = () => {
 
           <label className="text-gray-500 mt-4 mb-1">Skills:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
             disabled={!isEditable}
@@ -107,7 +113,7 @@ const UserProfile = () => {
 
           <label className="text-gray-500 mt-4 mb-1">Highest Education:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={education}
             onChange={(e) => setEducation(e.target.value)}
             disabled={!isEditable}
@@ -115,18 +121,18 @@ const UserProfile = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col w-full md:w-1/2 px-3 mb-4">
+        <div className="flex flex-col w-full md:w-1/2 mb-4">
           <label className="text-gray-500 mb-1">Mobile:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             disabled={!isEditable}
           />
 
-          <label className="text-gray-500 mt-4 mb-1">Email:</label>
+          <label className="text-gray-500  mb-1">Email:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={!isEditable}
@@ -134,7 +140,7 @@ const UserProfile = () => {
 
           <label className="text-gray-500 mt-4 mb-1">German language Level:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={germanLevel}
             onChange={(e) => setGermanLevel(e.target.value)}
             disabled={!isEditable}
@@ -142,32 +148,30 @@ const UserProfile = () => {
 
           <label className="text-gray-500 mt-4 mb-1">Languages:</label>
           <input
-            className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
             value={languages}
             onChange={(e) => setLanguages(e.target.value)}
             disabled={!isEditable}
           />
-        </div>
-      </div>
 
-      {/* Resume Link */}
-      <div className="flex flex-col w-full px-8 mb-4">
-        <label className="text-gray-500 mb-1">Resume Link:</label>
-        <input
-          className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
-          value={resumeLink}
-          onChange={(e) => setResumeLink(e.target.value)}
-          disabled={!isEditable}
-        />
+          <label className="text-gray-500 mt-4 mb-1">Resume Link:</label>
+          <input
+            className="w-full shadow-sm px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={resumeLink}
+            onChange={(e) => setResumeLink(e.target.value)}
+            disabled={!isEditable}
+          />
+        </div>
       </div>
 
       {/* About Section */}
       <div className="flex flex-col w-full px-8 mb-4">
         <label className="text-gray-500 mb-1">About:</label>
         <textarea
-          className="w-full px-3 py-3 border-b rounded-sm focus:outline-none"
+          className="w-full shadow-smpx-3 py-3 border-b rounded-sm focus:outline-none"
           value={about}
           minLength={10}
+          rows={5}
           onChange={(e) => setAbout(e.target.value)}
           disabled={!isEditable}
         />
