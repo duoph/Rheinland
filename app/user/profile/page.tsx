@@ -63,7 +63,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="pt-[95px] flex flex-col items-center justify-center pb-10 w-full" >
+    <div className="pt-[95px] flex flex-col items-center justify-center pb-10 w-full md:px-8 px-3" >
       {/* Profile Picture & Basic Info */}
       <h1 className="text-[40px] font-semibold">My Profile</h1>
       <div className="flex flex-col justify-center items-center mb-8">
@@ -77,7 +77,7 @@ const UserProfile = () => {
       </div>
 
       {/* Form Section */}
-      <div className="flex gap-2 flex-col md:flex-row justify-around w-full md:px-8 px-3">
+      <div className="flex gap-2 flex-col md:flex-row justify-around w-full ">
         {/* Left Section */}
         <div className="flex flex-col w-full md:w-1/2 mb-4">
           <label className="text-gray-500 mb-1">Name :</label>
