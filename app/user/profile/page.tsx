@@ -165,7 +165,7 @@ const UserProfile = () => {
       </div>
 
       {/* About Section */}
-      <div className="flex flex-col w-full px-8 mb-4">
+      <div className="flex flex-col w-full mb-4">
         <label className="text-gray-500 mb-1">About:</label>
         <textarea
           className="w-full shadow-smpx-3 py-3 border-b rounded-sm focus:outline-none"
