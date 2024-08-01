@@ -4,6 +4,7 @@ export interface Job {
     _id: string;
     title: string;
     category: string;
+    salary?: number;
     isOpen?: boolean;
     description: string;
     skills?: string[] | undefined;

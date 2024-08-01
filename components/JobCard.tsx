@@ -84,7 +84,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
 
   return (
     <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer">
-      <Link href={`/jobs/${job._id}`}>
+      <Link href={`/jobs/${job._id}`} className="w-full">
         <div className="flex justify-between items-center w-full py-2">
           <Image
             src={"/RheinlandLogoHeader.png"}
@@ -126,9 +126,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
       <div className="pt-2 font-extralight flex items-end justify-between text-sm w-full">
         <span>{new Date(job.createdAt).toLocaleDateString()}</span>
         {savedJobs.includes(job._id) ? (
-          <HiBookmark onClick={handleSave} className="text-xl cursor-pointer" />
+          <HiBookmark onClick={handleSave} className="text-[25px] text-rheinland-red cursor-pointer" />
         ) : (
-          <HiOutlineBookmark className="text-xl cursor-pointer" onClick={handleSave} />
+          <HiOutlineBookmark className="text-[25px] text-rheinland-red cursor-pointer" onClick={handleSave} />
         )}
       </div>
     </div>

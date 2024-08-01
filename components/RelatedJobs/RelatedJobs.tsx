@@ -5,41 +5,29 @@ import { Job } from "@/types";
 import JobCard from "../JobCard";
 import axios from "axios";
 
-function RelatedJobs() {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const fetchJobs = async () => {
-    try {
-      const { data } = await axios.get("/api/job");
-      if (data.success) {
-        setJobs(data.jobs);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.error(error);
-    }
-  };
- 
-  useEffect(() => {
-    fetchJobs();
-  }, []);
+interface RelatedJobsProps {
+  jobs: Job[];
+  loading: boolean;
+}
+
+
+function RelatedJobs({ jobs, loading }: RelatedJobsProps) {
 
   return (
     <>
       <h1 className="text-2xl font-semibold">Related Jobs</h1>
 
       <div className="w-full gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
-        {isLoading
+        {loading
           ? Array.from({ length: 4 }).map((_, index) => (
-              <JobCard key={index} isLoading={isLoading} job={null} />
-            ))
+            <JobCard key={index} job={null} />
+          ))
           : jobs
-              .slice(0, 4)
-              .map((job, index) => (
-                <JobCard key={index} isLoading={isLoading} job={job} />
-              ))}
+            .slice(0, 4)
+            .map((job, index) => (
+              <JobCard key={index} isLoading={loading} job={job} />
+            ))}
       </div>
     </>
   );

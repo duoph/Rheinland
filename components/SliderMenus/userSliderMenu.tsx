@@ -42,42 +42,40 @@ const UserSliderMenu = () => {
             size={28}
           />
         )}
+
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-1 py-3 bg-rheinland-blue sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
-          }`}
-        >
-          <Link
-            href={"/login"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
+          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
             }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <p>Login</p>
-            </span>
-          </Link>
+        >
 
           <Link
-            href={"/create-account"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
+            href={"/login"}
+            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <p>Craete Account</p>
+              <p>Profile</p>
             </span>
           </Link>
 
           <Link
             href={"/jobs"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
+            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
               <p>Jobs</p>
+            </span>
+          </Link>
+
+          <Link
+            href={"/jobs"}
+            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <p>My Jobs</p>
             </span>
           </Link>
 
@@ -89,12 +87,12 @@ const UserSliderMenu = () => {
             <AiOutlineLogout />
           </button>
 
-          <div
+          {/* <div
             className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Link href={"/jobs"}>User Account</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </ClickAwayListener>

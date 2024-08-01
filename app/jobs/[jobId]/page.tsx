@@ -9,28 +9,29 @@ import { format } from "date-fns";
 import { CiBookmark, CiBookmarkCheck, CiLocationOn } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { CiUser } from "react-icons/ci";
-import { HiOutlineBanknotes } from "react-icons/hi2";
+import { HiBookmark, HiOutlineBanknotes, HiOutlineBookmark } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
 
 import { Skeleton } from '../../../components/ui/skeleton';
 import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
+import toast from "react-hot-toast";
 
 const SingleJobPage = () => {
+
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
-  const [jobs, setJobs] = useState<Job[] | null>(null);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
-  const { account } = useAccount();
 
   const formattedDate = job?.createdAt
     ? format(new Date(job.createdAt), "dd/MM/yyyy")
     : "Date data failed to load";
 
   // fetching job from id 
-
   const fetchJob = useCallback(async () => {
     try {
       const res = await axios.get(`/api/job/${jobId}`);
@@ -47,14 +48,12 @@ const SingleJobPage = () => {
     }
   }, [jobId]);
 
-
   // Getting related jobs
-
-  const relatedJobs = async () => {
+  const fetchRelatedJobs = async () => {
     try {
       const res = await axios.get(`/api/job`);
       if (res.data.success) {
-        setJobs(res.data.job);
+        setJobs(res.data.jobs); // Changed from res.data.job to res.data.jobs
       } else {
         setError("Failed to load job data.");
       }
@@ -62,27 +61,44 @@ const SingleJobPage = () => {
       console.error(error);
       setError("An error occurred while fetching job data.");
     }
-  }
-
-
-
-
+  };
 
   useEffect(() => {
     fetchJob();
-    relatedJobs()
+    fetchRelatedJobs();
   }, [fetchJob]);
 
-  const handleSave = async () => {
+  const fetchUser = async () => {
     try {
-      const res = await axios.post(`/api/job/${jobId}/user/save`);
-      fetchJob();
-      console.log(res);
+      const res = await axios.get('/api/user');
+      setSavedJobs(res.data.user.savedJobs || []);
     } catch (error) {
-      console.error(error);
-      setError("An error occurred while handling save job.");
+      console.error('Error fetching user data:', error);
     }
   };
+
+  const handleSave = async () => {
+    if (!job) return;
+
+    try {
+      await axios.put(`/api/job/${job._id}/user/save`);
+      if (job._id && savedJobs.includes(job._id)) {
+        setSavedJobs((prev) => prev.filter((id) => id !== job._id));
+        toast.success("Job Removed");
+      } else {
+        setSavedJobs((prev) => [...prev, job._id]);
+        toast.success("Job saved");
+      }
+
+      fetchUser();
+    } catch (error) {
+      console.error('Error saving job:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   if (loading) {
     return (
@@ -132,7 +148,7 @@ const SingleJobPage = () => {
         </span>
         <span className="flex gap-2 font-light">
           <HiOutlineBanknotes className="text-rheinland-red" size={24} />
-          Salary
+          {job?.salary || "Salary not specified"} {/* Add job.salary */}
         </span>
         <span className="flex gap-2 font-light">
           <SlCalender className="text-rheinland-red" size={24} />
@@ -140,8 +156,7 @@ const SingleJobPage = () => {
         </span>
         {(job?.minAge || job?.maxAge) && (
           <span className="flex gap-2 font-light">
-            <MdAccessTime className="text-rheinland-red" size={24} /> Age:
-            {""} {job?.minAge} - {job?.maxAge}
+            <MdAccessTime className="text-rheinland-red" size={24} /> Age: {job?.minAge} - {job?.maxAge}
           </span>
         )}
       </div>
@@ -172,23 +187,24 @@ const SingleJobPage = () => {
       </div>
 
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
+
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
+
         <div onClick={handleSave} className="cursor-pointer">
-          {job?.savedUsers?.includes(account.id) ? (
-            <CiBookmarkCheck className="text-red-500" size={30} />
+          {savedJobs.includes(job?._id || "") ? (
+            <HiBookmark onClick={handleSave} className="text-[25px] text-rheinland-red cursor-pointer" />
           ) : (
-            <CiBookmark className="text-red-500" size={30} />
+            <HiOutlineBookmark className="text-[25px] text-rheinland-red cursor-pointer" onClick={handleSave} />
           )}
         </div>
+
       </div>
 
       {/* Related Jobs Section */}
 
-      <RelatedJobs />
-
-
+      <RelatedJobs jobs={jobs} loading={loading} />
     </div>
   );
 };
