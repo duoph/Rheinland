@@ -15,8 +15,8 @@ const userSchema = new Schema({
     about: { type: String },
     knownLanguages: [{ type: String }],
     germanLanguageLevel: { type: String },
-    savedJobs: [{ type: mongoose.Schema.ObjectId }],
-    appliedJobs: [{ type: mongoose.Schema.ObjectId }],
+    savedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
+    appliedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
     accountType: { type: String, default: "user", required: true }
 
 }, { timestamps: true })
