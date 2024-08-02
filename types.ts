@@ -7,7 +7,7 @@ export interface Job {
     salary?: number;
     isOpen?: boolean;
     description: string;
-    skills?: string[] | undefined;
+    skills?: string[];
     minAge?: string;
     maxAge?: string;
     location?: string;

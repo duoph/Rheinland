@@ -42,13 +42,6 @@ export default function RootLayout({
           <Toaster
             toastOptions={{
               className: "shadow-md",
-              // style: {
-              //   backgroundColor: "red",
-              //   paddingLeft: "10px",
-              //   paddingRight: "10px",
-              //   color: "white",
-              //   borderRadius: "2px",
-              // },
             }}
           />
           {children}
