@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
             httpOnly: true,
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         });
-        response.cookies.set('isAdmin', account.isAdmin ? "1" : "0", {
+        response.cookies.set('accountType', account.accountType, {
             httpOnly: true,
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         });

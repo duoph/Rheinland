@@ -51,7 +51,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={`/user/profile`}
-            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -61,7 +61,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={"/jobs"}
-            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -71,7 +71,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={"/user/myJobs"}
-            className={`w-full px-10 py-2 text-white text-center ${pathname?.startsWith("/admin/applications") && "bg-red-600"
+            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/user/myJobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -80,7 +80,7 @@ const UserSliderMenu = () => {
           </Link>
 
           <button
-            className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
+            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
             onClick={handleLogout}
           >
             LogOut
