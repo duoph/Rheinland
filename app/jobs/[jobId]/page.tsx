@@ -157,7 +157,7 @@ const SingleJobPage = () => {
 
 
 
-     
+
 
       <div className="flex flex-col gap-2 items-start justify-center w-full">
         <h1 className="font-medium">Job Description</h1>
@@ -165,6 +165,16 @@ const SingleJobPage = () => {
           {job?.description || "No description available"}
         </p>
       </div>
+
+      {job?.skills && job.skills.length > 0 ? (
+        job.skills.map((skill, index) => (
+          <span key={index} className="px-3 py-3 bg-rheinland-blue rounded-sm">
+            {skill === "" && null}
+          </span>
+        ))
+      ) : (
+        <span>No skills specified</span>
+      )}
 
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
         <button
