@@ -41,8 +41,7 @@ export default function RootLayout({
           <AlertMessageSlider />
           <Toaster
             toastOptions={{
-              position: 'bottom-right',
-              className: "",
+              className: "shadow-md",
               // style: {
               //   backgroundColor: "red",
               //   paddingLeft: "10px",

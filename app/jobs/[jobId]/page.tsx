@@ -22,62 +22,36 @@ const SingleJobPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
-  const [saving, setSaving] = useState<boolean>(false);
   const [applying, setApplying] = useState<boolean>(false);
 
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
-  // Fetch job by ID
-  const fetchJob = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/api/job/${jobId}`);
-      if (res.data.success) {
-        setJob(res.data.job);
+      const jobRes = await axios.get(`/api/job/${jobId}`);
+      const relatedJobsRes = await axios.get(`/api/job`);
+      const userRes = await axios.get('/api/user');
+
+      if (jobRes.data.success && relatedJobsRes.data.success && userRes.data.success) {
+        setJob(jobRes.data.job);
+        setJobs(relatedJobsRes.data.jobs);
+        setSavedJobs(userRes.data.user.savedJobs.map((job: Job) => job._id));
+        setAppliedJobs(userRes.data.user.appliedJobs.map((job: Job) => job._id));
       } else {
-        setError("Failed to load job data.");
+        setError("Failed to load data.");
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred while fetching job data.");
+      setError("An error occurred while fetching data.");
     } finally {
       setLoading(false);
     }
   }, [jobId]);
 
-  // Fetch related jobs
-  const fetchRelatedJobs = async () => {
-    try {
-      const res = await axios.get(`/api/job`);
-      if (res.data.success) {
-        setJobs(res.data.jobs);
-      } else {
-        setError("Failed to load related jobs.");
-      }
-    } catch (error) {
-      console.error(error);
-      setError("An error occurred while fetching related jobs.");
-    }
-  };
-
-  // Fetch user data for saved jobs
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get('/api/user');
-      if (res.data.success) {
-        setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
-        setAppliedJobs(res.data.user.appliedJobs.map((job: Job) => job._id));
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
-  // Handle saving or unsaving a job
   const handleSave = async () => {
     if (!job) return;
 
-    setSaving(true);
     try {
       await axios.put(`/api/job/${job._id}/user/save`);
       if (savedJobs.includes(job._id)) {
@@ -87,12 +61,9 @@ const SingleJobPage = () => {
         setSavedJobs((prev) => [...prev, job._id]);
         toast.success("Job saved");
       }
-      fetchUser();
     } catch (error) {
       toast.error("Error saving job");
       console.error('Error saving job:', error);
-    } finally {
-      setSaving(false);
     }
   };
 
@@ -119,13 +90,8 @@ const SingleJobPage = () => {
   const isJobApplied = job && appliedJobs.includes(job._id);
 
   useEffect(() => {
-    fetchJob();
-    fetchRelatedJobs();
-  }, [fetchJob]);
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
+    fetchData();
+  }, [fetchData]);
 
   if (loading) {
     return (
