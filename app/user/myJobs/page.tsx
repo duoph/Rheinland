@@ -6,7 +6,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const MyJobs = () => {
-    const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('all');
+
+    const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('saved');
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [jobs, setJobs] = useState<Job[]>([]);
 
@@ -36,14 +37,14 @@ const MyJobs = () => {
 
             <div className="flex items-center justify-center gap-2 md:gap-3 lg:gap-5 rounded-md py-3 px-5 md:px-10 w-full text-[15px] flex-wrap">
                 <span
-                    onClick={() => setSelectedApplicantsType('all')}
-                    className={`px-2 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'all' ? 'bg-rheinland-red text-white' : ''}`}
+                    onClick={() => setSelectedApplicantsType('saved')}
+                    className={`px-2 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'saved' ? 'bg-rheinland-red text-white' : ''}`}
                 >
                     Applied Jobs
                 </span>
                 <span
-                    onClick={() => setSelectedApplicantsType('shortListed')}
-                    className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'shortListed' ? 'bg-rheinland-red text-white' : ''}`}
+                    onClick={() => setSelectedApplicantsType('applied')}
+                    className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'applied' ? 'bg-rheinland-red text-white' : ''}`}
                 >
                     Saved Jobs
                 </span>

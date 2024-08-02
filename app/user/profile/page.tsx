@@ -41,26 +41,38 @@ const UserProfile = () => {
     fetchUser();
   }, []);
 
+
   const handleSaveChanges = async () => {
     try {
       setIsEditable(false);
-      const updatedUser = {
-        address,
-        experience,
-        skills,
-        education,
-        phone,
-        email,
-        germanLevel,
-        languages,
-        resumeLink,
-      };
-      await axios.put('/api/user', updatedUser);
+
+      // Create a FormData object and append the updated user data
+      const formData = new FormData();
+      formData.append('address', address);
+      formData.append('experience', experience);
+      formData.append('skills', skills);
+      formData.append('education', education);
+      formData.append('phone', phone);
+      formData.append('email', email);
+      formData.append('germanLevel', germanLevel);
+      formData.append('languages', languages);
+      formData.append('resumeLink', resumeLink);
+
+      // Send the FormData object to the server
+      await axios.put('/api/user', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
       setIsEditable(true);
     } catch (error) {
       console.error('Error updating user:', error);
     }
   };
+
+
+
 
   return (
     <div className="pt-[95px] flex flex-col items-center justify-center pb-10 w-full md:px-8 px-3" >
