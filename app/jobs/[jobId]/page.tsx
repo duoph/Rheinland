@@ -104,7 +104,7 @@ const SingleJobPage = () => {
       const response = await axios.put(`/api/job/${jobId}/user/apply`);
       if (response.data.success) {
         toast.success("Applied");
-        setAppliedJobs((prev) => [...prev, jobId]); // Update appliedJobs state
+        setAppliedJobs((prev: any) => [...prev, jobId]); // Update appliedJobs state
       } else {
         toast.error("Failed to apply");
       }
