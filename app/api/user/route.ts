@@ -4,14 +4,16 @@ import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt'
 
-
 export async function GET(req: NextRequest) {
     try {
         await connectMongoDB();
 
         const { id } = await getDataFromToken(req);
 
-        const user = await userModel.findById(id).populate("savedJobs");
+        // Populate both savedJobs and appliedJobs
+        const user = await userModel.findById(id)
+            .populate("savedJobs")    // Populate savedJobs
+            .populate("appliedJobs"); // Populate appliedJobs
 
         return NextResponse.json({
             message: 'Fetched user successfully',
@@ -29,7 +31,6 @@ export async function GET(req: NextRequest) {
         });
     }
 }
-
 
 // create account for user 
 

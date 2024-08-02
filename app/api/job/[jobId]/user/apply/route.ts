@@ -1,33 +1,31 @@
 import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
+import jobModel from "@/models/jobSchema";
 import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
-
 // GET APPLIED JOBS BY USER ID
-
-export async function GET(req: NextRequest, { params }: any) {
-
+export async function PUT(req: NextRequest, { params }: { params: { jobId: string } }) {
     try {
-        await connectMongoDB()
+        await connectMongoDB();
 
-        const jobId = params.jobId
+        const { jobId } = params;
+        const { id } = await getDataFromToken(req);
 
-        const decodedToken = getDataFromToken(req);
+        if (!id) {
+            return NextResponse.json({ error: 'User ID not found in token', success: false, status: 400 });
+        }
 
-        const user = await userModel.findByIdAndUpdate({ _id: decodedToken.id }, {
-            $push: {}
-        })
+        // Update user and job documents
+        await Promise.all([
+            userModel.findByIdAndUpdate(id, { $push: { appliedJobs: jobId } }),
+            jobModel.findByIdAndUpdate(jobId, { $push: { appliedUsers: id } })
+        ]);
 
-
-        console.log(user)
-
-        return NextResponse.json({ message: 'Fetched Job successfully', success: true, user });
+        return NextResponse.json({ message: 'Applied for Job successfully', success: true, status: 200 });
 
     } catch (error) {
-
-        console.error('Error Fetching job:', error);
+        console.error('Error applying for job:', error);
         return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
-
     }
 }

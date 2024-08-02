@@ -21,6 +21,9 @@ const SingleJobPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
+  const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [applying, setApplying] = useState<boolean>(false);
 
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
@@ -62,7 +65,7 @@ const SingleJobPage = () => {
     try {
       const res = await axios.get('/api/user');
       setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
-      console.log(res.data.user.savedJobs);
+      setAppliedJobs(res.data.user.appliedJobs);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -72,6 +75,7 @@ const SingleJobPage = () => {
   const handleSave = async () => {
     if (!job) return;
 
+    setSaving(true);
     try {
       await axios.put(`/api/job/${job._id}/user/save`);
       if (savedJobs.includes(job._id)) {
@@ -81,12 +85,36 @@ const SingleJobPage = () => {
         setSavedJobs((prev) => [...prev, job._id]);
         toast.success("Job saved");
       }
-
       fetchUser();
     } catch (error) {
+      toast.error("Error saving job");
       console.error('Error saving job:', error);
+    } finally {
+      setSaving(false);
     }
   };
+
+  const handleApply = async () => {
+    if (!job) return;
+
+    setApplying(true);
+    try {
+      const response = await axios.put(`/api/job/${jobId}/user/apply`);
+      if (response.data.success) {
+        toast.success("Applied");
+        setAppliedJobs((prev: any) => [...prev, jobId]); // Update appliedJobs state
+      } else {
+        toast.error("Failed to apply");
+      }
+    } catch (error) {
+      toast.error("Error applying job");
+      console.error('Error applying job:', error);
+    } finally {
+      setApplying(false);
+    }
+  };
+
+  const isJobApplied = job && appliedJobs.includes(job._id);
 
   useEffect(() => {
     fetchJob();
@@ -184,15 +212,20 @@ const SingleJobPage = () => {
       </div>
 
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
-        <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
-          Apply Now
+        <button
+          onClick={handleApply}
+          disabled={applying || isJobApplied}
+          className={`bg-rheinland-red px-4 py-3 text-white rounded-sm ${applying || isJobApplied ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+        >
+          {applying ? "Applying..." : isJobApplied ? "Applied" : "Apply Now"}
         </button>
 
         <div onClick={handleSave} className="cursor-pointer">
           {savedJobs.includes(job?._id || "") ? (
-            <HiBookmark onClick={handleSave} className="text-[25px] text-rheinland-red cursor-pointer" />
+            <HiBookmark className="text-[25px] text-rheinland-red" />
           ) : (
-            <HiOutlineBookmark className="text-[25px] text-rheinland-red cursor-pointer" onClick={handleSave} />
+            <HiOutlineBookmark className="text-[25px] text-rheinland-red" />
           )}
         </div>
       </div>
