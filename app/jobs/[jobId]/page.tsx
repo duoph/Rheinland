@@ -64,8 +64,10 @@ const SingleJobPage = () => {
   const fetchUser = async () => {
     try {
       const res = await axios.get('/api/user');
-      setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
-      setAppliedJobs(res.data.user.appliedJobs);
+      if (res.data.success) {
+        setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
+        setAppliedJobs(res.data.user.appliedJobs.map((job: Job) => job._id));
+      }
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -102,7 +104,7 @@ const SingleJobPage = () => {
       const response = await axios.put(`/api/job/${jobId}/user/apply`);
       if (response.data.success) {
         toast.success("Applied");
-        setAppliedJobs((prev: any) => [...prev, jobId]); // Update appliedJobs state
+        setAppliedJobs((prev) => [...prev, jobId]); // Update appliedJobs state
       } else {
         toast.error("Failed to apply");
       }
@@ -214,9 +216,8 @@ const SingleJobPage = () => {
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
         <button
           onClick={handleApply}
-          disabled={applying || isJobApplied}
-          className={`bg-rheinland-red px-4 py-3 text-white rounded-sm ${applying || isJobApplied ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+          disabled={applying as boolean || isJobApplied as boolean}
+          className={`bg-rheinland-red px-4 py-3 text-white rounded-sm ${applying || isJobApplied ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {applying ? "Applying..." : isJobApplied ? "Applied" : "Apply Now"}
         </button>
