@@ -28,7 +28,9 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
       });
     }
 
-    const updateOperation = user.savedJobs.includes(jobId)
+    const isJobSaved = user.savedJobs.includes(jobId);
+
+    const updateOperation = isJobSaved
       ? { $pull: { savedJobs: jobId } } // Remove job if already saved
       : { $push: { savedJobs: jobId } }; // Add job if not saved
 
@@ -39,9 +41,9 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
     );
 
     return NextResponse.json({
-      message: `Job ${user.savedJobs.includes(jobId) ? 'unsave' : 'save'} operation successful`,
+      message: `Job ${isJobSaved ? 'unsaved' : 'saved'} successfully`,
       success: true,
-      savedJobs: updatedUser?.savedJobs || [],
+      savedJobs: updatedUser.savedJobs,
     });
 
   } catch (error: any) {

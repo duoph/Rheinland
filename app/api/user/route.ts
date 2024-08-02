@@ -6,21 +6,27 @@ import bcrypt from 'bcrypt'
 
 
 export async function GET(req: NextRequest) {
-
     try {
-        await connectMongoDB()
+        await connectMongoDB();
 
-        const { id } = await getDataFromToken(req)
+        const { id } = await getDataFromToken(req);
 
-        const user = await userModel.findById({ _id: id }).populate("savedJobs", "appliedJobs")
+        const user = await userModel.findById(id).populate("savedJobs");
 
-        return NextResponse.json({ message: 'Fetched user successfully', success: true, user, status: 200 });
+        return NextResponse.json({
+            message: 'Fetched user successfully',
+            success: true,
+            user,
+            status: 200
+        });
 
     } catch (error) {
-
-        console.error('Error Fetching user:', error);
-        return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
-
+        console.error('Error fetching user:', error);
+        return NextResponse.json({
+            error: 'Internal server error',
+            success: false,
+            status: 500
+        });
     }
 }
 

@@ -14,9 +14,9 @@ const jobSchema = new Schema({
     requirements: { type: String },
     gender: { type: String },
     isFeatured: { type: Boolean, default: false },
-    appliedUsers: { type: mongoose.Schema.ObjectId },
-    savedUsers: { type: mongoose.Schema.ObjectId },
-    employerId: { type: mongoose.Schema.ObjectId, required: true },
+    appliedUsers: { type: mongoose.Schema.ObjectId, ref: 'user' },
+    savedUsers: { type: mongoose.Schema.ObjectId, ref: 'user' },
+    employerId: { type: mongoose.Schema.ObjectId, ref: 'employer', required: true },
     approvedByAdmin: { type: Boolean, default: false }
 
 }, { timestamps: true })

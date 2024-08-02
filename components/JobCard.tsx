@@ -16,13 +16,14 @@ interface JobCardProps {
 }
 
 const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
+  
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
   const fetchUser = async () => {
     try {
       const res = await axios.get('/api/user');
-      setSavedJobs(res.data.user.savedJobs || []);
-      console.log(res.data.user);
+      setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
+      console.log(res.data.user.savedJobs);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -36,15 +37,13 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
       const response = await axios.put(`/api/job/${job._id}/user/save`);
       console.log(response.data);
 
-      if (job._id && savedJobs.includes(job._id)) {
+      if (savedJobs.includes(job._id)) {
         setSavedJobs((prev) => prev.filter((id) => id !== job._id));
         toast.success("Job Removed");
       } else {
         setSavedJobs((prev) => [...prev, job._id]);
-        toast.success("Job saved");
+        toast.success("Job Saved");
       }
-
-      fetchUser();
     } catch (error) {
       console.error('Error saving job:', error);
     }
