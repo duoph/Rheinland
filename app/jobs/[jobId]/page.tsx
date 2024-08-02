@@ -5,20 +5,16 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
-import {  CiLocationOn } from "react-icons/ci";
+import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
-import { CiUser } from "react-icons/ci";
 import { HiBookmark, HiOutlineBanknotes, HiOutlineBookmark } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
-
-
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
 import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 import toast from "react-hot-toast";
 
 const SingleJobPage = () => {
-
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -26,13 +22,11 @@ const SingleJobPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
+  const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
-  const formattedDate = job?.createdAt
-    ? format(new Date(job.createdAt), "dd/MM/yyyy")
-    : "Date data failed to load";
-
-  // fetching job from id 
+  // Fetch job by ID
   const fetchJob = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`/api/job/${jobId}`);
       if (res.data.success) {
@@ -48,43 +42,41 @@ const SingleJobPage = () => {
     }
   }, [jobId]);
 
-  // Getting related jobs
+  // Fetch related jobs
   const fetchRelatedJobs = async () => {
     try {
       const res = await axios.get(`/api/job`);
       if (res.data.success) {
-        setJobs(res.data.jobs); // Changed from res.data.job to res.data.jobs
+        setJobs(res.data.jobs);
       } else {
-        setError("Failed to load job data.");
+        setError("Failed to load related jobs.");
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred while fetching job data.");
+      setError("An error occurred while fetching related jobs.");
     }
   };
 
-  useEffect(() => {
-    fetchJob();
-    fetchRelatedJobs();
-  }, [fetchJob]);
-
+  // Fetch user data for saved jobs
   const fetchUser = async () => {
     try {
       const res = await axios.get('/api/user');
-      setSavedJobs(res.data.user.savedJobs || []);
+      setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
+      console.log(res.data.user.savedJobs);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
   };
 
+  // Handle saving or unsaving a job
   const handleSave = async () => {
     if (!job) return;
 
     try {
       await axios.put(`/api/job/${job._id}/user/save`);
-      if (job._id && savedJobs.includes(job._id)) {
+      if (savedJobs.includes(job._id)) {
         setSavedJobs((prev) => prev.filter((id) => id !== job._id));
-        toast.success("Job Removed");
+        toast.success("Job removed");
       } else {
         setSavedJobs((prev) => [...prev, job._id]);
         toast.success("Job saved");
@@ -95,6 +87,11 @@ const SingleJobPage = () => {
       console.error('Error saving job:', error);
     }
   };
+
+  useEffect(() => {
+    fetchJob();
+    fetchRelatedJobs();
+  }, [fetchJob]);
 
   useEffect(() => {
     fetchUser();
@@ -148,7 +145,7 @@ const SingleJobPage = () => {
         </span>
         <span className="flex gap-2 font-light">
           <HiOutlineBanknotes className="text-rheinland-red" size={24} />
-          {job?.salary || "Salary not specified"} {/* Add job.salary */}
+          {job?.salary || "Salary not specified"}
         </span>
         <span className="flex gap-2 font-light">
           <SlCalender className="text-rheinland-red" size={24} />
@@ -187,7 +184,6 @@ const SingleJobPage = () => {
       </div>
 
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
-
         <button className="bg-rheinland-red px-4 py-3 bottom-5 text-white rounded-sm">
           Apply Now
         </button>
@@ -199,11 +195,9 @@ const SingleJobPage = () => {
             <HiOutlineBookmark className="text-[25px] text-rheinland-red cursor-pointer" onClick={handleSave} />
           )}
         </div>
-
       </div>
 
       {/* Related Jobs Section */}
-
       <RelatedJobs jobs={jobs} loading={loading} />
     </div>
   );
