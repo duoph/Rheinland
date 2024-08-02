@@ -30,7 +30,6 @@ const SingleJobPage = () => {
     setLoading(true);
     try {
       const jobRes = await axios.get(`/api/job/${jobId}`);
-      console.log(jobRes.data);
       const relatedJobsRes = await axios.get(`/api/job`);
       const userRes = await axios.get('/api/user');
 
@@ -155,9 +154,22 @@ const SingleJobPage = () => {
         )}
       </div>
 
+      <div className="flex flex-col items-start justify-center w-full gap-3">
+        <h1 className="font-medium">Preferred Skills</h1>
+        <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
 
+          {job?.skills && job.skills.length > 0 && (
+            job.skills
+              .filter(skill => skill !== "")
+              .map((skill, index) => (
+                <span key={index} className="px-3 py-3 bg-rheinland-blue rounded-sm">
+                  {skill}
+                </span>
+              ))
+          )}
 
-
+        </div>
+      </div>
 
       <div className="flex flex-col gap-2 items-start justify-center w-full">
         <h1 className="font-medium">Job Description</h1>
@@ -165,16 +177,6 @@ const SingleJobPage = () => {
           {job?.description || "No description available"}
         </p>
       </div>
-
-      {job?.skills && job.skills.length > 0 ? (
-        job.skills.map((skill, index) => (
-          <span key={index} className="px-3 py-3 bg-rheinland-blue rounded-sm">
-            {skill === "" && null}
-          </span>
-        ))
-      ) : (
-        <span>No skills specified</span>
-      )}
 
       <div className="w-full h-full flex items-center gap-5 justify-center py-10">
         <button

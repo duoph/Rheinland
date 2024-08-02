@@ -78,7 +78,7 @@ const UserProfile = () => {
     <div className="pt-[95px] flex flex-col items-center justify-center pb-10 w-full md:px-8 px-3" >
       {/* Profile Picture & Basic Info */}
       <h1 className="text-[40px] font-semibold">My Profile</h1>
-      <div className="flex flex-col justify-center items-center mb-8">
+      <div className="flex flex-col justify-center items-center">
         <Image
           src="/person-icon.jpg"
           alt="Profile Picture"
