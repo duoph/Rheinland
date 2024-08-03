@@ -16,7 +16,7 @@ interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, type = 'job' }) => {
-  
+
   const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, 
 
   const filteredSuggestions = useMemo(() => {
     return suggestions.filter((item: Category) =>
-      item.name.toLowerCase().includes(searchInput.toLowerCase())
+      item?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
     );
   }, [searchInput, suggestions]);
 
@@ -37,7 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchInput(value);
-    setShowSuggestion(value.length >= 2);
+    setShowSuggestion(value?.length >= 2);
   };
 
   // const handleClickAway = (event: MouseEvent) => {

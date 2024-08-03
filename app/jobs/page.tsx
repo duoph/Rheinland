@@ -5,12 +5,22 @@ import JobCard from '@/components/JobCard';
 import { Job } from '@/types';
 import axios from 'axios';
 import SearchInput from '@/components/Search/SearchInput';
+import { useSearchParams } from 'next/navigation'
 
 const Jobs = () => {
+
+
+    // getting query from url 
+
+    const searchParams = useSearchParams()
+    const queryJobTitle = searchParams.get('title') || ""
+    const queryLocation = searchParams.get('location') || ""
+
+
     const [jobs, setJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16);
-    const [JobTitle, setJobTitle] = useState<string>('');
-    const [location, setLocation] = useState<string>('');
+    const [JobTitle, setJobTitle] = useState<string>(queryJobTitle);
+    const [location, setLocation] = useState<string>(queryLocation);
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -29,7 +39,7 @@ const Jobs = () => {
         }
     };
 
-    
+
 
     useEffect(() => {
         fetchJobs();

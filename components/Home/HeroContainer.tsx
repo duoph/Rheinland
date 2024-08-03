@@ -5,12 +5,25 @@ import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import SearchInput from "../Search/SearchInput";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 const HeroContainer = () => {
 
     const [JobTitle, setJobTitle] = useState<string>('');
     const [location, setLocation] = useState<string>('');
+
+
+    const router = useRouter();
+
+
+    const handleSearch = () => {
+        try {
+            router.push(`/jobs?title=${JobTitle}&location=${location}`);
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div className='flex items-center justify-center gap-2 sm:gap-5 lg:px-16 px-5 md:px-5  min-h-screen'>
@@ -31,7 +44,7 @@ const HeroContainer = () => {
                         <CiLocationOn size={24} />
                         <SearchInput searchInput={location} setSearchInput={setLocation} type='location' />
                     </div>
-                    <button className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">
+                    <button onClick={handleSearch} className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">
                         Search My job
                     </button>
                 </div>
