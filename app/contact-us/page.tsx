@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io';
 
 const ContactPage = () => {
+    
     const [formData, setFormData] = useState({
         name: '',
         email: '',
