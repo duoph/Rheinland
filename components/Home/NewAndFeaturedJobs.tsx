@@ -45,7 +45,7 @@ const NewAndFeaturedJobs = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-center w-full px-2 md:px-5 md:py-10 py-6 gap-4'>
+        <div className='flex flex-col items-center justify-center w-full px-2 lg:px-32 md:px-20 md:py-10 py-6 gap-4'>
             {/* Featured Jobs Section */}
             <div className='flex flex-col items-center justify-center w-full  md:py-5 py-2 gap-4'>
                 <div className='flex items-center justify-center w-full'>
