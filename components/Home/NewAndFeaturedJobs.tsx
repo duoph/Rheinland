@@ -52,8 +52,8 @@ const NewAndFeaturedJobs = () => {
                     <h1 className="lg:text-[40px] text-[35px] font-semibold"> Featured <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>
                 <div className='relative w-full'>
-                    <GoChevronLeft onClick={() => handleScroll(featuredJobsRef, 'left')} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
-                    <GoChevronRight onClick={() => handleScroll(featuredJobsRef, 'right')} className='z-10 absolute top-[140px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
+                    <GoChevronLeft onClick={() => handleScroll(featuredJobsRef, 'left')} className='z-10 absolute top-[130px] left-3 md:-left-10 lg:-left-14 bg-black text-white  rounded-full cursor-pointer' size={30} />
+                    <GoChevronRight onClick={() => handleScroll(featuredJobsRef, 'right')} className='z-10 absolute top-[130px] right-3 md:-right-10 lg:-right-14 bg-black text-white  rounded-full cursor-pointer' size={30} />
                     <div ref={featuredJobsRef} style={{ scrollBehavior: "smooth" }} className='relative flex overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
                         {isLoading
                             ? Array.from({ length: 9 }).map((_, index) => (
@@ -77,8 +77,8 @@ const NewAndFeaturedJobs = () => {
                     <h1 className="lg:text-[40px] text-[35px] font-semibold">New <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>
                 <div className='relative w-full'>
-                    <GoChevronLeft onClick={() => handleScroll(newJobsRef, 'left')} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
-                    <GoChevronRight onClick={() => handleScroll(newJobsRef, 'right')} className='z-10 absolute top-[140px] bg-black text-white right-3 md:right-6 rounded-full cursor-pointer' size={30} />
+                    <GoChevronLeft onClick={() => handleScroll(newJobsRef, 'left')} className='z-10 absolute top-[130px] left-3 md:-left-10 lg:-left-14 bg-black text-white  rounded-full cursor-pointer' size={30} />
+                    <GoChevronRight onClick={() => handleScroll(newJobsRef, 'right')} className='z-10 absolute top-[130px] right-3 md:-right-10 lg:-right-14 bg-black text-white  rounded-full cursor-pointer' size={30} />
                     <div ref={newJobsRef} style={{ scrollBehavior: "smooth" }} className='relative flex overflow-scroll justify-start items-center gap-2 w-full hideScrollBar min-h-[270px]'>
                         {isLoading
                             ? Array.from({ length: 9 }).map((_, index) => (
