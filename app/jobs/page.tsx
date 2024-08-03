@@ -105,7 +105,7 @@ const Jobs = () => {
             </div>
 
             {
-                displayedJobs.length > 0 && jobs.length > jobsToDisplay && (
+                displayedJobs.length >= 16 && jobs.length > jobsToDisplay && (
                     <button
                         onClick={handleLoadMore}
                         className='w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3'
