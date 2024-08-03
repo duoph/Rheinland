@@ -13,14 +13,14 @@ const Jobs = () => {
     // getting query from url 
 
     const searchParams = useSearchParams()
-    const queryJobTitle = searchParams.get('title') || ""
-    const queryLocation = searchParams.get('location') || ""
+    const queryJobTitle = searchParams.get('title') 
+    const queryLocation = searchParams.get('location')
 
 
     const [jobs, setJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16);
-    const [JobTitle, setJobTitle] = useState<string>(queryJobTitle);
-    const [location, setLocation] = useState<string>(queryLocation);
+    const [JobTitle, setJobTitle] = useState<string>(queryJobTitle || "");
+    const [location, setLocation] = useState<string>(queryLocation || "");
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
