@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         }
 
 
-        const token = JWT.sign({ id: account._id, accountType: account.accountType === "user" ? "user" : "employer" }, process.env.NEXT_PUBLIC_JWT_SECRET!, { expiresIn: '7d' });
+        const token = JWT.sign({ id: account._id, email: account.email }, process.env.NEXT_PUBLIC_JWT_SECRET!, { expiresIn: '7d' });
 
         const response = NextResponse.json({
             message: "Login successfully",
