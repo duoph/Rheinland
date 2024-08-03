@@ -45,11 +45,11 @@ const NewAndFeaturedJobs = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-center w-full px-5 md:px-7 md:py-5 py-2 gap-4'>
+        <div className='flex flex-col items-center justify-center w-full px-2 md:px-5 md:py-10 py-6 gap-4'>
             {/* Featured Jobs Section */}
-            <div className='flex flex-col items-center justify-center w-full px-5 md:px-7 md:py-5 py-2 gap-4'>
+            <div className='flex flex-col items-center justify-center w-full  md:py-5 py-2 gap-4'>
                 <div className='flex items-center justify-center w-full'>
-                    <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] font-semibold">Featured <span className="text-rheinland-yellow">Jobs</span></h1>
+                    <h1 className="lg:text-[40px] text-[35px] font-semibold"> Featured <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>
                 <div className='relative w-full'>
                     <GoChevronLeft onClick={() => handleScroll(featuredJobsRef, 'left')} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
@@ -72,9 +72,9 @@ const NewAndFeaturedJobs = () => {
             </div>
 
             {/* New Jobs Section */}
-            <div className='flex flex-col items-center justify-center w-full px-5 md:px-7 md:py-5 py-2 gap-4'>
+            <div className='flex flex-col items-center justify-center w-full md:py-5 py-2 gap-4'>
                 <div className='flex items-center justify-center w-full'>
-                    <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] font-semibold">New <span className="text-rheinland-yellow">Jobs</span></h1>
+                    <h1 className="lg:text-[40px] text-[35px] font-semibold">New <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>
                 <div className='relative w-full'>
                     <GoChevronLeft onClick={() => handleScroll(newJobsRef, 'left')} className='z-10 absolute top-[140px] bg-black text-white md:left-6 left-3 rounded-full cursor-pointer' size={30} />
@@ -84,7 +84,7 @@ const NewAndFeaturedJobs = () => {
                             ? Array.from({ length: 9 }).map((_, index) => (
                                 <div key={index} className='min-w-[320px]'>
                                     <JobCard isLoading={isLoading} job={null} />
-                                </div>  
+                                </div>
                             ))
                             : jobs.map((job) => (
                                 <div key={job._id} className='min-w-[320px]'>
