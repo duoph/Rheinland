@@ -49,14 +49,14 @@ const ContactPage = () => {
     };
 
     return (
-        <div className="relative min-h-screen flex flex-col items-center justify-center p-6">
+        <div className="relative pt-[90px] min-h-screen flex flex-col items-center justify-start p-6">
             <div className="absolute top-[80px] left-[10px] cursor-pointer md:flex hidden">
                 <span onClick={() => router.push('/')} className="flex items-center justify-center gap-2 ">
                     <IoMdArrowBack /> Back
                 </span>
             </div>
             <div className="rounded-sm flex flex-col items-center justify-center gap-4 sm:w-[400px] w-full px-4 py-7">
-                <div className="flex flex-col items-start justify-center w-full mb-4">
+                <div className="flex flex-col items-center justify-center w-full mb-4">
                     <span className="text-[30px] font-semibold text-red-600">Contact Us</span>
                     <span className="text-sm font-light">We love to hear from you</span>
                 </div>
