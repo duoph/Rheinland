@@ -10,7 +10,7 @@ const NewAndFeaturedJobs = () => {
     const featuredJobsRef = useRef<HTMLDivElement>(null);
     const newJobsRef = useRef<HTMLDivElement>(null);
 
-    const [jobs, setJobs] = useState<Job[]>([]);
+const [jobs, setJobs] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchJobs = async () => {

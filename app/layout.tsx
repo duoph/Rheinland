@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { AccountProvider } from "@/context/useAccount";
 import AlertMessageSlider from "@/components/AlertMessageSlider";
 import ProgressBar from "@/components/ProgressBar";
+import { Suspense } from "react";
 
 
 const poppins = Poppins({
@@ -44,7 +45,9 @@ export default function RootLayout({
               className: "shadow-md",
             }}
           />
-          {children}
+          <Suspense fallback={null}>
+            {children}
+          </Suspense>
           <Footer />
         </AccountProvider>
       </body>
