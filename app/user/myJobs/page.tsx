@@ -1,5 +1,6 @@
 "use client";
 
+// MyJobs.jsx
 import JobCard from "@/components/JobCard";
 import { Job } from "@/types";
 import axios from "axios";
@@ -10,7 +11,9 @@ const MyJobs = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [savedJobs, setSavedJobs] = useState<Job[]>([]);
     const [appliedJobs, setAppliedJobs] = useState<Job[]>([]);
+    const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); // Number of jobs displayed initially
 
+    // Function to fetch jobs from the API
     const fetchJobs = async () => {
         setIsLoading(true);
         try {
@@ -26,11 +29,21 @@ const MyJobs = () => {
         }
     };
 
+    // Fetch jobs on initial render
     useEffect(() => {
         fetchJobs();
     }, []);
 
-    const jobsToDisplay = selectedJobsType === "saved" ? savedJobs : appliedJobs;
+    // Determine the jobs to display based on the selected type and pagination
+    const jobsToDisplayList = (selectedJobsType === "saved" ? savedJobs : appliedJobs).slice(0, jobsToDisplay);
+
+    // Handle "Load More" button click
+    const handleLoadMore = () => {
+        setJobsToDisplay(prev => Math.min(prev + 16, (selectedJobsType === "saved" ? savedJobs : appliedJobs).length));
+    };
+
+    // Check if there are more jobs to load for the selected type
+    const hasMoreJobs = (selectedJobsType === "saved" ? savedJobs : appliedJobs).length > jobsToDisplay;
 
     return (
         <div className="pt-[95px] flex flex-col items-center justify-start pb-10 w-full md:px-8 px-3 min-h-screen">
@@ -56,13 +69,22 @@ const MyJobs = () => {
                     ? Array.from({ length: 16 }).map((_, index) => (
                         <JobCard key={index} isLoading={isLoading} job={null} />
                     ))
-                    : jobsToDisplay.length > 0
-                        ? jobsToDisplay.map((job) => (
+                    : jobsToDisplayList.length > 0
+                        ? jobsToDisplayList.map((job) => (
                             <JobCard key={job._id} isLoading={isLoading} job={job} />
                         ))
                         : <p className="text-center text-gray-500">No jobs available.</p>
                 }
             </div>
+
+            {hasMoreJobs && (
+                <button
+                    onClick={handleLoadMore}
+                    className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3 mt-5"
+                >
+                    Load More
+                </button>
+            )}
         </div>
     );
 };

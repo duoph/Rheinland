@@ -70,14 +70,25 @@ const UserSliderMenu = () => {
           </Link>
 
           <Link
-            href={"/user/myJobs"}
-            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/user/myJobs") && "bg-rheinland-red text-white"
+            href={"/user/saved-jobs"}
+            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <p>My Jobs</p>
+              <p>Saved Jobs</p>
             </span>
           </Link>
+
+          <Link
+            href={"/user/applied-jobs"}
+            className={`w-full px-10 py-2  text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <p>Applied Jobs</p>
+            </span>
+          </Link>
+
 
           <button
             className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"

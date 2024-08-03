@@ -13,10 +13,11 @@ import toast from "react-hot-toast";
 interface JobCardProps {
   job: Job | null;
   isLoading?: boolean;
+  fetchObject?: () => void;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job, isLoading }) => {
-  
+const JobCard: React.FC<JobCardProps> = ({ job, isLoading, fetchObject }) => {
+
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
   const fetchUser = async () => {
