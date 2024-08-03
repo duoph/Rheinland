@@ -29,9 +29,9 @@ const Footer = () => {
         </div>
         <div className="md:w-1/2 w-full  flex flex-col items-center md:justify-start">
           <span className="underline">Quick Links</span>
-          <span className="cursor-pointer">About</span>
-          <span className="cursor-pointer">Contact Us</span>
-          <span className="cursor-pointer">Privacy Policy</span>
+          <Link href={"/about-us"} className="cursor-pointer">About Us</Link>
+          <Link href={"/contact-us"} className="cursor-pointer">Contact Us </Link>
+          <Link href={"/about-us"} className="cursor-pointer">Privacy Policy</Link>
         </div>
       </div>
 

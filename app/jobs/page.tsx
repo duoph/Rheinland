@@ -19,6 +19,7 @@ const Jobs = () => {
     const [location, setLocation] = useState<string>(queryLocation);
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [noJobsMessage, setNoJobsMessage] = useState<string>('');
 
     const fetchJobs = async () => {
         try {
@@ -26,11 +27,19 @@ const Jobs = () => {
             if (data.success) {
                 setJobs(data.jobs);
                 setSearchResults(data.jobs); // Initialize search results with all jobs
+                if (data.jobs.length === 0) {
+                    setNoJobsMessage('No jobs available at the moment.');
+                } else {
+                    setNoJobsMessage('');
+                }
+            } else {
+                setNoJobsMessage('Failed to fetch jobs.');
             }
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
             console.error(error);
+            setNoJobsMessage('An error occurred while fetching jobs.');
         }
     };
 
@@ -45,6 +54,12 @@ const Jobs = () => {
             job?.location?.toLowerCase().includes(location?.toLowerCase())
         );
         setSearchResults(filteredJobs);
+
+        if (filteredJobs.length === 0 && jobs.length > 0) {
+            setNoJobsMessage('No jobs match your search criteria.');
+        } else {
+            setNoJobsMessage('');
+        }
     }, [jobTitle, location, jobs]);
 
     const handleLoadMore = () => {
@@ -68,7 +83,7 @@ const Jobs = () => {
                     type='location'
                 />
                 <button
-                    onClick={() => fetchJobs()} // Trigger search on button click
+                    onClick={fetchJobs} // Trigger search on button click
                     className='w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center'
                 >
                     Search
@@ -81,9 +96,11 @@ const Jobs = () => {
                         ? Array.from({ length: 16 }).map((_, index) => (
                             <JobCard key={index} isLoading={isLoading} job={null} />
                         ))
-                        : displayedJobs.map((job) => (
-                            <JobCard key={job._id} isLoading={isLoading} job={job} />
-                        ))
+                        : displayedJobs.length > 0
+                            ? displayedJobs.map((job) => (
+                                <JobCard key={job._id} isLoading={isLoading} job={job} />
+                            ))
+                            : <p className='text-center text-red-500'>{noJobsMessage}</p>
                 }
             </div>
 
