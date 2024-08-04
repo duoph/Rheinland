@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { AiOutlineLogout } from "react-icons/ai";
-import { FaBriefcase, FaPlusSquare, FaRegListAlt, FaUserTie } from "react-icons/fa";
+import {  FaPlusSquare, FaRegListAlt, FaUserTie } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 
@@ -59,19 +59,19 @@ const EmployerSliderMenu = () => {
           </Link>
 
           <Link
-            href={"/jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
+            href={"/employer/job/my-jobs"}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/job/my-jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
               <FaRegListAlt size={20} />
-              <p>Job Listings</p>
+              <p>My Job Listings</p>
             </span>
           </Link>
 
           <Link
             href={"/employer/job/create-job"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs/create") && "bg-rheinland-red text-white"
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/job/create-job") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
