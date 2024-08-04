@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
-import { jobCategories } from '@/data/jobCategory';
+import { jobCategories } from '@/data/jobData';
 import { locations } from '@/data/location';
 
 interface Category {

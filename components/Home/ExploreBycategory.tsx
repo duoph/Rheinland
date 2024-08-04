@@ -1,6 +1,6 @@
 import { CiCircleChevRight } from "react-icons/ci"
 import CategoryCard from "../CategoryCard"
-import { jobCategories } from "@/data/jobCategory"
+import { jobCategories } from "@/data/jobData"
 
 const ExploteBycategory = () => {
 
