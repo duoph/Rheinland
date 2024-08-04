@@ -66,9 +66,9 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="pt-[90px] flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
-      <h1 className="text-4xl font-bold mb-8">My Profile</h1>
-      <div className="flex flex-col items-center mb-8">
+    <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
+      <h1 className="text-4xl font-bold ">My Profile</h1>
+      <div className="flex flex-col items-center">
         <Image
           src="/person-icon.jpg"
           alt="Profile Picture"

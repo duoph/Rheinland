@@ -11,7 +11,6 @@ const AppliedJobsPage = () => {
     const [appliedJobs, setAppliedJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); // Number of jobs displayed initially
 
-    // Function to fetch applied jobs from the API
     const fetchAppliedJobs = async () => {
         setIsLoading(true);
         try {
@@ -26,20 +25,16 @@ const AppliedJobsPage = () => {
         }
     };
 
-    // Fetch applied jobs on initial render
     useEffect(() => {
         fetchAppliedJobs();
     }, []);
 
-    // Determine the jobs to display based on pagination
     const jobsToDisplayList = appliedJobs?.slice(0, jobsToDisplay);
 
-    // Handle "Load More" button click
     const handleLoadMore = () => {
         setJobsToDisplay(prev => Math.min(prev + 16, appliedJobs?.length));
     };
 
-    // Check if there are more jobs to load
     const hasMoreJobs = appliedJobs.length > jobsToDisplay;
 
     return (
