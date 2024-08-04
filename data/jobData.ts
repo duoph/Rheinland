@@ -1,4 +1,5 @@
 export const jobCategories = [
+
     { id: 1, name: "Information Technology" },
     { id: 2, name: "Medical" },
     { id: 3, name: "Management" },
@@ -23,6 +24,7 @@ export const jobCategories = [
     { id: 22, name: "Arts and Entertainment" },
     { id: 23, name: "Research and Development" },
     { id: 24, name: "Public Administration" }
+    
 ];
 
 

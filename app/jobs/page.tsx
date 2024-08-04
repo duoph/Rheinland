@@ -8,7 +8,7 @@ import SearchInput from '@/components/Search/SearchInput';
 import { useSearchParams } from 'next/navigation';
 
 const Jobs = () => {
-    // Getting query from URL
+
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
     const queryLocation = searchParams.get('location') || "";
