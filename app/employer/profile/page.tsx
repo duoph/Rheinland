@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import axios from "axios";
-import { FaEdit, FaSave } from "react-icons/fa";
+import { FaEdit, FaSave, FaBuilding } from "react-icons/fa";
 
 const EmployerProfile = () => {
   const [companyName, setCompanyName] = useState("Tech Solutions Inc.");
@@ -62,15 +61,9 @@ const EmployerProfile = () => {
   return (
     <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
       <h1 className="text-4xl font-bold">Employer Profile</h1>
-      <div className="flex flex-col items-center mb-4">
-        <Image
-          src="/path-to-your-company-logo.jpg" // Replace with the path to your logo
-          alt="Company Logo"
-          height={100}
-          width={100}
-          className="rounded-full mb-2"
-        />
-      </div>
+      {/* <div className="flex flex-col items-center mb-4">
+        <FaBuilding className="text-gray-500 text-6xl mb-2" />
+      </div> */}
 
       <div className="w-full max-w-xl">
         <div className="grid grid-cols-1 gap-4 mb-8">

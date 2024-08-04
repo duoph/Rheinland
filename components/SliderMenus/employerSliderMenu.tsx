@@ -11,6 +11,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 
 const EmployerSliderMenu = () => {
+  
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const pathname = usePathname();

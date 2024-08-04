@@ -1,32 +1,54 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import CompanyCard from "@/components/Employer/EmployerMyJobs";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import EmployerJobCard from "@/components/Employer/EmployerJobCard";
 
-const candidates = Array(20).fill(null);
+const ITEMS_PER_PAGE = 9;
 
-function MyJobs() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 9;
+const MyJobs = () => {
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handlePageClick = (data: { selected: number }) => {
-    setCurrentPage(data.selected);
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const fetchJobs = async () => {
+    try {
+      const { data } = await axios.get('/api/job');
+      if (data.success) {
+        setJobs(data.jobs);
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const offset = currentPage * itemsPerPage;
-  const currentCandidates = candidates.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(candidates.length / itemsPerPage);
+  const currentPage = 0; // Static page view since pagination is removed
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const displayedJobs = jobs.slice(offset, offset + ITEMS_PER_PAGE);
 
   return (
-    <div className="pt-[95px] flex gap-5 flex-col items-center">
+    <div className="pt-[95px] flex flex-col items-center gap-5">
       <h1 className="font-semibold text-[30px]">My Jobs</h1>
-      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-        {currentCandidates.map((_, index) => (
-          <CompanyCard key={index} />
-        ))}
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="flex flex-wrap gap-5 justify-center">
+          {displayedJobs.length > 0 ? (
+            displayedJobs.map((job, index) => (
+              <EmployerJobCard key={index} />
+            ))
+          ) : (
+            <p>No jobs available</p>
+          )}
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default MyJobs;
