@@ -43,7 +43,7 @@ const AppliedJobsPage = () => {
     const hasMoreJobs = appliedJobs.length > jobsToDisplay;
 
     return (
-        <div className="pt-[95px] flex flex-col items-center justify-start pb-10 w-full md:px-8 px-3 min-h-screen">
+        <div className="pt-[95px] gap-3  flex flex-col items-center justify-start pb-10 w-full md:px-8 px-3 min-h-screen">
             <h1 className="font-semibold text-[30px]">Applied Jobs</h1>
 
             <div className="flex items-center justify-center flex-wrap gap-3">
