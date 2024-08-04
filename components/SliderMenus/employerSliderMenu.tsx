@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { AiOutlineLogout } from "react-icons/ai";
+import { FaBriefcase, FaPlusSquare, FaRegListAlt, FaUserTie } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 
@@ -14,7 +15,7 @@ const EmployerSliderMenu = () => {
 
   const pathname = usePathname();
 
-  const { LogOut, account } = useAccount();
+  const { LogOut } = useAccount();
 
   const handleLogout = async () => {
     try {
@@ -26,8 +27,6 @@ const EmployerSliderMenu = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
-      {/* user Slider Layout */}
-
       <div className="flex items-center justify-center w-full">
         {isMenuOpen ? (
           <RiCloseLargeFill
@@ -42,59 +41,52 @@ const EmployerSliderMenu = () => {
             size={28}
           />
         )}
+
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-1 py-3 bg-rheinland-blue sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
-          }`}
+          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)] transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
+            }`}
         >
           <Link
-            href={"/login"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
+            href={`/employer/profile`}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/profile") && "bg-rheinland-red text-white"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <p>Login</p>
-            </span>
-          </Link>
-
-          <Link
-            href={"/create-account"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <p>Craete Account</p>
+              <FaUserTie size={20} />
+              <p>Profile</p>
             </span>
           </Link>
 
           <Link
             href={"/jobs"}
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <p>Jobs</p>
+              <FaRegListAlt size={20} />
+              <p>Job Listings</p>
+            </span>
+          </Link>
+
+          <Link
+            href={"/employer/job/create-job"}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs/create") && "bg-rheinland-red text-white"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <FaPlusSquare size={20} />
+              <p>Create Job</p>
             </span>
           </Link>
 
           <button
-            className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
+            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
             onClick={handleLogout}
           >
             LogOut
-            <AiOutlineLogout />
+            <AiOutlineLogout size={20} />
           </button>
-
-          <div
-            className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Link href={"/employer"}>User Account</Link>
-          </div>
         </div>
       </div>
     </ClickAwayListener>

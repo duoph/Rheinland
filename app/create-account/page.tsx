@@ -54,7 +54,7 @@ const CreateAccountPage = () => {
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name);
       formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("email", formData.email);
+      formDataToSend.append("email", formData.email.toLowerCase());
       formDataToSend.append("dateOfBirth", formData.dateOfBirth);
       formDataToSend.append("password", formData.password);
 
@@ -144,11 +144,10 @@ const CreateAccountPage = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none ${
-              !passwordsMatch() && formData.confirmPassword
-                ? "border-rheinland-red"
-                : ""
-            }`}
+            className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none ${!passwordsMatch() && formData.confirmPassword
+              ? "border-rheinland-red"
+              : ""
+              }`}
             placeholder="Confirm Password"
           />
           <button

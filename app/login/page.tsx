@@ -27,7 +27,7 @@ const LoginPage = () => {
             }
 
             const res = await axios.post('/api/login', {
-                email,
+                email: email.toLowerCase(),
                 password
             });
 
@@ -51,7 +51,7 @@ const LoginPage = () => {
                     type: res.data.accountType,
                     token: res.data.token
                 };
-                
+
                 setAccountData(accountData.id, accountData.token, accountData.type);
 
                 localStorage.setItem('currentAccount', JSON.stringify(accountData));
