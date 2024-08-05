@@ -9,6 +9,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { PiStudentFill } from "react-icons/pi";
+import { BsBuildingsFill } from "react-icons/bs";
 import { FaBriefcase, FaBookmark, FaRegClipboard } from "react-icons/fa"; // Import additional icons
 
 const  AdminSliderMenu = () => {
@@ -47,13 +48,23 @@ const  AdminSliderMenu = () => {
             }`}
         >
           <Link
-            href={`/user/profile`}
+            href={`/admin/candidates`}
             className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <PiStudentFill size={20} />
-              <p>Profile</p>
+              <PiStudentFill size={26} />
+              <p>Candidates</p>
+            </span>
+          </Link> 
+          <Link
+            href={`/admin/companies`}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <BsBuildingsFill  size={26} />
+              <p>Companies</p>
             </span>
           </Link>
 
