@@ -10,6 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { PiStudentFill } from "react-icons/pi";
 import { BsBuildingsFill } from "react-icons/bs";
+import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoDocumentAttachOutline } from "react-icons/io5";
 import { FaBriefcase, FaBookmark} from "react-icons/fa"; // Import additional icons
 
@@ -69,6 +70,17 @@ const  AdminSliderMenu = () => {
             </span>
           </Link>
 
+            
+                      <Link
+                        href={"/admin/companies/jobs"}
+                        className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
+                          }`}
+                      >
+                        <span className="flex items-center justify-start gap-8">
+                          <MdOutlineWorkHistory size={26} />
+                          <p>Submitted Jobs</p>
+                        </span>
+                      </Link>
           <Link
             href={"/jobs"}
             className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
@@ -90,17 +102,6 @@ const  AdminSliderMenu = () => {
               <p>All Applications</p>
             </span>
           </Link>
-{/* 
-          <Link
-            href={"/user/applied-jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
-              }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <FaRegClipboard size={20} />
-              <p>Applied Jobs</p>
-            </span>
-          </Link> */}
 
           <button
             className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
