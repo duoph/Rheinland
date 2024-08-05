@@ -4,8 +4,11 @@ import React, { useEffect, useState } from 'react';
 import JobCard from '@/components/JobCard';
 import { Job } from '@/types';
 import axios from 'axios';
-import SearchInput from '@/components/Search/SearchInput';
+import SearchInput from '@/components/SuggestionInput';
 import { useSearchParams } from 'next/navigation';
+import SuggestionInput from '@/components/SuggestionInput';
+import { jobData } from '@/data/jobData';
+import { locations } from '@/data/location';
 
 const Jobs = () => {
 
@@ -72,15 +75,17 @@ const Jobs = () => {
         <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-4 py-10'>
             {/* Search Bar */}
             <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
-                <SearchInput
+                <SuggestionInput
                     searchInput={jobTitle}
                     setSearchInput={setJobTitle}
-                    type='job'
+                    data={jobData}
+                    placeholder='Job Title'
                 />
-                <SearchInput
-                    searchInput={location}
-                    setSearchInput={setLocation}
-                    type='location'
+                <SuggestionInput
+                    searchInput={jobTitle}
+                    setSearchInput={setJobTitle}
+                    data={locations}
+                    placeholder='Location'
                 />
                 <button
                     onClick={fetchJobs} // Trigger search on button click

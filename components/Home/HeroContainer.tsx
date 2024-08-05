@@ -3,9 +3,11 @@
 
 import Image from "next/image";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
-import SearchInput from "../Search/SearchInput";
+import SuggestionInput from "../SuggestionInput";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { jobData } from "@/data/jobData";
+import { locations } from "@/data/location";
 
 
 const HeroContainer = () => {
@@ -38,11 +40,11 @@ const HeroContainer = () => {
                 <div className="w-full shadow-lg lg:w-[70vw] flex items-center justify-center lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiSearch size={24} />
-                        <SearchInput searchInput={JobTitle} setSearchInput={setJobTitle} type='job' />
+                        <SuggestionInput searchInput={JobTitle} setSearchInput={setJobTitle} data={jobData} />
                     </div>
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiLocationOn size={24} />
-                        <SearchInput searchInput={location} setSearchInput={setLocation} type='location' />
+                        <SuggestionInput searchInput={location} setSearchInput={setLocation} data={locations} placeholder='location' />
                     </div>
                     <button onClick={handleSearch} className="w-full bg-rheinland-red text-white rounded-sm px-3 py-3">
                         Search My job

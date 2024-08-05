@@ -16,7 +16,7 @@ const MyJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get('/api/job');
+      const { data } = await axios.get('/api/employer/account/my-jobs')
       if (data.success) {
         setJobs(data.jobs);
       }

@@ -24,11 +24,11 @@ export const jobCategories = [
     { id: 22, name: "Arts and Entertainment" },
     { id: 23, name: "Research and Development" },
     { id: 24, name: "Public Administration" }
-    
+
 ];
 
 
-export const jobs = [
+export const jobData = [
 
     { id: 1, name: 'Frontend Developer' },
     { id: 2, name: 'Backend Developer' },
