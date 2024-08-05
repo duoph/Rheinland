@@ -8,7 +8,8 @@ import ClickAwayListener from "react-click-away-listener";
 import { AiOutlineLogout } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { FaUser, FaBriefcase, FaBookmark, FaRegClipboard } from "react-icons/fa"; // Import additional icons
+import { PiStudentFill } from "react-icons/pi";
+import { FaBriefcase, FaBookmark, FaRegClipboard } from "react-icons/fa"; // Import additional icons
 
 const  AdminSliderMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -51,7 +52,7 @@ const  AdminSliderMenu = () => {
               }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <FaUser size={20} />
+              <PiStudentFill size={20} />
               <p>Profile</p>
             </span>
           </Link>
