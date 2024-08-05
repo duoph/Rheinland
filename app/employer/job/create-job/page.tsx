@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAccount } from '@/context/useAccount';
 import toast from 'react-hot-toast';
+import SuggestionInput from '@/components/SuggestionInput';
+import { locations } from '@/data/location';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,19 +23,6 @@ const CreateJob = () => {
     });
 
     const { account } = useAccount();
-
-    const cities = [
-        "New York",
-        "Los Angeles",
-        "Chicago",
-        "Houston",
-        "Phoenix",
-        "Philadelphia",
-        "San Antonio",
-        "San Diego",
-        "Dallas",
-        "San Jose"
-    ];
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -160,7 +149,7 @@ const CreateJob = () => {
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
 
-                <input
+                {/* <input
                     type='text'
                     name='location'
                     value={job.location}
@@ -168,13 +157,14 @@ const CreateJob = () => {
                     onChange={handleChange}
                     placeholder='Location'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-                />
+                /> */}
 
-                <datalist className='w-full' id="cities">
-                    {cities.map((city, index) => (
-                        <option key={index} value={city} />
-                    ))}
-                </datalist>
+                <SuggestionInput
+                    placeholder='Location'
+                    data={locations}
+                    searchInput={job.location}
+                    setSearchInput={handleChange}
+                />
 
                 <button
                     type='submit'

@@ -39,7 +39,7 @@ const LoginPage = () => {
                 }
 
                 if (res.data.accountType === 'employer') {
-                    router.push('/employer');
+                    router.push('/employer/job/my-jobs');
                 }
 
                 if (res.data.accountType === 'admin') {
