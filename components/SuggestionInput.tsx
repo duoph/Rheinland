@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
-import { jobCategories } from '@/data/jobData';
-import { locations } from '@/data/location';
+
 
 interface Category {
   id: number;
@@ -12,10 +11,11 @@ interface SuggestionInputProps {
   setSearchInput: (input: string) => void;
   searchInput: string;
   placeholder?: string
-  data: any[]
+  data: any[];
+  classNames?: string
 }
 
-const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searchInput, data, placeholder }) => {
+const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searchInput, data, placeholder, classNames }) => {
 
   const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -57,13 +57,13 @@ const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searc
 
     <ClickAwayListener onClickAway={() => setShowSuggestion(false)}>
 
-      <div className='relative flex items-center justify-center bg-white px-2 w-full rounded-sm'>
+      <div className='relative flex items-center justify-center bg-white  w-full rounded-sm'>
         <input
           ref={inputRef}
           onChange={handleChange}
           value={searchInput}
           type='text'
-          className='w-full px-3 py-3 border-b rounded-sm focus:outline-none'
+          className={classNames ? classNames : 'w-full px-3 py-3 border-b rounded-sm focus:outline-none'}
           placeholder={placeholder}
           onFocus={handleFocus}
         />

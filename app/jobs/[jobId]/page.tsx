@@ -3,7 +3,7 @@
 import { Job } from "@/types";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
@@ -17,27 +17,24 @@ import toast from "react-hot-toast";
 const SingleJobPage = () => {
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
-  const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
   const [applying, setApplying] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
       const jobRes = await axios.get(`/api/job/${jobId}`);
-      const relatedJobsRes = await axios.get(`/api/job`);
       const userRes = await axios.get('/api/user');
 
-      if (jobRes.data.success && relatedJobsRes.data.success && userRes.data.success) {
+      if (jobRes.data.success && userRes.data.success) {
         setJob(jobRes.data.job);
-        setJobs(relatedJobsRes.data.jobs);
-        setSavedJobs(userRes.data.user.savedJobs.map((job: Job) => job._id));
-        setAppliedJobs(userRes.data.user.appliedJobs.map((job: Job) => job._id));
+        setSavedJobs(userRes.data.user.savedJobs?.map((job: Job) => job._id) || []);
+        setAppliedJobs(userRes.data.user.appliedJobs?.map((job: Job) => job._id) || []);
       } else {
         setError("Failed to load data.");
       }
@@ -47,7 +44,11 @@ const SingleJobPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [jobId]);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleSave = async () => {
     if (!job) return;
@@ -89,10 +90,6 @@ const SingleJobPage = () => {
 
   const isJobApplied = job && appliedJobs.includes(job._id);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-start gap-3 min-h-screen px-3 sm:px-5 pt-[90px]">
@@ -112,8 +109,8 @@ const SingleJobPage = () => {
 
   if (error) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center">
-        {error}
+      <div className="flex flex-col items-center justify-center min-h-screen px-3 sm:px-5 pt-[90px]">
+        <h1 className="text-red-500 text-lg">{error}</h1>
       </div>
     );
   }
@@ -157,8 +154,7 @@ const SingleJobPage = () => {
       <div className="flex flex-col items-start justify-center w-full gap-3">
         <h1 className="font-medium">Preferred Skills</h1>
         <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
-
-          {job?.skills && job.skills.length > 0 && (
+          {job?.skills && job.skills.length > 0 ? (
             job.skills
               .filter(skill => skill !== "")
               .map((skill, index) => (
@@ -166,8 +162,9 @@ const SingleJobPage = () => {
                   {skill}
                 </span>
               ))
+          ) : (
+            <p>No skills listed</p>
           )}
-
         </div>
       </div>
 
@@ -197,7 +194,7 @@ const SingleJobPage = () => {
       </div>
 
       {/* Related Jobs Section */}
-      <RelatedJobs jobs={jobs} loading={loading} />
+      {/* <RelatedJobs jobs={jobs} loading={loading} /> */}
     </div>
   );
 };
