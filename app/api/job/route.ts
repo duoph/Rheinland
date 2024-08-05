@@ -96,7 +96,7 @@ export async function PUT(req: NextRequest) {
             location,
             requirements,
             gender,
-            skills,
+            skills, 
             minAge,
             maxAge,
         }, { new: true });
