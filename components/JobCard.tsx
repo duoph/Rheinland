@@ -106,7 +106,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, fetchObject }) => {
           </span>
           <span className="flex items-center justify-center gap-[6px] w-full">
             <CiLocationOn />
-            {`${job.location}, ${job.state}`}
+            {job.location}
           </span>
         </div>
         <div className="h-[80px] w-full py-1">
