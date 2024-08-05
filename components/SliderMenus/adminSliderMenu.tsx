@@ -1,29 +1,23 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import ClickAwayListener from "react-click-away-listener";
-import {
-  CiCirclePlus,
-  CiCircleRemove,
-  CiMenuBurger,
-  CiShop,
-  CiShoppingCart,
-} from "react-icons/ci";
-import { AiOutlineLogout } from "react-icons/ai";
-import { usePathname, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { RiCloseLargeFill } from "react-icons/ri";
-import { GiHamburgerMenu } from "react-icons/gi";
+
+"use client";
 import { useAccount } from "@/context/useAccount";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useState } from "react";
+import ClickAwayListener from "react-click-away-listener";
+import { AiOutlineLogout } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RiCloseLargeFill } from "react-icons/ri";
+import { FaUser, FaBriefcase, FaBookmark, FaRegClipboard } from "react-icons/fa"; // Import additional icons
 
-const AdminSliderMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const  AdminSliderMenu = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
-
   const { LogOut, account } = useAccount();
 
   const handleLogout = async () => {
     try {
-      LogOut();
+      await LogOut();
     } catch (error) {
       console.log(error);
     }
@@ -31,70 +25,76 @@ const AdminSliderMenu = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-full">
         {isMenuOpen ? (
           <RiCloseLargeFill
-            onClick={() => setIsMenuOpen(false)}
-            className="text-red-500 z-10"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-rheinland-red z-10"
             size={28}
           />
         ) : (
           <GiHamburgerMenu
-            onClick={() => setIsMenuOpen(true)}
-            className="text-red-500 z-10"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-rheinland-red z-10"
             size={28}
           />
         )}
 
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute right-0 top-[74px] flex items-start justify-start flex-col gap-1 py-3 bg-rheinland-blue sm:w-[300px] w-full h-[calc(100vh-74px)]  transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
-          }`}
+          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)] transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
+            }`}
         >
           <Link
-            href="/admin/applications"
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/applications") && "bg-red-600"
-            }`}
+            href={`/user/profile`}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <CiShoppingCart />
-              <p>Applicants</p>
+              <FaUser size={20} />
+              <p>Profile</p>
             </span>
           </Link>
 
           <Link
-            href="/admin/candidates"
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/candidates") && "bg-red-600"
-            }`}
+            href={"/jobs"}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <CiCirclePlus />
-              <p>Candidates</p>
+              <FaBriefcase size={20} />
+              <p>Jobs</p>
             </span>
           </Link>
 
           <Link
-            onClick={() => setIsMenuOpen(false)}
-            href="/admin/companies"
-            className={`w-full px-10 py-2 text-white text-center ${
-              pathname?.startsWith("/admin/companies") && "bg-red-600"
-            }`}
+            href={"/user/saved-jobs"}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
+              }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <CiCirclePlus />
-              <p>Companies</p>
+              <FaBookmark size={20} />
+              <p>Saved Jobs</p>
+            </span>
+          </Link>
+
+          <Link
+            href={"/user/applied-jobs"}
+            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <FaRegClipboard size={20} />
+              <p>Applied Jobs</p>
             </span>
           </Link>
 
           <button
-            className="bg-red-600 w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
+            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
             onClick={handleLogout}
           >
             LogOut
-            <AiOutlineLogout />
+            <AiOutlineLogout size={20} />
           </button>
         </div>
       </div>
@@ -102,4 +102,4 @@ const AdminSliderMenu = () => {
   );
 };
 
-export default AdminSliderMenu;
+export default  AdminSliderMenu;
