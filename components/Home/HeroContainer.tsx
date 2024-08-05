@@ -40,7 +40,7 @@ const HeroContainer = () => {
                 <div className="w-full shadow-lg lg:w-[70vw] flex items-center justify-center lg:flex-row flex-col gap-3 bg-slate-200 px-5 py-5 rounded-sm">
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiSearch size={24} />
-                        <SuggestionInput searchInput={JobTitle} setSearchInput={setJobTitle} data={jobData} />
+                        <SuggestionInput searchInput={JobTitle} setSearchInput={setJobTitle} data={jobData} placeholder='Job Title' />
                     </div>
                     <div className="flex items-center justify-center bg-white px-2 w-full rounded-sm">
                         <CiLocationOn size={24} />
@@ -52,11 +52,7 @@ const HeroContainer = () => {
                 </div>
                 <span className="font-light text-center" >Popular : UI Designer, UX Researcher, Android, Admin</span>
             </div>
-            {/* <div className='hidden w-1/3  lg:flex items-center h-full justify-center px-12'>
-                <div className="relative w-full  h-full flex items-center justify-center  -z-10">
-                    <Image src={'/person.png'} height={700} width={400} alt={"personImage"} />
-                </div>
-            </div> */}
+
         </div>
     )
 }

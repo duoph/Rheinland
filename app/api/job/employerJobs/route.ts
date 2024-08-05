@@ -1,15 +1,18 @@
-import jobModel from "@/models/jobSchema"; // Adjust the import based on your project structure
+import jobModel from "@/models/jobSchema";
 import { NextRequest, NextResponse } from "next/server";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
 
 export async function GET(req: NextRequest) {
     try {
+        // Ensure MongoDB connection
         await connectMongoDB();
 
+        // Extract ID from token
         const { id } = getDataFromToken(req);
 
         if (!id) {
+            console.log("No employer ID found in token"); // Added console log for debugging
             return NextResponse.json({
                 message: "No employer ID found in token",
                 success: false,
@@ -17,8 +20,9 @@ export async function GET(req: NextRequest) {
             });
         }
 
-        // Fetch jobs posted by the employer with the given ID
-        const jobs = await jobModel.find({ employerId: id });
+        // Fetch jobs using the correct query
+        const jobs = await jobModel.find({ employerId: id }); // Ensure you use { employerId: id } as the query
+        console.log("This is jobs: ", jobs); // Ensure this line executes
 
         return NextResponse.json({
             message: "Jobs retrieved successfully",
@@ -27,12 +31,11 @@ export async function GET(req: NextRequest) {
             status: 200,
         });
     } catch (error) {
-        console.error(error);
+        console.error('Error retrieving jobs:', error);
         return NextResponse.json({
             message: "Error retrieving jobs",
-            error,
             success: false,
-            status: 400,
+            status: 500,
         });
     }
 }

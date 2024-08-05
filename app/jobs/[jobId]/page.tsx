@@ -15,6 +15,7 @@ import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 import toast from "react-hot-toast";
 
 const SingleJobPage = () => {
+
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

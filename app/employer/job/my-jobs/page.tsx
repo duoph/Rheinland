@@ -3,33 +3,30 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EmployerJobCard from "@/components/Employer/EmployerJobCard";
-
-const ITEMS_PER_PAGE = 9;
+import { Job } from "@/types"; // Import the Job type
 
 const MyJobs = () => {
-  const [jobs, setJobs] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    fetchJobs();
-  }, []);
 
   const fetchJobs = async () => {
     try {
-      const { data } = await axios.get('/api/employer/account/my-jobs')
-      if (data.success) {
-        setJobs(data.jobs);
-      }
+      const res = await axios.get('/api/job/employerJobs');
+      console.log(res.data.jobs);
+      if (res.data.success) {
+        setJobs(res.data.jobs);
+      } 
     } catch (error) {
       console.error('Error fetching jobs:', error);
+      setJobs([]); // Set jobs to empty array on error
     } finally {
       setIsLoading(false);
     }
   };
 
-  const currentPage = 0; // Static page view since pagination is removed
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const displayedJobs = jobs.slice(offset, offset + ITEMS_PER_PAGE);
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <div className="pt-[95px] flex flex-col items-center gap-5">
@@ -38,9 +35,9 @@ const MyJobs = () => {
         <p>Loading...</p>
       ) : (
         <div className="flex flex-wrap gap-5 justify-center">
-          {displayedJobs.length > 0 ? (
-            displayedJobs.map((job, index) => (
-              <EmployerJobCard key={index} />
+          {jobs.length > 0 ? (
+            jobs.map((job) => (
+              <EmployerJobCard key={job._id} />
             ))
           ) : (
             <p>No jobs available</p>
