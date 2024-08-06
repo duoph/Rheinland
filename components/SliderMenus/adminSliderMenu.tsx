@@ -1,4 +1,3 @@
-
 "use client";
 import { useAccount } from "@/context/useAccount";
 import Link from "next/link";
@@ -12,9 +11,9 @@ import { PiStudentFill } from "react-icons/pi";
 import { BsBuildingsFill } from "react-icons/bs";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoDocumentAttachOutline } from "react-icons/io5";
-import { FaBriefcase, FaBookmark} from "react-icons/fa"; // Import additional icons
+import { FaBriefcase, FaBookmark } from "react-icons/fa"; // Import additional icons
 
-const  AdminSliderMenu = () => {
+const AdminSliderMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   const { LogOut, account } = useAccount();
@@ -46,32 +45,36 @@ const  AdminSliderMenu = () => {
 
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)] transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
-            }`}
+          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)] transition-all duration-300 ease-in-out ${
+            isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
+          }`}
         >
           <Link
             href={`/admin/candidates`}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
-              }`}
+            className={`w-full px-10 py-2 text-center ${
+              pathname?.startsWith("/user/profile") &&
+              "bg-rheinland-red text-white"
+            }`}
           >
             <span className="flex items-center justify-start gap-8">
               <PiStudentFill size={26} />
               <p>Candidates</p>
             </span>
-          </Link> 
+          </Link>
           <Link
             href={`/admin/companies`}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
-              }`}
+            className={`w-full px-10 py-2 text-center ${
+              pathname?.startsWith("/user/profile") &&
+              "bg-rheinland-red text-white"
+            }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <BsBuildingsFill  size={26} />
+              <BsBuildingsFill size={26} />
               <p>Companies</p>
             </span>
           </Link>
 
-            
-                      <Link
+          {/* <Link
                         href={"/admin/companies/jobs"}
                         className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
                           }`}
@@ -80,11 +83,12 @@ const  AdminSliderMenu = () => {
                           <MdOutlineWorkHistory size={26} />
                           <p>Submitted Jobs</p>
                         </span>
-                      </Link>
+                      </Link> */}
           <Link
             href={"/jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
-              }`}
+            className={`w-full px-10 py-2 text-center ${
+              pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
+            }`}
           >
             <span className="flex items-center justify-start gap-8">
               <FaBriefcase size={20} />
@@ -94,8 +98,10 @@ const  AdminSliderMenu = () => {
 
           <Link
             href={"/admin/applications"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
-              }`}
+            className={`w-full px-10 py-2 text-center ${
+              pathname?.startsWith("/user/saved-jobs") &&
+              "bg-rheinland-red text-white"
+            }`}
           >
             <span className="flex items-center justify-start gap-8">
               <IoDocumentAttachOutline size={20} />
@@ -116,4 +122,4 @@ const  AdminSliderMenu = () => {
   );
 };
 
-export default  AdminSliderMenu;
+export default AdminSliderMenu;
