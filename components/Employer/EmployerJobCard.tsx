@@ -1,9 +1,22 @@
-import { Job } from "@/types";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaMapMarkerAlt, FaRegTrashAlt, FaRegUser } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
 
 const EmployerJobCard = ({ job }: any) => {
+
+  const router = useRouter()
+
+
+  const handleDelete = async () => {
+    try {
+
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   const truncateDescription = (description: string, maxLength: number) => {
@@ -53,11 +66,11 @@ const EmployerJobCard = ({ job }: any) => {
 
       {/* Action Buttons */}
       <div className="flex items-center justify-between p-4 bg-white rounded-b-sm shadow-inner w-full">
-        <button className="flex items-center px-4 py-2 text-white bg-green-500 rounded-sm gap-2 hover:bg-green-600 transition">
+        <button onClick={() => router.push(`/employer/job/edit-job/${job.id}`)} className="flex items-center px-4 py-2 text-white bg-green-500 rounded-sm gap-2 hover:bg-green-600 transition">
           <GoPencil />
           <span>Edit</span>
         </button>
-        <button className="flex items-center px-4 py-2 text-white bg-red-500 rounded-sm gap-2 hover:bg-red-600 transition">
+        <button onClick={handleDelete} className="flex items-center px-4 py-2 text-white bg-red-500 rounded-sm gap-2 hover:bg-red-600 transition">
           <FaRegTrashAlt />
           <span>Delete</span>
         </button>

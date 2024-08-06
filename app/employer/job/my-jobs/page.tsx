@@ -9,6 +9,9 @@ const MyJobs = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
+
+
   const fetchJobs = async () => {
     try {
       const res = await axios.get('/api/job/employerJobs');

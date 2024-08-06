@@ -13,11 +13,11 @@ export async function GET(req: NextRequest) {
   try {
     await connectMongoDB();
 
-    const { id } = getDataFromToken(req);
+    const { id } = await getDataFromToken(req);
 
 
     // Fetch the employer details from the database
-    const employer = await employerModel.findById({ _id: "66b197332ffc60a1d440a6c3" });
+    const employer = await employerModel.findById({ _id: id });
 
     if (!employer) {
       return NextResponse.json({
