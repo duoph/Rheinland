@@ -12,20 +12,21 @@ export async function GET(req: NextRequest) {
         await connectMongoDB();
 
         // Extract ID from token
-        const { id } = getDataFromToken(req);
+        const { id } = getDataFromToken(req)
 
-        if (!id) {
-            console.log("No employer ID found in token"); // Added console log for debugging
-            return NextResponse.json({
-                message: "No employer ID found in token",
-                success: false,
-                status: 401,
-            });
-        }
+        console.log(id)
+
+        // if (!id) {
+        //     console.log("No employer ID found in token"); // Added console log for debugging
+        //     return NextResponse.json({
+        //         message: "No employer ID found in token",
+        //         success: false,
+        //         status: 401,
+        //     });
+        // }
 
         // Fetch jobs using the correct query
-        const jobs = await jobModel.find({ employerId: id }); // Ensure you use { employerId: id } as the query
-        console.log("This is jobs: ", jobs); // Ensure this line executes
+        const jobs = await jobModel.find();
 
         return NextResponse.json({
             message: "Jobs retrieved successfully",

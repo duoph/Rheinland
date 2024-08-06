@@ -13,9 +13,9 @@ const MyJobs = () => {
     try {
       const res = await axios.get('/api/job/employerJobs');
       console.log(res.data.jobs);
-      if (res.data.success) {
-        setJobs(res.data.jobs);
-      } 
+      // if (res.data.success) {
+      setJobs(res.data.jobs);
+      // } 
     } catch (error) {
       console.error('Error fetching jobs:', error);
       setJobs([]); // Set jobs to empty array on error
@@ -29,15 +29,15 @@ const MyJobs = () => {
   }, []);
 
   return (
-    <div className="pt-[95px] flex flex-col items-center gap-5">
+    <div className="pt-[95px] flex flex-col items-center gap-5 px-5 md:px-10">
       <h1 className="font-semibold text-[30px]">My Jobs</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div className="flex flex-wrap gap-5 justify-center">
-          {jobs.length > 0 ? (
-            jobs.map((job) => (
-              <EmployerJobCard key={job._id} />
+          {jobs?.length > 0 ? (
+            jobs?.map((job) => (
+              <EmployerJobCard key={job?._id} job={job}  />
             ))
           ) : (
             <p>No jobs available</p>
