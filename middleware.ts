@@ -12,6 +12,18 @@ export default function middleware(request: NextRequest) {
         }
     }
 
+
+    if (path === "/login" && token) {
+        if (accountType === "user") {
+            return NextResponse.redirect(new URL('/jobs', request.url));
+        } else if (accountType === "employer") {
+            return NextResponse.redirect(new URL('/employer/my-jobs', request.url));
+        } else if (accountType === "admin") {
+            return NextResponse.redirect(new URL('/admin', request.url));
+        }
+    }
+
+
     // Redirect to login page if the user does not have the required account type
     if (path.startsWith("/employer")) {
         if (accountType !== "employer") {
@@ -28,5 +40,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/employer/:path*", "/admin/:path*"], // Apply middleware to /employer and /admin paths
+    matcher: ["/employer/:path*", "/admin/:path*", "/login"], // Apply middleware to /employer and /admin paths
 };
