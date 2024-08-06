@@ -2,29 +2,31 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaEdit, FaSave, FaBuilding } from "react-icons/fa";
+import { FaEdit, FaSave } from "react-icons/fa";
+import { useAccount } from "@/context/useAccount";
 
 const EmployerProfile = () => {
-  const [companyName, setCompanyName] = useState("Tech Solutions Inc.");
-  const [address, setAddress] = useState("San Francisco, CA, USA");
-  const [industry, setIndustry] = useState("Information Technology");
-  const [phone, setPhone] = useState("+1234567890");
-  const [email, setEmail] = useState("contact@techsolutions.com");
-  const [website, setWebsite] = useState("https://www.techsolutions.com/");
-  const [about, setAbout] = useState("Leading provider of IT solutions and consulting services.");
+  const [employerName, setEmployerName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [about, setAbout] = useState("");
   const [isEditable, setIsEditable] = useState(false);
+
+  const { account } = useAccount();
 
   const fetchEmployer = async () => {
     try {
-      const response = await axios.get("/api/employer");
+      const response = await axios.get(`/api/employer/account`);
+      console.log(response)
       const employerData = response.data.employer;
-      setCompanyName(employerData.companyName);
-      setAddress(employerData.address);
-      setIndustry(employerData.industry);
-      setPhone(employerData.phone);
-      setEmail(employerData.email);
-      setWebsite(employerData.website);
-      setAbout(employerData.about);
+      setEmployerName(employerData?.employerName);
+      setAddress(employerData?.address);
+      setPhone(employerData?.phone);
+      setEmail(employerData?.email);
+      setWebsite(employerData?.website);
+      setAbout(employerData?.about);
     } catch (error) {
       console.log(error);
     }
@@ -38,15 +40,14 @@ const EmployerProfile = () => {
     try {
       setIsEditable(false);
       const formData = new FormData();
-      formData.append('companyName', companyName);
+      formData.append('companyName', employerName);
       formData.append('address', address);
-      formData.append('industry', industry);
       formData.append('phone', phone);
       formData.append('email', email);
       formData.append('website', website);
       formData.append('about', about);
 
-      await axios.put('/api/employer', formData, {
+      await axios.put(`/api/employer/${account.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -61,71 +62,53 @@ const EmployerProfile = () => {
   return (
     <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
       <h1 className="text-4xl font-bold">Employer Profile</h1>
-      {/* <div className="flex flex-col items-center mb-4">
-        <FaBuilding className="text-gray-500 text-6xl mb-2" />
-      </div> */}
-
       <div className="w-full max-w-xl">
-        <div className="grid grid-cols-1 gap-4 mb-8">
-          <div>
-            <label className="text-gray-500">Company Name:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
-          <div>
-            <label className="text-gray-500">Address:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
-          <div>
-            <label className="text-gray-500">Industry:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={industry}
-              onChange={(e) => setIndustry(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
-          <div>
-            <label className="text-gray-500">Phone:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
-          <div>
-            <label className="text-gray-500">Email:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
-          <div>
-            <label className="text-gray-500">Website:</label>
-            <input
-              className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              disabled={!isEditable}
-            />
-          </div>
+        <div className="grid grid-cols-1 gap-2 mb-3">
+          <input
+            type="text"
+            placeholder="Company Name"
+            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={employerName}
+            onChange={(e) => setEmployerName(e.target.value)}
+            disabled={!isEditable}
+          />
+          <input
+            type="text"
+            placeholder="Address"
+            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            disabled={!isEditable}
+          />
+          <input
+            type="tel"
+            placeholder="Phone"
+            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            disabled={!isEditable}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={!isEditable}
+          />
+          <input
+            type="text"
+            placeholder="Website"
+            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            disabled={!isEditable}
+          />
         </div>
 
         <div className="mb-8">
-          <label className="text-gray-500">About:</label>
           <textarea
+            placeholder="About"
             className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
             value={about}
             rows={5}

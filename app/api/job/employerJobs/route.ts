@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
 
+export const revalidate = 0
+
+
 export async function GET(req: NextRequest) {
     try {
         // Ensure MongoDB connection

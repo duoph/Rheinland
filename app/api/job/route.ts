@@ -4,7 +4,7 @@ import jobModel from "@/models/jobSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export const revalidate = 3600
+export const revalidate = 0
 
 
 export async function GET(req: NextRequest) {

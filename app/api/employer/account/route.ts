@@ -5,24 +5,19 @@ import connectMongoDB from "@/lib/dbConnect";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 
 
+export const revalidate = 0
+
+
 // Get employer profile by ID
 export async function GET(req: NextRequest) {
   try {
     await connectMongoDB();
 
-    // Retrieve the employer ID from the token
     const { id } = getDataFromToken(req);
 
-    if (!id) {
-      return NextResponse.json({
-        message: "No employer ID found in token",
-        success: false,
-        status: 401,
-      });
-    }
 
     // Fetch the employer details from the database
-    const employer = await employerModel.findById(id);
+    const employer = await employerModel.findById({ _id: "66b197332ffc60a1d440a6c3" });
 
     if (!employer) {
       return NextResponse.json({
@@ -64,13 +59,16 @@ export async function POST(req: NextRequest) {
     const phone = formData.get("phone");
     const email = formData.get("email");
     const password = formData.get("password");
+    const website = formData.get("website");
+    const address = formData.get("address");
 
-    console.log(employerName, email, password);
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
 
     const employerAccount = await employerModel.create({
       employerName,
+      address,
+      website,
       email,
       password: hashedPassword,
       phone,

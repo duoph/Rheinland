@@ -80,7 +80,7 @@ const CreateAccountPage = () => {
   const passwordsMatch = () => formData.password === formData.confirmPassword;
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center">
+    <div className="relative min-h-screen pt-[80px] flex flex-col items-center justify-center">
       <div className="absolute top-[80px] left-[10px] cursor-pointer md:flex hidden">
         <span
           onClick={() => router.push("/")}

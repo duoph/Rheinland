@@ -17,9 +17,18 @@ export default function middleware(request: NextRequest) {
         if (accountType === "user") {
             return NextResponse.redirect(new URL('/jobs', request.url));
         } else if (accountType === "employer") {
-            return NextResponse.redirect(new URL('/employer/my-jobs', request.url));
+            return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         } else if (accountType === "admin") {
             return NextResponse.redirect(new URL('/admin', request.url));
+        }
+    }
+
+
+    if (path.startsWith("/job/:path") && token) {
+        if (accountType === "admin") {
+            return NextResponse.redirect(new URL('/admin', request.url));
+        } else if (accountType === "employer") {
+            return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
     }
 
@@ -40,5 +49,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/employer/:path*", "/admin/:path*", "/login"], // Apply middleware to /employer and /admin paths
+    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path'], // Apply middleware to /employer and /admin paths
 };
