@@ -29,7 +29,7 @@ const MyJobs = () => {
   }, []);
 
   return (
-    <div className="pt-[95px] flex flex-col items-center gap-5 px-5 md:px-10">
+    <div className="pt-[95px] pb-10 flex flex-col items-center gap-5 px-5 md:px-10">
       <h1 className="font-semibold text-[30px]">My Jobs</h1>
       {isLoading ? (
         <p>Loading...</p>
@@ -37,7 +37,7 @@ const MyJobs = () => {
         <div className="flex flex-wrap gap-5 justify-center">
           {jobs?.length > 0 ? (
             jobs?.map((job) => (
-              <EmployerJobCard key={job?._id} job={job}  />
+              <EmployerJobCard key={job?._id} job={job} />
             ))
           ) : (
             <p>No jobs available</p>
