@@ -12,7 +12,6 @@ const ApplicationPage = () => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('all');
 
-
   const fetchApplications = async () => {
     try {
       const response = await fetch("/api/applications");
@@ -29,6 +28,14 @@ const ApplicationPage = () => {
   useEffect(() => {
     fetchApplications();
   }, []);
+
+  useEffect(() => {
+    if (selectedApplicantsType === 'all') {
+      setSearchResults(applicants);
+    } else {
+      setSearchResults(applicants.filter(applicant => applicant.status === selectedApplicantsType));
+    }
+  }, [selectedApplicantsType, applicants]);
 
   const handleLoadMore = () => {
     setApplicantsToDisplay((prev) => prev + 18);
@@ -70,7 +77,7 @@ const ApplicationPage = () => {
       <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3'>
         <input
           type='text'
-          placeholder='Name,Job,Location'
+          placeholder='Name, Job, Location'
           className='border px-4 py-4 rounded-md w-full'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -83,8 +90,8 @@ const ApplicationPage = () => {
           ? Array.from({ length: 18 }).map((_, index) => (
             <ApplicationCard key={index} />
           ))
-          : Array.from({ length: 18 })?.map((applicant, index) => (
-            <ApplicationCard key={index} isLoading={isLoading} />
+          : displayedApplicants?.map((applicant, index) => (
+            <ApplicationCard key={index} applicant={applicant} />
           ))}
       </div>
 
@@ -93,8 +100,6 @@ const ApplicationPage = () => {
           Load more
         </button>
       )}
-
-
     </div>
   );
 };
