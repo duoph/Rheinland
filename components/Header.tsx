@@ -31,7 +31,6 @@ const Header = () => {
           {!account.token && !account.id && (
             <div className="hidden lg:flex justify-center items-center gap-4 font-light`">
               <Link href={"/jobs"}>Find Jobs</Link>
-              <Link href={"/"}>Browse Companies</Link>
               <Link href={"/"}>Are you a student?</Link>
             </div>
           )}

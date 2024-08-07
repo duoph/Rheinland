@@ -2,6 +2,10 @@ import connectMongoDB from "@/lib/dbConnect";
 import jobModel from "@/models/jobSchema";
 import { NextRequest, NextResponse } from "next/server";
 
+
+export const revalidate = 0
+
+
 export async function GET(req: NextRequest, { params }: any) {
 
     try {

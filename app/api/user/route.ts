@@ -4,6 +4,9 @@ import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt'
 
+export const revalidate = 0
+
+
 export async function GET(req: NextRequest) {
     try {
         await connectMongoDB();

@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
-import { jobCategories } from '@/data/jobCategory';
-import { locations } from '@/data/location';
+
 
 interface Category {
   id: number;
   name: string;
 }
 
-interface SearchInputProps {
+interface SuggestionInputProps {
   setSearchInput: (input: string) => void;
   searchInput: string;
-  type?: 'job' | 'location';
   placeholder?: string
+  data: any[];
+  classNames?: string
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, type = 'job' }) => {
+const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searchInput, data, placeholder, classNames }) => {
 
   const [showSuggestion, setShowSuggestion] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const suggestions = type === 'job' ? jobCategories : locations;
+  const suggestions = data
 
   const filteredSuggestions = useMemo(() => {
     return suggestions.filter((item: Category) =>
@@ -57,14 +57,14 @@ const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, 
 
     <ClickAwayListener onClickAway={() => setShowSuggestion(false)}>
 
-      <div className='relative flex items-center justify-center bg-white px-2 w-full rounded-sm'>
+      <div className='relative flex items-center justify-center bg-white  w-full rounded-sm'>
         <input
           ref={inputRef}
           onChange={handleChange}
           value={searchInput}
           type='text'
-          className='w-full px-3 py-3 border-b rounded-sm focus:outline-none'
-          placeholder={type === 'job' ? 'Job title or keyword' : 'Location'}
+          className={classNames ? classNames : 'w-full px-3 py-3 border-b rounded-sm focus:outline-none'}
+          placeholder={placeholder}
           onFocus={handleFocus}
         />
 
@@ -99,4 +99,4 @@ const SearchInput: React.FC<SearchInputProps> = ({ setSearchInput, searchInput, 
   );
 };
 
-export default SearchInput;
+export default SuggestionInput;

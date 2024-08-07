@@ -3,6 +3,9 @@ import jobModel from "@/models/jobSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 
+export const revalidate = 0
+
+
 // Approve the jobs by adimin
 
 export async function PUT(req: NextRequest, params: any) {

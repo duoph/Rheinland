@@ -99,14 +99,14 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, fetchObject }) => {
         <div className="flex justify-start items-center font-semibold gap-2 w-full">
           <span>{job.title}</span>
         </div>
-        <div className="flex justify-start items-center font-light text-sm gap-2 w-full py-1">
-          <span className="flex items-center justify-center gap-[6px]">
+        <div className="flex font-light text-sm gap-2 w-full py-1">
+          {/* <span className="flex items-center justify-center gap-[6px]">
             <HiOutlineBuildingOffice2 />
             Rheinland
-          </span>
-          <span className="flex items-center justify-center gap-[6px] w-full">
+          </span> */}
+          <span className="flex items-center justify-center gap-[6px]">
             <CiLocationOn />
-            {`${job.location}, ${job.state}`}
+            {job.location}
           </span>
         </div>
         <div className="h-[80px] w-full py-1">

@@ -4,6 +4,49 @@ import bcrypt from "bcrypt";
 import connectMongoDB from "@/lib/dbConnect";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 
+
+export const revalidate = 0
+
+
+// Get employer profile by ID
+export async function GET(req: NextRequest) {
+  try {
+    await connectMongoDB();
+
+    const { id } = await getDataFromToken(req);
+
+
+    // Fetch the employer details from the database
+    const employer = await employerModel.findById({ _id: id });
+
+    if (!employer) {
+      return NextResponse.json({
+        message: "Employer not found",
+        success: false,
+        status: 404,
+      });
+    }
+
+    return NextResponse.json({
+      message: "Employer profile retrieved successfully",
+      employer,
+      success: true,
+      status: 200,
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({
+      message: "Error retrieving employer profile",
+      error,
+      success: false,
+      status: 400,
+    });
+  }
+}
+
+
+
+
 // create account for employer
 
 export async function POST(req: NextRequest) {
@@ -16,13 +59,16 @@ export async function POST(req: NextRequest) {
     const phone = formData.get("phone");
     const email = formData.get("email");
     const password = formData.get("password");
+    const website = formData.get("website");
+    const address = formData.get("address");
 
-    console.log(employerName, email, password);
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
 
-    const employerAccount = await employerModel.create({ 
+    const employerAccount = await employerModel.create({
       employerName,
+      address,
+      website,
       email,
       password: hashedPassword,
       phone,
@@ -56,7 +102,7 @@ export async function PUT(req: NextRequest) {
 
     const formData = await req.formData();
 
-    const decodedToken = getDataFromToken(req)
+    const { id } = getDataFromToken(req)
 
     const employerName = formData.get("employerName");
     const phone = formData.get("phone");
@@ -66,7 +112,7 @@ export async function PUT(req: NextRequest) {
       phone,
     };
 
-    await employerModel.findByIdAndUpdate({ _id: decodedToken.id }, update);
+    await employerModel.findByIdAndUpdate({ _id: id }, update);
 
     return NextResponse.json({
       message: "Employer profile updated successfully",

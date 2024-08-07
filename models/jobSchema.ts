@@ -10,7 +10,6 @@ const jobSchema = new Schema({
     minAge: { type: String },
     maxAge: { type: String },
     location: { type: String },
-    state: { type: String },
     requirements: { type: String },
     gender: { type: String },
     isFeatured: { type: Boolean, default: false },

@@ -1,5 +1,35 @@
 export const jobCategories = [
 
+    { id: 1, name: "Information Technology" },
+    { id: 2, name: "Medical" },
+    { id: 3, name: "Management" },
+    { id: 4, name: "Design and Creative" },
+    { id: 5, name: "Hospitality and Services" },
+    { id: 6, name: "Science and Engineering" },
+    { id: 7, name: "Trades and Labor" },
+    { id: 8, name: "Agriculture and Farming" },
+    { id: 9, name: "Military and Defense" },
+    { id: 10, name: "Education" },
+    { id: 11, name: "Finance and Accounting" },
+    { id: 12, name: "Marketing and Advertising" },
+    { id: 13, name: "Transportation and Logistics" },
+    { id: 14, name: "Manufacturing and Production" },
+    { id: 15, name: "Retail and Sales" },
+    { id: 16, name: "Customer Service" },
+    { id: 17, name: "Real Estate" },
+    { id: 18, name: "Environmental and Conservation" },
+    { id: 19, name: "Media and Communications" },
+    { id: 20, name: "Health and Wellness" },
+    { id: 21, name: "Construction" },
+    { id: 22, name: "Arts and Entertainment" },
+    { id: 23, name: "Research and Development" },
+    { id: 24, name: "Public Administration" }
+
+];
+
+
+export const jobData = [
+
     { id: 1, name: 'Frontend Developer' },
     { id: 2, name: 'Backend Developer' },
     { id: 3, name: 'Full Stack Developer' },
