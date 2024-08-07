@@ -46,7 +46,6 @@ export async function GET(req: NextRequest) {
 
 
 
-
 // create account for employer
 
 export async function POST(req: NextRequest) {
