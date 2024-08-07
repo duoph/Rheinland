@@ -13,10 +13,10 @@ import toast from "react-hot-toast";
 interface JobCardProps {
   job: Job | null;
   isLoading?: boolean;
-  fetchObject?: () => void;
+  reFectch?: () => void;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job, isLoading, fetchObject }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
@@ -44,6 +44,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, fetchObject }) => {
       } else {
         setSavedJobs((prev) => [...prev, job._id]);
         toast.success("Job Saved");
+      }
+      if (reFectch) {
+        reFectch()
       }
     } catch (error) {
       console.error('Error saving job:', error);

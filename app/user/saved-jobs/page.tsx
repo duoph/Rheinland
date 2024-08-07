@@ -53,7 +53,7 @@ const SavedJobsPage = () => {
                     ))
                     : jobsToDisplayList.length > 0
                         ? jobsToDisplayList.map((job) => (
-                            <JobCard key={job._id} isLoading={isLoading} job={job} />
+                            <JobCard  key={job._id} isLoading={isLoading} job={job} />
                         ))
                         : <p className="text-center text-gray-500">No saved jobs available.</p>
                 }
