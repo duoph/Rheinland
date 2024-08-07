@@ -4,13 +4,16 @@ import React, { useEffect, useState } from 'react';
 import JobCard from '@/components/JobCard';
 import { Job } from '@/types';
 import axios from 'axios';
-import SearchInput from '@/components/SuggestionInput';
 import { useSearchParams } from 'next/navigation';
 import SuggestionInput from '@/components/SuggestionInput';
 import { jobData } from '@/data/jobData';
 import { locations } from '@/data/location';
+import { useAccount } from '@/context/useAccount';
 
 const Jobs = () => {
+
+
+
 
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
@@ -69,7 +72,9 @@ const Jobs = () => {
         setJobsToDisplay(prev => prev + 18);
     };
 
+
     const displayedJobs = searchResults.slice(0, jobsToDisplay);
+
 
     return (
         <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-4 py-10'>
@@ -82,13 +87,13 @@ const Jobs = () => {
                     placeholder='Job Title'
                 />
                 <SuggestionInput
-                    searchInput={jobTitle}
-                    setSearchInput={setJobTitle}
+                    searchInput={location}
+                    setSearchInput={setLocation}
                     data={locations}
                     placeholder='Location'
                 />
                 <button
-                    onClick={fetchJobs} // Trigger search on button click
+                    onClick={fetchJobs} 
                     className='w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center'
                 >
                     Search

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 const Footer = () => {
+
   const path = usePathname();
 
   if (path.startsWith("/admin")) return null;
