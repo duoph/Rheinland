@@ -1,12 +1,13 @@
 "use client";
 
-// SavedJobsPage.jsx
 import JobCard from "@/components/JobCard";
 import { Job } from "@/types";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+
 const SavedJobsPage = () => {
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [savedJobs, setSavedJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); // Number of jobs displayed initially

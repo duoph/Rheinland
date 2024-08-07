@@ -35,11 +35,7 @@ const SingleJobPage = () => {
     setLoading(true);
     try {
       if (account?.token) {
-        const userRes = await axios.get("/api/user", {
-          headers: {
-            Authorization: `Bearer ${account.token}`,
-          },
-        });
+        const userRes = await axios.get("/api/user");
 
         if (userRes.data.success) {
           setSavedJobs(userRes.data.user.savedJobs?.map((job: Job) => job._id) || []);
@@ -186,7 +182,7 @@ const SingleJobPage = () => {
       <div className="flex flex-col items-start justify-center w-full gap-3">
         <h1 className="font-medium">Preferred Skills</h1>
         <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
-        
+
           {job?.skills && job.skills.length > 0 ? (
             <>
               {job.skills

@@ -1,6 +1,19 @@
-import React from 'react'
+'use client'
+
+import { Job } from '@/types';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
+import React, { useState } from 'react'
 
 const EditJob = () => {
+
+
+    const [job, setJob] = useState<Job | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+
+
+    const { jobId } = useParams()
+
     return (
         <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5 pb-20'>
 
@@ -113,6 +126,6 @@ const EditJob = () => {
             </form>
         </div >
     )
-}
 
+}
 export default EditJob
