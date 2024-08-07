@@ -31,7 +31,7 @@ const Footer = () => {
           <span className="underline">Quick Links</span>
           <Link href={"/about-us"} className="cursor-pointer">About Us</Link>
           <Link href={"/contact-us"} className="cursor-pointer">Contact Us </Link>
-          <Link href={"/about-us"} className="cursor-pointer">Privacy Policy</Link>
+          <Link href={"/privacy-policy"} className="cursor-pointer">Privacy Policy</Link>
         </div>
       </div>
 

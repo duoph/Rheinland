@@ -8,12 +8,16 @@ export default function middleware(request: NextRequest) {
     // Redirect to login page if the user is not authenticated
     if (!token) {
         if (path.startsWith("/employer") || path.startsWith("/admin") || path.startsWith("/user")) {
+            console.log("No Token")
             return NextResponse.redirect(new URL('/login', request.url));
         }
+
     }
 
 
     if (path === '/') {
+        console.log("No")
+
         if (accountType === "user") {
             return NextResponse.redirect(new URL('/jobs', request.url));
         }
