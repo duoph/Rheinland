@@ -9,9 +9,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { PiStudentFill } from "react-icons/pi";
 import { BsBuildingsFill } from "react-icons/bs";
-import { MdOutlineWorkHistory } from "react-icons/md";
 import { IoDocumentAttachOutline } from "react-icons/io5";
-import { FaBriefcase, FaBookmark } from "react-icons/fa"; // Import additional icons
+import { FaBriefcase } from "react-icons/fa"; // Import additional icons
 
 const AdminSliderMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

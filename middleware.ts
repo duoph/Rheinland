@@ -7,8 +7,21 @@ export default function middleware(request: NextRequest) {
 
     // Redirect to login page if the user is not authenticated
     if (!token) {
-        if (path.startsWith("/employer") || path.startsWith("/admin")) {
+        if (path.startsWith("/employer") || path.startsWith("/admin") || path.startsWith("/user")) {
             return NextResponse.redirect(new URL('/login', request.url));
+        }
+    }
+
+
+    if (path === '/') {
+        if (accountType === "user") {
+            return NextResponse.redirect(new URL('/jobs', request.url));
+        }
+        if (accountType === "admin") {
+            return NextResponse.redirect(new URL('/admin/candidates', request.url));
+        }
+        if (accountType === "employer") {
+            return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
     }
 
@@ -49,5 +62,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path'], // Apply middleware to /employer and /admin paths
+    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path', '/'], // Apply middleware to /employer and /admin paths
 };
