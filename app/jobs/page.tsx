@@ -31,7 +31,7 @@ const Jobs = () => {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                setSearchResults(data.jobs); // Initialize search results with all jobs
+                setSearchResults(data.jobs);
                 if (data.jobs.length === 0) {
                     setNoJobsMessage('No jobs available at the moment.');
                 } else {
@@ -52,8 +52,10 @@ const Jobs = () => {
         fetchJobs();
     }, []);
 
-    useEffect(() => {
-        // Filter jobs based on the search inputs
+
+    const handleSearch = () => {
+
+        setIsLoading(true);
         const filteredJobs = jobs.filter(job =>
             job?.title?.toLowerCase().includes(jobTitle?.toLowerCase()) &&
             job?.location?.toLowerCase().includes(location?.toLowerCase())
@@ -65,7 +67,13 @@ const Jobs = () => {
         } else {
             setNoJobsMessage('');
         }
-    }, [jobTitle, location, jobs]);
+        setIsLoading(false);
+    }
+
+    // useEffect(() => {
+    //     // Filter jobs based on the search inputs
+
+    // }, [jobTitle, location, jobs]);
 
     const handleLoadMore = () => {
         setJobsToDisplay(prev => prev + 18);
@@ -92,7 +100,7 @@ const Jobs = () => {
                     placeholder='Location'
                 />
                 <button
-                    onClick={fetchJobs} 
+                    onClick={handleSearch}
                     className='w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center'
                 >
                     Search

@@ -42,9 +42,9 @@ const CreateJob = () => {
         }
 
         try {
-            const res = await axios.post('/api/job', jobData);
+            const res = await axios.post('/api/job', jobData).then((res) => console.log(res.data));
             toast.success("Job created successfully");
-            console.log('Job created successfully:', res.data);
+            console.log('Job created successfully:');
         } catch (error) {
             console.error('Error creating job:', error);
             toast.error("Failed to create job");
@@ -52,6 +52,7 @@ const CreateJob = () => {
             setIsLoading(false);
         }
     };
+
 
     return (
         <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5 pb-20'>
@@ -68,7 +69,7 @@ const CreateJob = () => {
                 />
 
 
-                <select className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                <select onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     name="category" id="">
                     <option defaultChecked disabled>Select Category</option>
                     {jobCategories.map((JobCategory: any) => (
