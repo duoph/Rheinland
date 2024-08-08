@@ -11,9 +11,6 @@ import { locations } from '@/data/location';
 
 const Jobs = () => {
 
-
-
-
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
     const queryLocation = searchParams.get('location') || "";

@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     // Fetch the employer details from the database
     const employer = await employerModel.findById({ _id: id });
 
-    if (!employer) {
+    if (!employer && id !== employer._id) {
       return NextResponse.json({
         message: "Employer not found",
         success: false,

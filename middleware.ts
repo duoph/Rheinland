@@ -5,7 +5,6 @@ export default function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value || "";
     const accountType = request.cookies.get("accountType")?.value || "user";
 
-    // Redirect to login page if the user is not authenticated
     if (!token) {
         if (path.startsWith("/employer") || path.startsWith("/admin") || path.startsWith("/user")) {
             console.log("No Token")
@@ -15,7 +14,7 @@ export default function middleware(request: NextRequest) {
     }
 
 
-    if (path === '/') {
+    if (path === '/' && token) {
         console.log("No")
 
         if (accountType === "user") {
@@ -27,6 +26,11 @@ export default function middleware(request: NextRequest) {
         if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
+
+        if (!accountType || !token) {
+            return NextResponse.redirect(new URL('/', request.url));
+        }
+
     }
 
 

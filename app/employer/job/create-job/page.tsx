@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import SuggestionInput from '@/components/SuggestionInput';
 import { locations } from '@/data/location';
 import { jobCategories } from '@/data/jobData';
+import { useRouter } from 'next/router';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,6 +22,8 @@ const CreateJob = () => {
     const [maxAge, setMaxAge] = useState<string>('');
 
     const { account } = useAccount();
+
+    const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,6 +54,7 @@ const CreateJob = () => {
             console.error('Error creating job:', error);
             toast.error("Failed to create job");
         } finally {
+            router.push('/employer/job/my-jobs');
             setIsLoading(false);
         }
     };
@@ -58,7 +62,7 @@ const CreateJob = () => {
 
     return (
         <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5 pb-20'>
-            <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-semibold">Create Job</h1>
+            <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-semibold">Post a Job</h1>
 
             <form className='sm:w-[500px] w-full flex flex-col items-center justify-center gap-5' onSubmit={handleSubmit}>
                 <input
@@ -73,7 +77,7 @@ const CreateJob = () => {
 
                 <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     name="category" id="">
-                    <option disabled>Select Category</option>
+                    <option value='' disabled>Select Category</option>
                     {jobCategories.map((JobCategory: any) => (
                         <option key={JobCategory.id} value={JobCategory.name}>{JobCategory.name}</option>
                     ))}
@@ -106,7 +110,7 @@ const CreateJob = () => {
                     required
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 >
-                    <option value='' disabled>Minimum Language Level Required</option>
+                    <option value='' disabled>Select Minimum Language Level</option>
                     <option value='A1'>A1</option>
                     <option value='A2'>A2</option>
                     <option value='B1'>B1</option>
@@ -155,7 +159,7 @@ const CreateJob = () => {
                     className='px-5 py-3  w-full bg-rheinland-red text-white'
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Creating...' : 'Create Job'}
+                    {isLoading ? 'Posting...' : 'Submit'}
                 </button>
             </form>
         </div>

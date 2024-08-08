@@ -69,7 +69,7 @@ const EmployerProfile = () => {
   if (loading) {
     return (
       <div className="pt-[95px] flex items-center justify-center w-full h-[calc(100vh-95px)]">
-        <p className="text-xl font-semibold">Loading...</p>
+        <p className="text-xl ">Loading...</p>
       </div>
     );
   }
