@@ -16,6 +16,7 @@ const CreateJob = () => {
     const [skills, setSkills] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [gender, setGender] = useState<string>('');
+    const [languageLevel, setLanguageLevel] = useState<string>('');
     const [minAge, setMinAge] = useState<string>('');
     const [maxAge, setMaxAge] = useState<string>('');
 
@@ -32,6 +33,7 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
+            languageLevel,
             minAge,
             maxAge,
         };
@@ -69,9 +71,9 @@ const CreateJob = () => {
                 />
 
 
-                <select onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     name="category" id="">
-                    <option defaultChecked disabled>Select Category</option>
+                    <option disabled>Select Category</option>
                     {jobCategories.map((JobCategory: any) => (
                         <option key={JobCategory.id} value={JobCategory.name}>{JobCategory.name}</option>
                     ))}
@@ -98,11 +100,26 @@ const CreateJob = () => {
                     <option value='Any'>Any</option>
                 </select>
 
+                <select
+                    value={gender}
+                    onChange={(e) => setLanguageLevel(e.target.value)}
+                    required
+                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                >
+                    <option value='' disabled>Minimum Language Level Required</option>
+                    <option value='A1'>A1</option>
+                    <option value='A2'>A2</option>
+                    <option value='B1'>B1</option>
+                    <option value='B2'>B2</option>
+                    <option value='C1'>C1</option>
+                    <option value='C2'>C2</option>
+                </select>
+
                 <input
                     type='text'
                     value={skills}
                     onChange={(e) => setSkills(e.target.value)}
-                    placeholder='Skills (comma-separated)'
+                    placeholder='Skills (comma-separated) (eg. Python, Java, C++)'
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
 

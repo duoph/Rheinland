@@ -76,7 +76,7 @@ const EmployerProfile = () => {
 
   return (
     <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
-      <h1 className="text-4xl font-bold">Employer Profile</h1>
+      <h1 className="text-4xl font-bold text-rheinland-red">Profile</h1>
       <div className="w-full max-w-xl">
         <div className="grid grid-cols-1 gap-2 mb-3">
           <input

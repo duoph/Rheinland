@@ -39,31 +39,31 @@ export async function POST(req: NextRequest) {
             title,
             description,
             category,
-            state,
             location,
             requirements,
             gender,
             skills,
+            languageLevel,
             minAge,
             maxAge
         } = await req.json();
 
-        if (!title || !description || !category) {
+        if (!title || !description || !category || !location) {
             return NextResponse.json({ error: 'Missing required fields', success: false, status: 400 });
         }
 
         const newJob = new jobModel({
+            employerId: id,
             title,
             description,
             category,
-            employerId: id, 
-            state,
             location,
             requirements,
             gender,
             skills,
+            languageLevel,
             minAge,
-            maxAge,
+            maxAge
         });
 
         // Save the new job to the database
@@ -96,7 +96,7 @@ export async function PUT(req: NextRequest) {
             location,
             requirements,
             gender,
-            skills, 
+            skills,
             minAge,
             maxAge,
         }, { new: true });
