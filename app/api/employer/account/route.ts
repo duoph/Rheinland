@@ -59,14 +59,14 @@ export async function POST(req: NextRequest) {
     const email = formData.get("email");
     const password = formData.get("password");
     const website = formData.get("website");
-    const address = formData.get("address");
+    const location = formData.get("location");
 
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
 
     const employerAccount = await employerModel.create({
       employerName,
-      address,
+      location,
       website,
       email,
       password: hashedPassword,
@@ -101,14 +101,22 @@ export async function PUT(req: NextRequest) {
 
     const formData = await req.formData();
 
-    const { id } = getDataFromToken(req)
+    const { id } = await getDataFromToken(req)
 
     const employerName = formData.get("employerName");
     const phone = formData.get("phone");
+    const email = formData.get("email");
+    const website = formData.get("website");
+    const location = formData.get("location");
+    const about = formData.get("about");
 
     const update = {
       employerName,
+      location,
       phone,
+      website,
+      email,
+      about
     };
 
     await employerModel.findByIdAndUpdate({ _id: id }, update);

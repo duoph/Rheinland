@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaRegTrashAlt, FaRegUser } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import ConfirmationModal from '../confirmationModal';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../ConfirmationModal';
 
 const EmployerJobCard = ({ job }: any) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

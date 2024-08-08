@@ -40,14 +40,14 @@ const EmployerProfile = () => {
     try {
       setIsEditable(false);
       const formData = new FormData();
-      formData.append('companyName', employerName);
+      formData.append('employerName', employerName);
       formData.append('address', address);
       formData.append('phone', phone);
       formData.append('email', email);
       formData.append('website', website);
       formData.append('about', about);
 
-      await axios.put(`/api/employer/${account.id}`, formData, {
+      await axios.put(`/api/employer/account`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
