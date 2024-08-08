@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import ApplicationCard from "@/components/ApplicationCard";
 import { CiSearch } from "react-icons/ci";
+import axios from "axios";
 
 const ApplicationPage = () => {
   const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
@@ -14,10 +15,10 @@ const ApplicationPage = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await fetch("/api/applications");
-      const data = await response.json();
-      setApplicants(data);
-      setSearchResults(data);
+      const response = await axios.get("/api/job/appliedJobs");
+      console.log(response.data.appliedJobs);
+      // setApplicants(data);
+      // setSearchResults(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching applications:", error);

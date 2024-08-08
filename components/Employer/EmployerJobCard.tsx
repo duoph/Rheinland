@@ -50,7 +50,7 @@ const EmployerJobCard: React.FC<EmployerJobCardProps> = ({ job, loading }) => {
           <div className="flex flex-row items-center gap-2">
             <Skeleton className="w-[20px] h-[20px]" />
             <Skeleton className="w-[100px] h-[20px]" />
-          </div>
+      </div>
         </div>
         <Skeleton className="w-full h-[60px] mt-3" />
         <Skeleton className="w-[100px] h-[20px] mt-2" />
