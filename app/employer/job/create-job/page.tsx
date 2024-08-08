@@ -67,14 +67,15 @@ const CreateJob = () => {
                     className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                 />
 
-                <SuggestionInput
-                    placeholder='Category'
-                    data={jobCategories}
-                    searchInput={category}
-                    setSearchInput={setCategory}
-                    classNames="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
 
-                />
+                <select className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    name="category" id="">
+                    <option defaultChecked disabled>Select Category</option>
+                    {jobCategories.map((JobCategory: any) => (
+                        <option key={JobCategory.id} value={JobCategory.name}>{JobCategory.name}</option>
+                    ))}
+                </select>
+
 
                 <textarea
                     value={description}

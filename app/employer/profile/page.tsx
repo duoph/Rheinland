@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaEdit, FaSave } from "react-icons/fa";
-import { useAccount } from "@/context/useAccount";
+import toast from "react-hot-toast";
 
 const EmployerProfile = () => {
   const [employerName, setEmployerName] = useState("");
@@ -13,8 +13,8 @@ const EmployerProfile = () => {
   const [website, setWebsite] = useState("");
   const [about, setAbout] = useState("");
   const [isEditable, setIsEditable] = useState(false);
+  const [loading, setLoading] = useState(true); // Add loading state
 
-  const { account } = useAccount();
 
   const fetchEmployer = async () => {
     try {
@@ -29,6 +29,8 @@ const EmployerProfile = () => {
       setAbout(employerData?.about);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,17 +49,30 @@ const EmployerProfile = () => {
       formData.append('website', website);
       formData.append('about', about);
 
-      await axios.put(`/api/employer/account`, formData, {
+      const res = await axios.put(`/api/employer/account`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
+      if (res.data.success === false) {
+        toast.error(res.data.message);
+      } else {
+        toast.success(res.data.message);
+      }
       setIsEditable(false);
     } catch (error) {
       console.error('Error updating employer:', error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="pt-[95px] flex items-center justify-center w-full h-[calc(100vh-95px)]">
+        <p className="text-xl font-semibold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">

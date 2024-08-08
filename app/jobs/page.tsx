@@ -8,7 +8,6 @@ import { useSearchParams } from 'next/navigation';
 import SuggestionInput from '@/components/SuggestionInput';
 import { jobData } from '@/data/jobData';
 import { locations } from '@/data/location';
-import { useAccount } from '@/context/useAccount';
 
 const Jobs = () => {
 

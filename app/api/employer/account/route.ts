@@ -64,6 +64,18 @@ export async function POST(req: NextRequest) {
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
 
+
+    const emailCheck = await employerModel.findOne({ email });
+
+    if (emailCheck) {
+      return NextResponse.json({
+        message: "Email already exists",
+        success: false,
+        status: 400,
+      });
+    }
+
+
     const employerAccount = await employerModel.create({
       employerName,
       location,
@@ -109,6 +121,18 @@ export async function PUT(req: NextRequest) {
     const website = formData.get("website");
     const location = formData.get("location");
     const about = formData.get("about");
+
+
+    const emailCheck = await employerModel.findOne({ email });
+
+    if (emailCheck) {
+      return NextResponse.json({
+        message: "Email already exists",
+        success: false,
+        status: 400,
+      });
+    }
+
 
     const update = {
       employerName,
