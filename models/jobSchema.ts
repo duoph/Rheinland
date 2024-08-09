@@ -15,8 +15,8 @@ const jobSchema = new Schema({
     languageLevel: { type: String },
     gender: { type: String },
     isFeatured: { type: Boolean, default: false },
-    appliedUsers: { type: mongoose.Schema.ObjectId, ref: 'user' },
-    savedUsers: { type: mongoose.Schema.ObjectId, ref: 'user' },
+    appliedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'user' }],
+    savedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'user' }],
     employerId: { type: mongoose.Schema.ObjectId, ref: 'employer', required: true },
     approvedByAdmin: { type: Boolean, default: false }
 

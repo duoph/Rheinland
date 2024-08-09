@@ -13,7 +13,6 @@ const userSchema = new Schema({
     resumeURL: { type: String },
     address: { type: String },
     about: { type: String },
-    knownLanguages: [{ type: String }],
     germanLanguageLevel: { type: String },
     savedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
     appliedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],

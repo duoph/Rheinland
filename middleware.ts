@@ -17,6 +17,9 @@ export default function middleware(request: NextRequest) {
     if (path === '/' && token) {
         console.log("No")
 
+        // console.log(token)
+        // console.log(accountType)
+
         if (accountType === "user") {
             return NextResponse.redirect(new URL('/jobs', request.url));
         }
@@ -40,7 +43,7 @@ export default function middleware(request: NextRequest) {
         } else if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         } else if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin', request.url));
+            return NextResponse.redirect(new URL('/admin/all-jobs', request.url));
         }
     }
 
@@ -65,10 +68,21 @@ export default function middleware(request: NextRequest) {
         }
     }
 
+
+    if (path === "/jobs") {
+        if (accountType === "employer") {
+            return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
+        }
+        if (accountType === "admin") {
+            return NextResponse.redirect(new URL('/admin/jobs', request.url));
+        }
+    }
+
+
     // Allow access for all other paths
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path', '/'], // Apply middleware to /employer and /admin paths
+    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path', '/', '/jobs'], // Apply middleware to /employer and /admin paths
 };

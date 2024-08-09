@@ -51,7 +51,7 @@ export async function PUT(req: NextRequest, { params }: any) {
         await connectMongoDB();
 
         const jobId = params.jobId;
-        
+
         const { title, description, category, skills, employerId, state, location, requirements, gender, minAge, maxAge } = await req.json();
 
         await jobModel.updateOne({ _id: jobId }, { $set: { title, description, category, skills, employerId, state, location, requirements, gender, minAge, maxAge } });
