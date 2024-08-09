@@ -23,7 +23,17 @@ const CategoryPage = () => {
                                 <h2 className='text-xl font-semibold'>{category.name}</h2>
                             </div>
                             <div className='p-4'>
-                                <p className='text-gray-700'>{category.description}</p>
+                                <p
+                                    className="font-light h-full overflow-hidden"
+                                    style={{
+                                        display: "-webkit-box",
+                                        WebkitLineClamp: 3,
+                                        WebkitBoxOrient: "vertical",
+                                        textOverflow: "ellipsis",
+                                    }}
+                                >
+                                    {category.description}
+                                </p>
                             </div>
 
                             <div className='flex items-center justify-end w-full px-3'>
