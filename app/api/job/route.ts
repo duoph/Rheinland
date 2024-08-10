@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectMongoDB from '@/lib/dbConnect';
 import jobModel from '@/models/jobSchema';
+import { getDataFromToken } from '@/actions/getDataFromToken';
 
 export const revalidate = 100;
 
