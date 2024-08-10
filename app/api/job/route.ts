@@ -1,29 +1,35 @@
-import { getDataFromToken } from "@/actions/getDataFromToken";
-import connectMongoDB from "@/lib/dbConnect";
-import jobModel from "@/models/jobSchema";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import connectMongoDB from '@/lib/dbConnect';
+import jobModel from '@/models/jobSchema';
 
-
-export const revalidate = 0
-
+export const revalidate = 100;
 
 export async function GET(req: NextRequest) {
-
     try {
+        // Connect to MongoDB
+        await connectMongoDB();
 
-        await connectMongoDB()
+        // Fetch jobs from the database
+        const jobs = await jobModel.find();
 
-        const jobs = await jobModel.find()
-
-        return NextResponse.json({ message: 'Fetched Job successfully', success: true, jobs });
+        // Return success response
+        return NextResponse.json({
+            message: 'Fetched jobs successfully',
+            success: true,
+            jobs
+        }, { status: 200 });
 
     } catch (error) {
+        console.error('Error fetching jobs:', error);
 
-        console.error('Error Fetching job:', error);
-        return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
-
+        // Return error response
+        return NextResponse.json({
+            error: 'Internal server error',
+            success: false
+        }, { status: 500 });
     }
 }
+
 
 
 export async function POST(req: NextRequest) {
