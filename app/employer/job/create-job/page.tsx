@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import SuggestionInput from '@/components/SuggestionInput';
 import { locations } from '@/data/location';
 import { jobCategories } from '@/data/jobData';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const CreateJob = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const CreateJob = () => {
         }
 
         try {
-            const res = await axios.post('/api/job', jobData).then((res) => console.log(res.data));
+            await axios.post('/api/job', jobData).then((res) => console.log(res.data));
             toast.success("Job created successfully");
             console.log('Job created successfully:');
         } catch (error) {
