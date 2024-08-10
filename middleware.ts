@@ -20,19 +20,9 @@ export default function middleware(request: NextRequest) {
         // console.log(token)
         // console.log(accountType)
 
-        if (accountType === "user") {
-            return NextResponse.redirect(new URL('/jobs', request.url));
-        }
-        if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/candidates', request.url));
-        }
-        if (accountType === "employer") {
-            return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
-        }
-
-        if (!accountType || !token) {
-            return NextResponse.redirect(new URL('/', request.url));
-        }
+        
+            return NextResponse.redirect(new URL('/login', request.url));
+        
 
     }
 

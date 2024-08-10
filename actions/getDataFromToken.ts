@@ -11,13 +11,12 @@ export const getDataFromToken: any = async (req: NextRequest) => {
         console.log(token)
 
         if (!token) {
-            throw new Error('Authorization token not found in cookies');
+            console.log('Authorization token not found in cookies');
         }
 
-        const decodedToken = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET!);
+        const decodedToken = jwt.verify(token ? token : '', process.env.NEXT_PUBLIC_JWT_SECRET!);
 
         console.log(decodedToken)
-
 
         return decodedToken;
 

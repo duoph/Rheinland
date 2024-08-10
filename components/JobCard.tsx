@@ -19,12 +19,14 @@ interface JobCardProps {
 const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
+  const [token, setToken] = useState<string | null>(null);
 
   const fetchUser = async () => {
+    if (!token) return; // Only fetch if token is available
+
     try {
-      const res = await axios.get('/api/user');
-      setSavedJobs(res.data.user.savedJobs.map((job: Job) => job._id));
-      console.log(res.data.user.savedJobs);
+      const res = await axios.get('/api/user', { headers: { Authorization: `Bearer ${token}` } });
+      setSavedJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -35,10 +37,10 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
     if (!job) return;
 
     try {
-      const response = await axios.put(`/api/job/${job._id}/user/save`);
-      console.log(response.data);
+      const response = await axios.put(`/api/job/${job._id}/user/save`, {}, { headers: { Authorization: `Bearer ${token}` } });
+      console.log(response?.data);
 
-      if (savedJobs.includes(job._id)) {
+      if (savedJobs?.includes(job._id)) {
         setSavedJobs((prev) => prev.filter((id) => id !== job._id));
         toast.success("Job Removed");
       } else {
@@ -46,7 +48,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
         toast.success("Job Saved");
       }
       if (reFectch) {
-        reFectch()
+        reFectch();
       }
     } catch (error) {
       console.error('Error saving job:', error);
@@ -54,8 +56,16 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    const getToken = async () => {
+      // Replace this with your actual logic to get the token
+      const token = localStorage.getItem('account.token');
+      setToken(token);
+    };
+
+    getToken().then(() => {
+      fetchUser();
+    });
+  }, [token]);
 
   if (isLoading) {
     return (
@@ -103,10 +113,6 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
           <span>{job.title}</span>
         </div>
         <div className="flex font-light text-sm gap-2 w-full py-1">
-          {/* <span className="flex items-center justify-center gap-[6px]">
-            <HiOutlineBuildingOffice2 />
-            Rheinland
-          </span> */}
           <span className="flex items-center justify-center gap-[6px]">
             <CiLocationOn />
             {job.location}
