@@ -43,7 +43,7 @@ const LoginPage = () => {
                 }
 
                 if (res.data.accountType === 'admin') {
-                    router.push('/admin');
+                    router.push('/admin/applications');
                 }
 
                 const accountData = {

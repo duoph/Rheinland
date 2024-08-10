@@ -13,6 +13,7 @@ import { MdAccessTime } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import { useAccount } from "@/context/useAccount";
+import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 
 
 const SingleJobPage = () => {
@@ -22,6 +23,7 @@ const SingleJobPage = () => {
   const { jobId } = useParams();
 
   const [job, setJob] = useState<Job | null>(null);
+  const [relatedJobs, setRelatedJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState<boolean>(true);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
@@ -44,6 +46,17 @@ const SingleJobPage = () => {
           console.error("Failed to load user data:", userRes.data.message);
         }
       }
+
+
+      const relatedJobsRes = await axios.get(`/api/job`);
+      if (relatedJobsRes.data.success) {
+        setRelatedJobs(relatedJobsRes.data.jobs);
+      } else {
+        setError("Failed to load job data.");
+      }
+
+
+
 
       const jobRes = await axios.get(`/api/job/${jobId}`);
       if (jobRes.data.success) {
@@ -235,7 +248,7 @@ const SingleJobPage = () => {
         </div>
 
         {/* Related Jobs Section */}
-        {/* <RelatedJobs jobs={jobs} loading={loading} /> */}
+        <RelatedJobs jobs={relatedJobs} loading={loading} />
       </div>
 
     </div>

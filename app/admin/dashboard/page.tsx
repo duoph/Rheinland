@@ -4,11 +4,13 @@ import React, { useState, useEffect } from "react";
 import ApplicationCard from "@/components/ApplicationCard";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
+import AdminJobCard from "@/components/Admin/AdminJobCard";
 
-const ApplicationPage = () => {
+const AdminDashboard = () => {
   const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [applicants, setApplicants] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<any[]>([]);
   const [search, setSearch] = useState<string>('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('all');
@@ -16,9 +18,7 @@ const ApplicationPage = () => {
   const fetchApplications = async () => {
     try {
       const response = await axios.get("/api/job/appliedJobs");
-      console.log(response.data.appliedJobs);
-      // setApplicants(data);
-      // setSearchResults(data);
+      setApplicants(response.data.appliedJobs);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching applications:", error);
@@ -26,7 +26,19 @@ const ApplicationPage = () => {
     }
   };
 
+  const fetchAllJobs = async () => {
+    try {
+      const response = await axios.get("/api/job/");
+      setJobs(response.data.jobs);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
+    fetchAllJobs();
     fetchApplications();
   }, []);
 
@@ -38,16 +50,26 @@ const ApplicationPage = () => {
     }
   }, [selectedApplicantsType, applicants]);
 
+  useEffect(() => {
+    if (search) {
+      setSearchResults(prevResults => prevResults.filter(applicant => 
+        applicant.name.toLowerCase().includes(search.toLowerCase()) ||
+        applicant.job.toLowerCase().includes(search.toLowerCase()) ||
+        applicant.location.toLowerCase().includes(search.toLowerCase())
+      ));
+    } else {
+      setSearchResults(applicants);
+    }
+  }, [search]);
+
   const handleLoadMore = () => {
-    setApplicantsToDisplay((prev) => prev + 18);
+    setApplicantsToDisplay(prev => prev + 18);
   };
 
-  const displayedApplicants = searchResults?.slice(0, applicantsToDisplay);
+  const displayedApplicants = searchResults.slice(0, applicantsToDisplay);
 
   return (
     <div className="pt-[95px] flex flex-col gap-5 items-center px-3 pb-10">
-      <h1 className="font-semibold text-[30px]">All Applications</h1>
-
       <div className="flex items-center justify-center gap-2 md:gap-3 lg:gap-5 rounded-md pt-3 px-5 md:px-10 w-full text-[15px] flex-wrap">
         <span
           onClick={() => setSelectedApplicantsType('all')}
@@ -56,10 +78,10 @@ const ApplicationPage = () => {
           All
         </span>
         <span
-          onClick={() => setSelectedApplicantsType('shortListed')}
-          className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'shortListed' ? 'bg-rheinland-red text-white' : ''}`}
+          onClick={() => setSelectedApplicantsType('jobs')}
+          className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'jobs' ? 'bg-rheinland-red text-white' : ''}`}
         >
-          Short Listed Applicants
+          Jobs
         </span>
         <span
           onClick={() => setSelectedApplicantsType('contacted')}
@@ -86,15 +108,29 @@ const ApplicationPage = () => {
         <CiSearch className='rounded-md text-[30px] cursor-pointer text-white' />
       </div>
 
-      <div className="flex items-center justify-center flex-wrap gap-3">
-        {isLoading
-          ? Array.from({ length: 18 }).map((_, index) => (
-            <ApplicationCard key={index} />
-          ))
-          : displayedApplicants?.map((applicant, index) => (
-            <ApplicationCard key={index} applicant={applicant} />
-          ))}
-      </div>
+      {selectedApplicantsType === 'jobs' && (
+        <div className="flex items-center justify-center flex-wrap gap-3">
+          {jobs.length > 0 ? (
+            jobs.map((job, index) => (
+              <AdminJobCard key={index} job={job} />
+            ))
+          ) : (
+            <p>No jobs available</p>
+          )}
+        </div>
+      )}
+
+      {selectedApplicantsType !== 'jobs' && (
+        <div className="flex items-center justify-center flex-wrap gap-3">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            displayedApplicants.map((applicant, index) => (
+              <ApplicationCard key={index} applicant={applicant} />
+            ))
+          )}
+        </div>
+      )}
 
       {displayedApplicants?.length > 0 && applicants?.length > applicantsToDisplay && (
         <button onClick={handleLoadMore} className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3">
@@ -105,4 +141,4 @@ const ApplicationPage = () => {
   );
 };
 
-export default ApplicationPage;
+export default AdminDashboard;

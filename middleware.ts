@@ -14,16 +14,11 @@ export default function middleware(request: NextRequest) {
     }
 
 
-    if (path === '/' && token) {
+    if (path === '/') {
         console.log("No")
-
-        // console.log(token)
-        // console.log(accountType)
-
-        
+        if (token.length > 0) {
             return NextResponse.redirect(new URL('/login', request.url));
-        
-
+        }
     }
 
 
@@ -33,14 +28,14 @@ export default function middleware(request: NextRequest) {
         } else if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         } else if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/all-jobs', request.url));
+            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
         }
     }
 
 
     if (path.startsWith("/job/:path") && token) {
         if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin', request.url));
+            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
         } else if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
@@ -64,7 +59,7 @@ export default function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
         if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/jobs', request.url));
+            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
         }
     }
 
