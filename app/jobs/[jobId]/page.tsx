@@ -115,6 +115,12 @@ const SingleJobPage = () => {
     }
   };
 
+  // Function to format text with line breaks
+  const formatTextWithLineBreaks = (text: any) => {
+    return text.replace(/\n/g, '<br>');
+  };
+
+
   const isJobApplied = job && appliedJobs.includes(job._id);
 
   if (loading) {
@@ -180,8 +186,8 @@ const SingleJobPage = () => {
       </div>
 
       <div className="flex flex-col items-start justify-center w-full gap-3">
-        <h1 className="font-medium">Preferred Skills</h1>
-        <div className="font-light text-sm text-white flex flex-wrap gap-2 pb-3">
+        {/* <h1 className="font-medium">Preferred Skills</h1> */}
+        <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
 
           {job?.skills && job.skills.length > 0 ? (
             <>
@@ -206,10 +212,8 @@ const SingleJobPage = () => {
         </div>
 
         <div className="flex flex-col gap-2 items-start justify-center w-full">
-          <h1 className="font-medium">Job Description</h1>
-          <p className="font-light">
-            {job?.description || "No description available"}
-          </p>
+          {/* <h1 className="font-medium">Job Description</h1> */}
+          <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
         </div>
 
         <div className="w-full h-full flex items-center gap-5 justify-center py-10">

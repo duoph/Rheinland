@@ -9,6 +9,7 @@ import { HiOutlineBuildingOffice2, HiOutlineBookmark, HiBookmark } from "react-i
 import { Skeleton } from "./ui/skeleton";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAccount } from "@/context/useAccount";
 
 interface JobCardProps {
   job: Job | null;
@@ -19,25 +20,31 @@ interface JobCardProps {
 const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
-  const [token, setToken] = useState<string | null>(null);
+
+  const { account } = useAccount()
 
   const fetchUser = async () => {
-    if (!token) return; // Only fetch if token is available
+    if (!account.token) return
 
     try {
-      const res = await axios.get('/api/user', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get('/api/user');
       setSavedJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
   };
 
+  useEffect(() => {
+    if (!account.token) return;
+    fetchUser();
+  }, []);
+
   const handleSave = async (e: React.MouseEvent<SVGElement>) => {
     e.stopPropagation();
     if (!job) return;
 
     try {
-      const response = await axios.put(`/api/job/${job._id}/user/save`, {}, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.put(`/api/job/${job._id}/user/save`);
       console.log(response?.data);
 
       if (savedJobs?.includes(job._id)) {
@@ -55,17 +62,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
     }
   };
 
-  useEffect(() => {
-    const getToken = async () => {
-      // Replace this with your actual logic to get the token
-      const token = localStorage.getItem('account.token');
-      setToken(token);
-    };
 
-    getToken().then(() => {
-      fetchUser();
-    });
-  }, [token]);
 
   if (isLoading) {
     return (
