@@ -80,9 +80,9 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                     </div>
                 </div>
                 <Skeleton className="w-full h-[60px] mt-3" />
-                <div className="flex justify-between items-center mt-2">
-                    <Skeleton className="w-[20px] h-[20px]" />
-                    <Skeleton className="w-[20px] h-[20px]" />
+                <div className="flex gap-2 justify-center items-center w-full mt-2">
+                    <Skeleton className="p-2 w-full" />
+                    <Skeleton className="p-2 w-full" />
                 </div>
             </div>
         );

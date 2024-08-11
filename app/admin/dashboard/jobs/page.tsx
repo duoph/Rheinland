@@ -66,18 +66,21 @@ const ApplicationsPage = () => {
             </div>
 
             <div className="flex items-center justify-center flex-wrap gap-3">
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : (
-                    displayJobs.length > 0 ? (
-                        displayJobs.map((job, index) => (
-                            <AdminJobCard reFectch={fetchAllJobs} key={index} job={job} />
+                {
+                    isLoading
+                        ? Array.from({ length: 16 }).map((_, index) => (
+                            <AdminJobCard key={index} isLoading={isLoading} job={null} />
                         ))
-                    ) : (
-                        <p>No jobs available</p>
-                    )
-                )}
+                        : displayJobs.length > 0
+                            ? displayJobs.map((job) => (
+                                <AdminJobCard key={job._id} isLoading={isLoading} job={job} />
+                            ))
+                            : <p>No jobs available</p>
+
+                }
             </div>
+
+
 
             {displayJobs.length > 0 && searchResults.length > applicantsToDisplay && (
                 <div className="flex justify-center mt-4">
