@@ -1,12 +1,15 @@
+"use client";
+
 import { Job } from '@/types';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
-import { CiLocationOn } from 'react-icons/ci';
+import { CiLocationOn, CiTrash } from 'react-icons/ci';
 import Link from 'next/link';
 import Image from 'next/image';
-
-
+import { FaRegEyeSlash } from 'react-icons/fa';
+import ConfirmationModal from '../ConfirmationModal';
+import toast from 'react-hot-toast';
 
 interface AdminJobCardProps {
     job: Job | null;
@@ -14,17 +17,14 @@ interface AdminJobCardProps {
     reFectch?: () => void;
 }
 
-
 const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
-
-    const [savedJobs, setSavedJobs] = useState<string[]>([]);
-
+    const [jobs, setJobs] = useState<string[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const fetchUser = async () => {
-
         try {
             const res = await axios.get('/api/user');
-            setSavedJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
+            setJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -34,6 +34,32 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
         fetchUser();
     }, []);
 
+    const handleDelete = async () => {
+        if (job?._id) {
+            try {
+                await axios.delete(`/api/job/${job._id}`);
+                if (reFectch) reFectch();
+            } catch (error) {
+                console.error('Error deleting job:', error);
+            } finally {
+                toast.success('Job Deleted');
+            }
+        }
+        setIsModalOpen(false);
+    };
+
+    const handleHide = async () => {
+        if (job?._id) {
+            try {
+                await axios.put(`/api/job/${job._id}`, { visible: false });
+                if (reFectch) reFectch();
+            } catch (error) {
+                console.error('Error hiding job:', error);
+            } finally {
+                toast.success('Job hidden');
+            }
+        }
+    };
 
     if (isLoading) {
         return (
@@ -54,17 +80,18 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                     </div>
                 </div>
                 <Skeleton className="w-full h-[60px] mt-3" />
-                <Skeleton className="w-[100px] h-[20px] mt-2" />
+                <div className="flex justify-between items-center mt-2">
+                    <Skeleton className="w-[20px] h-[20px]" />
+                    <Skeleton className="w-[20px] h-[20px]" />
+                </div>
             </div>
         );
     }
 
-    if (!job) {
-        return null;
-    }
+    if (!job) { return null; }
 
     return (
-        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer">
+        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px]  group rounded-sm px-3 py-2 cursor-pointer">
             <Link href={`/admin/${job._id}`} className="w-full">
                 <div className="flex justify-between items-center w-full py-2">
                     <Image
@@ -86,6 +113,12 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                         {job.location}
                     </span>
                 </div>
+
+                {/* Applicants length */}
+                <span className="text-sm opacity-50 py-2">{job?.appliedUsers?.length} Applicants</span>
+
+
+
                 <div className="h-[80px] w-full py-1">
                     <p
                         className="font-light h-full overflow-hidden"
@@ -101,8 +134,31 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                 </div>
             </Link>
 
-        </div>
-    )
-}
 
-export default AdminJobCard
+
+
+
+            <div className="flex gap-2 justify-center items-center w-full">
+                <button
+                    onClick={handleHide}
+                    className="flex items-center justify-center bg-rheinland-gray w-full rounded-sm p-2"
+                >
+                    <FaRegEyeSlash className="text-xl text-white" />
+                </button>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="flex items-center justify-center bg-rheinland-red w-full rounded-sm p-2"
+                >
+                    <CiTrash className="text-xl text-white" />
+                </button>
+            </div>
+            <ConfirmationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleDelete}
+            />
+        </div>
+    );
+};
+
+export default AdminJobCard;
