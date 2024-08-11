@@ -53,9 +53,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (search) {
       setSearchResults(prevResults => prevResults.filter(applicant => 
-        applicant.name.toLowerCase().includes(search.toLowerCase()) ||
-        applicant.job.toLowerCase().includes(search.toLowerCase()) ||
-        applicant.location.toLowerCase().includes(search.toLowerCase())
+        applicant?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        applicant?.job?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        applicant?.location?.toLowerCase()?.includes(search?.toLowerCase())
       ));
     } else {
       setSearchResults(applicants);

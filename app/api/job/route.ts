@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         await connectMongoDB();
 
         // Fetch jobs from the database
-        const jobs = await jobModel.find();
+        const jobs = await jobModel.find({});
 
         // Return success response
         return NextResponse.json({
