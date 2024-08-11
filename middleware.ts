@@ -28,14 +28,14 @@ export default function middleware(request: NextRequest) {
         } else if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         } else if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+            return NextResponse.redirect(new URL('admin/dashboard/applications', request.url));
         }
     }
 
 
-    if (path.startsWith("/job/:path") && token) {
+    if (path.startsWith("/job/") && token) {
         if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+            return NextResponse.redirect(new URL('/admin/dashboard/applications', request.url));
         } else if (accountType === "employer") {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
@@ -59,7 +59,7 @@ export default function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/employer/job/my-jobs', request.url));
         }
         if (accountType === "admin") {
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+            return NextResponse.redirect(new URL('admin/dashboard/applications', request.url));
         }
     }
 
