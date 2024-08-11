@@ -120,17 +120,7 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {selectedApplicantsType !== 'jobs' && (
-        <div className="flex items-center justify-center flex-wrap gap-3">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            displayedApplicants.map((applicant, index) => (
-              <ApplicationCard key={index} applicant={applicant} />
-            ))
-          )}
-        </div>
-      )}
+     
 
       {displayedApplicants?.length > 0 && applicants?.length > applicantsToDisplay && (
         <button onClick={handleLoadMore} className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3">

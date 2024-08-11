@@ -98,12 +98,15 @@ const AdminDashboardLayout = ({ children }: any) => {
                 >
                     Contacted Applicants
                 </span>
-                {/* <span
-                    onClick={() => setSelectedApplicantsType('rejected')}
-                    className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'rejected' ? 'bg-rheinland-red text-white' : ''}`}
+                <span
+                    onClick={() => {
+                        setSelectedApplicantsType('rejected')
+                        router.push('/admin/dashboard/rejected')
+                    }}
+                    className={`px-3 py-2 rounded-md cursor-pointer border ${path === '/admin/dashboard/rejected' ? 'bg-rheinland-red text-white' : ''}`}
                 >
                     Rejected Applicants
-                </span> */}
+                </span>
             </div>
 
             {/* <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3'>
