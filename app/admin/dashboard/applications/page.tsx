@@ -12,8 +12,8 @@ const ApplicationsPage = () => {
 
     const fetchApplications = async () => {
         try {
-            const response = await axios.get("/api/job/appliedJobs");
-            setApplicants(response.data.appliedJobs);
+            const response = await axios.get("/api/job");
+            setApplicants(response?.data?.jobs);
         } catch (error) {
             console.error("Error fetching applications:", error);
         } finally {
@@ -29,7 +29,7 @@ const ApplicationsPage = () => {
         setApplicantsToDisplay(prev => prev + 18);
     };
 
-    const displayedApplicants = applicants.slice(0, applicantsToDisplay);
+    const displayedApplicants = applicants?.slice(0, applicantsToDisplay);
 
     return (
         <AdminDashboardLayout>
@@ -37,8 +37,8 @@ const ApplicationsPage = () => {
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : (
-                    displayedApplicants.length > 0 ? (
-                        displayedApplicants.map((applicant, index) => (
+                    displayedApplicants?.length > 0 ? (
+                        displayedApplicants?.map((applicant, index) => (
                             <ApplicationCard key={index} applicant={applicant} />
                         ))
                     ) : (
@@ -47,7 +47,7 @@ const ApplicationsPage = () => {
                 )}
             </div>
 
-            {displayedApplicants.length > 0 && applicants.length > applicantsToDisplay && (
+            {displayedApplicants?.length > 0 && applicants?.length > applicantsToDisplay && (
                 <button onClick={handleLoadMore} className="w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3">
                     Load more
                 </button>

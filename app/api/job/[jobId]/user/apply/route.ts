@@ -16,11 +16,13 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
             return NextResponse.json({ error: 'User ID not found in token', success: false, status: 400 });
         }
 
-        // Update user and job documents with $addToSet to avoid duplicates
-        await Promise.all([
-            userModel.findByIdAndUpdate(id, { $addToSet: { appliedJobs: jobId } }),
-            jobModel.findByIdAndUpdate(jobId, { $addToSet: { appliedUsers: id } })
-        ]);
+        // Update user document
+        await userModel.findByIdAndUpdate(id, { $addToSet: { appliedJobs: jobId } });
+
+        // Update job document
+        await jobModel.findByIdAndUpdate(jobId, {
+            $addToSet: { appliedUsers: { userId: id } }
+        });
 
         return NextResponse.json({ message: 'Applied for Job successfully', success: true, status: 200 });
 
