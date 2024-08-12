@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminJobCard from '@/components/Admin/AdminJobCard';
-import AdminDashboardLayout from '@/components/layouts/AdminDashboardLayout';
 import { CiSearch } from 'react-icons/ci';
 
 const ApplicationsPage = () => {
@@ -51,8 +50,8 @@ const ApplicationsPage = () => {
     const displayJobs = searchResults.slice(0, applicantsToDisplay);
 
     return (
-        <>
-            <div className='pt-[90px] rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
+        <div className="flex items-center justify-center flex-col pt-[90px] px-5 md:px-10">
+            <div className=' rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
                 <input
                     type='text'
                     placeholder='Search by job title or location'
@@ -91,7 +90,7 @@ const ApplicationsPage = () => {
                     </button>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
