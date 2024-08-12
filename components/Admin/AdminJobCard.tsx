@@ -115,7 +115,7 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                 </div>
 
                 {/* Applicants length */}
-                <span className={`text-sm opacity-50 py-2 ${job.appliedUsers?.length > 0 ? 'text-rheinland-red underline' : ''}`}>{job?.appliedUsers?.length} Applicants</span>
+                <span className={`text-sm  py-2 ${job.appliedUsers?.length > 0 ? 'text-rheinland-red opacity-100 underline' : 'opacity-50'}`}>{job?.appliedUsers?.length} Applicants</span>
 
 
 
