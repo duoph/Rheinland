@@ -50,7 +50,7 @@ const EmployerSliderMenu = () => {
         >
           <Link
             href={`/employer/profile`}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/profile") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/employer/profile") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -61,7 +61,7 @@ const EmployerSliderMenu = () => {
 
           <Link
             href={"/employer/job/my-jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/job/my-jobs") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/employer/job/my-jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -72,7 +72,7 @@ const EmployerSliderMenu = () => {
 
           <Link
             href={"/employer/job/create-job"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/employer/job/create-job") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/employer/job/create-job") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">

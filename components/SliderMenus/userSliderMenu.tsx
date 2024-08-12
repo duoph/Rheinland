@@ -46,7 +46,7 @@ const UserSliderMenu = () => {
         >
           <Link
             href={`/user/profile`}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/user/profile") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -57,7 +57,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={"/jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -68,7 +68,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={"/user/saved-jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
@@ -79,7 +79,7 @@ const UserSliderMenu = () => {
 
           <Link
             href={"/user/applied-jobs"}
-            className={`w-full px-10 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/user/applied-jobs") && "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">

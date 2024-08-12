@@ -10,12 +10,11 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import { PiStudentFill } from "react-icons/pi";
 import { BsBuildingsFill } from "react-icons/bs";
 import { IoDocumentAttachOutline } from "react-icons/io5";
-import { FaBriefcase } from "react-icons/fa"; // Import additional icons
 
 const AdminSliderMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
-  const { LogOut, account } = useAccount();
+  const { LogOut } = useAccount();
 
   const handleLogout = async () => {
     try {
@@ -49,16 +48,15 @@ const AdminSliderMenu = () => {
         >
 
 
-
           <Link
-            href={"/admin/dashboard"}
+            href={"/admin/jobs"}
             className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/dashboard") &&
               "bg-rheinland-red text-white"
               }`}
           >
             <span className="flex items-center justify-start gap-8">
               <IoDocumentAttachOutline size={20} />
-              <p>Dashboard</p>
+              <p>Jobs</p>
             </span>
           </Link>
 
@@ -84,8 +82,6 @@ const AdminSliderMenu = () => {
               <p>Registered Companies</p>
             </span>
           </Link>
-
-
 
 
 
