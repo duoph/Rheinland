@@ -14,6 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import { useAccount } from "@/context/useAccount";
 import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
+import ApplicationCard from "@/components/ApplicationCard";
 
 
 const SingleJobPage = () => {
@@ -229,26 +230,23 @@ const SingleJobPage = () => {
                     <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
                 </div>
 
-                <div className="w-full h-full flex items-center gap-5 justify-center py-10">
-                    <button
-                        onClick={handleApply}
-                        disabled={applying || isJobApplied || !account?.token} // Disable button if not logged in
-                        className={`bg-rheinland-red px-4 py-3 text-white rounded-sm ${applying || isJobApplied || !account?.token ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    >
-                        {applying ? "Applying..." : isJobApplied ? "Applied" : !account?.token ? "Login to Apply" : "Apply Now"}
-                    </button>
 
-                    <div onClick={handleSave} className="cursor-pointer">
-                        {savedJobs.includes(job?._id || "") ? (
-                            <HiBookmark className="text-[25px] text-rheinland-red" />
-                        ) : (
-                            <HiOutlineBookmark className="text-[25px] text-rheinland-red" />
-                        )}
+
+                <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
+
+                    <h1 className="text-3xl font-semibold text-center">Applications</h1>
+
+                    <div >
+
+                        <ApplicationCard />
+
                     </div>
+
                 </div>
 
-                {/* Related Jobs Section */}
-                <RelatedJobs jobs={relatedJobs} loading={loading} />
+
+
+
             </div>
 
         </div>

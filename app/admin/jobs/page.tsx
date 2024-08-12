@@ -52,7 +52,7 @@ const ApplicationsPage = () => {
 
     return (
         <>
-            <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
+            <div className='pt-[90px] rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
                 <input
                     type='text'
                     placeholder='Search by job title or location'
