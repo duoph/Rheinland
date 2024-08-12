@@ -17,8 +17,9 @@ const ApplicationsPage = () => {
     const fetchAllJobs = async () => {
         try {
             const response = await axios.get("/api/job/");
-            setJobs(response.data.jobs);
-            setSearchResults(response.data.jobs); // Initialize search results with all jobs
+            const sortedJobs = response.data.jobs.sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+            setJobs(sortedJobs);
+            setSearchResults(sortedJobs); // Initialize search results with sorted jobs
         } catch (error) {
             console.error("Error fetching jobs:", error);
         } finally {
@@ -50,7 +51,7 @@ const ApplicationsPage = () => {
     const displayJobs = searchResults.slice(0, applicantsToDisplay);
 
     return (
-        <AdminDashboardLayout>
+        <>
             <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
                 <input
                     type='text'
@@ -80,8 +81,6 @@ const ApplicationsPage = () => {
                 }
             </div>
 
-
-
             {displayJobs.length > 0 && searchResults.length > applicantsToDisplay && (
                 <div className="flex justify-center mt-4">
                     <button
@@ -92,7 +91,7 @@ const ApplicationsPage = () => {
                     </button>
                 </div>
             )}
-        </AdminDashboardLayout>
+        </>
     );
 };
 

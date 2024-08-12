@@ -92,7 +92,7 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
 
     return (
         <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px]  group rounded-sm px-3 py-2 cursor-pointer">
-            <Link href={`/admin/${job._id}`} className="w-full">
+            <Link href={`/admin/job/${job._id}`} className="w-full">
                 <div className="flex justify-between items-center w-full py-2">
                     <Image
                         src={"/RheinlandLogoHeader.png"}
@@ -115,7 +115,7 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                 </div>
 
                 {/* Applicants length */}
-                <span className="text-sm opacity-50 py-2">{job?.appliedUsers?.length} Applicants</span>
+                <span className={`text-sm opacity-50 py-2 ${job.appliedUsers?.length > 0 ? 'text-rheinland-red underline' : ''}`}>{job?.appliedUsers?.length} Applicants</span>
 
 
 
