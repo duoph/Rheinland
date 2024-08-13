@@ -15,6 +15,7 @@ const CreateAccountPage = () => {
     email: "",
     phone: "",
     dateOfBirth: "",
+    resumeURL: "",
     password: "",
     confirmPassword: "",
   });
@@ -35,7 +36,7 @@ const CreateAccountPage = () => {
       !formData.name ||
       !formData.email ||
       !formData.phone ||
-      !formData.dateOfBirth ||
+      // !formData.dateOfBirth ||
       !formData.password ||
       !formData.confirmPassword
     ) {
@@ -55,8 +56,9 @@ const CreateAccountPage = () => {
       formDataToSend.append("name", formData.name);
       formDataToSend.append("phone", formData.phone);
       formDataToSend.append("email", formData.email.toLowerCase());
-      formDataToSend.append("dateOfBirth", formData.dateOfBirth);
+      // formDataToSend.append("dateOfBirth", formData.dateOfBirth);
       formDataToSend.append("password", formData.password);
+      formDataToSend.append("resumeURL", formData.resumeURL);
 
       const res = await axios.post(
         "/api/user",
@@ -123,14 +125,21 @@ const CreateAccountPage = () => {
             className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
             placeholder="Phone"
           />
-          <input
+          {/* <input
             type="date"
             name="dateOfBirth"
-            
             value={formData.dateOfBirth}
             onChange={handleChange}
             className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
             placeholder="Date of Birth"
+          /> */}
+          <input
+            type="text"
+            name="resumeURL"
+            value={formData.resumeURL}
+            onChange={handleChange}
+            placeholder="Resume URL"
+            className={`w-full border px-3 py-3 border-b rounded-sm focus:outline-none`}
           />
           <input
             type="password"
