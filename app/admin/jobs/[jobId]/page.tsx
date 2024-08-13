@@ -50,7 +50,7 @@ const SingleJobPage: React.FC = () => {
 
     useEffect(() => {
         fetchData();
-    }, [jobId]);
+    }, []);
 
     // Function to format text with line breaks
     const formatTextWithLineBreaks = (text: string) => {
@@ -59,7 +59,7 @@ const SingleJobPage: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-start gap-3 min-h-screen px-3 sm:px-5 pt-[90px]">
+            <div className="flex flex-col items-center justify-start gap-3 min-h-screen px-3 sm:px-5 pt-[90px] pb-10">
                 <Skeleton className="w-full h-[40px] mb-3" />
                 <div className="flex flex-row items-start w-full gap-5 flex-wrap">
                     <Skeleton className="w-full h-[30px]" />
@@ -138,14 +138,26 @@ const SingleJobPage: React.FC = () => {
                     <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
                 </div>
 
-                <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
-                    <h1 className="text-3xl font-semibold text-center">Applications</h1>
-                    <div className="flex flex-wrap items-center justify-center gap-2 w-full">
-                        {job?.appliedUsers && job.appliedUsers.map((appliedUser: any) => (
-                            <ApplicationCard key={appliedUser?._id} />
-                        ))}
+                {job?.appliedUsers ? (
+                    job.appliedUsers.length > 0 ? (
+                        <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
+                            <h1 className="text-3xl font-semibold text-center">Applications</h1>
+                            <div className="flex flex-wrap items-center justify-center gap-2 w-full">
+                                {job.appliedUsers.map((appliedUser: any) => (
+                                    <ApplicationCard key={appliedUser._id} />
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-center w-full py-10">
+                            <p className="text-xl font-semibold">No candidates have applied yet.</p>
+                        </div>
+                    )
+                ) : (
+                    <div className="flex items-center justify-center w-full py-10">
+                        <p className="text-xl font-semibold">No candidates have applied yet.</p>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

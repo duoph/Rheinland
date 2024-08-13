@@ -53,13 +53,11 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ applicant, isLoading 
 
   return (
     <div className="border shadow-md border-gray-300 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] group cursor-pointer rounded-lg px-4 py-3 bg-white hover:shadow-lg transition-shadow duration-200">
+     
       <div className="flex justify-start items-center w-full">
         <span className="font-light text-xs">Applied On : {applicant?.appliedOn || "20-10-2024 at 10:00 AM"}</span>
       </div>
-      <div className="flex flex-col items-center justify-center w-full py-2">
-        <h1 className="text-[20px] font-semibold text-gray-800">{applicant?.jobTitle || "Full Stack Engineer"}</h1>
-        <h3 className="text-[16px] text-gray-500">{applicant?.company || "Duoph Technologies"}</h3>
-      </div>
+     
       <div className="flex flex-col items-start justify-center w-full gap-1 mt-2">
         <p className="text-sm font-medium text-gray-700 flex items-center">
           <FaUser className="mr-2" /> {applicant?.name || "Praveen Prasad"}
