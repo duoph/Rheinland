@@ -26,6 +26,7 @@ const SingleJobPage: React.FC = () => {
     const { account } = useAccount();
     const { jobId } = useParams();
     const [job, setJob] = useState<Job | null>(null);
+    const [appliedUsers, setAppliedUsers] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [showMoreSkills, setShowMoreSkills] = useState<boolean>(false);
 
@@ -34,9 +35,11 @@ const SingleJobPage: React.FC = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const jobRes = await axios.get(`/api/job/${jobId}`);
+            const jobRes = await axios.get(`/api/admin/job/${jobId}`);
             if (jobRes.data.success) {
                 setJob(jobRes.data.job);
+                setAppliedUsers(jobRes.data.job.appliedUsers);
+                console.log(jobRes.data)
             } else {
                 toast.error("Failed to fetch job data");
             }
@@ -138,13 +141,13 @@ const SingleJobPage: React.FC = () => {
                     <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
                 </div>
 
-                {job?.appliedUsers ? (
-                    job.appliedUsers.length > 0 ? (
+                {appliedUsers ? (
+                    appliedUsers.length > 0 ? (
                         <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
                             <h1 className="text-3xl font-semibold text-center">Applications</h1>
                             <div className="flex flex-wrap items-center justify-center gap-2 w-full">
-                                {job.appliedUsers.map((appliedUser: any) => (
-                                    <ApplicationCard key={appliedUser._id} />
+                                {appliedUsers.map((appliedUser: any) => (
+                                    <ApplicationCard key={appliedUser._id} applicant={appliedUser.userId} />
                                 ))}
                             </div>
                         </div>

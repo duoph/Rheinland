@@ -1,0 +1,31 @@
+import { NextRequest, NextResponse } from 'next/server';
+import connectMongoDB from '@/lib/dbConnect';
+import jobModel from '@/models/jobSchema';
+
+export const revalidate = 100;
+
+export async function GET(req: NextRequest, { params }: any) {
+    try {
+
+        await connectMongoDB();
+
+        const jobId = params.jobId
+
+
+        const job = await jobModel.findById({ _id: jobId }).populate('appliedUsers.userId')
+
+        return NextResponse.json({
+            message: 'Fetched jobs successfully',
+            success: true,
+            job
+        }, { status: 200 });
+
+    } catch (error) {
+        console.error('Error fetching jobs:', error);
+
+        return NextResponse.json({
+            error: 'Internal server error',
+            success: false
+        }, { status: 500 });
+    }
+}

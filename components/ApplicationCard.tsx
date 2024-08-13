@@ -53,29 +53,29 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ applicant, isLoading 
 
   return (
     <div className="border shadow-md border-gray-300 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] group cursor-pointer rounded-lg px-4 py-3 bg-white hover:shadow-lg transition-shadow duration-200">
-     
+
       <div className="flex justify-start items-center w-full">
-        <span className="font-light text-xs">Applied On : {applicant?.appliedOn || "20-10-2024 at 10:00 AM"}</span>
+        <span className="font-light text-xs">Applied On : {applicant?.appliedOn?.toLcateString()}</span>
       </div>
-     
+
       <div className="flex flex-col items-start justify-center w-full gap-1 mt-2">
         <p className="text-sm font-medium text-gray-700 flex items-center">
-          <FaUser className="mr-2" /> {applicant?.name || "Praveen Prasad"}
+          <FaUser className="mr-2" /> {applicant?.name}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaLanguage className="mr-2" /> Language Level: {applicant?.languageLevel || "Not Specified"}
+          <FaLanguage className="mr-2" /> Language Level: {applicant?.germanLanguageLevel}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaEnvelope className="mr-2" /> {applicant?.email || "praveenprasad@gmail.com"}
+          <FaEnvelope className="mr-2" /> {applicant?.email}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaPhone className="mr-2" /> {applicant?.phone || "84834834249"}
+          <FaPhone className="mr-2" /> {applicant?.phone}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaBriefcase className="mr-2" /> {applicant?.experience || "2 Years of work Experience"}
+          <FaBriefcase className="mr-2" /> {applicant?.workExperience === 0 ? "No Work Experience" : applicant?.workExperience}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaMapMarkerAlt className="mr-2" /> {applicant?.location || "Berlin"}
+          <FaMapMarkerAlt className="mr-2" /> {applicant?.location}
         </p>
       </div>
       <div className="flex justify-center items-center w-full py-1">
