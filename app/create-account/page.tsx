@@ -126,6 +126,7 @@ const CreateAccountPage = () => {
           <input
             type="date"
             name="dateOfBirth"
+            
             value={formData.dateOfBirth}
             onChange={handleChange}
             className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
