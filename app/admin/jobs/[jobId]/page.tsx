@@ -1,13 +1,13 @@
 "use client";
 
-import { Job } from "@/types";
+import { Job } from "@/types"; // Importing the Job type
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
-import { HiBookmark, HiOutlineBanknotes, HiOutlineBookmark } from "react-icons/hi2";
+import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,58 +16,33 @@ import { useAccount } from "@/context/useAccount";
 import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 import ApplicationCard from "@/components/ApplicationCard";
 
+// Define the type for applied users
+interface AppliedUser {
+    _id: string;
+    // Add other relevant fields if needed
+}
 
-const SingleJobPage = () => {
-
+const SingleJobPage: React.FC = () => {
     const { account } = useAccount();
-
     const { jobId } = useParams();
-
     const [job, setJob] = useState<Job | null>(null);
-    const [relatedJobs, setRelatedJobs] = useState<Job[]>([])
     const [loading, setLoading] = useState<boolean>(true);
-    const [savedJobs, setSavedJobs] = useState<string[]>([]);
-    const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
-    const [applying, setApplying] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const [showMoreSkills, setShowMoreSkills] = useState(false);
+    const [showMoreSkills, setShowMoreSkills] = useState<boolean>(false);
 
     const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
     const fetchData = async () => {
         setLoading(true);
         try {
-            if (account?.token) {
-                const userRes = await axios.get("/api/user");
-
-                if (userRes.data.success) {
-                    setSavedJobs(userRes.data.user.savedJobs?.map((job: Job) => job._id) || []);
-                    setAppliedJobs(userRes.data.user.appliedJobs?.map((job: Job) => job._id) || []);
-                } else {
-                    console.error("Failed to load user data:", userRes.data.message);
-                }
-            }
-
-
-            const relatedJobsRes = await axios.get(`/api/job`);
-            if (relatedJobsRes.data.success) {
-                setRelatedJobs(relatedJobsRes.data.jobs);
-            } else {
-                setError("Failed to load job data.");
-            }
-
-
-
-
             const jobRes = await axios.get(`/api/job/${jobId}`);
             if (jobRes.data.success) {
                 setJob(jobRes.data.job);
             } else {
-                setError("Failed to load job data.");
+                toast.error("Failed to fetch job data");
             }
         } catch (error) {
             console.error(error);
-            setError("An error occurred while fetching data.");
+            toast.error("An error occurred while fetching job data");
         } finally {
             setLoading(false);
         }
@@ -75,67 +50,12 @@ const SingleJobPage = () => {
 
     useEffect(() => {
         fetchData();
-    }, [])
-
-    const handleSave = async () => {
-        if (!job) return;
-
-        if (!account.token) {
-            toast.error("Login to save job");
-            return;
-        }
-
-        try {
-            const response = await axios.put(`/api/job/${job._id}/user/save`);
-
-            if (response.data.success) {
-                setSavedJobs((prev) =>
-                    savedJobs.includes(job._id)
-                        ? prev.filter((id) => id !== job._id)
-                        : [...prev, job._id]
-                );
-                toast.success(savedJobs.includes(job._id) ? "Job removed" : "Job saved");
-            } else {
-                toast.error("Error saving job");
-            }
-        } catch (error) {
-            toast.error("Error saving job");
-            console.error("Error saving job:", error);
-        }
-    };
-
-    const handleApply = async () => {
-        if (!job) return;
-
-        setApplying(true);
-        try {
-            const response = await axios.put(`/api/job/${jobId}/user/apply`, null, {
-                headers: {
-                    Authorization: `Bearer ${account.token}`,
-                },
-            });
-
-            if (response.data.success) {
-                toast.success("Applied");
-                setAppliedJobs((prev: any) => [...prev, jobId]);
-            } else {
-                toast.error("Failed to apply");
-            }
-        } catch (error) {
-            toast.error("Error applying job");
-            console.error("Error applying job:", error);
-        } finally {
-            setApplying(false);
-        }
-    };
+    }, [jobId]);
 
     // Function to format text with line breaks
-    const formatTextWithLineBreaks = (text: any) => {
+    const formatTextWithLineBreaks = (text: string) => {
         return text.replace(/\n/g, '<br>');
     };
-
-
-    const isJobApplied = job && appliedJobs.includes(job._id);
 
     if (loading) {
         return (
@@ -154,17 +74,8 @@ const SingleJobPage = () => {
         );
     }
 
-    if (error) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen px-3 sm:px-5 pt-[90px]">
-                <h1 className="text-red-500 text-lg">{error}</h1>
-            </div>
-        );
-    }
-
     return (
         <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pb-[50px] pt-[90px]">
-
             <div className="flex items-start w-full">
                 <h1 className="font-semibold text-[30px] md:text-[50px]">
                     {job?.title}
@@ -194,15 +105,14 @@ const SingleJobPage = () => {
                 </span>
                 {(job?.minAge || job?.maxAge) && (
                     <span className="flex gap-2 font-light">
-                        <MdAccessTime className="text-rheinland-red" size={24} /> Age: {job?.minAge} - {job?.maxAge}
+                        <MdAccessTime className="text-rheinland-red" size={24} />
+                        Age: {job?.minAge} - {job?.maxAge}
                     </span>
                 )}
             </div>
 
             <div className="flex flex-col items-start justify-center w-full gap-3">
-                {/* <h1 className="font-medium">Preferred Skills</h1> */}
                 <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
-
                     {job?.skills && job.skills.length > 0 ? (
                         <>
                             {job.skills
@@ -222,33 +132,21 @@ const SingleJobPage = () => {
                     ) : (
                         <p>No skills listed</p>
                     )}
-
                 </div>
 
                 <div className="flex flex-col gap-2 items-start justify-center w-full">
-                    {/* <h1 className="font-medium">Job Description</h1> */}
                     <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
                 </div>
 
-
-
                 <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
-
                     <h1 className="text-3xl font-semibold text-center">Applications</h1>
-
-                    <div >
-
-                        <ApplicationCard />
-
+                    <div className="flex flex-wrap items-center justify-center gap-2 w-full">
+                        {job?.appliedUsers && job.appliedUsers.map((appliedUser: any) => (
+                            <ApplicationCard key={appliedUser?._id} />
+                        ))}
                     </div>
-
                 </div>
-
-
-
-
             </div>
-
         </div>
     );
 };

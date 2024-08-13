@@ -50,7 +50,7 @@ const AdminSliderMenu = () => {
 
           <Link
             href={"/admin/jobs"}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/dashboard") &&
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/jobs") &&
               "bg-rheinland-red text-white"
               }`}
           >
