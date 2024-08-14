@@ -5,7 +5,7 @@ import connectMongoDB from "@/lib/dbConnect";
 import { getDataFromToken } from "@/actions/getDataFromToken";
 
 
-export const revalidate = 0
+export const revalidate = 0;
 
 
 // Get employer profile by ID

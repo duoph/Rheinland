@@ -3,7 +3,7 @@ import connectMongoDB from '@/lib/dbConnect';
 import jobModel from '@/models/jobSchema';
 import { getDataFromToken } from '@/actions/getDataFromToken';
 
-export const revalidate = 100;
+export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
     try {
