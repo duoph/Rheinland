@@ -1,6 +1,6 @@
 "use client";
 
-import { Job } from "@/types"; // Importing the Job type
+import { Job } from "@/types";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -12,18 +12,11 @@ import { SlCalender } from "react-icons/sl";
 import { MdAccessTime } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
-import { useAccount } from "@/context/useAccount";
-import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
 import ApplicationCard from "@/components/ApplicationCard";
 
-// Define the type for applied users
-interface AppliedUser {
-    _id: string;
-    // Add other relevant fields if needed
-}
+
 
 const SingleJobPage: React.FC = () => {
-    const { account } = useAccount();
     const { jobId } = useParams();
     const [job, setJob] = useState<Job | null>(null);
     const [appliedUsers, setAppliedUsers] = useState<any>(null);
