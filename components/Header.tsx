@@ -3,28 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAccount } from "@/context/useAccount";
-import { CgProfile } from "react-icons/cg";
-import { Router } from "next/router";
 import AdminSliderMenu from "./SliderMenus/adminSliderMenu";
-import { usePathname } from "next/navigation";
 import UserSliderMenu from "./SliderMenus/userSliderMenu";
 import EmployerSliderMenu from "./SliderMenus/employerSliderMenu";
 
 const Header = () => {
   const { account } = useAccount();
-
-  const pathname = usePathname();
-
   return (
     <div className="flex bg-white border-b shadow-sm fixed top-0 left-0 w-full items-center justify-between lg:px-5 px-3 min-h-[70px] z-50">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-10 ">
           <Link href={"/"} className="flex items-center min-w-1/3">
             <Image
-              src={"/RheinlandLogoHeader.png"}
+              src={"/RheinlandEnlarged.png"}
               alt="Logo"
-              height={100}
-              width={100}
+              height={120}
+              width={120}
             />
           </Link>
 

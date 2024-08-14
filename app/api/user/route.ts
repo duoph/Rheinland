@@ -15,8 +15,8 @@ export async function GET(req: NextRequest) {
 
         // Populate both savedJobs and appliedJobs
         const user = await userModel.findById(id)
-            .populate("savedJobs")    // Populate savedJobs
-            .populate("appliedJobs"); // Populate appliedJobs
+            .populate("savedJobs")    
+            .populate("appliedJobs"); 
 
         return NextResponse.json({
             message: 'Fetched user successfully',
