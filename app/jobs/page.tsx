@@ -81,7 +81,7 @@ const Jobs = () => {
 
 
     return (
-        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-4 py-10'>
+        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-3 py-5'>
             {/* Search Bar */}
             <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
                 <SuggestionInput
@@ -103,6 +103,18 @@ const Jobs = () => {
                     Search
                 </button>
             </div>
+
+
+            {/* Filter Options */}
+
+            <div className='w-full flex items-center justify-end'>
+                <select name="" id="" className='border rounded-md py-2 px-4'>
+                    <option value="1">New Jobs</option>
+                    <option value="2">Popular Jobs</option>
+                    <option value="3">Latest Jobs</option>
+                </select>
+            </div>
+
 
             <div className='flex items-center justify-center flex-wrap gap-3'>
                 {
