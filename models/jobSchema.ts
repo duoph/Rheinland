@@ -9,6 +9,7 @@ const jobSchema = new Schema({
     skills: [{ type: String }],
     minAge: { type: String },
     maxAge: { type: String },
+    jobType: { type: String },
     salary: { type: String },
     location: { type: String },
     requirements: { type: String },

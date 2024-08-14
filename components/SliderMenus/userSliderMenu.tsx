@@ -67,6 +67,17 @@ const UserSliderMenu = () => {
           </Link>
 
           <Link
+            href={"/category"}
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/category") && "bg-rheinland-red text-white"
+              }`}
+          >
+            <span className="flex items-center justify-start gap-8">
+              <FaBriefcase size={20} />
+              <p>Browse Category</p>
+            </span>
+          </Link>
+
+          <Link
             href={"/user/saved-jobs"}
             className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/user/saved-jobs") && "bg-rheinland-red text-white"
               }`}
