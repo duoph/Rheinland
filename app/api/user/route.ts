@@ -14,14 +14,18 @@ export async function GET(req: NextRequest) {
         const { id } = await getDataFromToken(req);
 
         // Populate both savedJobs and appliedJobs
+        const jobs = await userModel.findById(id)
+
         const user = await userModel.findById(id)
-            .populate("savedJobs")    
-            .populate("appliedJobs"); 
+            .populate("savedJobs")
+            .populate("appliedJobs");
 
         return NextResponse.json({
             message: 'Fetched user successfully',
             success: true,
             user,
+            savedJobs: jobs?.savedJobs,
+            appliedJobs: jobs?.appliedJobs,
             status: 200
         });
 

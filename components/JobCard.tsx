@@ -97,10 +97,10 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
       <Link href={`/jobs/${job._id}`} className="w-full">
         <div className="flex justify-between items-center w-full py-2">
           <Image
-            src={"/RheinlandLogoHeader.png"}
+            src={"/RheinlandEnlarged.png"}
             alt="Logo"
-            height={60}
-            width={60}
+            height={70}
+            width={70}
           />
           <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
             Full Time

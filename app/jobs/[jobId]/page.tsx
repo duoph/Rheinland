@@ -34,30 +34,34 @@ const SingleJobPage = () => {
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
   const fetchData = async () => {
+
     setLoading(true);
+
     try {
       if (account?.token) {
+        // Fetch user data
         const userRes = await axios.get("/api/user");
 
         if (userRes.data.success) {
-          setSavedJobs(userRes.data.user.savedJobs?.map((job: Job) => job._id) || []);
-          setAppliedJobs(userRes.data.user.appliedJobs?.map((job: Job) => job._id) || []);
+
+          setSavedJobs(userRes.data.appliedJobs);
+
+          setAppliedJobs(userRes.data.savedJobs);
+
         } else {
           console.error("Failed to load user data:", userRes.data.message);
         }
       }
 
-
+      // Fetch related jobs
       const relatedJobsRes = await axios.get(`/api/job`);
       if (relatedJobsRes.data.success) {
         setRelatedJobs(relatedJobsRes.data.jobs);
       } else {
-        setError("Failed to load job data.");
+        setError("Failed to load related job data.");
       }
 
-
-
-
+      // Fetch job details
       const jobRes = await axios.get(`/api/job/${jobId}`);
       if (jobRes.data.success) {
         setJob(jobRes.data.job);
@@ -72,9 +76,11 @@ const SingleJobPage = () => {
     }
   };
 
+
   useEffect(() => {
     fetchData();
   }, [])
+
 
   const handleSave = async () => {
     if (!job) return;
@@ -108,11 +114,7 @@ const SingleJobPage = () => {
 
     setApplying(true);
     try {
-      const response = await axios.put(`/api/job/${jobId}/user/apply`, null, {
-        headers: {
-          Authorization: `Bearer ${account.token}`,
-        },
-      });
+      const response = await axios.put(`/api/job/${jobId}/user/apply`);
 
       if (response.data.success) {
         toast.success("Applied");
