@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import JobCard from '@/components/JobCard';
 import { Job } from '@/types';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import SuggestionInput from '@/components/SuggestionInput';
 import { jobData } from '@/data/jobData';
 import { locations } from '@/data/location';
@@ -14,6 +14,10 @@ const Jobs = () => {
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
     const queryLocation = searchParams.get('location') || "";
+
+
+    const router = useRouter();
+
 
     const [jobs, setJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16);
@@ -81,7 +85,7 @@ const Jobs = () => {
 
 
     return (
-        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen gap-3 py-5'>
+        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen py-5'>
             {/* Search Bar */}
             <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
                 <SuggestionInput
@@ -107,16 +111,24 @@ const Jobs = () => {
 
             {/* Filter Options */}
 
-            <div className='w-full flex items-center justify-end'>
-                <select name="" id="" className='border rounded-md py-2 px-4'>
+            <div className='w-full flex items-center justify-between mb-3'>
+
+                <span onClick={() => router.push('/category')} className='underline text-sm cursor-pointer'>
+                    <p></p> View Catergories
+                </span>
+
+
+                <select name="" id="" className='border outline-none:none focus:outline-none rounded-md py-1 px-4'>
                     <option value="1">New Jobs</option>
                     <option value="2">Popular Jobs</option>
                     <option value="3">Latest Jobs</option>
                 </select>
+
+
             </div>
 
 
-            <div className='flex items-center justify-center flex-wrap gap-3'>
+            <div className='flex items-center justify-center flex-wrap gap-3 mb-3'>
                 {
                     isLoading
                         ? Array.from({ length: 16 }).map((_, index) => (
