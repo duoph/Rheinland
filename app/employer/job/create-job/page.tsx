@@ -20,6 +20,7 @@ const CreateJob = () => {
     const [languageLevel, setLanguageLevel] = useState<string>('');
     const [minAge, setMinAge] = useState<string>('');
     const [maxAge, setMaxAge] = useState<string>('');
+    const [numberOfOpenings, setNumberOfOpenings] = useState<string>('');
 
     const { account } = useAccount();
 
@@ -72,11 +73,11 @@ const CreateJob = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder='Title'
                     required
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 
 
-                <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                     name="category" id="">
                     <option value='' disabled>Select Category</option>
                     {jobCategories.map((JobCategory: any) => (
@@ -90,14 +91,14 @@ const CreateJob = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder='Description'
                     required
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 
                 <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                     required
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 >
                     <option value='' disabled>Select Gender</option>
                     <option value='Male'>Male</option>
@@ -106,10 +107,30 @@ const CreateJob = () => {
                 </select>
 
                 <select
-                    value={gender}
+                    value={numberOfOpenings}
+                    onChange={(e) => setNumberOfOpenings(e.target.value)}
+                    required
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
+                >
+                    <option value="" disabled>Select Number of Openings</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="10+">10+</option>
+                </select>
+
+                <select
+                    value={languageLevel}
                     onChange={(e) => setLanguageLevel(e.target.value)}
                     required
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 >
                     <option value='' disabled>Select Minimum Language Level</option>
                     <option value='A1'>A1</option>
@@ -125,7 +146,7 @@ const CreateJob = () => {
                     value={skills}
                     onChange={(e) => setSkills(e.target.value)}
                     placeholder='Skills (comma-separated) (eg. Python, Java, C++)'
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 
                 <input
@@ -133,7 +154,7 @@ const CreateJob = () => {
                     value={minAge}
                     onChange={(e) => setMinAge(e.target.value)}
                     placeholder='Minimum Age'
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 
                 <input
@@ -141,7 +162,7 @@ const CreateJob = () => {
                     value={maxAge}
                     onChange={(e) => setMaxAge(e.target.value)}
                     placeholder='Maximum Age'
-                    className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 
 
@@ -150,14 +171,14 @@ const CreateJob = () => {
                     data={locations}
                     searchInput={location}
                     setSearchInput={setLocation}
-                    classNames="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    classNames="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
 
                 />
 
 
                 <button
                     type='submit'
-                    className='px-5 py-3  w-full bg-rheinland-red text-white'
+                    className='px-5 py-2  w-full bg-rheinland-red text-white'
                     disabled={isLoading}
                 >
                     {isLoading ? 'Posting...' : 'Submit'}

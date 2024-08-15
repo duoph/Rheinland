@@ -10,8 +10,8 @@ const CategoryPage = () => {
     const router = useRouter();
 
     return (
-        <div className='flex flex-col items-center justify-center pt-20 pb-10 min-h-screen px-4 bg-gray-100'>
-            <h1 className='text-4xl font-bold mb-12 text-rheinland-red'>Categories</h1>
+        <div className='flex flex-col items-center justify-center pt-[90px] pb-10 min-h-screen px-4 bg-gray-100'>
+            <h1 className='text-4xl font-bold mb-12'>Categories</h1>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                 {jobCategories.length > 0 ? (
                     jobCategories.map(category => (

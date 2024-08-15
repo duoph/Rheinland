@@ -8,6 +8,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { FaUser, FaBriefcase, FaBookmark, FaRegClipboard } from "react-icons/fa"; // Import additional icons
+import { TbCategoryFilled } from "react-icons/tb";
 
 const UserSliderMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -72,7 +73,7 @@ const UserSliderMenu = () => {
               }`}
           >
             <span className="flex items-center justify-start gap-8">
-              <FaBriefcase size={20} />
+              <TbCategoryFilled size={20} />
               <p>Browse Category</p>
             </span>
           </Link>
