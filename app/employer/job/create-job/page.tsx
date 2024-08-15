@@ -30,6 +30,9 @@ const CreateJob = () => {
         e.preventDefault();
         setIsLoading(true);
 
+        const selectedCategory = jobCategories.find(cat => cat.name === category);
+
+
         const jobData: any = {
             title,
             description,
@@ -37,7 +40,7 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
-            categoryId: jobCategories.map((cat) => cat.name === category),
+            categoryId: selectedCategory?.id,
             languageLevel,
             minAge,
             maxAge,

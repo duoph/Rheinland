@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
         const {
             title,
             description,
+            categoryId,
             category,
             location,
-            requirements,
             gender,
             skills,
             languageLevel,
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
             maxAge
         } = await req.json();
 
-        if (!title || !description || !category || !location) {
+        if (!title || !description || !category || !categoryId || !location) {
             return NextResponse.json({ error: 'Missing required fields', success: false, status: 400 });
         }
 
@@ -64,8 +64,8 @@ export async function POST(req: NextRequest) {
             title,
             description,
             category,
+            categoryId,
             location,
-            requirements,
             gender,
             skills,
             languageLevel,

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { CiLocationOn } from "react-icons/ci";
-import { HiOutlineBuildingOffice2, HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
+import {  HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
 import axios from "axios";
 import toast from "react-hot-toast";

@@ -249,8 +249,8 @@ const SingleJobPage = () => {
           </div>
         </div>
 
-        {/* Related Jobs Section */}
-        <RelatedJobs jobs={relatedJobs} loading={loading} />
+        {/* Related Jobs Section */}  
+        <RelatedJobs pageJobId={jobId as string} jobs={relatedJobs} loading={loading} />
       </div>
 
     </div>

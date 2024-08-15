@@ -7,9 +7,12 @@ import JobCard from "../JobCard";
 interface RelatedJobsProps {
   jobs: Job[];
   loading: boolean;
+  pageJobId?: string;
 }
 
-function RelatedJobs({ jobs, loading }: RelatedJobsProps) {
+function RelatedJobs({ jobs, loading, pageJobId }: RelatedJobsProps) {
+
+  const filteredJobs = jobs.filter((job) => job._id !== pageJobId);
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 w-full">
@@ -18,13 +21,13 @@ function RelatedJobs({ jobs, loading }: RelatedJobsProps) {
       <div className="w-full gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
         {loading ? (
           Array.from({ length: 4 }).map((_, index) => (
-            <JobCard key={index} job={null} />
+            <JobCard key={index} job={null} isLoading={true} />
           ))
-        ) : jobs.length === 0 ? (
-          <p>No jobs available</p>
+        ) : filteredJobs.length === 0 ? (
+          <p>No related jobs available</p>
         ) : (
-          jobs.slice(0, 4).map((job, index) => (
-            <JobCard key={index} isLoading={loading} job={job} />
+          filteredJobs.slice(0, 4).map((job) => (
+            <JobCard key={job._id} isLoading={loading} job={job} />
           ))
         )}
       </div>
