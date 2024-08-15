@@ -4,6 +4,7 @@ const jobSchema = new Schema({
 
     title: { type: String, required: true },
     category: { type: String, required: true },
+    categoryId: { type: String, required: true },
     isOpen: { type: Boolean, default: true },
     description: { type: String, required: true },
     skills: [{ type: String }],

@@ -36,6 +36,7 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
+            categoryId: jobCategories.map((cat) => cat.name === category),
             languageLevel,
             minAge,
             maxAge,

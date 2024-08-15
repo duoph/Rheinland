@@ -66,7 +66,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   if (isLoading) {
     return (
-      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2">
+      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
         <div className="flex justify-between items-center w-full py-2">
           <Skeleton className="w-[60px] h-[60px]" />
           <Skeleton className="w-[70px] h-[30px]" />
@@ -93,7 +93,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   }
 
   return (
-    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer">
+    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer  md:hover:shadow-lg transition-shadow duration-300 ease-in-out">
       <Link href={`/jobs/${job._id}`} className="w-full">
         <div className="flex justify-between items-center w-full py-2">
           <Image
