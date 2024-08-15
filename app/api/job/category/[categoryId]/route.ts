@@ -8,9 +8,9 @@ export async function GET(req: NextRequest, { params }: any) {
     try {
         await connectMongoDB();
 
-        const category = params.categoryId
+        const categoryId = params.categoryId
 
-        const jobs = await jobModel.find({ category: category });
+        const jobs = await jobModel.find({ categoryId: categoryId });
 
         return NextResponse.json({
             message: 'Fetched category based jobs successfully',

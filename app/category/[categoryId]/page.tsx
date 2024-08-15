@@ -18,11 +18,10 @@ const SingleCategory = () => {
     const categoryJobFetch = async () => {
         try {
             setLoading(true)
-            const res = await axios.get(`/api/job/category/${category.name}`)
+            const res = await axios.get(`/api/job/category/${category.id}`)
             setCategoryJobs(res.data.jobs)
             console.log(res)
             setLoading(false)
-
         } catch (error) {
             setLoading(false)
             console.log(error)
