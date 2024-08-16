@@ -23,14 +23,14 @@ const Jobs = () => {
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [noJobsMessage, setNoJobsMessage] = useState<string>('');
-    const [sortOption, setSortOption] = useState<string>('default'); // Default sort option
+    const [sortOption, setSortOption] = useState<string>('popularJobs');
 
     const fetchJobs = async () => {
         try {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                applySort(data.jobs);
+                setSearchResults(data.jobs); // Initially set jobs as they come from the API
                 setNoJobsMessage(data.jobs.length === 0 ? 'No jobs available at the moment.' : '');
             } else {
                 setNoJobsMessage('Failed to fetch jobs.');
@@ -59,40 +59,37 @@ const Jobs = () => {
         setIsLoading(false);
     };
 
-    const sortJobs = (jobsToSort: Job[]) => {
+    const sortJobsByDate = (jobsToSort: Job[]) => {
         return [...jobsToSort].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     };
 
     const applySort = (jobsToSort: Job[]) => {
         let sortedJobs = jobsToSort;
-        switch (sortOption) {
-            case 'popularJobs':
-                sortedJobs = shuffleArray(jobsToSort);
-                break;
-            case 'LatestJobs':
-                sortedJobs = sortJobs(jobsToSort);
-                break;
-            default:
-                sortedJobs = jobsToSort; // Show jobs without specific sorting
-                break;
+        if (sortOption === 'LatestJobs') {
+            sortedJobs = sortJobsByDate(jobsToSort);
+        } else if (sortOption === 'popularJobs') {
+            sortedJobs = shuffleArray(jobsToSort);
         }
         setSearchResults(sortedJobs);
     };
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOption(e.target.value);
-        applySort(jobs);
     };
+
+    useEffect(() => {
+        fetchJobs();
+    }, []);
+
+    useEffect(() => {
+        applySort(searchResults);
+    }, [sortOption]);
 
     const handleLoadMore = () => {
         setJobsToDisplay(prev => prev + 18);
     };
 
     const displayedJobs = searchResults.slice(0, jobsToDisplay);
-
-    useEffect(() => {
-        fetchJobs();
-    }, []);
 
     return (
         <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen py-5'>
@@ -129,9 +126,8 @@ const Jobs = () => {
                     onChange={handleSortChange}
                     className='border outline-none focus:outline-none rounded-md py-1 px-4'
                 >
-                    <option value="default">Sort by</option>
-                    <option value="LatestJobs">Latest Jobs</option>
                     <option value="popularJobs">Popular Jobs</option>
+                    <option value="LatestJobs">Latest Jobs</option>
                 </select>
             </div>
 

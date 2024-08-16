@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { CiLocationOn } from "react-icons/ci";
-import {  HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
+import { HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -103,7 +103,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
             width={70}
           />
           <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
-            Full Time
+            {job.jobType ? job.jobType : "Full Time"}
           </span>
         </div>
         <div className="flex justify-start items-center font-semibold gap-2 w-full">

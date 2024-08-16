@@ -19,6 +19,7 @@ export interface Job {
     savedUsers: string[];
     createdAt: string;
     updatedAt: string;
+    jobType: string;
     employerId: Types.ObjectId;
 }
 
