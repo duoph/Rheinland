@@ -30,7 +30,7 @@ const Jobs = () => {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                applySort(data.jobs); // Apply default sorting (i.e., show all jobs)
+                applySort(data.jobs);
                 if (data.jobs.length === 0) {
                     setNoJobsMessage('No jobs available at the moment.');
                 } else {
@@ -74,10 +74,13 @@ const Jobs = () => {
 
     const applySort = (jobsToSort: Job[]) => {
         switch (sortOption) {
-            case 'shuffled':
+            case 'default':
+                setSearchResults(jobs);
+                break;
+            case 'popularJobs':
                 setSearchResults(shuffleArray(jobsToSort));
                 break;
-            case 'createdAt':
+            case 'LatestJobs':
                 setSearchResults(sortJobs(jobsToSort));
                 break;
             default:
@@ -139,8 +142,8 @@ const Jobs = () => {
                     className='border outline-none focus:outline-none rounded-md py-1 px-4'
                 >
                     <option value="default">Sort by</option>
-                    <option value="createdAt">Latest Jobs</option>
-                    <option value="shuffled">Shuffled Jobs</option>
+                    <option value="LatestJobs">Latest Jobs</option>
+                    <option value="popularJobs">Popular Jobs</option>
                 </select>
             </div>
 

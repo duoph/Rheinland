@@ -20,6 +20,7 @@ const CreateJob = () => {
     const [languageLevel, setLanguageLevel] = useState<string>('');
     const [minAge, setMinAge] = useState<string>('');
     const [maxAge, setMaxAge] = useState<string>('');
+    const [jobType, setJobType] = useState<string>('');
     const [numberOfOpenings, setNumberOfOpenings] = useState<string>('');
 
     const { account } = useAccount();
@@ -40,6 +41,7 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
+            jobType,
             categoryId: selectedCategory?.id,
             languageLevel,
             minAge,
@@ -107,6 +109,17 @@ const CreateJob = () => {
                     <option value='Male'>Male</option>
                     <option value='Female'>Female</option>
                     <option value='Any'>Any</option>
+                </select>
+
+                <select
+                    value={jobType}
+                    onChange={(e) => setJobType(e.target.value)}
+                    required
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
+                >
+                    <option value='' disabled>Select Job Type</option>
+                    <option value='Full Time'>Full Time</option>
+                    <option value='Part Time'>Part Time</option>
                 </select>
 
                 <select
