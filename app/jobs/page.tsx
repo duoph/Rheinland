@@ -31,69 +31,57 @@ const Jobs = () => {
             if (data.success) {
                 setJobs(data.jobs);
                 applySort(data.jobs);
-                if (data.jobs.length === 0) {
-                    setNoJobsMessage('No jobs available at the moment.');
-                } else {
-                    setNoJobsMessage('');
-                }
+                setNoJobsMessage(data.jobs.length === 0 ? 'No jobs available at the moment.' : '');
             } else {
                 setNoJobsMessage('Failed to fetch jobs.');
             }
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
             console.error(error);
             setNoJobsMessage('An error occurred while fetching jobs.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const shuffleArray = (array: Job[]) => {
-        return array.sort(() => Math.random() - 0.5);
+        return [...array].sort(() => Math.random() - 0.5);
     };
 
     const handleSearch = () => {
         setIsLoading(true);
         const filteredJobs = jobs.filter(job =>
-            job?.title?.toLowerCase().includes(jobTitle?.toLowerCase()) &&
-            job?.location?.toLowerCase().includes(location?.toLowerCase())
+            job?.title?.toLowerCase().includes(jobTitle.toLowerCase()) &&
+            job?.location?.toLowerCase().includes(location.toLowerCase())
         );
 
         applySort(filteredJobs);
-
-        if (filteredJobs.length === 0 && jobs.length > 0) {
-            setNoJobsMessage('No jobs match your search criteria.');
-        } else {
-            setNoJobsMessage('');
-        }
+        setNoJobsMessage(filteredJobs.length === 0 && jobs.length > 0 ? 'No jobs match your search criteria.' : '');
         setIsLoading(false);
     };
 
-    const sortJobs = (jobs: Job[]) => {
-        return jobs.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const sortJobs = (jobsToSort: Job[]) => {
+        return [...jobsToSort].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     };
 
     const applySort = (jobsToSort: Job[]) => {
+        let sortedJobs = jobsToSort;
         switch (sortOption) {
-            case 'default':
-                setSearchResults(jobs);
-                break;
             case 'popularJobs':
-                setSearchResults(shuffleArray(jobsToSort));
+                sortedJobs = shuffleArray(jobsToSort);
                 break;
             case 'LatestJobs':
-                setSearchResults(sortJobs(jobsToSort));
+                sortedJobs = sortJobs(jobsToSort);
                 break;
             default:
-                setSearchResults(jobsToSort); // Show all jobs without sorting or shuffling
+                sortedJobs = jobsToSort; // Show jobs without specific sorting
                 break;
         }
+        setSearchResults(sortedJobs);
     };
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedSort = e.target.value;
-        setSortOption(selectedSort);
-
-        applySort(searchResults);  // Apply sorting to the current search results
+        setSortOption(e.target.value);
+        applySort(jobs);
     };
 
     const handleLoadMore = () => {
@@ -160,7 +148,7 @@ const Jobs = () => {
                 }
             </div>
 
-            {displayedJobs.length >= 16 && jobs.length > jobsToDisplay && (
+            {displayedJobs.length >= 16 && searchResults.length > jobsToDisplay && (
                 <button
                     onClick={handleLoadMore}
                     className='w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3'
