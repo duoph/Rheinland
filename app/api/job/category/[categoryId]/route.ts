@@ -21,7 +21,6 @@ export async function GET(req: NextRequest, { params }: any) {
     } catch (error) {
         console.error('Error fetching category based jobs:', error);
 
-        // Return error response
         return NextResponse.json({
             error: 'Internal server error',
             success: false
