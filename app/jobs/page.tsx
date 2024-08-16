@@ -10,14 +10,11 @@ import { jobData } from '@/data/jobData';
 import { locations } from '@/data/location';
 
 const Jobs = () => {
-
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
     const queryLocation = searchParams.get('location') || "";
 
-
     const router = useRouter();
-
 
     const [jobs, setJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16);
@@ -26,13 +23,14 @@ const Jobs = () => {
     const [searchResults, setSearchResults] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [noJobsMessage, setNoJobsMessage] = useState<string>('');
+    const [sortOption, setSortOption] = useState<string>('default'); // Default sort option
 
     const fetchJobs = async () => {
         try {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                setSearchResults(data.jobs);
+                applySort(data.jobs); // Apply default sorting (i.e., show all jobs)
                 if (data.jobs.length === 0) {
                     setNoJobsMessage('No jobs available at the moment.');
                 } else {
@@ -49,19 +47,18 @@ const Jobs = () => {
         }
     };
 
-    useEffect(() => {
-        fetchJobs();
-    }, []);
-
+    const shuffleArray = (array: Job[]) => {
+        return array.sort(() => Math.random() - 0.5);
+    };
 
     const handleSearch = () => {
-
         setIsLoading(true);
         const filteredJobs = jobs.filter(job =>
             job?.title?.toLowerCase().includes(jobTitle?.toLowerCase()) &&
             job?.location?.toLowerCase().includes(location?.toLowerCase())
         );
-        setSearchResults(filteredJobs);
+
+        applySort(filteredJobs);
 
         if (filteredJobs.length === 0 && jobs.length > 0) {
             setNoJobsMessage('No jobs match your search criteria.');
@@ -69,20 +66,42 @@ const Jobs = () => {
             setNoJobsMessage('');
         }
         setIsLoading(false);
-    }
+    };
 
-    // useEffect(() => {
-    //     // Filter jobs based on the search inputs
+    const sortJobs = (jobs: Job[]) => {
+        return jobs.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    };
 
-    // }, [jobTitle, location, jobs]);
+    const applySort = (jobsToSort: Job[]) => {
+        switch (sortOption) {
+            case 'shuffled':
+                setSearchResults(shuffleArray(jobsToSort));
+                break;
+            case 'createdAt':
+                setSearchResults(sortJobs(jobsToSort));
+                break;
+            default:
+                setSearchResults(jobsToSort); // Show all jobs without sorting or shuffling
+                break;
+        }
+    };
+
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedSort = e.target.value;
+        setSortOption(selectedSort);
+
+        applySort(searchResults);  // Apply sorting to the current search results
+    };
 
     const handleLoadMore = () => {
         setJobsToDisplay(prev => prev + 18);
     };
 
-
     const displayedJobs = searchResults.slice(0, jobsToDisplay);
 
+    useEffect(() => {
+        fetchJobs();
+    }, []);
 
     return (
         <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen py-5'>
@@ -108,53 +127,46 @@ const Jobs = () => {
                 </button>
             </div>
 
-
             {/* Filter Options */}
-
             <div className='w-full flex items-center justify-between mb-3'>
-
                 <span onClick={() => router.push('/category')} className='underline text-sm cursor-pointer'>
-                    <p></p> View Catergories
+                    View Categories
                 </span>
 
-
-                <select name="" id="" className='border outline-none:none focus:outline-none rounded-md py-1 px-4'>
-                    <option value="1">New Jobs</option>
-                    <option value="2">Popular Jobs</option>
-                    <option value="3">Latest Jobs</option>
+                <select
+                    value={sortOption}
+                    onChange={handleSortChange}
+                    className='border outline-none focus:outline-none rounded-md py-1 px-4'
+                >
+                    <option value="default">Sort by</option>
+                    <option value="createdAt">Latest Jobs</option>
+                    <option value="shuffled">Shuffled Jobs</option>
                 </select>
-
-
             </div>
 
-
             <div className='flex items-center justify-center flex-wrap gap-3 mb-3'>
-                {
-                    isLoading
-                        ? Array.from({ length: 16 }).map((_, index) => (
-                            <JobCard key={index} isLoading={isLoading} job={null} />
+                {isLoading
+                    ? Array.from({ length: 16 }).map((_, index) => (
+                        <JobCard key={index} isLoading={isLoading} job={null} />
+                    ))
+                    : displayedJobs.length > 0
+                        ? displayedJobs.map((job) => (
+                            <JobCard key={job._id} isLoading={isLoading} job={job} />
                         ))
-                        : displayedJobs.length > 0
-                            ? displayedJobs.map((job) => (
-                                <JobCard key={job._id} isLoading={isLoading} job={job} />
-                            ))
-                            : <p className='text-center text-red-500'>{noJobsMessage}</p>
+                        : <p className='text-center text-red-500'>{noJobsMessage}</p>
                 }
             </div>
 
-            {
-                displayedJobs.length >= 16 && jobs.length > jobsToDisplay && (
-                    <button
-                        onClick={handleLoadMore}
-                        className='w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3'
-                    >
-                        Load more
-                    </button>
-                )
-            }
+            {displayedJobs.length >= 16 && jobs.length > jobsToDisplay && (
+                <button
+                    onClick={handleLoadMore}
+                    className='w-[200px] bg-rheinland-red text-white rounded-sm px-3 py-3'
+                >
+                    Load more
+                </button>
+            )}
         </div>
     );
 };
 
 export default Jobs;
-
