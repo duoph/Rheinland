@@ -101,10 +101,10 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                         Full Time
                     </span>
                 </div>
-                <div className="flex justify-start items-center text-sm font-semibold  w-full">
+                <div className="flex justify-start items-center text-sm font-normal w-full">
                     <span>Posted By<span className="underline"> Duoph Technologies</span> </span>
                 </div>
-                <div className="flex font-light text-sm gap-2 w-full py-1">
+                <div className="flex font-light text-sm gap-2 w-full ">
                     <span className="flex items-center justify-center gap-[6px]">
                         <CiLocationOn />
                         {job.location}
