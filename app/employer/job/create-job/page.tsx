@@ -16,6 +16,7 @@ const CreateJob = () => {
     const [description, setDescription] = useState<string>('');
     const [skills, setSkills] = useState<string>('');
     const [location, setLocation] = useState<string>('');
+    const [salary, setSalary] = useState<string>('');
     const [gender, setGender] = useState<string>('');
     const [languageLevel, setLanguageLevel] = useState<string>('');
     const [minAge, setMinAge] = useState<string>('');
@@ -42,6 +43,7 @@ const CreateJob = () => {
             location,
             gender,
             jobType,
+            salary,
             categoryId: selectedCategory?.id,
             languageLevel,
             minAge,
@@ -178,6 +180,14 @@ const CreateJob = () => {
                     value={maxAge}
                     onChange={(e) => setMaxAge(e.target.value)}
                     placeholder='Maximum Age'
+                    className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
+                />
+
+                <input
+                    type='text'
+                    value={salary}
+                    onChange={(e) => setSalary(e.target.value)}
+                    placeholder='Salary(Per Month)(Optional)'
                     className="w-full border px-3 py-2 border-b rounded-sm focus:outline-none"
                 />
 

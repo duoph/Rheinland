@@ -7,13 +7,11 @@ export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
     try {
-        // Connect to MongoDB
+
         await connectMongoDB();
 
-        // Fetch jobs from the database
         const jobs = await jobModel.find({});
 
-        // Return success response
         return NextResponse.json({
             message: 'Fetched jobs successfully',
             success: true,
@@ -23,12 +21,12 @@ export async function GET(req: NextRequest) {
     } catch (error) {
         console.error('Error fetching jobs:', error);
 
-        // Return error response
         return NextResponse.json({
             error: 'Internal server error',
             success: false
         }, { status: 500 });
     }
+
 }
 
 
@@ -49,6 +47,7 @@ export async function POST(req: NextRequest) {
             category,
             location,
             gender,
+            salary,
             jobType,
             skills,
             languageLevel,
