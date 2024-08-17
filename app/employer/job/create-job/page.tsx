@@ -71,7 +71,7 @@ const CreateJob = () => {
 
     return (
         <div className='flex flex-col items-center justify-start pt-[90px] min-h-screen px-3 sm:px-5 gap-5 pb-20'>
-            <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-semibold">Post a Job</h1>
+            <h1 className="lg:text-[40px] md:text-[35px] sm:text-[30px] xs:text-[25px] text-rheinland-red font-bold">Post a Job</h1>
 
             <form className='sm:w-[500px] w-full flex flex-col items-center justify-center gap-5' onSubmit={handleSubmit}>
                 <input
@@ -122,6 +122,7 @@ const CreateJob = () => {
                     <option value='' disabled>Select Job Type</option>
                     <option value='Full Time'>Full Time</option>
                     <option value='Part Time'>Part Time</option>
+                    <option value='Contract'>Contract</option>
                 </select>
 
                 <select
@@ -204,7 +205,7 @@ const CreateJob = () => {
 
                 <button
                     type='submit'
-                    className='px-5 py-2  w-full bg-rheinland-red text-white'
+                    className='px-5 py-2 rounded-md w-full bg-rheinland-red text-white'
                     disabled={isLoading}
                 >
                     {isLoading ? 'Posting...' : 'Submit'}

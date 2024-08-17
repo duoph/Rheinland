@@ -51,7 +51,7 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
     const handleHide = async () => {
         if (job?._id) {
             try {
-                await axios.put(`/api/job/${job._id}`, { visible: false });
+                await axios.put(`/api/job/${job._id}`, { approvedByAdmin: false });
                 if (reFectch) reFectch();
             } catch (error) {
                 console.error('Error hiding job:', error);
@@ -94,18 +94,15 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
         <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px]  group rounded-sm px-3 py-2 cursor-pointer">
             <Link href={`/admin/jobs/${job._id}`} className="w-full">
                 <div className="flex justify-between items-center w-full py-2">
-                    <Image
-                        src={"/RheinlandLogoHeader.png"}
-                        alt="Logo"
-                        height={60}
-                        width={60}
-                    />
+                    <div className="flex justify-start items-center font-semibold">
+                        <span>{job.title}</span>
+                    </div>
                     <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
                         Full Time
                     </span>
                 </div>
-                <div className="flex justify-start items-center font-semibold gap-2 w-full">
-                    <span>{job.title}</span>
+                <div className="flex justify-start items-center text-sm font-semibold  w-full">
+                    <span>Posted By<span className="underline"> Duoph Technologies</span> </span>
                 </div>
                 <div className="flex font-light text-sm gap-2 w-full py-1">
                     <span className="flex items-center justify-center gap-[6px]">

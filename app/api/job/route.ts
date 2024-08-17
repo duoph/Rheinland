@@ -67,6 +67,7 @@ export async function POST(req: NextRequest) {
             categoryId,
             location,
             gender,
+            salary,
             jobType,
             skills,
             languageLevel,
@@ -74,10 +75,8 @@ export async function POST(req: NextRequest) {
             maxAge
         });
 
-        // Save the new job to the database
         const savedJob = await newJob.save();
 
-        // Return success response
         return NextResponse.json({ message: 'Job created successfully', success: true, job: savedJob });
     } catch (error) {
         console.error('Error creating job:', error);
