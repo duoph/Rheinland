@@ -7,22 +7,20 @@ import toast from "react-hot-toast";
 
 const EmployerProfile = () => {
   const [employerName, setEmployerName] = useState("");
-  const [address, setAddress] = useState("");
+  const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [about, setAbout] = useState("");
   const [isEditable, setIsEditable] = useState(false);
-  const [loading, setLoading] = useState(true); // Add loading state
-
+  const [loading, setLoading] = useState(true);
 
   const fetchEmployer = async () => {
     try {
       const response = await axios.get(`/api/employer/account`);
-      console.log(response)
       const employerData = response.data.employer;
       setEmployerName(employerData?.employerName);
-      setAddress(employerData?.address);
+      setLocation(employerData?.location);
       setPhone(employerData?.phone);
       setEmail(employerData?.email);
       setWebsite(employerData?.website);
@@ -43,7 +41,7 @@ const EmployerProfile = () => {
       setIsEditable(false);
       const formData = new FormData();
       formData.append('employerName', employerName);
-      formData.append('address', address);
+      formData.append('address', location);
       formData.append('phone', phone);
       formData.append('email', email);
       formData.append('website', website);
@@ -60,7 +58,6 @@ const EmployerProfile = () => {
       } else {
         toast.success(res.data.message);
       }
-      setIsEditable(false);
     } catch (error) {
       console.error('Error updating employer:', error);
     }
@@ -68,68 +65,77 @@ const EmployerProfile = () => {
 
   if (loading) {
     return (
-      <div className="pt-[95px] flex items-center justify-center w-full h-[calc(100vh-95px)]">
-        <p className="text-xl ">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center w-full h-full">
+        <p className="text-gray-500 text-lg">Loading...</p>
       </div>
     );
   }
 
   return (
     <div className="pt-[95px] gap-3 flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
-      <h1 className="text-4xl font-bold text-rheinland-red">Profile</h1>
+      <h1 className="text-4xl font-bold">Profile</h1>
       <div className="w-full max-w-xl">
-        <div className="grid grid-cols-1 gap-2 mb-3">
-          <input
-            type="text"
-            placeholder="Company Name"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={employerName}
-            onChange={(e) => setEmployerName(e.target.value)}
-            disabled={!isEditable}
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            disabled={!isEditable}
-          />
-          <input
-            type="tel"
-            placeholder="Phone"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            disabled={!isEditable}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={!isEditable}
-          />
-          <input
-            type="text"
-            placeholder="Website"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            disabled={!isEditable}
-          />
-        </div>
-
-        <div className="mb-8">
-          <textarea
-            placeholder="About"
-            className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-            value={about}
-            rows={5}
-            onChange={(e) => setAbout(e.target.value)}
-            disabled={!isEditable}
-          />
+        <div className="grid grid-cols-1 gap-2 mb-8">
+          <div>
+            <label className="text-sm font-medium mb-1">Company Name:</label>
+            <input
+              type="text"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={employerName}
+              onChange={(e) => setEmployerName(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1">Location:</label>
+            <input
+              type="text"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1">Phone:</label>
+            <input
+              type="tel"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1">Email:</label>
+            <input
+              type="email"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1">Website:</label>
+            <input
+              type="text"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1">About:</label>
+            <textarea
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+              value={about}
+              rows={5}
+              onChange={(e) => setAbout(e.target.value)}
+              disabled={!isEditable}
+            />
+          </div>
         </div>
 
         <button

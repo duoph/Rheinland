@@ -70,18 +70,9 @@ const UserProfile = () => {
   return (
     <div className="pt-[95px] D flex flex-col items-center justify-center pb-10 w-full px-3 md:px-8">
       <h1 className="text-4xl font-bold ">My Profile</h1>
-      <div className="flex flex-col items-center">
-        <Image
-          src="/person-icon.jpg"
-          alt="Profile Picture"
-          height={100}
-          width={100}
-          className="rounded-full mb-1"
-        />
-      </div>
-
+     
       <div className="w-full max-w-xl">
-        <div className="grid grid-cols-1 gap-4 mb-8">
+        <div className="grid grid-cols-1 gap-2 mb-8">
           <div>
             <label className="text-sm font-medium mb-1">Name:</label>
             <input

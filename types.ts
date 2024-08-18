@@ -20,6 +20,7 @@ export interface Job {
     createdAt: string;
     updatedAt: string;
     jobType: string;
+    numberOfOpenings: string;
     employerId: Types.ObjectId;
 }
 
