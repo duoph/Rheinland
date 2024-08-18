@@ -9,7 +9,7 @@ import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
-import { MdAccessTime } from "react-icons/md";
+import { MdAccessTime, MdCategory } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import ApplicationCard from "@/components/ApplicationCard";
@@ -81,13 +81,17 @@ const SingleJobPage: React.FC = () => {
             <div className="flex flex-row items-start w-full gap-5 flex-wrap">
                 <span className="flex gap-2 font-light">
                     <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
-                    {job?.category || "Unable to load category"}
+                    {job?.jobType ? job.jobType : "Full Time"}
                 </span>
+                {/* <span className="flex gap-2 font-light">
+                    <MdCategory  className="text-rheinland-red" size={24} />
+                    {job?.category || "Unable to load category"}
+                </span> */}
                 <span className="flex gap-2 font-light">
                     <CiLocationOn className="text-rheinland-red" size={24} />
                     {job?.location || "Location not specified"}
                 </span>
-                <span className="flex gap-2 font-light">
+            <span className="flex gap-2 font-light">
                     <CiUser className="text-rheinland-red" size={24} />
                     {job?.gender || "Gender data failed to load"}
                 </span>

@@ -175,8 +175,12 @@ const SingleJobPage = () => {
       <div className="flex flex-row items-start w-full gap-5 flex-wrap">
         <span className="flex gap-2 font-light">
           <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
-          {job?.category || "Unable to load category"}
+          {job?.jobType ? job.jobType : "Full Time"}
         </span>
+        {/* <span className="flex gap-2 font-light">
+          <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
+          {job?.category || "Unable to load category"}
+        </span> */}
         <span className="flex gap-2 font-light">
           <CiLocationOn className="text-rheinland-red" size={24} />
           {job?.location || "Location not specified"}
@@ -249,7 +253,7 @@ const SingleJobPage = () => {
           </div>
         </div>
 
-        {/* Related Jobs Section */}  
+        {/* Related Jobs Section */}
         <RelatedJobs pageJobId={jobId as string} jobs={relatedJobs} loading={loading} />
       </div>
 
