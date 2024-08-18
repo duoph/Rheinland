@@ -66,7 +66,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   if (isLoading) {
     return (
-      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group cursor-pointer rounded-sm px-3 py-2">
         <div className="flex justify-between items-center w-full py-2">
           <Skeleton className="w-[60px] h-[60px]" />
           <Skeleton className="w-[70px] h-[30px]" />
@@ -93,31 +93,23 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   }
 
   return (
-    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[250px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer  md:hover:shadow-lg transition-shadow duration-300 ease-in-out">
+    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[230px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer ">
       <Link href={`/jobs/${job._id}`} className="w-full">
-        <div className="flex justify-between items-center w-full py-2">
-          <Image
-            src={"/RheinlandEnlarged.png"}
-            alt="Logo"
-            height={70}
-            width={70}
-          />
-          <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
-            {job.jobType ? job.jobType : "Full Time"}
-          </span>
+        <div className="flex flex-col w-full py-2 space-y-2">
+          <span className="text-lg font-semibold text-gray-800">{job.title}</span>
+          <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
+          {/* <span className="text-sm font-normal text-gray-900">
+            Posted By <span className="underline">Duoph Technologies</span>
+          </span> */}
         </div>
-        <div className="flex justify-start items-center font-semibold gap-2 w-full">
-          <span>{job.title}</span>
+
+        <div className="flex items-center text-sm text-gray-600 gap-2">
+          <CiLocationOn />
+          {job.location}
         </div>
-        <div className="flex font-light text-sm gap-2 w-full py-1">
-          <span className="flex items-center justify-center gap-[6px]">
-            <CiLocationOn />
-            {job.location}
-          </span>
-        </div>
-        <div className="h-[80px] w-full py-1">
+        <div className="h-[80px] w-full py-2">
           <p
-            className="font-light h-full overflow-hidden"
+            className="font-light text-sm text-gray-700 overflow-hidden"
             style={{
               display: "-webkit-box",
               WebkitLineClamp: 3,

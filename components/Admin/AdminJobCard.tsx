@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import { CiLocationOn, CiTrash } from 'react-icons/ci';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FaRegEyeSlash } from 'react-icons/fa';
 import ConfirmationModal from '../ConfirmationModal';
 import toast from 'react-hot-toast';
@@ -17,20 +16,19 @@ interface AdminJobCardProps {
     reFectch?: () => void;
 }
 
-const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
+const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFectch }) => {
     const [jobs, setJobs] = useState<string[]>([]);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const fetchUser = async () => {
-        try {
-            const res = await axios.get('/api/user');
-            setJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    };
-
     useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios.get('/api/user');
+                setJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
         fetchUser();
     }, []);
 
@@ -63,42 +61,36 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
 
     if (isLoading) {
         return (
-            <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] min-h-[250px] group cursor-pointer rounded-md px-4 py-3">
-                <div className="flex justify-between items-center w-full py-2">
-                    <Skeleton className="w-[60px] h-[60px]" />
-                    <Skeleton className="w-[100px] h-[30px]" />
+            <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] min-h-[250px] group cursor-pointer rounded-md px-4 py-3 animate-pulse">
+                <div className="flex flex-col w-full py-2 space-y-2">
+                    <Skeleton className="w-[60%] h-[24px] rounded-md" />
+                    <Skeleton className="w-[40%] h-[20px] rounded-md" />
+                    <Skeleton className="w-[50%] h-[20px] rounded-md" />
                 </div>
-                <Skeleton className="w-full h-[20px] mb-3" />
-                <div className="flex flex-row items-center justify-between gap-2 w-full">
-                    <div className="flex flex-row items-center gap-2">
-                        <Skeleton className="w-[20px] h-[20px]" />
-                        <Skeleton className="w-[120px] h-[20px]" />
-                    </div>
-                    <Skeleton className="w-[60px] h-[20px]" />
+                <div className="flex items-center gap-2 w-full py-2">
+                    <Skeleton className="w-[20px] h-[20px] rounded-full" />
+                    <Skeleton className="w-[60%] h-[20px] rounded-md" />
                 </div>
-                <Skeleton className="w-full h-[60px] mt-4" />
-                <div className="flex gap-2 justify-center items-center w-full mt-4">
-                    <Skeleton className="p-2 w-full" />
-                    <Skeleton className="p-2 w-full" />
+                <Skeleton className="w-[80%] h-[20px] rounded-md mt-2" />
+                <div className="h-[80px] w-full py-2">
+                    <Skeleton className="w-full h-full rounded-md" />
                 </div>
             </div>
         );
     }
 
-    if (!job) { return null; }
+    if (!job) {
+        return null;
+    }
 
     return (
-        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] group rounded-md px-4 py-3 cursor-pointer">
+        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] group rounded-md px-4 py-3 cursor-pointer ">
             <Link href={`/admin/jobs/${job._id}`} className="w-full">
-                <div className="flex justify-between items-center w-full py-2">
-                    <div className="flex flex-col">
-                        <span className="text-lg font-semibold">{job.title}</span>
-                        <span className="text-sm font-normal text-gray-600">
-                            Posted By <span className="underline">Duoph Technologies</span>
-                        </span>
-                    </div>
-                    <span className="border px-2 py-1 rounded-sm text-rheinland-blue border-rheinland-blue">
-                        {job.jobType ? job.jobType : "Full Time"}
+                <div className="flex flex-col w-full py-2 space-y-2">
+                    <span className="text-lg font-semibold text-gray-800">{job.title}</span>
+                    <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
+                    <span className="text-sm font-normal text-gray-900">
+                        Posted By <span className="underline">Duoph Technologies</span>
                     </span>
                 </div>
 
@@ -107,7 +99,7 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
                     {job.location}
                 </div>
 
-                <span className={`text-sm py-2 ${job.appliedUsers?.length > 0 ? 'text-rheinland-red underline' : 'text-gray-400'}`}>
+                <span className={`text-sm py-2 ${job.appliedUsers?.length > 0 ? 'text-red-600 underline' : 'text-gray-400'}`}>
                     {job?.appliedUsers?.length} Applicants
                 </span>
 
@@ -129,9 +121,9 @@ const AdminJobCard = ({ job, isLoading, reFectch }: AdminJobCardProps) => {
             <div className="flex gap-3 justify-end items-center w-full mt-2">
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center justify-center  text-white rounded-md py-2 transition-colors"
+                    className="flex items-center justify-center text-white bg-red-600 rounded-md py-2 px-4 hover:bg-red-700 transition-colors"
                 >
-                    <CiTrash className="text-xl text-red-700" />
+                    <CiTrash className="text-xl" />
                 </button>
             </div>
             <ConfirmationModal
