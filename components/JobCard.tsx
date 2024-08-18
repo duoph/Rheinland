@@ -1,7 +1,6 @@
 "use client";
 
 import { Job } from "@/types";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { CiLocationOn } from "react-icons/ci";
@@ -10,6 +9,7 @@ import { Skeleton } from "./ui/skeleton";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAccount } from "@/context/useAccount";
+import { useRouter } from "next/navigation";
 
 interface JobCardProps {
   job: Job | null;
@@ -20,6 +20,8 @@ interface JobCardProps {
 const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
 
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
+
+  const router = useRouter()
 
   const { account } = useAccount()
 
@@ -43,8 +45,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
     e.stopPropagation();
     if (!job) return;
 
-    if (account.token) {
+    if (!account.token) {
       toast.error("Please login to save job");
+      router.push('/login')
       return;
     }
 

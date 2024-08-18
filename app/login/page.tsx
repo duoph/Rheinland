@@ -80,7 +80,7 @@ const LoginPage = () => {
                 </div>
                 <div className='flex flex-col gap-2 w-full'>
 
-                    <div className='flex flex-col gap-2 w-full'>
+                    <div className='flex flex-col w-full'>
                         <label className='text-sm font-medium'>Email</label>
                         <input
                             type="email"
@@ -90,7 +90,7 @@ const LoginPage = () => {
                             placeholder="Enter your email"
                         />
                     </div>
-                    <div className='flex flex-col gap-2 w-full'>
+                    <div className='flex flex-col w-full'>
                         <label className='text-sm font-medium'>Password</label>
                         <input
                             type="password"
