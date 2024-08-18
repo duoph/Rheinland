@@ -43,6 +43,11 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
     e.stopPropagation();
     if (!job) return;
 
+    if (account.token) {
+      toast.error("Please login to save job");
+      return;
+    }
+
     try {
       const response = await axios.put(`/api/job/${job._id}/user/save`);
       console.log(response?.data);
