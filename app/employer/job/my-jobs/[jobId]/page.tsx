@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAccount } from '@/context/useAccount';
 import toast from 'react-hot-toast';
-import SuggestionInput from '@/components/SuggestionInput';
-import { locations } from '@/data/location';
 import { jobCategories } from '@/data/jobData';
 import { useRouter, useParams } from 'next/navigation';
 
@@ -95,7 +93,7 @@ const EditJob = () => {
 
                 {/* Title Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Title</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Title</label>
                     <input
                         type='text'
                         value={title}
@@ -108,7 +106,7 @@ const EditJob = () => {
 
                 {/* Category Select */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Category</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Category</label>
                     <select
                         required
                         value={category}
@@ -125,7 +123,7 @@ const EditJob = () => {
 
                 {/* Description Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Description</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Description</label>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -137,7 +135,7 @@ const EditJob = () => {
 
                 {/* Gender Select */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Gender</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Gender</label>
                     <select
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
@@ -153,7 +151,7 @@ const EditJob = () => {
 
                 {/* Job Type Select */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Job Type</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Job Type</label>
                     <select
                         value={jobType}
                         onChange={(e) => setJobType(e.target.value)}
@@ -169,7 +167,7 @@ const EditJob = () => {
 
                 {/* Number of Openings Select */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Number of Openings</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Number of Openings</label>
                     <select
                         value={numberOfOpenings}
                         onChange={(e) => setNumberOfOpenings(e.target.value)}
@@ -193,7 +191,7 @@ const EditJob = () => {
 
                 {/* Language Level Select */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Language Level</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Language Level</label>
                     <select
                         value={languageLevel}
                         onChange={(e) => setLanguageLevel(e.target.value)}
@@ -212,7 +210,7 @@ const EditJob = () => {
 
                 {/* Skills Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Skills</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Skills</label>
                     <input
                         type='text'
                         value={skills}
@@ -224,34 +222,49 @@ const EditJob = () => {
 
                 {/* Salary Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium'>Salary (Per Month) (Optional)</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Salary</label>
                     <input
                         type='text'
                         value={salary}
                         onChange={(e) => setSalary(e.target.value)}
-                        placeholder='Enter salary'
+                        placeholder='Enter salary (e.g., $1000)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
 
-                {/* Location SuggestionInput */}
-                <SuggestionInput
-                    placeholder="Enter location"
-                    searchInput={location}
-                    setSearchInput={setLocation}
-                    data={locations}
-                />
+                {/* Location Input */}
+                <div className='flex flex-col w-full'>
+                    <label className='text-sm font-medium text-rheinland-gray'>Salary</label>
+                    <input
+                        type='text'
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder='Enter salary (e.g., $1000)'
+                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    />
+                </div>
 
+                {/* Submit Button */}
                 <button
                     type="submit"
+                    className="bg-rheinland-red text-white font-semibold text-sm sm:text-base rounded-[3px] w-full px-4 py-3 shadow-md focus:outline-none transition duration-200 ease-in-out"
                     disabled={isLoading}
-                    className="px-4 py-3 w-full bg-rheinland-red rounded-md text-white font-semibold text-[17px] disabled:bg-gray-400"
                 >
-                    {isLoading ? 'Updating...' : 'Update'}
+                    {isLoading ? (
+                        <div className="flex items-center justify-center">
+                            <svg className="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm2-8a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            Submitting...
+                        </div>
+                    ) : (
+                        'Save Changes'
+                    )}
                 </button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default EditJob;
