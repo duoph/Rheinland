@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
             salary,
             jobType,
             skills,
+            numberOfOpenings,
             languageLevel,
             minAge,
             maxAge
@@ -71,6 +72,7 @@ export async function POST(req: NextRequest) {
             jobType,
             skills,
             languageLevel,
+            numberOfOpenings,
             minAge,
             maxAge
         });

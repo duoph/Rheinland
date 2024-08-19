@@ -44,6 +44,7 @@ const CreateJob = () => {
             gender,
             jobType,
             salary,
+            numberOfOpenings,
             categoryId: selectedCategory?.id,
             languageLevel,
             minAge,
