@@ -189,12 +189,12 @@ const CreateJob = () => {
 
                 {/* Skills Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium text-rheinland-gray'>Skills</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Skills (e.g., Python, Java, C++)</label>
                     <input
                         type='text'
                         value={skills}
                         onChange={(e) => setSkills(e.target.value)}
-                        placeholder='Enter skills (comma-separated) (e.g., Python, Java, C++)'
+                        placeholder='Enter skills (comma-separated)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
@@ -223,7 +223,7 @@ const CreateJob = () => {
                     />
                 </div>
 
-               
+
 
                 <button type='submit' disabled={isLoading} className='bg-rheinland-red text-white w-full rounded-md py-2.5 font-semibold flex items-center justify-center'>
                     {isLoading ? "Creating..." : "Create Job"}
