@@ -177,31 +177,32 @@ const SingleJobPage = () => {
           <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
           {job?.jobType ? job.jobType : "Full Time"}
         </span>
-        {/* <span className="flex gap-2 font-light">
-          <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
-          {job?.category || "Unable to load category"}
-        </span> */}
+
         <span className="flex gap-2 font-light">
           <CiLocationOn className="text-rheinland-red" size={24} />
-          {job?.location || "Location not specified"}
+          {job?.location}
         </span>
-        <span className="flex gap-2 font-light">
-          <CiUser className="text-rheinland-red" size={24} />
-          {job?.gender || "Gender data failed to load"}
-        </span>
-        <span className="flex gap-2 font-light">
-          <HiOutlineBanknotes className="text-rheinland-red" size={24} />
-          {job?.salary || "Salary not specified"}
-        </span>
+
+        {job?.gender && job?.gender !== "Any" && (
+          <span className="flex gap-2 font-light">
+            <CiUser className="text-rheinland-red" size={24} />
+            {job?.gender}
+          </span>
+        )}
+
+        {job?.salary && (
+          <span className="flex gap-2 font-light">
+            <HiOutlineBanknotes className="text-rheinland-red" size={24} />
+            {job?.salary}
+          </span>
+        )}
+
+
         <span className="flex gap-2 font-light">
           <SlCalender className="text-rheinland-red" size={24} />
           {formattedDate}
         </span>
-        {(job?.minAge || job?.maxAge) && (
-          <span className="flex gap-2 font-light">
-            <MdAccessTime className="text-rheinland-red" size={24} /> Age: {job?.minAge} - {job?.maxAge}
-          </span>
-        )}
+
       </div>
 
       <div className="flex flex-col items-start justify-center w-full gap-3">

@@ -30,7 +30,7 @@ const MyJobs: React.FC = () => {
     setJobsToDisplay(prev => prev + 16);
   };
 
-  const displayedJobs = jobs.slice(0, jobsToDisplay);
+  const displayedJobs = jobs?.slice(0, jobsToDisplay);
 
   return (
     <div className="pt-[95px] pb-10 flex flex-col items-center gap-5 px-5 md:px-10">
@@ -39,16 +39,16 @@ const MyJobs: React.FC = () => {
       <div className='flex items-center justify-center flex-wrap gap-3'>
         {isLoading
           ? Array.from({ length: 16 }).map((_, index) => (
-              <EmployerJobCard key={index} loading={isLoading} job={undefined} />
-            ))
+            <EmployerJobCard key={index} loading={isLoading} job={undefined} />
+          ))
           : displayedJobs.length > 0
             ? displayedJobs.map((job) => (
-                <EmployerJobCard loading={isLoading} key={job._id} job={job} />
-              ))
+              <EmployerJobCard loading={isLoading} key={job._id} job={job} />
+            ))
             : <p>No jobs available</p>
         }
       </div>
-      
+
       {!isLoading && displayedJobs.length < jobs.length && (
         <button
           onClick={handleLoadMore}
