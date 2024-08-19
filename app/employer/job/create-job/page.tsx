@@ -108,6 +108,7 @@ const CreateJob = () => {
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder='Enter job description'
                         required
+                        rows={5}
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
@@ -206,7 +207,7 @@ const CreateJob = () => {
                         type='text'
                         value={salary}
                         onChange={(e) => setSalary(e.target.value)}
-                        placeholder='Enter salary (e.g., $1000)'
+                        placeholder='Enter salary (e.g., €2000)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
