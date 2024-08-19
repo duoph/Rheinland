@@ -85,7 +85,7 @@ const EmployerJobCard: React.FC<EmployerJobCardProps> = ({ job, loading }) => {
       <div className='flex items-end justify-center w-full'>
         <div className='flex gap-1 w-2/3'>
           <button
-            onClick={() => router.push('/employer/job/my-jobs')}
+            onClick={() => router.push(`/employer/job/my-jobs/${job?._id}`)}
             className="flex items-center justify-center w-full py-2 text-sm font-medium text-white bg-gray-500 rounded-md hover:bg-gray-600 transition"
           >
             <MdEdit size={18} className="mr-2" />

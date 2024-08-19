@@ -52,8 +52,7 @@ export async function POST(req: NextRequest) {
             skills,
             numberOfOpenings,
             languageLevel,
-            minAge,
-            maxAge
+           
         } = await req.json();
 
         if (!title || !description || !category || !categoryId || !location) {
@@ -73,8 +72,7 @@ export async function POST(req: NextRequest) {
             skills,
             languageLevel,
             numberOfOpenings,
-            minAge,
-            maxAge
+           
         });
 
         const savedJob = await newJob.save();
@@ -87,36 +85,3 @@ export async function POST(req: NextRequest) {
 }
 
 
-export async function PUT(req: NextRequest) {
-    try {
-        await connectMongoDB();
-
-        const { id, title, description, category, state, location, requirements, gender, skills, minAge, maxAge } = await req.json();
-
-        if (!id || !title || !description || !category) {
-            return NextResponse.json({ error: 'Missing required fields', success: false, status: 400 });
-        }
-
-        const updatedJob = await jobModel.findByIdAndUpdate(id, {
-            title,
-            description,
-            category,
-            state,
-            location,
-            requirements,
-            gender,
-            skills,
-            minAge,
-            maxAge,
-        }, { new: true });
-
-        if (!updatedJob) {
-            return NextResponse.json({ error: 'Job not found', success: false, status: 404 });
-        }
-
-        return NextResponse.json({ message: 'Job updated successfully', success: true, job: updatedJob });
-    } catch (error) {
-        console.error('Error updating job:', error);
-        return NextResponse.json({ error: 'Internal server error', success: false, status: 500 });
-    }
-}
