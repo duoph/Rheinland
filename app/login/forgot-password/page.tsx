@@ -15,39 +15,50 @@ const ForgotPasswordPage = () => {
 
     const router = useRouter();
 
-    const handleSubmit = async () => {
+    const handleEmailSumbit = async () => {
         setIsLoading(true);
         try {
-            if (stage === 1 && !email) {
-                setIsLoading(false);
-                return toast.error("Please enter your email");
-            }
-            if (stage === 2 && !otp) {
-                setIsLoading(false);
-                return toast.error("Please enter the OTP");
-            }
-            if (stage === 3 && !newPassword) {
-                setIsLoading(false);
-                return toast.error("Please enter a new password");
+            const emailResponse = await axios.post('/api/login/forgot-password', { email });
+
+            if (emailResponse.data.success) {
+                toast.success('OTP sent to your email');
+                setStage(2);
             }
 
-            const payload = { email: email.toLowerCase(), ...(stage === 2 && { otp }), ...(stage === 3 && { newPassword }) };
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error:', error);
+            toast.error('An error occurred. Please try again.');
+        }
+    };
 
-            const res = await axios({
-                method: stage === 3 ? 'put' : 'post',
-                url: '/api/user/forgot-password',
-                data: payload
-            });
+    const handleOTPSubmit = async () => {
+        setIsLoading(true);
+        try {
+            const emailResponse = await axios.post('/api/login/forgot-password', { email });
 
-            if (res.data.success) {
-                toast.success(res.data.message);
-                if (stage < 3) {
-                    setStage(stage + 1);
-                } else {
-                    router.push('/login');
-                }
-            } else {
-                toast.error(res.data.message);
+            if (emailResponse.data.success) {
+                toast.success('OTP sent to your email');
+                setStage(2);
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error:', error);
+            toast.error('An error occurred. Please try again.');
+        }
+    };
+
+    const handleNewPassword = async () => {
+        setIsLoading(true);
+        try {
+            const emailResponse = await axios.post('/api/login/forgot-password', { email });
+
+            if (emailResponse.data.success) {
+                toast.success('OTP sent to your email');
+                setStage(2);
             }
 
             setIsLoading(false);
@@ -120,7 +131,7 @@ const ForgotPasswordPage = () => {
                 </div>
 
                 <button
-                    onClick={handleSubmit}
+                    onClick={stage === 1 ? handleEmailSumbit : stage === 2 ? handleOTPSubmit : handleNewPassword}
                     className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
                     disabled={isLoading}
                 >

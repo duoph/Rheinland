@@ -1,3 +1,4 @@
+import userModel from "@/models/userSchema";
 import { randomInt } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer, { Transporter } from "nodemailer";
@@ -84,23 +85,24 @@ export async function POST(req: NextRequest) {
 
         const otp = randomInt(100000, 999999).toString();
 
-        // Save OTP in userModel (replace with your actual save logic)
+        // Save OTP in userModel(replace with your actual save logic)
         // await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
 
         const transporter: Transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: "hadhirasal22@gmail.com",
-                pass: "wxiulhnwqirkfsup"
+                user: "",
+                pass: ""
             }
         });
 
         const mailOptions = {
-            from: "newsletter.platform@gmail.com",
+            from: "no-reply@rheinland-consultancy.com",
             to: email,
             subject: "RheinLand Consultancy - Your OTP Code",
             html: replaceTemplatePlaceholders(emailHTML, otp),
         };
+
 
         await transporter.sendMail(mailOptions);
 
