@@ -17,7 +17,7 @@ const CategoryPage = () => {
                     jobCategories.map(category => (
                         <div
                             key={category.id}
-                            className='flex flex-col items-center justify-center bg-white border border-gray-200 h-[150px] sm:min-h-[250px] sm:max-h-[250px] rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300 ease-in-out'
+                            className='flex flex-col items-center justify-center bg-white border border-gray-200 h-[150px] sm:min-h-[250px] sm:max-h-[250px] rounded-lg shadow-md cursor-pointer '
                             onClick={() => router.push(`/category/${category.id}`)}
                         >
                             <div className='bg-rheinland-red w-full text-white rounded-t-lg py-3 px-4'>
