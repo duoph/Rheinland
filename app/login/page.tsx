@@ -118,7 +118,9 @@ const LoginPage = () => {
                         </Link>
                     </span>
                     <span className='text-blue-500 underline cursor-pointer font-light mt-2'>
-                        Forgot Password
+                        <Link href={'/login/forgot-password'} className='text-blue-500 underline'>
+                            Forgot password?
+                        </Link>
                     </span>
                 </div>
             </div>

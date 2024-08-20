@@ -25,6 +25,7 @@
     "mongoose": "^8.4.0",
     "next": "^14.2.4",
     "next-nprogress-bar": "^2.3.13",
+    "nodemailer": "^6.9.14",
     "primereact": "^10.6.5",
     "react": "^18.3.1",
     "react-autosuggest": "^10.1.0",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@types/next": "^9.0.0",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.15",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
