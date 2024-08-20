@@ -19,12 +19,12 @@ const UserProfile = () => {
     try {
       const response = await axios.get("/api/user");
       const userData = response.data.user;
-      setLocation(userData.location);
-      setPhone(userData.phone);
-      setName(userData.name);
-      setEmail(userData.email);
-      setGermanLanguageLevel(userData.germanLanguageLevel);
-      setResumeLink(userData.resumeLink);
+      setLocation(userData?.location);
+      setPhone(userData?.phone);
+      setName(userData?.name);
+      setEmail(userData?.email);
+      setGermanLanguageLevel(userData?.germanLanguageLevel);
+      setResumeLink(userData?.resumeLink);
     } catch (error) {
       console.log(error);
     } finally {
