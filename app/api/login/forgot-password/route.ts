@@ -86,7 +86,11 @@ export async function POST(req: NextRequest) {
         const otp = randomInt(100000, 999999).toString();
 
         // Save OTP in userModel(replace with your actual save logic)
-        await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
+        const user = await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
+
+        if (!user) {
+            return NextResponse.json({ success: false, message: "Chech your email" });
+        }
 
         const transporter: Transporter = nodemailer.createTransport({
             service: 'gmail',
