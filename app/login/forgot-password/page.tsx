@@ -19,7 +19,6 @@ const ForgotPasswordPage = () => {
         setIsLoading(true);
         try {
             const emailResponse = await axios.post('/api/login/forgot-password', { email });
-
             if (emailResponse.data.success) {
                 toast.success('OTP sent to your email');
                 setStage(2);
