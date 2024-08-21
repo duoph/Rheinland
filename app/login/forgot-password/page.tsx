@@ -101,8 +101,8 @@ const ForgotPasswordPage = () => {
                             />
                         </div>
                     )}
-
                     {stage === 2 && (
+
                         <div className='flex flex-col w-full'>
                             <label className='text-sm font-medium'>OTP</label>
                             <input
