@@ -15,7 +15,13 @@ const userSchema = new Schema({
     about: { type: String },
     germanLanguageLevel: { type: String },
     location: { type: String },
-    otp: { type: String },
+    security: {
+        type: {
+            otpCode: { type: String, required: true },
+            sentOn: { type: Date, required: true }
+        },
+        required: true
+    },
     savedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
     appliedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
     accountType: { type: String, default: "user", required: true }

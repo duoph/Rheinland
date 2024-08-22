@@ -86,11 +86,11 @@ export async function POST(req: NextRequest) {
         const otp = randomInt(100000, 999999).toString();
 
         // Save OTP in userModel(replace with your actual save logic)
-        const user = await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
+        // const user = await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
 
-        if (!user) {
-            return NextResponse.json({ success: false, message: "Chech your email" });
-        }
+        // if (!user) {
+        //     return NextResponse.json({ success: false, message: "Chech your email" });
+        // }
 
         const transporter: Transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
         const mailOptions = {
             from: "newsletter.platform@gmail.com",
             to: email,
-            subject: "RheinLand Consultancy - Your OTP Code",
+            subject: "RheinLand Consultancy - Your OTP Code ",
             html: replaceTemplatePlaceholders(emailHTML, otp),
         };
 
