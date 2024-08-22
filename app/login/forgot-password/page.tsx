@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io';
 
-
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState<string>('');
     const [otp, setOtp] = useState<string>('');
@@ -16,7 +15,12 @@ const ForgotPasswordPage = () => {
 
     const router = useRouter();
 
-    const handleEmailSumbit = async () => {
+    const handleEmailSubmit = async () => {
+        if (!email) {
+            toast.error('Please enter your email.');
+            return;
+        }
+
         setIsLoading(true);
         try {
             const emailResponse = await axios.post('/api/login/forgot-password', { email });
@@ -24,48 +28,55 @@ const ForgotPasswordPage = () => {
                 toast.success('OTP sent to your email');
                 setStage(2);
             }
-
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
             console.error('Error:', error);
             toast.error('An error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const handleOTPSubmit = async () => {
+        if (!otp) {
+            toast.error('Please enter the OTP.');
+            return;
+        }
+
         setIsLoading(true);
         try {
-            const emailResponse = await axios.post('/api/login/forgot-password/verify', { email, otp });
+            const otpResponse = await axios.post('/api/login/forgot-password/verify', { email, otp });
 
-            if (emailResponse.data.success) {
-                toast.success('OTP verified. Enter new password for your email');
+            if (otpResponse.data.success) {
+                toast.success('OTP verified. Enter a new password.');
                 setStage(3);
             }
-
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
             console.error('Error:', error);
             toast.error('An error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const handleNewPassword = async () => {
+        if (!newPassword) {
+            toast.error('Please enter a new password.');
+            return;
+        }
+
         setIsLoading(true);
         try {
-            const emailResponse = await axios.post('/api/login/forgot-password/new-password', { email, newPassword });
+            const passwordResponse = await axios.post('/api/login/forgot-password/new-password', { email, newPassword });
 
-            if (emailResponse.data.success) {
-                toast.success('Password changed successfully');
-                router.push('/login')
+            if (passwordResponse.data.success) {
+                toast.success('Password changed successfully.');
+                router.push('/login');
             }
-
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
             console.error('Error:', error);
             toast.error('An error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -103,7 +114,6 @@ const ForgotPasswordPage = () => {
                         </div>
                     )}
                     {stage === 2 && (
-
                         <div className='flex flex-col w-full'>
                             <label className='text-sm font-medium'>OTP</label>
                             <input
@@ -131,7 +141,7 @@ const ForgotPasswordPage = () => {
                 </div>
 
                 <button
-                    onClick={stage === 1 ? handleEmailSumbit : stage === 2 ? handleOTPSubmit : handleNewPassword}
+                    onClick={stage === 1 ? handleEmailSubmit : stage === 2 ? handleOTPSubmit : handleNewPassword}
                     className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
                     disabled={isLoading}
                 >

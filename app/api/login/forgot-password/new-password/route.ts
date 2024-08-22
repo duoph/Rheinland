@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
     try {
-        const { email, otp, newPassword } = await req.json();
+        const { email, newPassword } = await req.json();
 
-        if (!email || !otp || !newPassword) {
+        if (!email ||  !newPassword) {
             return NextResponse.json({ success: false, message: 'Email, OTP, and new password must be provided', status: 400 });
         }
 
@@ -21,22 +21,14 @@ export async function POST(req: NextRequest) {
         const currentTime = Date.now();
         const timeDifference = currentTime - new Date(sentOn).getTime();
 
-        if (timeDifference > 10 * 60 * 1000) { 
+        if (timeDifference > 10 * 60 * 1000) {
             return NextResponse.json({
                 success: false,
                 message: "OTP has expired. Please request a new one.",
-                status: 410 
+                status: 410
             });
         }
 
-        // Check if the OTP is correct
-        if (otpCode !== otp) {
-            return NextResponse.json({
-                success: false,
-                message: "Invalid OTP. Please check the code and try again.",
-                status: 401 
-            });
-        }
 
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
