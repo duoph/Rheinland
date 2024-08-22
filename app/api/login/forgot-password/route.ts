@@ -3,7 +3,6 @@ import { randomInt } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer, { Transporter } from "nodemailer";
 
-
 const emailHTML = `
 <!DOCTYPE html>
 <html lang="en">
@@ -76,21 +75,45 @@ function replaceTemplatePlaceholders(html: string, otp: string): string {
 
 export async function POST(req: NextRequest) {
     try {
-        const { email }: { email: string } = await req.json();
+        const { email } = await req.json();
 
         if (!email) {
             console.log('No email provided.');
             return NextResponse.json({ success: false, message: 'No email provided', status: 400 });
         }
 
+        // Retrieve the user
+        const user = await userModel.findOne({ email });
+
+        if (user) {
+            const lastSentOn = user.security?.sentOn;
+
+            if (lastSentOn) {
+                const currentTime = Date.now();
+                const timeDifference = currentTime - new Date(lastSentOn).getTime();
+
+                if (timeDifference < 10 * 60 * 1000) { 
+                    return NextResponse.json({
+                        success: false,
+                        message: "OTP already sent. Please wait for 10 minutes before requesting a new one.",
+                        status: 429 
+                    });
+                }
+            }
+        }
+
         const otp = randomInt(100000, 999999).toString();
 
-        // Save OTP in userModel(replace with your actual save logic)
-        // const user = await userModel.updateOne({ email }, { $set: { otp } }, { upsert: true });
-
-        // if (!user) {
-        //     return NextResponse.json({ success: false, message: "Chech your email" });
-        // }
+        await userModel.updateOne(
+            { email },
+            {
+                $set: {
+                    'security.otpCode': otp,
+                    'security.sentOn': Date.now()
+                }
+            },
+            { upsert: true }
+        );
 
         const transporter: Transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -103,7 +126,7 @@ export async function POST(req: NextRequest) {
         const mailOptions = {
             from: "newsletter.platform@gmail.com",
             to: email,
-            subject: "RheinLand Consultancy - Your OTP Code ",
+            subject: "RheinLand Consultancy - Your OTP Code",
             html: replaceTemplatePlaceholders(emailHTML, otp),
         };
 
