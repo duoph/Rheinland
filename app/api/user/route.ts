@@ -51,14 +51,15 @@ export async function POST(req: NextRequest) {
 
         const name = formData.get('name')
         const phone = formData.get('phone')
-        const dateOfBirth = formData.get('dateOfBirth')
         const email = formData.get('email')
         const password = formData.get('password')
+        const resumeURL = formData.get('resumeURL')
+        const countryCode = formData.get('countryCode')
 
         const hashedPassword = await bcrypt.hash(password as string, 10);
 
         const userAccount = await userModel.create({
-            name, email, password: hashedPassword, phone, dateOfBirth
+            name, email, password: hashedPassword, phone, resumeURL, countryCode
         })
 
         return NextResponse.json({ message: "Account created", userAccount, success: true, status: 200 })

@@ -1,6 +1,5 @@
 "use client";
 
-import { countries } from "@/data/countries";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,13 +10,13 @@ import { IoMdArrowBack } from "react-icons/io";
 
 
 const CreateAccountPage = () => {
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     countryCode: "",
     phone: "",
-    dateOfBirth: "",
     resumeURL: "",
     password: "",
     confirmPassword: "",
@@ -127,7 +126,20 @@ const CreateAccountPage = () => {
             />
           </div>
 
-  
+
+
+          <div className="flex flex-col">
+            <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Country Code (eg:+91 or +1)</label>
+            <input
+              type="text"
+              id="countryCode"
+              name="countryCode"
+              value={formData.countryCode}
+              onChange={handleChange}
+              placeholder="Enter your Phone"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            />
+          </div>
 
           <div className="flex flex-col">
             <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Phone</label>
