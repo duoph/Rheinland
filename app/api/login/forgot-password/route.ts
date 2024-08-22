@@ -82,7 +82,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: 'No email provided', status: 400 });
         }
 
-        // Retrieve the user
         const user = await userModel.findOne({ email });
 
         if (user) {
@@ -103,6 +102,8 @@ export async function POST(req: NextRequest) {
         }
 
         const otp = randomInt(100000, 999999).toString();
+
+        console.log(otp)
 
         await userModel.updateOne(
             { email },

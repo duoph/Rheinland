@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io';
 
+
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState<string>('');
     const [otp, setOtp] = useState<string>('');
@@ -35,11 +36,11 @@ const ForgotPasswordPage = () => {
     const handleOTPSubmit = async () => {
         setIsLoading(true);
         try {
-            const emailResponse = await axios.post('/api/login/forgot-password', { email });
+            const emailResponse = await axios.post('/api/login/forgot-password/verify', { email, otp });
 
             if (emailResponse.data.success) {
-                toast.success('OTP sent to your email');
-                setStage(2);
+                toast.success('OTP verified. Enter new password for your email');
+                setStage(3);
             }
 
             setIsLoading(false);
@@ -53,11 +54,11 @@ const ForgotPasswordPage = () => {
     const handleNewPassword = async () => {
         setIsLoading(true);
         try {
-            const emailResponse = await axios.post('/api/login/forgot-password', { email });
+            const emailResponse = await axios.post('/api/login/forgot-password/new-password', { email, newPassword });
 
             if (emailResponse.data.success) {
-                toast.success('OTP sent to your email');
-                setStage(2);
+                toast.success('Password changed successfully');
+                router.push('/login')
             }
 
             setIsLoading(false);
