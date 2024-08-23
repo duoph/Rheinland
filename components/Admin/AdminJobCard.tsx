@@ -16,6 +16,7 @@ interface AdminJobCardProps {
 }
 
 const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) => {
+
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 
@@ -30,19 +31,6 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
                 toast.error('Failed to delete job');
             } finally {
                 setIsModalOpen(false);
-            }
-        }
-    };
-
-    const handleHide = async () => {
-        if (job?._id) {
-            try {
-                await axios.put(`/api/job/${job._id}`, { approvedByAdmin: false });
-                if (reFetch) reFetch();
-                toast.success('Job hidden');
-            } catch (error) {
-                console.error('Error hiding job:', error);
-                toast.error('Failed to hide job');
             }
         }
     };

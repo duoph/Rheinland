@@ -13,17 +13,12 @@ const jobSchema = new Schema({
     salary: { type: String },
     location: { type: String },
     requirements: { type: String },
-    numberOfOpenings: { type: String  },
+    numberOfOpenings: { type: String },
     languageLevel: { type: String },
     gender: { type: String },
     isFeatured: { type: Boolean, default: false },
-    appliedUsers: [{
-
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-        isContacted: { type: Boolean, default: false },
-        isRejected: { type: Boolean, default: false }
-        
-    }],
+    shortListedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+    appliedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     employerId: { type: mongoose.Schema.ObjectId, ref: 'employer', required: true },
     approvedByAdmin: { type: Boolean, default: false }
 
