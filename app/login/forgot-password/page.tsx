@@ -10,7 +10,7 @@ const ForgotPasswordPage = () => {
     const [email, setEmail] = useState<string>('');
     const [otp, setOtp] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
-    const [stage, setStage] = useState<number>(1); // 1: Email, 2: OTP, 3: New Password
+    const [stage, setStage] = useState<number>(1); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const router = useRouter();

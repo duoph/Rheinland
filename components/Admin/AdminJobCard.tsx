@@ -6,55 +6,59 @@ import React, { useEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import { CiLocationOn, CiTrash } from 'react-icons/ci';
 import Link from 'next/link';
-import { FaRegEyeSlash } from 'react-icons/fa';
 import ConfirmationModal from '../ConfirmationModal';
 import toast from 'react-hot-toast';
 
 interface AdminJobCardProps {
     job: Job | null;
     isLoading?: boolean;
-    reFectch?: () => void;
+    reFetch?: () => void;
 }
 
-const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFectch }) => {
-    const [jobs, setJobs] = useState<string[]>([]);
+const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) => {
+    const [employer, setEmployer] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchEmployer = async () => {
+            if (!job?.employerId) return;
+
             try {
-                const res = await axios.get('/api/user');
-                setJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
+                const response = await axios.get(`/api/admin/employer/${job.employerId}`);
+                console.log(response.data.employer);
+                setEmployer(response.data.employer);
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                console.error("Error fetching employer:", error);
             }
         };
-        fetchUser();
-    }, []);
+
+        fetchEmployer();
+    }, [job?.employerId]);
 
     const handleDelete = async () => {
         if (job?._id) {
             try {
                 await axios.delete(`/api/job/${job._id}`);
-                if (reFectch) reFectch();
+                if (reFetch) reFetch();
+                toast.success('Job Deleted');
             } catch (error) {
                 console.error('Error deleting job:', error);
+                toast.error('Failed to delete job');
             } finally {
-                toast.success('Job Deleted');
+                setIsModalOpen(false);
             }
         }
-        setIsModalOpen(false);
     };
 
     const handleHide = async () => {
         if (job?._id) {
             try {
                 await axios.put(`/api/job/${job._id}`, { approvedByAdmin: false });
-                if (reFectch) reFectch();
+                if (reFetch) reFetch();
+                toast.success('Job hidden');
             } catch (error) {
                 console.error('Error hiding job:', error);
-            } finally {
-                toast.success('Job hidden');
+                toast.error('Failed to hide job');
             }
         }
     };
@@ -84,13 +88,13 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFectch })
     }
 
     return (
-        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] group rounded-md px-4 py-3 cursor-pointer ">
+        <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] group rounded-md px-4 py-3 cursor-pointer">
             <Link href={`/admin/jobs/${job._id}`} className="w-full">
                 <div className="flex flex-col w-full py-2 space-y-2">
                     <span className="text-lg font-semibold text-gray-800">{job.title}</span>
                     <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
                     <span className="text-sm font-normal text-gray-900">
-                        Posted By <span className="underline">Duoph Technologies</span>
+                        Posted By <span className="underline">{employer?.employerName || 'Loading...'}</span>
                     </span>
                 </div>
 
@@ -100,7 +104,7 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFectch })
                 </div>
 
                 <span className={`text-sm py-2 ${job.appliedUsers?.length > 0 ? 'text-red-600 underline' : 'text-gray-400'}`}>
-                    {job?.appliedUsers?.length} Applicants
+                    {job.appliedUsers?.length} Applicants
                 </span>
 
                 <div className="h-[80px] w-full py-2">

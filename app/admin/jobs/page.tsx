@@ -15,7 +15,8 @@ const ApplicationsPage = () => {
     // Fetch all jobs from the API
     const fetchAllJobs = async () => {
         try {
-            const response = await axios.get("/api/job/");
+            const response = await axios.get("/api/admin/job");
+            console.log(response.data.jobs);
             const sortedJobs = response.data.jobs.sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
             setJobs(sortedJobs);
             setSearchResults(sortedJobs); // Initialize search results with sorted jobs
@@ -25,6 +26,8 @@ const ApplicationsPage = () => {
             setIsLoading(false);
         }
     };
+
+    
 
     useEffect(() => {
         fetchAllJobs();

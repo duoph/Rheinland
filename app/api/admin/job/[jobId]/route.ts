@@ -4,16 +4,15 @@ import jobModel from '@/models/jobSchema';
 
 export const revalidate = 0;
 
-
 export async function GET(req: NextRequest, { params }: any) {
     try {
-
         await connectMongoDB();
 
-        const jobId = params.jobId
+        const jobId = params.jobId;
 
-
-        const job = await jobModel.findById({ _id: jobId }).populate('appliedUsers.userId')
+        const job = await jobModel.findById({ _id: jobId })
+            .populate('employerId')
+            .populate('appliedUsers.userId');
 
         return NextResponse.json({
             message: 'Fetched jobs successfully',
