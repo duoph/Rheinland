@@ -49,12 +49,23 @@ export async function POST(req: NextRequest) {
 
         const formData = await req.formData()
 
+
+
         const name = formData.get('name')
         const phone = formData.get('phone')
         const email = formData.get('email')
         const password = formData.get('password')
         const resumeURL = formData.get('resumeURL')
         const countryCode = formData.get('countryCode')
+
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            return NextResponse.json({
+                message: "User with this email already exists",
+                success: false,
+                status: 409 // Conflict
+            });
+        }
 
         const hashedPassword = await bcrypt.hash(password as string, 10);
 
@@ -81,14 +92,16 @@ export async function PUT(req: NextRequest) {
 
         const decodedToken = getDataFromToken(req);
 
-        const name = formData.get('name');
-        const phone = formData.get('phone');
-        const dateOfBirth = formData.get('dateOfBirth');
+        const name = formData.get('name')
+        const resumeURL = formData.get('resumeURL')
+        const countryCode = formData.get('countryCode')
+        const phone = formData.get('phone')
 
         const update = {
             name,
             phone,
-            dateOfBirth,
+            countryCode,
+            resumeURL
         };
 
         await userModel.findByIdAndUpdate({ _id: decodedToken.id }, update);

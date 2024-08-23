@@ -67,11 +67,12 @@ const CreateAccountPage = () => {
       const res = await axios.post("/api/user", formDataToSend);
 
       if (res.data.success === false) {
-        toast.error("Error creating account");
+        toast.error(res.data.message);
       } else {
         toast.success(res.data.message);
         router.push("/login");
       }
+      
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form");
