@@ -11,7 +11,6 @@ export async function PUT(req: NextRequest, { params }: any) {
         const jobId = params.jobId;
         const { userId } = await req.json();
 
-        // Update the job by adding the userId to shortlistedUsers using $addToSet
         const job = await jobModel.findByIdAndUpdate(
             jobId,
             { $addToSet: { shortlistedUsers: userId } },

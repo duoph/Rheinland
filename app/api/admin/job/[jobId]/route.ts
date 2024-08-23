@@ -12,7 +12,8 @@ export async function GET(req: NextRequest, { params }: any) {
 
         const job = await jobModel.findById({ _id: jobId })
             .populate('employerId')
-            .populate('appliedUsers.userId');
+            .populate('appliedUsers') 
+            .populate('shortlistedUsers');
 
         return NextResponse.json({
             message: 'Fetched jobs successfully',

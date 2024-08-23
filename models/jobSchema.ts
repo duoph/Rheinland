@@ -17,7 +17,7 @@ const jobSchema = new Schema({
     languageLevel: { type: String },
     gender: { type: String },
     isFeatured: { type: Boolean, default: false },
-    shortListedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+    shortlistedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     appliedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     employerId: { type: mongoose.Schema.ObjectId, ref: 'employer', required: true },
     approvedByAdmin: { type: Boolean, default: false }
