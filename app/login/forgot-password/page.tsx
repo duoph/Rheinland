@@ -25,8 +25,11 @@ const ForgotPasswordPage = () => {
         try {
             const emailResponse = await axios.post('/api/login/forgot-password', { email });
             if (emailResponse.data.success) {
-                toast.success('OTP sent to your email');
+                toast.success(emailResponse.data.message);
                 setStage(2);
+            }
+            if (emailResponse.data.success === false) {
+                toast.error(emailResponse.data.message);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -47,8 +50,11 @@ const ForgotPasswordPage = () => {
             const otpResponse = await axios.post('/api/login/forgot-password/verify', { email, otp });
 
             if (otpResponse.data.success) {
-                toast.success('OTP verified. Enter a new password.');
+                toast.success(otpResponse.data.message);
                 setStage(3);
+            }
+            if (otpResponse.data.success === false) {
+                toast.error(otpResponse.data.message);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -68,10 +74,16 @@ const ForgotPasswordPage = () => {
         try {
             const passwordResponse = await axios.post('/api/login/forgot-password/new-password', { email, newPassword });
 
+
             if (passwordResponse.data.success) {
-                toast.success('Password changed successfully.');
+                toast.success(passwordResponse.data.message);
                 router.push('/login');
             }
+            if (passwordResponse.data.success === false) {
+                toast.error(passwordResponse.data.message);
+            }
+
+
         } catch (error) {
             console.error('Error:', error);
             toast.error('An error occurred. Please try again.');

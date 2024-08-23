@@ -72,7 +72,7 @@ const CreateAccountPage = () => {
         toast.success(res.data.message);
         router.push("/login");
       }
-      
+
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form");
@@ -214,7 +214,6 @@ const CreateAccountPage = () => {
             Register as an employer?{" "}
             <Link href="/create-account/employer" className="text-blue-500 underline">Register</Link>
           </span>
-          <span className="text-blue-500 underline cursor-pointer font-light">Forgot Password</span>
         </div>
       </div>
     </div>

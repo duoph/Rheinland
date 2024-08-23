@@ -77,34 +77,49 @@ export async function POST(req: NextRequest) {
     try {
         const { email } = await req.json();
 
+        // Check if the email is provided
         if (!email) {
             console.log('No email provided.');
-            return NextResponse.json({ success: false, message: 'No email provided', status: 400 });
+            return NextResponse.json({
+                success: false,
+                message: 'No email provided',
+                status: 400
+            });
         }
 
+        // Check if the user exists in the database
         const user = await userModel.findOne({ email });
 
-        if (user) {
-            const lastSentOn = user.security?.sentOn;
+        if (!user) {
+            return NextResponse.json({
+                success: false,
+                message: "No account registered with this email",
+                status: 404 // Not Found
+            });
+        }
 
-            if (lastSentOn) {
-                const currentTime = Date.now();
-                const timeDifference = currentTime - new Date(lastSentOn).getTime();
+        // Check if OTP was recently sent
+        const lastSentOn = user.security?.sentOn;
 
-                if (timeDifference < 10 * 60 * 1000) { 
-                    return NextResponse.json({
-                        success: false,
-                        message: "OTP already sent. Please wait for 10 minutes before requesting a new one.",
-                        status: 429 
-                    });
-                }
+        if (lastSentOn) {
+            const currentTime = Date.now();
+            const timeDifference = currentTime - new Date(lastSentOn).getTime();
+
+            if (timeDifference < 10 * 60 * 1000) {
+                return NextResponse.json({
+                    success: false,
+                    message: "OTP already sent. Please wait for 10 minutes before requesting a new one.",
+                    status: 429 // Too Many Requests
+                });
             }
         }
 
+        // Generate a new OTP
         const otp = randomInt(100000, 999999).toString();
 
-        console.log(otp)
+        console.log(otp);
 
+        // Update the user with the new OTP and timestamp
         await userModel.updateOne(
             { email },
             {
@@ -113,9 +128,10 @@ export async function POST(req: NextRequest) {
                     'security.sentOn': Date.now()
                 }
             },
-            { upsert: true }
+            { new: true }
         );
 
+        // Set up the nodemailer transporter
         const transporter: Transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -124,6 +140,7 @@ export async function POST(req: NextRequest) {
             }
         });
 
+        // Set up the mail options
         const mailOptions = {
             from: "newsletter.platform@gmail.com",
             to: email,
@@ -131,11 +148,19 @@ export async function POST(req: NextRequest) {
             html: replaceTemplatePlaceholders(emailHTML, otp),
         };
 
+        // Send the email
         await transporter.sendMail(mailOptions);
 
-        return NextResponse.json({ success: true, message: "OTP sent successfully" });
+        return NextResponse.json({
+            success: true,
+            message: "OTP sent successfully"
+        });
     } catch (error: any) {
         console.error(error);
-        return NextResponse.json({ success: false, message: "Error sending OTP", error: error.message });
+        return NextResponse.json({
+            success: false,
+            message: "Error sending OTP",
+            error: error.message
+        });
     }
 }
