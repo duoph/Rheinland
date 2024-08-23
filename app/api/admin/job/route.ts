@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     try {
         await connectMongoDB();
 
-        const jobs = await jobModel.find({})
+        const jobs = await jobModel.find({}).populate('employerId');
 
         if (!jobs) {
             return NextResponse.json({
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         }, { status: 200 });
 
     } catch (error: any) {
-        console.error('Error fetching job:', error);
+        console.error('Error fetching job:', error.message);
 
         return NextResponse.json({
             error: 'Internal server error',

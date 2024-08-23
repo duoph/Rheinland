@@ -16,24 +16,8 @@ interface AdminJobCardProps {
 }
 
 const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) => {
-    const [employer, setEmployer] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    useEffect(() => {
-        const fetchEmployer = async () => {
-            if (!job?.employerId) return;
-
-            try {
-                const response = await axios.get(`/api/admin/employer/${job.employerId}`);
-                console.log(response.data.employer);
-                setEmployer(response.data.employer);
-            } catch (error) {
-                console.error("Error fetching employer:", error);
-            }
-        };
-
-        fetchEmployer();
-    }, [job?.employerId]);
 
     const handleDelete = async () => {
         if (job?._id) {
@@ -94,7 +78,7 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
                     <span className="text-lg font-semibold text-gray-800">{job.title}</span>
                     <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
                     <span className="text-sm font-normal text-gray-900">
-                        Posted By <span className="underline">{employer?.employerName || 'Loading...'}</span>
+                        Posted By <span className="underline">{job.employerId.employerName}</span>
                     </span>
                 </div>
 

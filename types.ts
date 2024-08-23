@@ -21,7 +21,7 @@ export interface Job {
     updatedAt: string;
     jobType: string;
     numberOfOpenings: string;
-    employerId: Types.ObjectId;
+    employerId: any;
 }
 
 export interface user {
