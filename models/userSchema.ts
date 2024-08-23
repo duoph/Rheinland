@@ -16,10 +16,9 @@ const userSchema = new Schema({
     location: { type: String },
     security: {
         type: {
-            otpCode: { type: String, required: true },
-            sentOn: { type: Date, required: true }
+            otpCode: { type: String },
+            sentOn: { type: Date }
         },
-        required: true
     },
     savedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
     appliedJobs: [{ type: mongoose.Schema.ObjectId, ref: "job" }],
