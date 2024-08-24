@@ -9,7 +9,6 @@ import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
-import { MdAccessTime, MdCategory } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import ApplicationCard from "@/components/ApplicationCard";
@@ -29,10 +28,10 @@ const SingleJobPage: React.FC = () => {
         setLoading(true);
         try {
             const jobRes = await axios.get(`/api/admin/job/${jobId}`);
+            console.log(jobRes.data)
             if (jobRes.data.success) {
                 setJob(jobRes.data.job);
                 setAppliedUsers(jobRes.data.job.appliedUsers);
-                console.log(jobRes.data)
             } else {
                 toast.error("Failed to fetch job data");
             }
@@ -80,7 +79,7 @@ const SingleJobPage: React.FC = () => {
 
 
             <div className="flex flex-row items-start w-full gap-5 flex-wrap">
-                
+
                 <span className="flex gap-2 font-light">
                     <PiSuitcaseSimpleFill className="text-rheinland-red" size={24} />
                     {job?.jobType ? job.jobType : "Full Time"}

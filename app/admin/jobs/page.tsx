@@ -19,7 +19,7 @@ const ApplicationsPage = () => {
             console.log(response.data.jobs);
             const sortedJobs = response.data.jobs.sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
             setJobs(sortedJobs);
-            setSearchResults(sortedJobs); // Initialize search results with sorted jobs
+            setSearchResults(sortedJobs); 
         } catch (error) {
             console.error("Error fetching jobs:", error);
         } finally {

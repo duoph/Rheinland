@@ -9,7 +9,6 @@ import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { HiBookmark, HiOutlineBanknotes, HiOutlineBookmark } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
-import { MdAccessTime } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import { useAccount } from "@/context/useAccount";
