@@ -15,6 +15,8 @@ export async function GET(req: NextRequest, { params }: any) {
             .populate('appliedUsers') 
             .populate('shortlistedUsers');
 
+            console.log(job)
+
         return NextResponse.json({
             message: 'Fetched jobs successfully',
             success: true,

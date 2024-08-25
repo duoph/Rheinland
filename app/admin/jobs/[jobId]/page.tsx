@@ -16,7 +16,9 @@ import ApplicationCard from "@/components/ApplicationCard";
 
 
 const SingleJobPage: React.FC = () => {
+
     const { jobId } = useParams();
+
     const [job, setJob] = useState<Job | null>(null);
     const [appliedUsers, setAppliedUsers] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -31,6 +33,7 @@ const SingleJobPage: React.FC = () => {
             console.log(jobRes.data)
             if (jobRes.data.success) {
                 setJob(jobRes.data.job);
+                console.log(jobRes.data.job)
                 setAppliedUsers(jobRes.data.job.appliedUsers);
             } else {
                 toast.error("Failed to fetch job data");
@@ -145,7 +148,7 @@ const SingleJobPage: React.FC = () => {
                             <h1 className="text-3xl font-semibold text-center">Applications</h1>
                             <div className="flex flex-wrap items-center justify-center gap-2 w-full">
                                 {appliedUsers.map((appliedUser: any) => (
-                                    <ApplicationCard jobId={jobId} key={appliedUser._id} applicant={appliedUser.userId} />
+                                    <ApplicationCard jobId={jobId} key={appliedUser._id} applicant={appliedUser} />
                                 ))}
                             </div>
                         </div>

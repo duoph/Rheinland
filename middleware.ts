@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export default function middleware(request: NextRequest) {
-    
+export default  function middleware(request: NextRequest) {
+
+    console.log("Middleware Called")
+
     const path = request.nextUrl.pathname;
     const token = request.cookies.get("token")?.value || "";
     const accountType = request.cookies.get("accountType")?.value || "user";
@@ -11,12 +13,9 @@ export default function middleware(request: NextRequest) {
             console.log("No Token")
             return NextResponse.redirect(new URL('/login', request.url));
         }
-
     }
 
-
     if (path === '/') {
-        console.log("No")
         if (token.length > 0) {
             return NextResponse.redirect(new URL('/login', request.url));
         }

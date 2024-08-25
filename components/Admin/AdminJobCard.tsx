@@ -8,6 +8,7 @@ import { CiLocationOn, CiTrash } from 'react-icons/ci';
 import Link from 'next/link';
 import ConfirmationModal from '../ConfirmationModal';
 import toast from 'react-hot-toast';
+import { MdDelete } from 'react-icons/md';
 
 interface AdminJobCardProps {
     job: Job | null;
@@ -92,6 +93,7 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
                         {job.description}
                     </p>
                 </div>
+
             </Link>
 
             <div className="flex gap-3 justify-end items-center w-full mt-2">
@@ -99,7 +101,7 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
                     onClick={() => setIsModalOpen(true)}
                     className="flex items-center justify-center text-white bg-red-600 rounded-md py-2 px-4 hover:bg-red-700 transition-colors"
                 >
-                    <CiTrash className="text-xl" />
+                    <MdDelete className="text-xl" />
                 </button>
             </div>
             <ConfirmationModal

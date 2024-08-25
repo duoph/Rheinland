@@ -4,7 +4,7 @@ import jobModel from "@/models/jobSchema";
 import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
-// PUT APPLIED JOBS BY USER ID
+
 export async function PUT(req: NextRequest, { params }: { params: { jobId: string } }) {
     try {
         await connectMongoDB();
@@ -16,12 +16,10 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
             return NextResponse.json({ error: 'User ID not found in token', success: false, status: 400 });
         }
 
-        // Update user document
         await userModel.findByIdAndUpdate(id, { $addToSet: { appliedJobs: jobId } });
 
-        // Update job document
         await jobModel.findByIdAndUpdate(jobId, {
-            $addToSet: { appliedUsers: { userId: id } }
+            $addToSet: { appliedUsers : id  }
         });
 
         return NextResponse.json({ message: 'Applied for Job successfully', success: true, status: 200 });

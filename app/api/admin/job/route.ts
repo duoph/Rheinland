@@ -11,6 +11,8 @@ export async function GET(req: NextRequest) {
 
         await connectMongoDB();
 
+        await employerModel.find({})
+
         const jobs = await jobModel.find({}).populate('employerId');
 
         if (!jobs || jobs.length === 0) {
@@ -27,6 +29,7 @@ export async function GET(req: NextRequest) {
         }, { status: 200 });
 
     } catch (error: any) {
+
         console.error('Error fetching jobs:', error.message);
 
         return NextResponse.json({
@@ -34,5 +37,7 @@ export async function GET(req: NextRequest) {
             success: false,
             details: error.message
         }, { status: 500 });
+
     }
+
 }
