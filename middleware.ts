@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export default  function middleware(request: NextRequest) {
 
-    console.log("Middleware Called")
-
     const path = request.nextUrl.pathname;
     const token = request.cookies.get("token")?.value || "";
     const accountType = request.cookies.get("accountType")?.value || "user";

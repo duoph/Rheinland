@@ -10,6 +10,8 @@ import axios from "axios";
 
 
 const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
+
+
   const handleShortListed = async () => {
     try {
       const res = await axios.put(`/api/job/${jobId}/admin/applicants/contacted`, {
@@ -27,6 +29,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
     }
   };
 
+
   const handleReject = () => {
     try {
       toast.error("Rejected");
@@ -35,6 +38,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
       toast.error("An error occurred while rejecting.");
     }
   };
+  
 
   if (isLoading) {
     return (
