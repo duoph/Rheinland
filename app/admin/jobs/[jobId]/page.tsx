@@ -22,6 +22,7 @@ const SingleJobPage: React.FC = () => {
     const [job, setJob] = useState<Job | null>(null);
     const [appliedUsers, setAppliedUsers] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('Applicants');
     const [showMoreSkills, setShowMoreSkills] = useState<boolean>(false);
 
     const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
@@ -146,6 +147,27 @@ const SingleJobPage: React.FC = () => {
                     appliedUsers.length > 0 ? (
                         <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
                             <h1 className="text-3xl font-semibold text-center">Applications</h1>
+
+
+
+                            <div className="flex items-center justify-center gap-2 md:gap-5 lg:gap-10 rounded-md pt-3 px-5 md:px-10 w-full text-[15px] flex-wrap">
+                                <span
+                                    onClick={() => setSelectedApplicantsType('Applicants')}
+                                    className={`px-2 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'Applicants' ? 'bg-rheinland-red text-white' : ''}`}
+                                >
+                                    Applicants
+                                </span>
+
+                                <span
+                                    onClick={() => setSelectedApplicantsType('shortlisted')}
+                                    className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'shortlisted' ? 'bg-rheinland-red text-white' : ''}`}
+                                >
+                                    Shortlisted
+                                </span>
+                            </div>
+
+
+
                             <div className="flex flex-wrap items-center justify-center gap-2 w-full">
                                 {appliedUsers.map((appliedUser: any) => (
                                     <ApplicationCard jobId={jobId} key={appliedUser._id} applicant={appliedUser} />
