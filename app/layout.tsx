@@ -19,11 +19,11 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Rheinland Jobs - Your Premier Job Consultancy",
+  title: "Rheinland Jobs: Your Gateway to German Careers",
   description:
-    "Discover tailored career solutions and expert guidance for your next career move with Rheinland Jobs, the premier job consultancy connecting talent with opportunities. Let us navigate the path to your professional success together.",
+    "Rheinland Jobs is a leading job consultancy founded by Paul Gopurathingal. We specialize in connecting talented individuals with top employers in Germany. Our personalized career guidance, expert recruitment services, and extensive network help you find your dream job in the German market.",
   keywords:
-    "jobs, career, consultancy, opportunities, professional success, Rheinland Jobs, Germany, job search, employment, recruitment, HR services",
+    "Rheinland Jobs, job consultancy, Germany, career guidance, recruitment, employment opportunities, job search, HR consulting, talent acquisition, German jobs, Paul Gopurathingal",
 };
 
 export default function RootLayout({
