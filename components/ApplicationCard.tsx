@@ -77,7 +77,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
           <FaPhone className="mr-2 text-xl" /> {applicant.countryCode} {""} {applicant?.phone || "N/A"}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaLanguage  className="mr-2 text-xl" /> {applicant?.germanLanguageLevel || "N/A"}
+          <FaLanguage  className="mr-2 text-xl" /> German Level :  {applicant?.germanLanguageLevel || "N/A"}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
           <IoLocationSharp  className="mr-2 text-xl" /> {applicant?.location || "N/A"}

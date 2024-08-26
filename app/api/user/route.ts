@@ -57,6 +57,8 @@ export async function POST(req: NextRequest) {
         const password = formData.get('password')
         const resumeURL = formData.get('resumeURL')
         const countryCode = formData.get('countryCode')
+        const location = formData.get('location')
+        const germanLanguageLevel = formData.get('germanLanguageLevel')
 
         const existingUser = await userModel.findOne({ email });
         if (existingUser) {
@@ -70,7 +72,8 @@ export async function POST(req: NextRequest) {
         const hashedPassword = await bcrypt.hash(password as string, 10);
 
         const userAccount = await userModel.create({
-            name, email, password: hashedPassword, phone, resumeURL, countryCode
+            name, email, password: hashedPassword, phone, resumeURL, countryCode, location,
+            germanLanguageLevel
         })
 
         return NextResponse.json({ message: "Account created", userAccount, success: true, status: 200 })

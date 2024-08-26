@@ -20,6 +20,8 @@ const CreateAccountPage = () => {
     resumeURL: "",
     password: "",
     confirmPassword: "",
+    location: "",
+    germanLanguageLevel: "",
   });
 
 
@@ -42,7 +44,7 @@ const CreateAccountPage = () => {
       !formData.email ||
       !formData.phone ||
       !formData.password ||
-      !formData.confirmPassword || !formData.countryCode
+      !formData.confirmPassword || !formData.countryCode || !formData.resumeURL || !formData.location || !formData.germanLanguageLevel
     ) {
       toast.error("Please fill all the inputs");
       return;
@@ -63,6 +65,8 @@ const CreateAccountPage = () => {
       formDataToSend.append("email", formData.email.toLowerCase());
       formDataToSend.append("password", formData.password);
       formDataToSend.append("resumeURL", formData.resumeURL);
+      formDataToSend.append("germanLanguageLevel", formData.germanLanguageLevel);
+      formDataToSend.append("location", formData.location);
 
       const res = await axios.post("/api/user", formDataToSend);
 
@@ -154,6 +158,36 @@ const CreateAccountPage = () => {
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
             />
           </div>
+
+
+          <div className="flex flex-col">
+            <label htmlFor="resumeURL" className="text-sm font-medium mb-1">German Language Level</label>
+            <input
+              type="number"
+              id="germanLanguageLevel"
+              name="germanLanguageLevel"
+              value={formData.germanLanguageLevel}
+              onChange={handleChange}
+              placeholder="Enter your German language level"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            />
+          </div>
+
+
+          <div className="flex flex-col">
+            <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Phone</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+
+              value={formData.location}
+              onChange={handleChange}
+              placeholder="Enter your Location"
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            />
+          </div>
+
 
           <div className="flex flex-col">
             <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Resume URL</label>
