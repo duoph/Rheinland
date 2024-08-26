@@ -5,13 +5,10 @@ const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     name: { type: String, required: true },
-    highestEducation: { type: String },
     workExperience: { type: Number, default: 0 },
     phone: { type: Number },
     countryCode: { type: String },
     resumeURL: { type: String },
-    address: { type: String },
-    about: { type: String },
     germanLanguageLevel: { type: String },
     location: { type: String },
     security: {

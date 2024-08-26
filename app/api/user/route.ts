@@ -90,21 +90,25 @@ export async function PUT(req: NextRequest) {
 
         const formData = await req.formData();
 
-        const decodedToken = getDataFromToken(req);
+        const { id } = await getDataFromToken(req);
 
         const name = formData.get('name')
         const resumeURL = formData.get('resumeURL')
         const countryCode = formData.get('countryCode')
         const phone = formData.get('phone')
+        const location = formData.get('location')
+        const germanLanguageLevel = formData.get('germanLanguageLevel')
 
         const update = {
             name,
+            location,
+            germanLanguageLevel,
             phone,
             countryCode,
             resumeURL
         };
 
-        await userModel.findByIdAndUpdate({ _id: decodedToken.id }, update);
+        await userModel.findByIdAndUpdate({ _id: id }, update, { new: true });
 
         return NextResponse.json({
             message: "User account updated",

@@ -2,11 +2,12 @@
 
 import React from "react";
 import { MdNotInterested } from "react-icons/md";
-import { FaCheck, FaPhone, FaUser, FaEnvelope } from "react-icons/fa";
+import { FaCheck, FaPhone, FaUser, FaEnvelope, FaLanguage } from "react-icons/fa";
 import { Skeleton } from "./ui/skeleton";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import axios from "axios";
+import { IoLocationSharp } from "react-icons/io5";
 
 
 const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
@@ -38,7 +39,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
       toast.error("An error occurred while rejecting.");
     }
   };
-  
+
 
   if (isLoading) {
     return (
@@ -73,7 +74,13 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
           <FaEnvelope className="mr-2 text-xl" /> {applicant?.email || "N/A"}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaPhone className="mr-2 text-xl" /> {applicant?.phone || "N/A"}
+          <FaPhone className="mr-2 text-xl" /> {applicant.countryCode} {""} {applicant?.phone || "N/A"}
+        </p>
+        <p className="text-sm text-gray-600 flex items-center">
+          <FaLanguage  className="mr-2 text-xl" /> {applicant?.germanLanguageLevel || "N/A"}
+        </p>
+        <p className="text-sm text-gray-600 flex items-center">
+          <IoLocationSharp  className="mr-2 text-xl" /> {applicant?.location || "N/A"}
         </p>
       </div>
       {applicant?.resumeURL ? (
