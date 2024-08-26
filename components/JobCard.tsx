@@ -101,11 +101,10 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   }
 
   return (
-    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[230px] max-h-[250px] group rounded-sm px-3 py-2 cursor-pointer ">
+    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[200px] max-h-[200px] group rounded-sm px-3 py-2 cursor-pointer ">
       <Link href={`/jobs/${job._id}`} className="w-full">
         <div className="flex flex-col w-full py-2 space-y-2">
           <span className="text-lg font-semibold text-gray-800">{job.title}</span>
-          <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
           {/* <span className="text-sm font-normal text-gray-900">
             Posted By <span className="underline">Duoph Technologies</span>
           </span> */}

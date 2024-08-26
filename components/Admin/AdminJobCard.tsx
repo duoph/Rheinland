@@ -65,7 +65,6 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
             <Link href={`/admin/jobs/${job._id}`} className="w-full">
                 <div className="flex flex-col w-full py-2 space-y-2">
                     <span className="text-lg font-semibold text-gray-800">{job.title}</span>
-                    <span className="text-sm font-normal text-gray-600">{job.jobType || "Full Time"}</span>
                     <span className="text-sm font-normal text-gray-900">
                         Posted By <span className="underline">{job.employerId.employerName}</span>
                     </span>
@@ -76,9 +75,16 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
                     {job.location}
                 </div>
 
-                <span className={`text-sm py-2 ${job.appliedUsers?.length > 0 ? 'text-red-600 underline' : 'text-gray-400'}`}>
-                    {job.appliedUsers?.length} Applicants
-                </span>
+
+                <div className='flex gap-0 flex-col items-start justify-center py-1'>
+                    <span className={`text-sm  ${job.appliedUsers?.length > 0 ? 'text-rheinland-red underline' : 'text-gray-400'}`}>
+                        {job.appliedUsers?.length} Applicants
+                    </span>
+                    <span className={`text-sm ${job.shortlistedUsers?.length > 0 ? 'text-green-700 underline' : 'text-gray-400'}`}>
+                        {job.shortlistedUsers?.length} Shortlisted
+                    </span>
+                </div>
+
 
                 <div className="h-[80px] w-full py-2">
                     <p

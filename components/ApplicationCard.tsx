@@ -10,13 +10,13 @@ import axios from "axios";
 import { IoLocationSharp } from "react-icons/io5";
 
 
-const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
+const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortlisted }) => {
 
 
   const handleShortListed = async () => {
     try {
-      const res = await axios.put(`/api/job/${jobId}/admin/applicants/contacted`, {
-        userId: applicant?.userId,
+      const res = await axios.put(`/api/admin/job/${jobId}/shortlist-users`, {
+        userId: applicant?._id,
       });
       console.log(res.data)
       if (res.data.success) {
@@ -77,10 +77,10 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
           <FaPhone className="mr-2 text-xl" /> {applicant.countryCode} {""} {applicant?.phone || "N/A"}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <FaLanguage  className="mr-2 text-xl" /> German Level :  {applicant?.germanLanguageLevel || "N/A"}
+          <FaLanguage className="mr-2 text-xl" /> German Level :  {applicant?.germanLanguageLevel || "N/A"}
         </p>
         <p className="text-sm text-gray-600 flex items-center">
-          <IoLocationSharp  className="mr-2 text-xl" /> {applicant?.location || "N/A"}
+          <IoLocationSharp className="mr-2 text-xl" /> {applicant?.location || "N/A"}
         </p>
       </div>
       {applicant?.resumeURL ? (
@@ -94,22 +94,17 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId }) => {
       ) : (
         <p className="text-sm text-gray-500 italic">No resume available</p>
       )}
-      <div className="flex flex-col gap-2 items-center justify-center rounded-md w-full mt-3">
-        <button
-          onClick={handleShortListed}
-          className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-green-600 hover:bg-green-500 transition-colors duration-200 gap-2 w-full"
-        >
-          Shortlist
-          <FaCheck />
-        </button>
-        <button
-          onClick={handleReject}
-          className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-red-600 hover:bg-red-500 transition-colors duration-200 gap-2 w-full"
-        >
-          Reject
-          <MdNotInterested />
-        </button>
-      </div>
+      {!isShortlisted && (
+        <div className="flex flex-col gap-2 items-center justify-center rounded-md w-full mt-3">
+          <button
+            onClick={handleShortListed}
+            className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-green-600 hover:bg-green-500 transition-colors duration-200 gap-2 w-full"
+          >
+            Shortlist
+            <FaCheck />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

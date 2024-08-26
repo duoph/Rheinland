@@ -13,7 +13,10 @@ export async function PUT(req: NextRequest, { params }: any) {
 
         const job = await jobModel.findByIdAndUpdate(
             jobId,
-            { $addToSet: { shortlistedUsers: userId } },
+            {
+                $addToSet: { shortlistedUsers: userId },
+                $pull: { appliedUsers: userId }
+            },
             { new: true }
         );
 
@@ -25,7 +28,7 @@ export async function PUT(req: NextRequest, { params }: any) {
         }
 
         return NextResponse.json({
-            message: 'User shortlisted successfully',
+            message: 'User shortlisted successfully and removed from applied users',
             success: true,
             job
         }, { status: 200 });

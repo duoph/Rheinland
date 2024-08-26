@@ -21,6 +21,7 @@ const SingleJobPage: React.FC = () => {
 
     const [job, setJob] = useState<Job | null>(null);
     const [appliedUsers, setAppliedUsers] = useState<any>(null);
+    const [shortlistedUsers, setShortlistedUsers] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('Applicants');
     const [showMoreSkills, setShowMoreSkills] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const SingleJobPage: React.FC = () => {
                 setJob(jobRes.data.job);
                 console.log(jobRes.data.job)
                 setAppliedUsers(jobRes.data.job.appliedUsers);
+                setShortlistedUsers(jobRes.data.job.shortlistedUsers);
             } else {
                 toast.error("Failed to fetch job data");
             }
@@ -50,6 +52,8 @@ const SingleJobPage: React.FC = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const candidatesToDisplay = selectedApplicantsType === "Applicants" ? appliedUsers : shortlistedUsers;
 
     // Function to format text with line breaks
     const formatTextWithLineBreaks = (text: string) => {
@@ -143,47 +147,41 @@ const SingleJobPage: React.FC = () => {
                     <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
                 </div>
 
-                {appliedUsers ? (
-                    appliedUsers.length > 0 ? (
-                        <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
-                            <h1 className="text-3xl font-semibold text-center">Applications</h1>
+
+                <div className="flex gap-3 flex-col items-center justify-center w-full py-10">
+                    <h1 className="text-3xl font-semibold text-center">Applications</h1>
 
 
 
-                            <div className="flex items-center justify-center gap-2 md:gap-5 lg:gap-10 rounded-md pt-3 px-5 md:px-10 w-full text-[15px] flex-wrap">
-                                <span
-                                    onClick={() => setSelectedApplicantsType('Applicants')}
-                                    className={`px-2 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'Applicants' ? 'bg-rheinland-red text-white' : ''}`}
-                                >
-                                    Applicants
-                                </span>
+                    <div className="flex items-center justify-center gap-2 md:gap-5 lg:gap-10 rounded-md pt-3 px-5 md:px-10 w-full text-[15px] flex-wrap">
+                        <span
+                            onClick={() => setSelectedApplicantsType('Applicants')}
+                            className={`px-2 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'Applicants' ? 'bg-rheinland-red text-white' : ''}`}
+                        >
+                            Applicants
+                        </span>
 
-                                <span
-                                    onClick={() => setSelectedApplicantsType('shortlisted')}
-                                    className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'shortlisted' ? 'bg-rheinland-red text-white' : ''}`}
-                                >
-                                    Shortlisted
-                                </span>
-                            </div>
-
-
-
-                            <div className="flex flex-wrap items-center justify-center gap-2 w-full">
-                                {appliedUsers.map((appliedUser: any) => (
-                                    <ApplicationCard jobId={jobId} key={appliedUser._id} applicant={appliedUser} />
-                                ))}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex items-center justify-center w-full py-10">
-                            <p className="text-xl font-semibold">No candidates have applied yet.</p>
-                        </div>
-                    )
-                ) : (
-                    <div className="flex items-center justify-center w-full py-10">
-                        <p className="text-xl font-semibold">No candidates have applied yet.</p>
+                        <span
+                            onClick={() => setSelectedApplicantsType('shortlisted')}
+                            className={`px-3 py-2 rounded-md cursor-pointer border ${selectedApplicantsType === 'shortlisted' ? 'bg-rheinland-red text-white' : ''}`}
+                        >
+                            Shortlisted
+                        </span>
                     </div>
-                )}
+
+
+                    <div className="flex flex-wrap items-center justify-center gap-2 w-full">
+                        {candidatesToDisplay.length > 0 ? (
+                            candidatesToDisplay.map((user: any) => (
+                                <ApplicationCard jobId={jobId} key={user._id} applicant={user} isShortlisted={selectedApplicantsType === 'shortlisted'} />
+                            ))
+                        ) : (
+                            <p className="text-xl font-semibold">No candidates to display.</p>
+                        )}
+                    </div>
+
+                </div>
+
             </div>
         </div>
     );

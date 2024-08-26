@@ -15,6 +15,7 @@ export interface Job {
     requirements?: string;
     gender?: string;
     appliedUsers: string[];
+    shortlistedUsers: string[];
     isFeatured: boolean,
     savedUsers: string[];
     createdAt: string;
