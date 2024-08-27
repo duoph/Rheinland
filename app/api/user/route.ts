@@ -3,6 +3,7 @@ import connectMongoDB from "@/lib/dbConnect";
 import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt'
+import jobModel from "@/models/jobSchema";
 
 export const revalidate = 0;
 
@@ -13,7 +14,9 @@ export async function GET(req: NextRequest) {
 
         const { id } = await getDataFromToken(req);
 
-        // Populate both savedJobs and appliedJobs
+
+        await jobModel.find()
+
         const jobs = await userModel.findById(id)
 
         const user = await userModel.findById(id)
@@ -24,8 +27,6 @@ export async function GET(req: NextRequest) {
             message: 'Fetched user successfully',
             success: true,
             user,
-            savedJobs: jobs?.savedJobs,
-            appliedJobs: jobs?.appliedJobs,
             status: 200
         });
 
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({
                 message: "User with this email already exists",
                 success: false,
-                status: 409 
+                status: 409
             });
         }
 

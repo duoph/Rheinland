@@ -43,9 +43,9 @@ const SingleJobPage = () => {
 
         if (userRes.data.success) {
 
-          setSavedJobs(userRes.data.appliedJobs);
+          setSavedJobs(userRes.data.user.appliedJobs);
 
-          setAppliedJobs(userRes.data.savedJobs);
+          setAppliedJobs(userRes.data.user.savedJobs);
 
         } else {
           console.error("Failed to load user data:", userRes.data.message);
