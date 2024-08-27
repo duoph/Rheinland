@@ -3,6 +3,8 @@ import connectMongoDB from "@/lib/dbConnect";
 import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0
+
 export async function PUT(req: NextRequest, { params }: { params: { jobId: string } }) {
   try {
     await connectMongoDB();
@@ -31,8 +33,8 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
     const isJobSaved = user.savedJobs.includes(jobId);
 
     const updateOperation = isJobSaved
-      ? { $pull: { savedJobs: jobId } } 
-      : { $push: { savedJobs: jobId } }; 
+      ? { $pull: { savedJobs: jobId } }
+      : { $push: { savedJobs: jobId } };
 
     const updatedUser = await userModel.findByIdAndUpdate(
       id,

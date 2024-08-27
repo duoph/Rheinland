@@ -4,6 +4,7 @@ import jobModel from "@/models/jobSchema";
 import userModel from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0
 
 export async function PUT(req: NextRequest, { params }: { params: { jobId: string } }) {
     try {
@@ -19,7 +20,7 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
         await userModel.findByIdAndUpdate(id, { $addToSet: { appliedJobs: jobId } });
 
         await jobModel.findByIdAndUpdate(jobId, {
-            $addToSet: { appliedUsers : id  }
+            $addToSet: { appliedUsers: id }
         });
 
         return NextResponse.json({ message: 'Applied for Job successfully', success: true, status: 200 });
