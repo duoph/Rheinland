@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { FaCheck, FaPhone, FaUser, FaEnvelope, FaLanguage } from "react-icons/fa";
 import { Skeleton } from "./ui/skeleton";
@@ -9,16 +9,16 @@ import Link from "next/link";
 import axios from "axios";
 import { IoLocationSharp } from "react-icons/io5";
 
-
 const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortlisted }) => {
-
+  const [isShortlisting, setIsShortlisting] = useState(false);
 
   const handleShortListed = async () => {
+    setIsShortlisting(true);
     try {
       const res = await axios.put(`/api/admin/job/${jobId}/shortlist-users`, {
         userId: applicant?._id,
       });
-      console.log(res.data)
+      console.log(res.data);
       if (res.data.success) {
         toast.success("Shortlisted");
       } else {
@@ -27,9 +27,10 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortli
     } catch (error) {
       console.error("Error during shortlisting:", error);
       toast.error("An error occurred while shortlisting.");
+    } finally {
+      setIsShortlisting(false);
     }
   };
-
 
   const handleReject = () => {
     try {
@@ -39,7 +40,6 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortli
       toast.error("An error occurred while rejecting.");
     }
   };
-
 
   if (isLoading) {
     return (
@@ -98,10 +98,12 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortli
         <div className="flex flex-col gap-2 items-center justify-center rounded-md w-full mt-3">
           <button
             onClick={handleShortListed}
-            className="flex items-center justify-center py-2 px-4 text-white rounded-md bg-green-600 hover:bg-green-500 transition-colors duration-200 gap-2 w-full"
+            disabled={isShortlisting}
+            className={`flex items-center justify-center py-2 px-4 text-white rounded-md ${isShortlisting ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-500"
+              } transition-colors duration-200 gap-2 w-full`}
           >
-            Shortlist
-            <FaCheck />
+            {isShortlisting ? "Shortlisting..." : "Shortlist"}
+            {!isShortlisting && <FaCheck />}
           </button>
         </div>
       )}

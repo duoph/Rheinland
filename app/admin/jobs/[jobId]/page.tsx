@@ -2,7 +2,7 @@
 
 import { Job } from "@/types";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CiLocationOn, CiUser } from "react-icons/ci";
@@ -25,6 +25,8 @@ const SingleJobPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedApplicantsType, setSelectedApplicantsType] = useState<string>('Applicants');
     const [showMoreSkills, setShowMoreSkills] = useState<boolean>(false);
+
+    const router = useRouter()
 
     const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
@@ -85,6 +87,8 @@ const SingleJobPage: React.FC = () => {
                 </h1>
             </div>
 
+
+            <span className="text-start font-light w-full">Posted by : <span onClick={() => router.push(`/admin/employers/${job?.employerId._id}`)} className="font-normal cursor-pointer underline">{job?.employerId.employerName}</span>  </span>
 
             <div className="flex flex-row items-start w-full gap-5 flex-wrap">
 

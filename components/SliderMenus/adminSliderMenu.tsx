@@ -61,8 +61,8 @@ const AdminSliderMenu = () => {
           </Link>
 
           <Link
-            href={`/admin/registered-users`}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/registered-users") &&
+            href={`/admin/users`}
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/users") &&
               "bg-rheinland-red text-white"
               }`}
           >
@@ -72,8 +72,8 @@ const AdminSliderMenu = () => {
             </span>
           </Link>
           <Link
-            href={`/admin/registered-employers`}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/registered-employers") &&
+            href={`/admin/companies`}
+            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/companies") &&
               "bg-rheinland-red text-white"
               }`}
           >
