@@ -31,8 +31,8 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
     const isJobSaved = user.savedJobs.includes(jobId);
 
     const updateOperation = isJobSaved
-      ? { $pull: { savedJobs: jobId } } // Remove job if already saved
-      : { $push: { savedJobs: jobId } }; // Add job if not saved
+      ? { $pull: { savedJobs: jobId } } 
+      : { $push: { savedJobs: jobId } }; 
 
     const updatedUser = await userModel.findByIdAndUpdate(
       id,

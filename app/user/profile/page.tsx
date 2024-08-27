@@ -124,15 +124,28 @@ const UserProfile = () => {
             />
           </div>
 
+
+
           <div>
             <label className="text-sm font-medium mb-1">German Language Level:</label>
-            <input
-              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            <select
               value={germanLanguageLevel}
               onChange={(e) => setGermanLanguageLevel(e.target.value)}
+              required
               disabled={!isEditable}
-            />
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            >
+              <option value='' disabled>Select Language Level</option>
+              <option value='A1'>A1</option>
+              <option value='A2'>A2</option>
+              <option value='B1'>B1</option>
+              <option value='B2'>B2</option>
+              <option value='C1'>C1</option>
+              <option value='C2'>C2</option>
+            </select>
           </div>
+
+
 
           <div>
             <label className="text-sm font-medium mb-1">Resume Link:</label>
