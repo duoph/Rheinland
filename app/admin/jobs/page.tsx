@@ -11,15 +11,15 @@ const ApplicationsPage = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
+    const [sortOption, setSortOption] = useState<string>('NewApplication');
 
     // Fetch all jobs from the API
     const fetchAllJobs = async () => {
         try {
             const response = await axios.get("/api/admin/job");
-            console.log(response.data.jobs);
-            const sortedJobs = response.data.jobs.sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+            const sortedJobs = sortJobsByDate(response.data.jobs); // Sort jobs initially by date
             setJobs(sortedJobs);
-            setSearchResults(sortedJobs); 
+            setSearchResults(sortedJobs);
         } catch (error) {
             console.error("Error fetching jobs:", error);
         } finally {
@@ -27,7 +27,10 @@ const ApplicationsPage = () => {
         }
     };
 
-    
+    // Sort jobs by the updatedAt date
+    const sortJobsByDate = (jobsToSort: any[]) => {
+        return [...jobsToSort].sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+    };
 
     useEffect(() => {
         fetchAllJobs();
@@ -36,12 +39,14 @@ const ApplicationsPage = () => {
     // Filter jobs based on search input
     const handleSearch = () => {
         if (search) {
-            setSearchResults(jobs.filter(job =>
+            const filteredJobs = jobs.filter(job =>
                 job.title.toLowerCase().includes(search.toLowerCase()) ||
                 job.location.toLowerCase().includes(search.toLowerCase())
-            ));
+            );
+            const sortedFilteredJobs = sortJobsByDate(filteredJobs); // Sort filtered jobs
+            setSearchResults(sortedFilteredJobs);
         } else {
-            setSearchResults(jobs);
+            setSearchResults(sortJobsByDate(jobs)); // Ensure the full list is sorted if no search input
         }
     };
 
@@ -54,32 +59,32 @@ const ApplicationsPage = () => {
 
     return (
         <div className="flex items-center justify-center flex-col pt-[90px] px-5 md:px-10 pb-10">
-            <div className=' rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
-                <input
-                    type='text'
-                    placeholder='Search by job title or location'
-                    className='border px-4 py-4 rounded-md w-full outline-none focus:outline-none'
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-                <CiSearch
-                    onClick={handleSearch}
-                    className='rounded-md text-[30px] cursor-pointer text-white'
-                />
+            <div className='w-full flex flex-col items-center mb-3'>
+                <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
+                    <input
+                        type='text'
+                        placeholder='Search by job title or location'
+                        className='border px-4 py-4 rounded-md w-full outline-none focus:outline-none'
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <CiSearch
+                        onClick={handleSearch}
+                        className='rounded-md text-[30px] cursor-pointer text-white'
+                    />
+                </div>
             </div>
 
             <div className="flex items-center justify-center flex-wrap gap-3">
-                {
-                    isLoading
-                        ? Array.from({ length: 16 }).map((_, index) => (
-                            <AdminJobCard key={index} isLoading={isLoading} job={null} />
+                {isLoading
+                    ? Array.from({ length: 16 }).map((_, index) => (
+                        <AdminJobCard key={index} isLoading={isLoading} job={null} />
+                    ))
+                    : displayJobs.length > 0
+                        ? displayJobs.map((job) => (
+                            <AdminJobCard key={job._id} isLoading={isLoading} job={job} />
                         ))
-                        : displayJobs.length > 0
-                            ? displayJobs.map((job) => (
-                                <AdminJobCard key={job._id} isLoading={isLoading} job={job} />
-                            ))
-                            : <p>No jobs available</p>
-
+                        : <p>No jobs available</p>
                 }
             </div>
 

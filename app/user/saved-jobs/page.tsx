@@ -12,7 +12,6 @@ const SavedJobsPage = () => {
     const [savedJobs, setSavedJobs] = useState<Job[]>([]);
     const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); // Number of jobs displayed initially
 
-    // Function to fetch saved jobs from the API
     const fetchSavedJobs = async () => {
         setIsLoading(true);
         try {
@@ -27,12 +26,10 @@ const SavedJobsPage = () => {
         }
     };
 
-    // Fetch saved jobs on initial render
     useEffect(() => {
         fetchSavedJobs();
     }, []);
 
-    // Determine the jobs to display based on pagination
     const jobsToDisplayList = savedJobs?.slice(0, jobsToDisplay);
 
     // Handle "Load More" button click

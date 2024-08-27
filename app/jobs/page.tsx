@@ -30,7 +30,7 @@ const Jobs = () => {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                setSearchResults(data.jobs); // Initially set jobs as they come from the API
+                setSearchResults(data.jobs); 
                 setNoJobsMessage(data.jobs.length === 0 ? 'No jobs available at the moment.' : '');
             } else {
                 setNoJobsMessage('Failed to fetch jobs.');

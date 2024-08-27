@@ -6,24 +6,42 @@ import { useAccount } from "@/context/useAccount";
 import AdminSliderMenu from "./SliderMenus/adminSliderMenu";
 import UserSliderMenu from "./SliderMenus/userSliderMenu";
 import EmployerSliderMenu from "./SliderMenus/employerSliderMenu";
+import { usePathname, useRouter } from "next/navigation"; // Correct import for usePathname
 
 const Header = () => {
   const { account } = useAccount();
+  const path = usePathname();
+  const router = useRouter()
+
+  const handleLogoRoute = () => {
+    if (path === "/admin/jobs" && account.type === "admin") {
+      return
+    }
+    if (path === "/employer/my-jobs" && account.type === "employer") {
+      return
+    }
+    if (path === "/jobs" && account.type === "user") {
+      return
+    }
+    router.push('/')
+  }
+
   return (
     <div className="flex bg-white border-b shadow-sm fixed top-0 left-0 w-full items-center justify-between lg:px-5 px-3 min-h-[70px] z-50">
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center gap-10 ">
-          <Link href={"/"} className="flex items-center min-w-1/3">
+        <div className="flex items-center justify-center gap-10">
+          <div onClick={handleLogoRoute} className="flex items-center min-w-1/3 cursor-pointer">
             <Image
               src={"/RheinlandEnlarged.png"}
               alt="Logo"
               height={120}
               width={120}
             />
-          </Link>
+          </div>
+
 
           {!account.token && !account.id && (
-            <div className="hidden lg:flex justify-center items-center gap-4 font-light`">
+            <div className="hidden lg:flex justify-center items-center gap-4 font-light">
               <Link href={"/jobs"}>Find Jobs</Link>
               <Link href={"/"}>Are you a student?</Link>
             </div>
@@ -32,11 +50,8 @@ const Header = () => {
       </div>
 
       {(!account.token || !account.id) && (
-        <div className="sm:w-3/6  flex items-center justify-end gap-3 font-light">
-          <Link
-            href={"/login"}
-            className="rounded-sm px-3 py-2 text-rheinland-red"
-          >
+        <div className="sm:w-3/6 flex items-center justify-end gap-3 font-light">
+          <Link href={"/login"} className="rounded-sm px-3 py-2 text-rheinland-red">
             Login
           </Link>
           <Link
@@ -49,21 +64,19 @@ const Header = () => {
       )}
 
       {account.token && account.type == "user" && (
-        <div className="sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer">
+        <div className="sm:w-[40px] flex items-end justify-end gap-3 font-light cursor-pointer">
           <UserSliderMenu />
         </div>
       )}
 
       {account.token && account.type === "employer" && (
-        <div className="sm:w-[40px] flex items-end justify-end  gap-3 font-light cursor-pointer">
+        <div className="sm:w-[40px] flex items-end justify-end gap-3 font-light cursor-pointer">
           <EmployerSliderMenu />
         </div>
       )}
 
-      {/* { account.type === 'admin' }  */}
-
       {account.token && account.id && account.type === "admin" && (
-        <div className="sm:w-[40px] flex  items-end justify-end  gap-3 font-light cursor-pointer">
+        <div className="sm:w-[40px] flex items-end justify-end gap-3 font-light cursor-pointer">
           <AdminSliderMenu />
         </div>
       )}

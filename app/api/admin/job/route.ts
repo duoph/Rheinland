@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
         await employerModel.find({})
 
-        const jobs = await jobModel.find({}).populate('employerId');
+        const jobs = await jobModel.find({}).populate('employerId').sort({ createdAt: 1 });
 
         if (!jobs || jobs.length === 0) {
             return NextResponse.json({

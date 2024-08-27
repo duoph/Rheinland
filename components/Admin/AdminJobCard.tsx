@@ -38,7 +38,7 @@ const AdminJobCard: React.FC<AdminJobCardProps> = ({ job, isLoading, reFetch }) 
 
     if (isLoading) {
         return (
-            <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:max-w-[320px] min-h-[250px] group cursor-pointer rounded-md px-4 py-3 animate-pulse">
+            <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:min-w-[300px] md:max-w-[300px]  group cursor-pointer rounded-md px-4 py-3 animate-pulse">
                 <div className="flex flex-col w-full py-2 space-y-2">
                     <Skeleton className="w-[60%] h-[24px] rounded-md" />
                     <Skeleton className="w-[40%] h-[20px] rounded-md" />
