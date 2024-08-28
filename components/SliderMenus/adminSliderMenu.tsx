@@ -1,19 +1,9 @@
 "use client";
 import { useAccount } from "@/context/useAccount";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import ClickAwayListener from "react-click-away-listener";
+import React from "react";
 import { AiOutlineLogout } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { RiCloseLargeFill } from "react-icons/ri";
-import { PiStudentFill } from "react-icons/pi";
-import { BsBuildingsFill } from "react-icons/bs";
-import { IoDocumentAttachOutline } from "react-icons/io5";
 
 const AdminSliderMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const pathname = usePathname();
   const { LogOut } = useAccount();
 
   const handleLogout = async () => {
@@ -25,76 +15,12 @@ const AdminSliderMenu = () => {
   };
 
   return (
-    <ClickAwayListener onClickAway={() => setIsMenuOpen(false)}>
-      <div className="flex items-center justify-center w-full">
-        {isMenuOpen ? (
-          <RiCloseLargeFill
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-rheinland-red z-10"
-            size={28}
-          />
-        ) : (
-          <GiHamburgerMenu
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-rheinland-red z-10"
-            size={28}
-          />
-        )}
-
-        <div
-          onClick={() => setIsMenuOpen(false)}
-          className={`absolute right-0 top-[70px] flex items-start justify-start flex-col gap-1 py-3 bg-gray-200 sm:w-[300px] w-full h-[calc(100vh-74px)] transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-x-[0%]" : "translate-x-[100%]"
-            }`}
-        >
-
-
-          <Link
-            href={"/admin/jobs"}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/jobs") &&
-              "bg-rheinland-red text-white"
-              }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <IoDocumentAttachOutline size={20} />
-              <p>Jobs</p>
-            </span>
-          </Link>
-
-          <Link
-            href={`/admin/users`}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/users") &&
-              "bg-rheinland-red text-white"
-              }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <PiStudentFill size={26} />
-              <p>Registered User</p>
-            </span>
-          </Link>
-          <Link
-            href={`/admin/employers`}
-            className={`w-full px-5 py-2 text-center ${pathname?.startsWith("/admin/employers") &&
-              "bg-rheinland-red text-white"
-              }`}
-          >
-            <span className="flex items-center justify-start gap-8">
-              <BsBuildingsFill size={26} />
-              <p>Registered Companies</p>
-            </span>
-          </Link>
-
-
-
-          <button
-            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
-            onClick={handleLogout}
-          >
-            LogOut
-            <AiOutlineLogout size={20} />
-          </button>
-        </div>
-      </div>
-    </ClickAwayListener>
+    <button
+      onClick={handleLogout}
+      className="bg-rheinland-red text-white px-5 py-2 rounded flex items-center justify-center gap-2"
+    >
+      <AiOutlineLogout size={20} />
+    </button>
   );
 };
 
