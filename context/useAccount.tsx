@@ -49,10 +49,12 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
 
     const LogOut = async () => {
         localStorage.removeItem('currentAccount');
-        await axios.get('/api/logout')
-        setAccount({ id: "", token: "", type: "" });
-        toast.success('Logged Out')
-        router.push('/login');
+        const res = await axios.get('/api/logout')
+        if (res.data.success) {
+            setAccount({ id: "", token: "", type: "" });
+            toast.success('Logged Out')
+            router.push('/login');
+        }
     };
 
     return (
