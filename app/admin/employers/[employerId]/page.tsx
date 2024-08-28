@@ -10,6 +10,7 @@ const EmployerPage = () => {
     const [employer, setEmployer] = useState<Employer | null>(null);
     const [totalJobs, setTotalJobs] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [showFullDescription, setShowFullDescription] = useState(false);
 
     const fetchEmployerDetails = async () => {
         try {
@@ -37,12 +38,16 @@ const EmployerPage = () => {
         window.open(websiteUrl, "_blank");
     };
 
+    const toggleDescription = () => {
+        setShowFullDescription(!showFullDescription);
+    };
+
     return (
         <div className="pt-[95px] px-4 flex flex-col items-center bg-gray-100 min-h-screen">
             <h1 className="font-bold text-[34px] text-center text-gray-800">
                 {employer?.employerName || "Employer Details"}
             </h1>
-            <div className="p-8 mt-6 w-full max-w-3xl">
+            <div className="w-full max-w-full">
                 {isLoading ? (
                     <p className="text-center text-gray-500">Loading employer details...</p>
                 ) : employer ? (
@@ -50,8 +55,18 @@ const EmployerPage = () => {
                         <div className="mb-6">
                             {employer.about && (
                                 <p className="text-xl text-gray-700">
-                                    {employer.about}
+                                    {showFullDescription || employer.about.length <= 200
+                                        ? employer.about
+                                        : `${employer.about.slice(0, 200)}...`}
                                 </p>
+                            )}
+                            {employer.about && employer.about.length > 200 && (
+                                <button
+                                    onClick={toggleDescription}
+                                    className="text-blue-600 hover:text-blue-800 underline mt-2"
+                                >
+                                    {showFullDescription ? "Show less" : "Load more"}
+                                </button>
                             )}
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 text-lg">
