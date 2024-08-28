@@ -53,7 +53,7 @@ const CreateEmployerAccount = () => {
             formDataToSend.append('email', formData.email.toLowerCase());
             formDataToSend.append('password', formData.password);
             formDataToSend.append('website', formData.website);
-            formDataToSend.append('address', formData.location);
+            formDataToSend.append('location', formData.location);
             formDataToSend.append('countryCode', formData.countryCode);
 
             const res = await axios.post('/api/employer/account', formDataToSend);
