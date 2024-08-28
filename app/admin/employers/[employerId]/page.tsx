@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import { Employer } from "@/types";
 
-
 const EmployerPage = () => {
     const { employerId } = useParams();
     const [employer, setEmployer] = useState<Employer | null>(null);
@@ -49,23 +48,28 @@ const EmployerPage = () => {
                 ) : employer ? (
                     <>
                         <div className="mb-6">
-                            <p className="text-xl text-gray-700">
-                                {employer.about}
-                            </p>
+                            {employer.about && (
+                                <p className="text-xl text-gray-700">
+                                    {employer.about}
+                                </p>
+                            )}
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 text-lg">
-
-                            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-                                <p> {employer.address}</p>
-                            </div>
-                            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-                                <p>{employer.email}</p>
-                            </div>
-
-                            {/* add country Code */}
-                            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-                                <p> {employer.phone}</p>
-                            </div>
+                            {employer.address && (
+                                <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                    <p>{employer.address}</p>
+                                </div>
+                            )}
+                            {employer.email && (
+                                <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                    <p>{employer.email}</p>
+                                </div>
+                            )}
+                            {employer.phone && (
+                                <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                                    <p>{employer.phone}</p>
+                                </div>
+                            )}
                             {employer.website && (
                                 <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                                     <a
@@ -75,9 +79,9 @@ const EmployerPage = () => {
                                     >
                                         {employer.website}
                                     </a>
-                                </div>)}
+                                </div>
+                            )}
                         </div>
-
                         <div className="mt-8 text-sm text-gray-500">
                             <p>Joined On: {new Date(employer.createdAt).toLocaleDateString()}</p>
                             <p>Total Jobs: {totalJobs}</p>
