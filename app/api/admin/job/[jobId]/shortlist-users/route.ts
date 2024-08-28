@@ -16,7 +16,7 @@ export async function PUT(req: NextRequest, { params }: any) {
             {
                 $addToSet: { shortlistedUsers: userId },
                 $pull: { appliedUsers: userId }
-            }, { new: true });
+            }, { new: true, timestamps: false });
 
         if (!job) {
             return NextResponse.json({

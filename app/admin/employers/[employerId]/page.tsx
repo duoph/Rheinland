@@ -1,32 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import CompanyCard from "@/components/Admin/Companies/CompanyCard";
 
-const candidates = Array(20).fill(null);
+interface EmployerDetails {
+    id: string;
+    name: string;
+    description: string;
+    // Add other employer-specific fields here
+}
 
 const EmployerPage = () => {
-    const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 9;
+    const router = useRouter();
+    const { employerId } = useParams();
+    const [employerDetails, setEmployerDetails] = useState<EmployerDetails | null>(null);
 
-    const handlePageClick = (data: { selected: number }) => {
-        setCurrentPage(data.selected);
-    };
+    useEffect(() => {
+        if (employerId) {
+            // Replace this with your API call to fetch employer details by employerId
+            const fetchEmployerDetails = async () => {
+                try {
+                    // Simulated fetch (replace with actual API call)
+                    const response = await fetch(`/api/employers/${employerId}`);
+                    const data = await response.json();
+                    setEmployerDetails(data);
+                } catch (error) {
+                    console.error("Failed to fetch employer details:", error);
+                }
+            };
 
-    const offset = currentPage * itemsPerPage;
-    const currentCandidates = candidates.slice(offset, offset + itemsPerPage);
-    const pageCount = Math.ceil(candidates.length / itemsPerPage);
+            fetchEmployerDetails();
+        }
+    }, [employerId]);
+
+
 
     return (
-        <div className="pt-[95px] flex gap-5 flex-col items-center">
-            <h1 className="font-semibold text-[30px]">Listed Companies</h1>
-            <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-                {currentCandidates.map((_, index) => (
-                    <CompanyCard key={index} />
-                ))}
+        <div className="pt-[95px] flex flex-col items-center">
+            <h1 className="font-semibold text-[30px]">{employerDetails?.name || employerId}</h1>
+            <p className="text-center text-[18px]">{employerDetails?.description}</p>
+            <div className="mt-5">
+                <CompanyCard />
             </div>
         </div>
     );
-}
+};
 
 export default EmployerPage;
