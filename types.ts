@@ -38,3 +38,16 @@ export interface user {
     updatedAt: string;
     savedJobs?: Types.ObjectId[];
 }
+
+export interface Employer {
+    id: string;
+    employerName: string;
+    about: string;
+    accountType: string;
+    address: string;
+    email: string;
+    phone: string;
+    website: string;
+    createdAt: string;
+    updatedAt: string;
+}
