@@ -9,8 +9,6 @@ import AlertMessageSlider from "@/components/AlertMessageSlider";
 import ProgressBar from "@/components/ProgressBar";
 import { Suspense } from "react";
 
-
-
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -21,7 +19,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Rheinland Jobs: Your Gateway to German Careers",
   description:
-    "Rheinland Jobs is a leading job consultancy founded by Paul Gopurathingal. We specialize in connecting talented individuals with top employers in Germany. Our personalized career guidance, expert recruitment services, and extensive network help you find your dream job in the German market.",
+    "Rheinland Jobs, founded by Paul Gopurathingal, is a premier job consultancy specializing in connecting talented individuals with top employers in Germany. Discover personalized career guidance, expert recruitment services, and find your dream job in the German market.",
   keywords:
     "Rheinland Jobs, job consultancy, Germany, career guidance, recruitment, employment opportunities, job search, HR consulting, talent acquisition, German jobs, Paul Gopurathingal",
 };
@@ -34,7 +32,44 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Paul Gopurathingal" />
+        <meta property="og:title" content="Rheinland Jobs: Your Gateway to German Careers" />
+        <meta property="og:description" content="Find your dream job in Germany with Rheinland Jobs, a leading consultancy founded by Paul Gopurathingal. Explore top employment opportunities and personalized career guidance." />
+        <meta property="og:image" content="/rheinlandLogoHeader.png" />
+        <meta property="og:url" content="https://www.rheinlandjobs.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Rheinland Jobs" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rheinland Jobs: Your Gateway to German Careers" />
+        <meta name="twitter:description" content="Explore job opportunities in Germany with Rheinland Jobs, founded by Paul Gopurathingal. Find top employers and personalized career guidance today." />
+        <meta name="twitter:image" content="/rheinlandLogoHeader.png" />
         <link rel="icon" href="/rheinlandLogoHeader.png" />
+        <link rel="canonical" href="https://www.rheinlandjobs.com" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "JobPosting",
+            "title": "Job Consultancy in Germany",
+            "description": "Rheinland Jobs, founded by Paul Gopurathingal, connects job seekers with top employers in Germany. Discover personalized career guidance and expert recruitment services.",
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "Rheinland Jobs",
+              "logo": "https://www.rheinlandjobs.com/rheinlandLogoHeader.png"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Germany",
+                "addressCountry": "DE"
+              }
+            },
+            "datePosted": "2024-08-30",
+            "employmentType": "Full-time",
+          })}
+        </script>
       </head>
       <body className={poppins.className}>
         <AccountProvider>
