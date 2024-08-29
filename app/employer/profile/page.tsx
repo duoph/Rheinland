@@ -41,7 +41,7 @@ const EmployerProfile = () => {
       setIsEditable(false);
       const formData = new FormData();
       formData.append('employerName', employerName);
-      formData.append('address', location);
+      formData.append('location', location);
       formData.append('phone', phone);
       formData.append('website', website);
       formData.append('about', about);
