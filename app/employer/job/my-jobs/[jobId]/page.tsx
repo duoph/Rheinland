@@ -95,6 +95,7 @@ const EditJob = () => {
                 <div className='flex flex-col w-full'>
                     <label className='text-sm font-medium text-rheinland-gray'>Title</label>
                     <input
+                        maxLength={35}
                         type='text'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -125,6 +126,7 @@ const EditJob = () => {
                 <div className='flex flex-col w-full'>
                     <label className='text-sm font-medium text-rheinland-gray'>Description</label>
                     <textarea
+                        maxLength={900}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder='Enter job description'
@@ -238,6 +240,7 @@ const EditJob = () => {
                     <input
                         type='text'
                         value={location}
+                        maxLength={100}
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder='Enter salary (e.g., $1000)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"

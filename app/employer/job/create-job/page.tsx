@@ -75,6 +75,7 @@ const CreateJob = () => {
                     <label className='text-sm font-medium text-rheinland-gray'>Title</label>
                     <input
                         type='text'
+                        maxLength={35}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder='Enter job title'
@@ -104,6 +105,7 @@ const CreateJob = () => {
                 <div className='flex flex-col w-full'>
                     <label className='text-sm font-medium text-rheinland-gray'>Description</label>
                     <textarea
+                        maxLength={900}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder='Enter job description'
@@ -217,6 +219,7 @@ const CreateJob = () => {
                     <label className='text-sm font-medium text-rheinland-gray'>Location</label>
                     <input
                         type='text'
+                        maxLength={100}
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder='Enter job location'
