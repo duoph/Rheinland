@@ -107,6 +107,7 @@ const Jobs = () => {
                     data={locations}
                     placeholder='Location'
                 />
+                
                 <button
                     onClick={handleSearch}
                     className='w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center'

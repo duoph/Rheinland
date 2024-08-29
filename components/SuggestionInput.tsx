@@ -68,7 +68,7 @@ const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searc
           onFocus={handleFocus}
         />
 
-        {showSuggestion && (
+        {/* {showSuggestion && (
           <div
             className='w-[calc(100%-10px)] rounded-md shadow-sm bg-slate-100 absolute top-[55px] right-0 flex flex-col items-center z-20'
             role="listbox"
@@ -91,7 +91,7 @@ const SuggestionInput: React.FC<SuggestionInputProps> = ({ setSearchInput, searc
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </div>
 
     </ClickAwayListener>
