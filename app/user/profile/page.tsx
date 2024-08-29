@@ -78,7 +78,7 @@ const UserProfile = () => {
       <div className="w-full max-w-xl">
         <div className="grid grid-cols-1 gap-2 mb-8">
           <div>
-            <label className="text-sm font-medium mb-1">Name:</label>
+            <label className="text-sm font-medium mb-1">Name</label>
             <input
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={name}
@@ -88,7 +88,7 @@ const UserProfile = () => {
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1">Email:</label>
+            <label className="text-sm font-medium mb-1">Email</label>
             <input
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={email}
@@ -97,7 +97,7 @@ const UserProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Country Code :</label>
+            <label className="text-sm font-medium mb-1">Country Code</label>
             <input
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={countryCode}
@@ -106,7 +106,7 @@ const UserProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Mobile:</label>
+            <label className="text-sm font-medium mb-1">Mobile</label>
             <input
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={phone}
@@ -115,7 +115,7 @@ const UserProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Location:</label>
+            <label className="text-sm font-medium mb-1">Location</label>
             <input
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={location}
@@ -127,7 +127,7 @@ const UserProfile = () => {
 
 
           <div>
-            <label className="text-sm font-medium mb-1">German Language Level:</label>
+            <label className="text-sm font-medium mb-1">German Language Level</label>
             <select
               value={germanLanguageLevel}
               onChange={(e) => setGermanLanguageLevel(e.target.value)}

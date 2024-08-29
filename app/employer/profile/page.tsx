@@ -76,7 +76,7 @@ const EmployerProfile = () => {
       <div className="w-full max-w-xl">
         <div className="grid grid-cols-1 gap-2 mb-8">
           <div>
-            <label className="text-sm font-medium mb-1">Company Name :</label>
+            <label className="text-sm font-medium ">Company Name</label>
             <input
               type="text"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
@@ -86,7 +86,7 @@ const EmployerProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Location :</label>
+            <label className="text-sm font-medium ">Location</label>
             <input
               type="text"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
@@ -96,7 +96,7 @@ const EmployerProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Phone :</label>
+            <label className="text-sm font-medium ">Phone</label>
             <input
               type="tel"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
@@ -106,7 +106,7 @@ const EmployerProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Email :</label>
+            <label className="text-sm font-medium ">Email</label>
             <input
               type="email"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
@@ -116,7 +116,7 @@ const EmployerProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">Website :</label>
+            <label className="text-sm font-medium ">Website</label>
             <input
               type="text"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
@@ -126,7 +126,7 @@ const EmployerProfile = () => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1">About :</label>
+            <label className="text-sm font-medium ">About </label>
             <textarea
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={about}

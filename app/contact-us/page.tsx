@@ -4,6 +4,7 @@ import { IoMdArrowBack } from 'react-icons/io';
 import { useRouter } from 'next/navigation';
 
 const ContactPage = () => {
+    
     const router = useRouter();
 
     return (
@@ -13,12 +14,12 @@ const ContactPage = () => {
                     <IoMdArrowBack /> Back
                 </span>
             </div>
-            <div className="rounded-sm flex flex-col items-center justify-center gap-4 sm:w-[400px] w-full px-4 py-7">
+            <div className="rounded-sm flex flex-col items-center justify-center  sm:w-[400px] w-full px-4 py-7">
                 <div className="flex flex-col items-center justify-center w-full mb-4">
                     <span className="text-[30px] font-semibold text-red-600">Contact Us</span>
                     <span className="text-sm font-light">We love to hear from you</span>
                 </div>
-                <div className="flex flex-col items-start justify-center w-full border px-4 py-5 rounded-sm bg-white shadow-lg">
+                <div className="flex flex-col items-start justify-center w-full px-4 py-5 rounded-sm">
                     <p className="text-lg font-medium">Paul Gopurathingal</p>
                     <p className="text-md font-light mt-2">Address:</p>
                     <p className="text-md">Rheinland Consultancy</p>

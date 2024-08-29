@@ -17,9 +17,6 @@ const CreateJob = () => {
     const [salary, setSalary] = useState<string>('');
     const [gender, setGender] = useState<string>('');
     const [languageLevel, setLanguageLevel] = useState<string>('');
-    const [minAge, setMinAge] = useState<string>('');
-    const [maxAge, setMaxAge] = useState<string>('');
-    const [jobType, setJobType] = useState<string>('');
     const [numberOfOpenings, setNumberOfOpenings] = useState<string>('');
 
     const { account } = useAccount();
@@ -38,13 +35,10 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
-            jobType,
             salary,
             numberOfOpenings,
             categoryId: selectedCategory?.id,
             languageLevel,
-            minAge,
-            maxAge
         };
 
         const skillsArray: any = skills.length > 0 && skills.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
@@ -131,21 +125,6 @@ const CreateJob = () => {
                     </select>
                 </div>
 
-                {/* Job Type Select */}
-                <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium text-rheinland-gray'>Job Type</label>
-                    <select
-                        value={jobType}
-                        onChange={(e) => setJobType(e.target.value)}
-                        required
-                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
-                    >
-                        <option value='' disabled>Select Job Type</option>
-                        <option value='Full Time'>Full Time</option>
-                        <option value='Part Time'>Part Time</option>
-                        <option value='Contract'>Contract</option>
-                    </select>
-                </div>
 
                 {/* Number of Openings Select */}
                 <div className='flex flex-col w-full'>

@@ -48,11 +48,9 @@ export async function POST(req: NextRequest) {
             location,
             gender,
             salary,
-            jobType,
             skills,
             numberOfOpenings,
             languageLevel,
-           
         } = await req.json();
 
         if (!title || !description || !category || !categoryId || !location) {
@@ -68,7 +66,6 @@ export async function POST(req: NextRequest) {
             location,
             gender,
             salary,
-            jobType,
             skills,
             languageLevel,
             numberOfOpenings,
