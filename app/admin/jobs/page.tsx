@@ -50,7 +50,6 @@ const ApplicationsPage = () => {
         }
     };
 
-    // Load more jobs
     const handleLoadMore = () => {
         setApplicantsToDisplay(prev => prev + 16);
     };
@@ -58,7 +57,7 @@ const ApplicationsPage = () => {
     const displayJobs = searchResults.slice(0, applicantsToDisplay);
 
     return (
-        <div className="flex items-center justify-center flex-col pt-[90px] px-5 md:px-10 pb-10">
+        <div className="flex items-center justify-center flex-col pt-[90px] px-3 pb-10">
             <div className='w-full flex flex-col items-center mb-3'>
                 <div className='rounded-md flex items-center justify-center cursor-pointer gap-3 bg-rheinland-red pr-3 w-full lg:w-1/2 md:w-2/3 mb-4'>
                     <input

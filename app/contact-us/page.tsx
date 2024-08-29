@@ -1,53 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 import { IoMdArrowBack } from 'react-icons/io';
+import { useRouter } from 'next/navigation';
 
 const ContactPage = () => {
-    
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-    });
-
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitMessage, setSubmitMessage] = useState('');
-
     const router = useRouter();
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitMessage('');
-
-        try {
-            const response = await axios.post('/api/contact', formData);
-            if (response.data.success) {
-                setSubmitMessage('Thank you for reaching out! We will get back to you soon.');
-                setFormData({ name: '', email: '', subject: '', message: '' }); // Clear the form
-            } else {
-                setSubmitMessage('Something went wrong. Please try again later.');
-            }
-        } catch (error) {
-            console.error(error);
-            setSubmitMessage('An error occurred. Please try again later.');
-        }
-
-        setIsSubmitting(false);
-    };
 
     return (
         <div className="relative pt-[90px] min-h-screen flex flex-col items-center justify-start p-6">
@@ -61,56 +18,16 @@ const ContactPage = () => {
                     <span className="text-[30px] font-semibold text-red-600">Contact Us</span>
                     <span className="text-sm font-light">We love to hear from you</span>
                 </div>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full border px-3 py-3 rounded-sm focus:outline-none"
-                        placeholder="Full Name"
-                        required
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full border px-3 py-3 rounded-sm focus:outline-none"
-                        placeholder="Email"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="w-full border px-3 py-3 rounded-sm focus:outline-none"
-                        placeholder="Subject"
-                        required
-                    />
-                    <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className="w-full border px-3 py-3 rounded-sm focus:outline-none"
-                        placeholder="Message"
-                        rows={4}
-                        required
-                    />
-                    <button
-                        type="submit"
-                        className="px-5 py-3 w-full bg-red-600 text-white rounded-sm"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </button>
-                </form>
-                {submitMessage && (
-                    <p className={`mt-4 ${submitMessage.startsWith('Thank') ? 'text-green-500' : 'text-red-500'}`}>
-                        {submitMessage}
-                    </p>
-                )}
+                <div className="flex flex-col items-start justify-center w-full border px-4 py-5 rounded-sm bg-white shadow-lg">
+                    <p className="text-lg font-medium">Paul Gopurathingal</p>
+                    <p className="text-md font-light mt-2">Address:</p>
+                    <p className="text-md">Rheinland Consultancy</p>
+                    <p className="text-md">Nordstrasse 43</p>
+                    <p className="text-md">53859 Niederkassel</p>
+                    <p className="text-md">Germany</p>
+                    <p className="text-md mt-4">Tel.: +49 2208 74741</p>
+                    <p className="text-md">Mobil: +49 1784816145</p>
+                </div>
             </div>
         </div>
     );
