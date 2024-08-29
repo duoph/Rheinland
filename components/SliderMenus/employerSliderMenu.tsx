@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { AiOutlineLogout } from "react-icons/ai";
-import {  FaPlusSquare, FaRegListAlt, FaUserTie } from "react-icons/fa";
+import { FaPlusSquare, FaRegListAlt, FaUserTie } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 
 const EmployerSliderMenu = () => {
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const pathname = usePathname();
@@ -82,11 +82,11 @@ const EmployerSliderMenu = () => {
           </Link>
 
           <button
-            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
+            className="bg-rheinland-red w-full px-5 py-2 text-white  flex items-center justify-star gap-3"
             onClick={handleLogout}
           >
-            LogOut
             <AiOutlineLogout size={20} />
+            LogOut
           </button>
         </div>
       </div>

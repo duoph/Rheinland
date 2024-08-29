@@ -117,21 +117,9 @@ export async function PUT(req: NextRequest) {
 
     const employerName = formData.get("employerName");
     const phone = formData.get("phone");
-    const email = formData.get("email");
     const website = formData.get("website");
     const location = formData.get("location");
     const about = formData.get("about");
-
-
-    const emailCheck = await employerModel.findOne({ email });
-
-    if (emailCheck) {
-      return NextResponse.json({
-        message: "Email already exists",
-        success: false,
-        status: 400,
-      });
-    }
 
 
     const update = {
@@ -139,7 +127,6 @@ export async function PUT(req: NextRequest) {
       location,
       phone,
       website,
-      email,
       about
     };
 
@@ -150,6 +137,7 @@ export async function PUT(req: NextRequest) {
       success: true,
       status: 200,
     });
+    
   } catch (error) {
     console.error(error);
     return NextResponse.json({

@@ -26,7 +26,7 @@ function RelatedJobs({ jobs, loading, pageJobId }: RelatedJobsProps) {
       <div className="w-full gap-2 flex flex-col flex-wrap md:flex-row justify-center items-center">
         {loading ? (
           Array.from({ length: 4 }).map((_, index) => (
-            <JobCard key={index} job={null} isLoading={true} />
+          <JobCard key={index} job={null} isLoading={true} />
           ))
         ) : shuffledJobs.length === 0 ? (
           <p>No related jobs available</p>

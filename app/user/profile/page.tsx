@@ -93,7 +93,7 @@ const UserProfile = () => {
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={!isEditable}
+              disabled={true}
             />
           </div>
           <div>

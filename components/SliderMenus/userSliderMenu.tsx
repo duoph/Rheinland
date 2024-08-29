@@ -101,11 +101,11 @@ const UserSliderMenu = () => {
           </Link>
 
           <button
-            className="bg-rheinland-red w-full px-10 py-2 text-white text-center flex items-center justify-center gap-3"
+            className="bg-rheinland-red w-full px-5 py-2 text-white  flex items-start justify-start gap-3"
             onClick={handleLogout}
           >
-            LogOut
             <AiOutlineLogout size={20} />
+            LogOut
           </button>
         </div>
       </div>
