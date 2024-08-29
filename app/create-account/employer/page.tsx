@@ -49,12 +49,12 @@ const CreateEmployerAccount = () => {
 
             const formDataToSend = new FormData();
             formDataToSend.append('employerName', formData.employerName);
+            formDataToSend.append('countryCode', formData.countryCode);
             formDataToSend.append('phone', formData.phone);
             formDataToSend.append('email', formData.email.toLowerCase());
             formDataToSend.append('password', formData.password);
             formDataToSend.append('website', formData.website);
             formDataToSend.append('location', formData.location);
-            formDataToSend.append('countryCode', formData.countryCode);
 
             const res = await axios.post('/api/employer/account', formDataToSend);
 
@@ -129,6 +129,19 @@ const CreateEmployerAccount = () => {
                                 <option key={country.code} value={country.code}>{country.code + " - " + country.country}</option>
                             ))}
                         </select>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Country Code (eg:+91 or +1)</label>
+                        <input
+                            type="text"
+                            id="countryCode"
+                            name="countryCode"
+                            value={formData.countryCode}
+                            onChange={handleChange}
+                            placeholder="Enter your Phone"
+                            className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+                        />
                     </div>
 
                     <div className='flex flex-col'>

@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EmployerJobCard from "@/components/Employer/EmployerJobCard";
-import { Job } from "@/types"; // Import the Job type
+import { Job } from "@/types"; 
 
 const MyJobs: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); // Set initial number to display
+  const [jobsToDisplay, setJobsToDisplay] = useState<number>(16); 
 
   const fetchJobs = async () => {
     try {
@@ -16,7 +16,7 @@ const MyJobs: React.FC = () => {
       setJobs(res.data.jobs);
     } catch (error) {
       console.error('Error fetching jobs:', error);
-      setJobs([]); // Set jobs to empty array on error
+      setJobs([]); 
     } finally {
       setIsLoading(false);
     }

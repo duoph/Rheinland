@@ -16,7 +16,6 @@ export async function GET(req: NextRequest) {
     const { id } = await getDataFromToken(req);
 
 
-    // Fetch the employer details from the database
     const employer = await employerModel.findById({ _id: id });
 
     if (!employer && id !== employer._id) {
@@ -46,7 +45,6 @@ export async function GET(req: NextRequest) {
 
 
 
-// create account for employer
 
 export async function POST(req: NextRequest) {
   try {
@@ -60,6 +58,7 @@ export async function POST(req: NextRequest) {
     const password = formData.get("password");
     const website = formData.get("website");
     const location = formData.get("location");
+    const countryCode = formData.get("countryCode");
 
 
     const hashedPassword = await bcrypt.hash(password as string, 10);
@@ -82,6 +81,7 @@ export async function POST(req: NextRequest) {
       website,
       email,
       password: hashedPassword,
+      countryCode,
       phone,
     });
 
@@ -105,7 +105,6 @@ export async function POST(req: NextRequest) {
 
 
 
-// Update employer profile
 
 export async function PUT(req: NextRequest) {
   try {
@@ -120,11 +119,14 @@ export async function PUT(req: NextRequest) {
     const website = formData.get("website");
     const location = formData.get("location");
     const about = formData.get("about");
+    const countryCode = formData.get("countryCode");
+
 
 
     const update = {
       employerName,
       location,
+      countryCode,
       phone,
       website,
       about
@@ -137,7 +139,7 @@ export async function PUT(req: NextRequest) {
       success: true,
       status: 200,
     });
-    
+
   } catch (error) {
     console.error(error);
     return NextResponse.json({
