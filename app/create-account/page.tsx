@@ -181,7 +181,7 @@ const CreateAccountPage = () => {
 
 
           <div className="flex flex-col">
-            <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Phone</label>
+            <label htmlFor="resumeURL" className="text-sm font-medium mb-1">Location</label>
             <input
               type="text"
               id="location"
