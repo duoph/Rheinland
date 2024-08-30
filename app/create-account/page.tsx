@@ -27,13 +27,12 @@ const CreateAccountPage = () => {
 
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -171,6 +170,27 @@ const CreateAccountPage = () => {
               placeholder="Enter your German language level"
               className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
             />
+          </div>
+
+
+          <div className="flex flex-col">
+            <label className="text-sm font-medium mb-1">German Language Level</label>
+            <select
+              value={formData.germanLanguageLevel}
+              onChange={handleChange}
+              id="germanLanguageLevel"
+              name="germanLanguageLevel"
+              required
+              className="w-full border px-3 py-3 border-gray-300 rounded-sm focus:outline-none transition-colors"
+            >
+              <option value='' disabled>Select Language Level</option>
+              <option value='A1'>A1</option>
+              <option value='A2'>A2</option>
+              <option value='B1'>B1</option>
+              <option value='B2'>B2</option>
+              <option value='C1'>C1</option>
+              <option value='C2'>C2</option>
+            </select>
           </div>
 
 
