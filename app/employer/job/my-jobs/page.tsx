@@ -65,7 +65,7 @@ const MyJobs: React.FC = () => {
           />
           <CiSearch
             onClick={handleSearch}
-            className='rounded-sm text-[30px] cursor-pointer text-white'
+            className=' text-[30px] cursor-pointer text-white rounded-sm'
           />
         </div>
       </div>

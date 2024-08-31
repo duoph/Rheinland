@@ -39,7 +39,7 @@ const EmployerJobCard: React.FC<EmployerJobCardProps> = ({ job, loading }) => {
 
   if (loading) {
     return (
-      <div className="border border-gray-300 shadow-sm flex flex-col justify-between md:min-w-[320px] w-full md:max-w-[320px] h-[350px] rounded-md p-4 animate-pulse">
+      <div className="border border-gray-300 shadow-sm flex flex-col justify-between md:min-w-[320px] w-full md:max-w-[320px] h-[350px]  rounded-smrounded-md p-4 animate-pulse">
         <div className="flex justify-between items-center mb-4">
           <Skeleton className="w-[60px] h-[60px]" />
           <Skeleton className="w-[100px] h-[20px]" />
@@ -52,7 +52,7 @@ const EmployerJobCard: React.FC<EmployerJobCardProps> = ({ job, loading }) => {
   }
 
   return (
-    <div className="border border-gray-200 shadow-md flex flex-col justify-between md:min-w-[320px] w-full md:max-w-[320px] h-auto rounded-md p-4 bg-white">
+    <div className="border border-gray-200  flex flex-col justify-between md:min-w-[320px] w-full md:max-w-[320px] h-auto  rounded-sm p-4 bg-white">
       {/* Job Title and Location */}
       <div className="flex flex-col mb-4">
         <h1 className="text-lg font-semibold text-gray-800">{job?.title}</h1>
