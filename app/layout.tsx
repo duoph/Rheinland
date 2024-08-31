@@ -35,16 +35,6 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Paul Gopurathingal" />
-        <meta property="og:title" content="Rheinland Jobs: Your Gateway to German Careers" />
-        <meta property="og:description" content="Find your dream job in Germany with Rheinland Jobs, a leading consultancy founded by Paul Gopurathingal. Explore top employment opportunities and personalized career guidance." />
-        <meta property="og:image" content="/rheinlandLogoHeader.png" />
-        <meta property="og:url" content="https://www.rheinlandjobs.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Rheinland Jobs" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Rheinland Jobs: Your Gateway to German Careers" />
-        <meta name="twitter:description" content="Explore job opportunities in Germany with Rheinland Jobs, founded by Paul Gopurathingal. Find top employers and personalized career guidance today." />
-        <meta name="twitter:image" content="/rheinlandLogoHeader.png" />
         <link rel="icon" href="/rheinlandLogoHeader.png" />
         <link rel="canonical" href="https://www.rheinlandjobs.com" />
         <script type="application/ld+json">
