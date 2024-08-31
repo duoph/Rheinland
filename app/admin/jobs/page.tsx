@@ -11,7 +11,6 @@ const ApplicationsPage = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [applicantsToDisplay, setApplicantsToDisplay] = useState<number>(16);
-    const [sortOption, setSortOption] = useState<string>('NewApplication');
 
     // Fetch all jobs from the API
     const fetchAllJobs = async () => {
@@ -63,13 +62,13 @@ const ApplicationsPage = () => {
                     <input
                         type='text'
                         placeholder='Search by job title or location'
-                        className='border px-4 py-4 rounded-md w-full outline-none focus:outline-none'
+                        className='border px-4 py-4 rounded-sm w-full outline-none focus:outline-none'
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <CiSearch
                         onClick={handleSearch}
-                        className='rounded-md text-[30px] cursor-pointer text-white'
+                        className='rounded-sm text-[30px] cursor-pointer text-white'
                     />
                 </div>
             </div>

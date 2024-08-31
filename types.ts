@@ -10,7 +10,7 @@ export interface Job {
     skills?: string[];
     minAge?: string;
     maxAge?: string;
-    location?: string;
+    location: string;
     state?: string;
     requirements?: string;
     gender?: string;

@@ -43,7 +43,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortli
 
   if (isLoading) {
     return (
-      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:w-[320px] group cursor-pointer rounded-lg px-4 py-3 bg-white">
+      <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between w-full md:w-[320px] group cursor-pointer rounded-sm  px-4 py-3 bg-white">
         <div className="flex justify-between items-center w-full py-2">
           <Skeleton className="w-16 h-16 rounded-full" />
           <Skeleton className="w-24 h-5" />
@@ -65,7 +65,7 @@ const ApplicationCard: React.FC<any> = ({ applicant, isLoading, jobId, isShortli
   }
 
   return (
-    <div className="border shadow-md border-gray-300 flex flex-col items-start justify-between w-full md:w-[320px] group cursor-pointer rounded-lg px-4 py-3 bg-white hover:shadow-lg transition-shadow duration-200">
+    <div className="border shadow-md border-gray-300 flex flex-col items-start justify-between w-full md:w-[320px] group cursor-pointer rounded-sm px-4 py-3 bg-white hover:shadow-lg transition-shadow duration-200">
       <div className="flex flex-col gap-2 w-full mt-2">
         <p className="text-sm font-semibold text-gray-800 flex items-center">
           <FaUser className="mr-2 text-xl" /> {applicant?.name || "N/A"}
