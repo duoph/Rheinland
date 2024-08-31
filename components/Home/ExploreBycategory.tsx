@@ -24,7 +24,6 @@ const ExploteBycategory = () => {
             <div className="flex items-center justify-center gap-2 flex-wrap">
 
                 {jobCategories.slice(0, 6).map((jobCategory: any) => (
-
                     <CategoryCard key={jobCategory.id} category={jobCategory} />
                 ))}
 

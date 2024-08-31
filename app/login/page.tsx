@@ -104,7 +104,7 @@ const LoginPage = () => {
 
                 <button
                     onClick={handleSubmit}
-                    className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white'
+                    className='px-5 py-3 h-[50px] w-full bg-rheinland-red text-white rounded-sm'
                     disabled={isLoading}
                 >
                     {isLoading ? 'Logging in...' : 'Login'}

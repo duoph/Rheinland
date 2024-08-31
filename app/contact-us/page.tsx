@@ -1,18 +1,16 @@
-"use client";
 
+import Link from 'next/link';
 import { IoMdArrowBack } from 'react-icons/io';
-import { useRouter } from 'next/navigation';
 
 const ContactPage = () => {
-    
-    const router = useRouter();
+
 
     return (
         <div className="relative pt-[90px] min-h-screen flex flex-col items-center justify-start p-6">
             <div className="absolute top-[80px] left-[10px] cursor-pointer md:flex hidden">
-                <span onClick={() => router.push('/')} className="flex items-center justify-center gap-2 ">
+                <Link href={'/'} className="flex items-center justify-center gap-2">
                     <IoMdArrowBack /> Back
-                </span>
+                </Link>
             </div>
             <div className="rounded-sm flex flex-col items-center justify-center  sm:w-[400px] w-full px-4 py-7">
                 <div className="flex flex-col items-center justify-center w-full mb-4">

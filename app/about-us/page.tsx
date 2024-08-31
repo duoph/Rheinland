@@ -32,29 +32,25 @@ const AboutPage = () => {
                 <section className="mb-12 w-full">
                     <h2 className="text-2xl font-semibold text-rheinland-red">Meet the Founder</h2>
                     <div className="flex flex-col md:flex-row items-center mt-6 w-full">
-                        <div className='flex gap-4 flex-col items-center justify-center md:w-1/3 w-full py-3'>
-
+                        <div className="flex flex-col items-center justify-center md:w-1/3 w-full py-3">
                             <Image
                                 src="/paul.jpg"
                                 alt="Paul Gopurathingal"
                                 width={300}
                                 height={300}
-                                className=" md:mr-6 "
+                                className="md:mr-6 rounded-sm"
                             />
-
-                            <div className='flex flex-col items-center justify-center'>
-                                <span className='text-lg text-center font-bold'>Paul Gopurathingal</span>
-                                <span className='text-lg text-center font-bold'>Founder of Rheinland Consultancy</span>
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="text-lg text-center font-bold">Paul Gopurathingal</span>
+                                <span className="text-lg text-center font-bold">Founder of Rheinland Consultancy</span>
                             </div>
-
                         </div>
-
-                        <div className='md:w-2/3'>
+                        <div className="md:w-2/3">
                             <p className="text-lg leading-relaxed">
                                 Rheinland Consultancy was established by Paul Gopurathingal with the mission of connecting Indian professionals with job opportunities in Germany. Since moving to Germany in 1978, Paul has made significant contributions to both communities, serving as the Global Chairman of the Global Malayali Federation and as a member of the Loka Kerala Sabha. He has also been honored with the “Hind Rattan Award for Social and Culture” for his outstanding contributions.
                             </p>
                             <p className="mt-4 text-lg leading-relaxed">
-                                Rheinland Consultancy benefits from Paul Gopurathingal’s extensive experience and leadership. His prior ventures, including founding the Indian School Cologne e.V. in Germany (1987) and the Rheinland German School, underscore his commitment to fostering cross-cultural understanding and facilitating career success. Our consultancy is dedicated to providing expert guidance and support to help Indian professionals navigate and succeed in Germany’s job market.
+                                Rheinland Consultancy benefits from Paul Gopurathingal&#39;s extensive experience and leadership. His prior ventures, including founding the Indian School Cologne e.V. in Germany (1987) and the Rheinland German School, underscore his commitment to fostering cross-cultural understanding and facilitating career success. Our consultancy is dedicated to providing expert guidance and support to help Indian professionals navigate and succeed in Germany&#39;s job market.
                             </p>
                         </div>
                     </div>
@@ -69,6 +65,6 @@ const AboutPage = () => {
             </main>
         </div>
     );
-}
+};
 
 export default AboutPage;

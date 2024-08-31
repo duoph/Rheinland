@@ -30,7 +30,7 @@ const Jobs = () => {
             const { data } = await axios.get('/api/job');
             if (data.success) {
                 setJobs(data.jobs);
-                setSearchResults(data.jobs); 
+                setSearchResults(data.jobs);
                 setNoJobsMessage(data.jobs.length === 0 ? 'No jobs available at the moment.' : '');
             } else {
                 setNoJobsMessage('Failed to fetch jobs.');
@@ -92,9 +92,9 @@ const Jobs = () => {
     const displayedJobs = searchResults.slice(0, jobsToDisplay);
 
     return (
-        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen py-5'>
+        <div className='flex flex-col items-center justify-start pt-[80px] px-3 min-h-screen py-5 '>
             {/* Search Bar */}
-            <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm'>
+            <div className='w-full md:w-full flex items-center justify-end md:flex-row flex-col gap-3 bg-slate py-5 rounded-sm max-w-screen-xl'>
                 <SuggestionInput
                     searchInput={jobTitle}
                     setSearchInput={setJobTitle}
@@ -107,7 +107,7 @@ const Jobs = () => {
                     data={locations}
                     placeholder='Location'
                 />
-                
+
                 <button
                     onClick={handleSearch}
                     className='w-full md:w-2/6 bg-rheinland-red text-white rounded-sm px-3 py-3 flex items-center justify-center'
@@ -117,7 +117,7 @@ const Jobs = () => {
             </div>
 
             {/* Filter Options */}
-            <div className='w-full flex items-center justify-between mb-3'>
+            <div className='w-full flex items-center justify-between mb-3 max-w-screen-xl' >
                 <span onClick={() => router.push('/category')} className='underline text-sm cursor-pointer'>
                     View Categories
                 </span>
