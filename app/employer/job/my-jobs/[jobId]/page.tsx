@@ -236,7 +236,7 @@ const EditJob = () => {
 
                 {/* Location Input */}
                 <div className='flex flex-col w-full'>
-                    <label className='text-sm font-medium text-rheinland-gray'>Salary</label>
+                    <label className='text-sm font-medium text-rheinland-gray'>Location</label>
                     <input
                         type='text'
                         value={location}
