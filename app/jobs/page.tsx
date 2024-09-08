@@ -10,6 +10,7 @@ import { jobData } from '@/data/jobData';
 import { locations } from '@/data/location';
 
 const Jobs = () => {
+
     const searchParams = useSearchParams();
     const queryJobTitle = searchParams.get('title') || "";
     const queryLocation = searchParams.get('location') || "";
@@ -83,7 +84,7 @@ const Jobs = () => {
 
     useEffect(() => {
         applySort(searchResults);
-    }, [sortOption]);
+    }, [sortOption])
 
     const handleLoadMore = () => {
         setJobsToDisplay(prev => prev + 18);

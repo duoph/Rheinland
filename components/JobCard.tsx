@@ -26,14 +26,17 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   const { account } = useAccount()
 
   const fetchUser = async () => {
-    if (!account.token) return
 
-    try {
-      const res = await axios.get('/api/user');
-      setSavedJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
+    if (account.token) {
+      try {
+        const res = await axios.get('/api/user');
+        setSavedJobs(res?.data?.user?.savedJobs?.map((job: Job) => job._id) || []);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
     }
+    return;
+
   };
 
   useEffect(() => {
