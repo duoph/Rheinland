@@ -68,10 +68,6 @@ const EmployerJobCard: React.FC<EmployerJobCardProps> = ({ job, loading }) => {
           <span className="font-medium text-gray-700">Category: </span>
           <span className="ml-1">{job?.category}</span>
         </div>
-        <div className="flex items-center">
-          <span className="font-medium text-gray-700">Openings: </span>
-          <span className="ml-1">{job?.numberOfOpenings ? job.numberOfOpenings : "1"}</span>
-        </div>
       </div>
 
       {/* Job Description */}
