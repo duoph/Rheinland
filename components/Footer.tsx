@@ -17,13 +17,14 @@ const Footer = () => {
 
         {/* Logo and Description */}
         <div className="flex flex-col items-center md:items-start md:w-1/2 w-full text-center md:text-left">
-          <Image
-            src={"/rheinlandWhiteLogo.png"}
-            className="cursor-pointer mb-4"
-            alt="Logo"
-            height={170}
-            width={170}
-          />
+            <Image
+              src={"/rheinlandWhiteLogo.png"}
+              className="cursor-pointer mb-4"
+              alt="Logo"
+              height={170}
+              width={170}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
           <p className="text-sm font-light">
             Great platform for job seekers passionate about startups.
             Find your dream job easier.

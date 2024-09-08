@@ -28,7 +28,11 @@ const HeroContainer = () => {
                     <h1 className="text-start">Discover</h1>
                     <h2>More Than</h2>
                     <h2 className="text-rheinland-yellow">5000+ Jobs</h2>
-                    <Image src={'/sketchSplash.png'} height={500} width={300} alt="Illustration of job search concept" />
+                    <Image
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        src={'/sketchSplash.png'}
+                        height={500} width={300}
+                        alt="Illustration of job search concept" />
                 </header>
                 <p className="text-rheinland-gray text-sm font-light py-2 xs:py-5 break-all">
                     Rheinland consultancy is a Great platform for the job seeker looking for new career heights.
@@ -46,7 +50,7 @@ const HeroContainer = () => {
                         Search My Job
                     </button>
                 </div>
-                <span className="font-light text-center">Popular: UI Designer, UX Researcher, Android, Admin</span>
+                <span className="font-light text-center">Popular: UI Designer,Software Developer,Manager</span>
             </div>
         </section>
     );

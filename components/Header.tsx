@@ -34,8 +34,9 @@ const Header = () => {
             <Image
               src={"/RheinlandEnlarged.png"}
               alt="Logo"
-              height={120}
-              width={120}
+              height={100}
+              width={100}
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
           </div>
 

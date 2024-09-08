@@ -129,7 +129,6 @@ const SingleJobPage = () => {
     }
   };
 
-  // Function to format text with line breaks
   const formatTextWithLineBreaks = (text: any) => {
     return text.replace(/\n/g, '<br>');
   };
@@ -254,7 +253,7 @@ const SingleJobPage = () => {
         </div>
 
         {/* Related Jobs Section */}
-        <RelatedJobs pageJobId={jobId as string} jobs={relatedJobs} loading={loading} />
+        {/* <RelatedJobs pageJobId={jobId as string} jobs={relatedJobs} loading={loading} /> */}
       </div>
 
     </div>

@@ -10,27 +10,27 @@ const SingleCategory = () => {
 
     const { categoryId } = useParams();
 
-    const [categoryJobs, setCategoryJobs] = useState<any>()
-    const [loading, setLoading] = useState(false)
+    const [categoryJobs, setCategoryJobs] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const category: any = jobCategories.find((cat: any) => cat.id == categoryId);
 
     const categoryJobFetch = async () => {
         try {
-            setLoading(true)
-            const res = await axios.get(`/api/job/category/${category.id}`)
-            setCategoryJobs(res.data.jobs)
-            console.log(res)
-            setLoading(false)
+            setLoading(true);
+            const res = await axios.get(`/api/job/category/${category.id}`);
+            setCategoryJobs(res.data.jobs);
+            console.log(res);
+            setLoading(false);
         } catch (error) {
-            setLoading(false)
-            console.log(error)
+            setLoading(false);
+            console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
-        categoryJobFetch()
-    }, [])
+        categoryJobFetch();
+    }, []);
 
     if (!category) {
         return (
@@ -41,26 +41,24 @@ const SingleCategory = () => {
     }
 
     return (
-        <div className='pt-[90px] pb-10 px-4 min-h-screen bg-gray-100'>
-            <h1 className='text-4xl font-bold text-rheinland-red mb-6'>{category.name}</h1>
-            <p className='text-lg text-gray-700 mb-8'>{category.description}</p>
+        <div className='pt-[90px] pb-10 px-4 min-h-screen flex flex-col items-center'>
+            <div className='max-w-4xl w-full'>
+                <h1 className='text-4xl font-bold text-rheinland-red mb-4 text-center'>{category.name}</h1>
+                <p className='text-lg text-gray-700 text-center mb-8'>{category.description}</p>
 
-
-            <div className='flex items-center justify-center flex-wrap gap-3 mb-3'>
-                {
-                    loading
-                        ? Array.from({ length: 16 }).map((_, index) => (
+                <div className='flex items-center justify-center gap-2'>
+                    {loading
+                        ? Array.from({ length: 6 }).map((_, index) => (
                             <JobCard key={index} isLoading={loading} job={null} />
                         ))
                         : categoryJobs?.length > 0
                             ? categoryJobs.map((job: any) => (
                                 <JobCard key={job._id} isLoading={loading} job={job} />
                             ))
-                            : <p className='text-center text-red-500'>No Jobs Found</p>
-                }
+                            : <p className='text-center col-span-full text-red-500'>No Jobs Found</p>
+                    }
+                </div>
             </div>
-
-
         </div>
     );
 };

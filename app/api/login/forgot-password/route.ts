@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
 
         // Set up the mail options
         const mailOptions = {
-            from: "newsletter.platform@gmail.com",
+            from: "duophmarketing@gmail.com",
             to: email,
             subject: "RheinLand Consultancy - Your OTP Code",
             html: replaceTemplatePlaceholders(emailHTML, otp),
