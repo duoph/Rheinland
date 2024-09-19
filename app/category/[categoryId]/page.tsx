@@ -54,7 +54,7 @@ const SingleCategory = () => {
                 <h1 className='text-4xl font-bold text-rheinland-red mb-4 text-center'>{category.name}</h1>
                 <p className='text-lg text-gray-700 text-center mb-8'>{category.description}</p>
 
-                <div className='flex items-center justify-center flex-wrap gap-3'>
+                <div className='flex items-center justify-center flex-wrap gap-3 max-w-screen-2xl'>
                     {loading
                         ? Array.from({ length: 26 }).map((_, index) => (
                             <JobCard key={index} isLoading={loading} job={null} />

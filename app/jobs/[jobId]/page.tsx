@@ -43,12 +43,12 @@ const SingleJobPage = () => {
 
         if (userRes.data.success) {
 
-          setSavedJobs(userRes.data.user.appliedJobs);
+          setSavedJobs(userRes.data?.user?.appliedJobs);
 
-          setAppliedJobs(userRes.data.user.savedJobs);
+          setAppliedJobs(userRes.data?.user?.savedJobs);
 
         } else {
-          console.error("Failed to load user data:", userRes.data.message);
+          console.error("Failed to load user data:", userRes?.data?.message);
         }
       }
 
@@ -63,7 +63,7 @@ const SingleJobPage = () => {
       // Fetch job details
       const jobRes = await axios.get(`/api/job/${jobId}`);
       if (jobRes.data.success) {
-        setJob(jobRes.data.job);
+        setJob(jobRes.data?.job);
       } else {
         setError("Failed to load job data.");
       }

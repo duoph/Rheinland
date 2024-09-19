@@ -31,13 +31,15 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-10">
           <div onClick={handleLogoRoute} className="flex items-center min-w-1/3 cursor-pointer">
+           
             <Image
               src={"/RheinlandEnlarged.png"}
               alt="Logo"
-              height={100}
-              width={100}
+              height={110}
+              width={110}
               sizes="(max-width: 768px) 100vw, 33vw"
             />
+            
           </div>
 
 
@@ -47,6 +49,7 @@ const Header = () => {
               <Link href={"/"}>Are you a student?</Link>
             </div>
           )}
+
         </div>
       </div>
 

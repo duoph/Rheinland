@@ -133,7 +133,7 @@ const Jobs = () => {
                 </select>
             </div>
 
-            <div className='flex items-center justify-center flex-wrap gap-3 mb-3 max-w-screen-2xl'>
+            <div className='flex items-center justify-center flex-wrap gap-2 mb-3 max-w-screen-2xl'>
                 {isLoading
                     ? Array.from({ length: 16 }).map((_, index) => (
                         <JobCard key={index} isLoading={isLoading} job={null} />
