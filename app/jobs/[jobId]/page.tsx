@@ -244,7 +244,7 @@ const SingleJobPage = () => {
           </button>
 
           <div onClick={handleSave} className="cursor-pointer">
-            {savedJobs.includes(job?._id || "") ? (
+            {savedJobs && savedJobs.includes(job?._id || "") ? (
               <HiBookmark className="text-[25px] text-rheinland-red" />
             ) : (
               <HiOutlineBookmark className="text-[25px] text-rheinland-red" />
