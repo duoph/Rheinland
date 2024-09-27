@@ -37,8 +37,8 @@ const SingleJobPage = () => {
         const userRes = await axios.get("/api/user");
 
         if (userRes.data.success) {
-          setSavedJobs(userRes.data?.user?.savedJobs);
-          setAppliedJobs(userRes.data?.user?.appliedJobs);
+          setSavedJobs(userRes.data?.user?.savedJobs || []);
+          setAppliedJobs(userRes.data?.user?.appliedJobs || []);
         } else {
           console.error("Failed to load user data:", userRes?.data?.message);
         }
@@ -124,6 +124,7 @@ const SingleJobPage = () => {
   };
 
   const isJobApplied = job && appliedJobs.includes(job._id);
+  const isJobSaved = job && savedJobs.includes(job._id);
 
   if (loading) {
     return (
@@ -226,7 +227,7 @@ const SingleJobPage = () => {
           </button>
 
           <div onClick={handleSave} className="cursor-pointer">
-            {account.token && savedJobs && savedJobs.includes(job?._id || "") ? (
+            {account.token && isJobSaved ? (
               <HiBookmark className="text-[25px] text-rheinland-red" />
             ) : (
               <HiOutlineBookmark className="text-[25px] text-rheinland-red" />
