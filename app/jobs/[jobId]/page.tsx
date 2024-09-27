@@ -12,17 +12,13 @@ import { SlCalender } from "react-icons/sl";
 import { Skeleton } from "@/components/ui/skeleton";
 import toast from "react-hot-toast";
 import { useAccount } from "@/context/useAccount";
-import RelatedJobs from "@/components/RelatedJobs/RelatedJobs";
-
 
 const SingleJobPage = () => {
-
   const { account } = useAccount();
-
   const { jobId } = useParams();
 
   const [job, setJob] = useState<Job | null>(null);
-  const [relatedJobs, setRelatedJobs] = useState<Job[]>([])
+  const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
@@ -33,7 +29,6 @@ const SingleJobPage = () => {
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
   const fetchData = async () => {
-
     setLoading(true);
 
     try {
@@ -42,11 +37,8 @@ const SingleJobPage = () => {
         const userRes = await axios.get("/api/user");
 
         if (userRes.data.success) {
-
-          setSavedJobs(userRes.data?.user?.appliedJobs);
-
-          setAppliedJobs(userRes.data?.user?.savedJobs);
-
+          setSavedJobs(userRes.data?.user?.savedJobs);
+          setAppliedJobs(userRes.data?.user?.appliedJobs);
         } else {
           console.error("Failed to load user data:", userRes?.data?.message);
         }
@@ -75,11 +67,9 @@ const SingleJobPage = () => {
     }
   };
 
-
   useEffect(() => {
     fetchData();
-  }, [])
-
+  }, [jobId, account?.token]);
 
   const handleSave = async () => {
     if (!job) return;
@@ -94,7 +84,7 @@ const SingleJobPage = () => {
 
       if (response.data.success) {
         setSavedJobs((prev) =>
-          savedJobs.includes(job._id)
+          prev.includes(job._id)
             ? prev.filter((id) => id !== job._id)
             : [...prev, job._id]
         );
@@ -117,7 +107,7 @@ const SingleJobPage = () => {
 
       if (response.data.success) {
         toast.success("Applied");
-        setAppliedJobs((prev: any) => [...prev, jobId]);
+        setAppliedJobs((prev) => [...prev, jobId as string]);
       } else {
         toast.error("Failed to apply");
       }
@@ -129,10 +119,9 @@ const SingleJobPage = () => {
     }
   };
 
-  const formatTextWithLineBreaks = (text: any) => {
+  const formatTextWithLineBreaks = (text: string) => {
     return text.replace(/\n/g, '<br>');
   };
-
 
   const isJobApplied = job && appliedJobs.includes(job._id);
 
@@ -163,7 +152,6 @@ const SingleJobPage = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col gap-3 items-center justify-start px-3 sm:px-5 pb-[50px] pt-[90px]">
-
       <div className="flex items-start w-full">
         <h1 className="font-semibold text-[30px] md:text-[50px]">
           {job?.title}
@@ -195,18 +183,14 @@ const SingleJobPage = () => {
           </span>
         )}
 
-
         <span className="flex gap-2 font-light">
           <SlCalender className="text-rheinland-red" size={24} />
           {formattedDate}
         </span>
-
       </div>
 
       <div className="flex flex-col items-start justify-center w-full gap-3">
-        {/* <h1 className="font-medium">Preferred Skills</h1> */}
         <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
-
           {job?.skills && job.skills.length > 0 ? (
             <>
               {job.skills
@@ -226,18 +210,16 @@ const SingleJobPage = () => {
           ) : (
             <p>No skills listed</p>
           )}
-
         </div>
 
         <div className="flex flex-col gap-2 items-start justify-center w-full">
-          {/* <h1 className="font-medium">Job Description</h1> */}
           <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job?.description || "No description available") }} />
         </div>
 
         <div className="w-full h-full flex items-center gap-5 justify-center py-10">
           <button
             onClick={handleApply}
-            disabled={applying || isJobApplied || !account?.token} // Disable button if not logged in
+            disabled={applying || isJobApplied || !account?.token}
             className={`bg-rheinland-red px-4 py-3 text-white rounded-sm ${applying || isJobApplied || !account?.token ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {applying ? "Applying..." : isJobApplied ? "Applied" : !account?.token ? "Login to Apply" : "Apply Now"}
@@ -251,10 +233,7 @@ const SingleJobPage = () => {
             )}
           </div>
         </div>
-
-      
       </div>
-
     </div>
   );
 };
