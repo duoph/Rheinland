@@ -244,7 +244,7 @@ const SingleJobPage = () => {
           </button>
 
           <div onClick={handleSave} className="cursor-pointer">
-            {savedJobs && savedJobs.includes(job?._id || "") ? (
+            {account.token && savedJobs && savedJobs.includes(job?._id || "") ? (
               <HiBookmark className="text-[25px] text-rheinland-red" />
             ) : (
               <HiOutlineBookmark className="text-[25px] text-rheinland-red" />
@@ -252,8 +252,7 @@ const SingleJobPage = () => {
           </div>
         </div>
 
-        {/* Related Jobs Section */}
-        {/* <RelatedJobs pageJobId={jobId as string} jobs={relatedJobs} loading={loading} /> */}
+      
       </div>
 
     </div>
