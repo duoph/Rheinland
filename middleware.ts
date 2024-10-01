@@ -14,7 +14,7 @@ export default function middleware(request: NextRequest) {
     }
 
     if (path === '/') {
-        if (token.length > 0) {
+        if (token) {
             return NextResponse.redirect(new URL('/login', request.url));
         }
     }
