@@ -3,7 +3,7 @@
 import { Job } from "@/types";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { format } from "date-fns";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
@@ -18,7 +18,6 @@ const SingleJobPage = () => {
   const { jobId } = useParams();
 
   const [job, setJob] = useState<Job | null>(null);
-  const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [appliedJobs, setAppliedJobs] = useState<string[]>([]);
@@ -28,34 +27,22 @@ const SingleJobPage = () => {
 
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
-  const fetchData = async () => {
-
+  const fetchData = useCallback(async () => {
     try {
-      if (account?.token) {
-        // Fetch user data
-        const userRes = await axios.get("/api/user");
+      const [jobRes, userRes] = await Promise.all([
+        axios.get(`/api/job/${jobId}`),
+        account?.token ? axios.get("/api/user") : Promise.resolve({ data: { success: false } })
+      ]);
 
-        if (userRes.data.success) {
-          setSavedJobs(userRes.data?.user?.savedJobs || []);
-          setAppliedJobs(userRes.data?.user?.appliedJobs || []);
-        } else {
-          console.error("Failed to load user data:", userRes?.data?.message);
-        }
-      }
-      // // Fetch related jobs
-      // const relatedJobsRes = await axios.get(`/api/job`);
-      // if (relatedJobsRes.data.success) {
-      //   setRelatedJobs(relatedJobsRes.data.jobs);
-      // } else {
-      //   setError("Failed to load related job data.");
-      // }
-
-      // Fetch job details
-      const jobRes = await axios.get(`/api/job/${jobId}`);
       if (jobRes.data.success) {
         setJob(jobRes.data?.job);
       } else {
         setError("Failed to load job data.");
+      }
+
+      if (userRes.data.success) {
+        setSavedJobs(userRes.data?.user?.savedJobs || []);
+        setAppliedJobs(userRes.data?.user?.appliedJobs || []);
       }
     } catch (error) {
       console.error(error);
@@ -63,20 +50,14 @@ const SingleJobPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [jobId, account?.token]);
 
   useEffect(() => {
     fetchData();
-  }, [jobId, account?.token]);
-
+  }, [fetchData]);
 
   const handleSave = async () => {
-    if (!job) return;
-
-    if (!account.token) {
-      toast.error("Login to save job");
-      return;
-    }
+    if (!job || !account.token) return;
 
     try {
       const response = await axios.put(`/api/job/${job._id}/user/save`);
