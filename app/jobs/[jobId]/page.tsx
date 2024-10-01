@@ -23,33 +23,33 @@ async function getJob(jobId: string) {
   }
 }
 
-async function getUserData(token: string | null) {
-  if (!token) return { savedJobs: [], appliedJobs: [] };
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
-      headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: 60 }
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch user data');
-    }
-    const data = await response.json();
-    if (data.success) {
-      return {
-        savedJobs: data.user.savedJobs || [],
-        appliedJobs: data.user.appliedJobs || []
-      };
-    }
-    throw new Error("Failed to load user data.");
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    return { savedJobs: [], appliedJobs: [] };
-  }
-}
+// async function getUserData(token: string | null) {
+//   if (!token) return { savedJobs: [], appliedJobs: [] };
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+//       headers: { Authorization: `Bearer ${token}` },
+//       next: { revalidate: 60 }
+//     });
+//     if (!response.ok) {
+//       throw new Error('Failed to fetch user data');
+//     }
+//     const data = await response.json();
+//     if (data.success) {
+//       return {
+//         savedJobs: data.user.savedJobs || [],
+//         appliedJobs: data.user.appliedJobs || []
+//       };
+//     }
+//     throw new Error("Failed to load user data.");
+//   } catch (error) {
+//     console.error("Error fetching user data:", error);
+//     return { savedJobs: [], appliedJobs: [] };
+//   }
+// }
 
 export default async function SingleJobPage({ params }: { params: { jobId: string } }) {
   const job: Job | null = await getJob(params.jobId);
-  const { savedJobs, appliedJobs } = await getUserData(null); // Replace null with the actual token when available
+  // const { savedJobs, appliedJobs } = await getUserData(null); // Replace null with the actual token when available
 
   if (!job) {
     return (
@@ -126,8 +126,6 @@ export default async function SingleJobPage({ params }: { params: { jobId: strin
 
         <JobActions
           jobId={job._id}
-          initialIsApplied={appliedJobs.includes(job._id)}
-          initialIsSaved={savedJobs.includes(job._id)}
         />
       </div>
     </div>
