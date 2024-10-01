@@ -1,20 +1,49 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HiBookmark, HiOutlineBookmark } from "react-icons/hi2";
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 interface JobActionsProps {
     jobId: string;
-    initialIsApplied: boolean;
-    initialIsSaved: boolean;
 }
 
-const JobActions: React.FC<JobActionsProps> = ({ jobId, initialIsApplied, initialIsSaved }) => {
-    const [isApplied, setIsApplied] = useState(initialIsApplied);
-    const [isSaved, setIsSaved] = useState(initialIsSaved);
+const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
     const [applying, setApplying] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
+    const [isApplied, setIsApplied] = useState(false);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const { savedJobs, appliedJobs } = await getUserData();
+            console.log(savedJobs)
+            setIsSaved(savedJobs.some((job: any) => job._id === jobId));
+            setIsApplied(appliedJobs.some((job: any) => job._id === jobId));
+        };
+        fetchUserData();
+    }, [jobId]);
+
+    async function getUserData() {
+        try {
+            const response = await fetch(`/api/user`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+            const data = await response.json();
+            if (data.success) {
+                return {
+                    savedJobs: data.user.savedJobs || [],
+                    appliedJobs: data.user.appliedJobs || []
+                };
+            }
+            throw new Error("Failed to load user data.");
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            return { savedJobs: [], appliedJobs: [] };
+        }
+    }
 
     const handleApply = async () => {
         if (isApplied) return;
