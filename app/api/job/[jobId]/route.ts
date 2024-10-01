@@ -15,9 +15,7 @@ export async function GET(req: NextRequest, { params }: any) {
         const jobId = params.jobId
 
         const job = await jobModel.findById({ _id: jobId })
-
-        console.log(job)
-
+        
         return NextResponse.json({ message: 'Fetched Job successfully', success: true, job });
 
     } catch (error) {

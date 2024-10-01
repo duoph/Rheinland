@@ -13,7 +13,7 @@ export const getDataFromToken: any = async (req: NextRequest) => {
             console.log('Authorization token not found in cookies');
         }
 
-        const decodedToken = jwt.verify(token ? token : '', process.env.NEXT_PUBLIC_JWT_SECRET!);
+        const decodedToken = jwt.verify(token ? token : '', process.env.JWT_SECRET!);
 
 
         return decodedToken;

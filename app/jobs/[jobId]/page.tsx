@@ -29,7 +29,6 @@ const SingleJobPage = () => {
   const formattedDate = job?.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
 
   const fetchData = async () => {
-    setLoading(true);
 
     try {
       if (account?.token) {
@@ -43,14 +42,13 @@ const SingleJobPage = () => {
           console.error("Failed to load user data:", userRes?.data?.message);
         }
       }
-
-      // Fetch related jobs
-      const relatedJobsRes = await axios.get(`/api/job`);
-      if (relatedJobsRes.data.success) {
-        setRelatedJobs(relatedJobsRes.data.jobs);
-      } else {
-        setError("Failed to load related job data.");
-      }
+      // // Fetch related jobs
+      // const relatedJobsRes = await axios.get(`/api/job`);
+      // if (relatedJobsRes.data.success) {
+      //   setRelatedJobs(relatedJobsRes.data.jobs);
+      // } else {
+      //   setError("Failed to load related job data.");
+      // }
 
       // Fetch job details
       const jobRes = await axios.get(`/api/job/${jobId}`);
@@ -70,6 +68,7 @@ const SingleJobPage = () => {
   useEffect(() => {
     fetchData();
   }, [jobId, account?.token]);
+
 
   const handleSave = async () => {
     if (!job) return;
