@@ -48,9 +48,9 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
     const router = useRouter();
 
     const LogOut = async () => {
-        localStorage.removeItem('currentAccount');
         const res = await axios.get('/api/logout')
         if (res.data.success) {
+            localStorage.removeItem('currentAccount');
             setAccount({ id: "", token: "", type: "" });
             toast.success('Logged Out')
             router.push('/login');
