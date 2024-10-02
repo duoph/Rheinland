@@ -6,6 +6,7 @@ import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 // import { HiOutlineBookmark, HiBookmark } from "react-icons/hi2";
 import { Skeleton } from "./ui/skeleton";
+import { PiSuitcaseSimpleFill } from "react-icons/pi";
 // import axios from "axios";
 // import toast from "react-hot-toast";
 // import { useAccount } from "@/context/useAccount";
@@ -104,16 +105,28 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
   }
 
   return (
-    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[200px] max-h-[200px] group rounded-sm px-3 py-2 cursor-pointer">
+    <div className="border shadow-sm border-opacity-35 flex flex-col items-start justify-between md:min-w-[320px] w-full md:max-w-[320px] min-h-[210px] max-h-[210px] group rounded-sm px-3 py-2 cursor-pointer">
       <Link href={`/jobs/${job._id}`} className="w-full">
-        <div className="flex flex-col w-full py-2 space-y-2">
+
+
+        <div className="flex justify-between items-center w-full ">
           <span className="text-lg font-semibold text-gray-800">{job.title}</span>
         </div>
 
-        <div className="flex items-center text-sm text-gray-600 gap-2">
-          <CiLocationOn />
-          {job.location}
+
+
+        <div className="flex flex-col items-start text-sm text-gray-600">
+
+          <span className="flex items-center justify-center gap-2">
+            <PiSuitcaseSimpleFill />
+            {job?.jobType ? job?.jobType : "Full Time"}</span>
+
+          <span className="flex items-center justify-center gap-2">
+            <CiLocationOn />
+            {job.location}
+          </span>
         </div>
+
         <div className="h-[80px] w-full py-2">
           <p
             className="font-light text-sm text-gray-700 overflow-hidden"
@@ -127,8 +140,8 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
             {job.description}
           </p>
         </div>
-      </Link>
-      <div className="pt-2 font-extralight flex items-end justify-between text-sm w-full">
+      </Link >
+      <div className="font-extralight flex items-end justify-between text-sm w-full">
         <span>{new Date(job.createdAt).toLocaleDateString()}</span>
         {/* {savedJobs.includes(job._id) ? (
           <HiBookmark onClick={handleSave} className="text-[25px] text-rheinland-red cursor-pointer" />
@@ -136,7 +149,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, isLoading, reFectch }) => {
           <HiOutlineBookmark className="text-[25px] text-rheinland-red cursor-pointer" onClick={handleSave} />
         )} */}
       </div>
-    </div>
+    </div >
   );
 };
 
