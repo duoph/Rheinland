@@ -2,14 +2,18 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const response = NextResponse.json({
-            message: "LogOut successful",
-            success: true
-        });
+        // Create a new NextResponse instance
+        const response = new NextResponse(
+            JSON.stringify({
+                message: "LogOut successful",
+                success: true
+            }),
+            { status: 200 }
+        );
 
-        // Delete cookies
-        response.cookies.delete("token");
-        response.cookies.delete("accountType");
+        // Delete cookies by setting them with an empty value and maxAge: 0
+        response.cookies.set("token", "", { maxAge: 0 });
+        response.cookies.set("accountType", "", { maxAge: 0 });
 
         return response;
     } catch (error: any) {
@@ -17,6 +21,6 @@ export async function GET() {
         return NextResponse.json({
             message: error.message || "Internal Server Error",
             success: false
-        });
+        }, { status: 500 });
     }
 }

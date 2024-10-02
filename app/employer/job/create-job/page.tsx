@@ -16,6 +16,7 @@ const CreateJob = () => {
     const [location, setLocation] = useState<string>('');
     const [salary, setSalary] = useState<string>('');
     const [gender, setGender] = useState<string>('');
+    const [jobType, setJobType] = useState<string>('');
     const [languageLevel, setLanguageLevel] = useState<string>('');
     const [numberOfOpenings, setNumberOfOpenings] = useState<string>('');
 
@@ -77,6 +78,24 @@ const CreateJob = () => {
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
+
+
+                <div className='flex flex-col w-full'>
+                    <label className='text-sm font-medium text-rheinland-gray'>Job Type</label>
+                    <select
+                        value={jobType}
+                        onChange={(e) => setJobType(e.target.value)}
+                        required
+                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    >
+                        <option value='' disabled> Select Job Type</option>
+                        <option value='Full Time'>Full Time</option>
+                        <option value='Part Time'>Part Time</option>
+                        <option value='Contract'>Contract</option>
+                    </select>
+                </div>
+
+
 
                 {/* Category Select */}
                 <div className='flex flex-col w-full'>
