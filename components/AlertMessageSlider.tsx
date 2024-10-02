@@ -17,7 +17,7 @@ const AlertMessageSlider = () => {
       <Marquee loop={0} speed={50} pauseOnHover={true}>
         <h1 className="text-white font-extralight">
           This website is still under development. The jobs listed are demo.
-          Stay tuned...
+          Stay tuned....
         </h1>
       </Marquee>
     </div>
