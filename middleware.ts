@@ -20,7 +20,7 @@ export default function middleware(request: NextRequest) {
     }
 
 
-    if (path === "/login" && token) {
+    if ((path === "/login" || path === "/create-account") && token) {
         if (accountType === "user") {
             return NextResponse.redirect(new URL('/jobs', request.url));
         } else if (accountType === "employer") {
@@ -66,5 +66,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/employer/:path*", "/admin/:path*", "/login", '/job/:path', '/', '/jobs'], // Apply middleware to /employer and /admin paths
+    matcher: ["/employer/:path*", "/admin/:path*", "/login","/create-account", '/job/:path', '/', '/jobs'],
 };
