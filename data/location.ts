@@ -1,5 +1,5 @@
 export const locations = [
-    { id: 1, name: 'Aachen' },
+    { id: 1, name: 'Aachen'},
     { id: 2, name: 'Aalen' },
     { id: 3, name: 'Ahlen' },
     { id: 4, name: 'Ahrensburg' },
