@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { cookies } from "next/headers";
 import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -49,22 +50,28 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
 
     const LogOut = async () => {
         try {
-            // Call the logout API to remove cookies
+            // Call the logout API to remove cookies on the server side
             const res = await axios.get('/api/logout');
 
-            // Check if the logout was successful and cookies were removed
+            // Check if the logout was successful
             if (res.data.success) {
+                // Manually delete cookies by setting their expiration to a past date
+                document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "accountType=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
                 // Verify if the cookies were successfully deleted
                 const tokenCookie = document.cookie.includes("token=");
                 const accountTypeCookie = document.cookie.includes("accountType=");
 
                 if (!tokenCookie && !accountTypeCookie) {
-                    // If cookies are removed, clear local storage and update the account state
+                    // Clear local storage and update the account state
                     localStorage.removeItem('currentAccount');
                     localStorage.removeItem('savedJobs');
                     setAccount({ id: "", token: "", type: "" });
+
+                    // Show success message and navigate to login page
                     toast.success('Logged Out');
-                    router.push('/login');
+                    await router.push('/login');  // Ensure navigation happens after logout
                 } else {
                     toast.error('Logout failed. Cookies were not removed.');
                 }
@@ -74,6 +81,7 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
             toast.error('Logout failed.');
         }
     };
+
 
 
     return (
