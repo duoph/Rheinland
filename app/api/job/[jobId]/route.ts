@@ -39,6 +39,7 @@ export async function PUT(req: NextRequest, { params }: any) {
             gender,
             salary,
             skills,
+            jobType,
             numberOfOpenings,
             languageLevel,
         } = await req.json();
@@ -54,6 +55,7 @@ export async function PUT(req: NextRequest, { params }: any) {
             category,
             location,
             gender,
+            jobType,
             salary,
             skills,
             numberOfOpenings,

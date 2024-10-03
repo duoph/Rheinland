@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
             gender,
             salary,
             skills,
+            jobType,
             numberOfOpenings,
             languageLevel,
         } = await req.json();
@@ -67,9 +68,10 @@ export async function POST(req: NextRequest) {
             gender,
             salary,
             skills,
+            jobType,
             languageLevel,
             numberOfOpenings,
-           
+
         });
 
         const savedJob = await newJob.save();
