@@ -36,6 +36,7 @@ const CreateJob = () => {
             employerId: account.id,
             location,
             gender,
+            jobType,
             salary,
             numberOfOpenings,
             categoryId: selectedCategory?.id,

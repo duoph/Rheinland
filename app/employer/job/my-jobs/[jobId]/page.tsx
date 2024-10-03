@@ -105,6 +105,24 @@ const EditJob = () => {
                     />
                 </div>
 
+
+                {/* Job type Select */}
+                <div className='flex flex-col w-full'>
+                    <label className='text-sm font-medium text-rheinland-gray'>Job Type</label>
+                    <select
+                        value={jobType}
+                        onChange={(e) => setJobType(e.target.value)}
+                        required
+                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    >
+                        <option value='' disabled> Select Job Type</option>
+                        <option value='Full Time'>Full Time</option>
+                        <option value='Part Time'>Part Time</option>
+                        <option value='Contract'>Contract</option>
+                    </select>
+                </div>
+
+
                 {/* Category Select */}
                 <div className='flex flex-col w-full'>
                     <label className='text-sm font-medium text-rheinland-gray'>Category</label>
