@@ -31,7 +31,7 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center gap-10">
           <div onClick={handleLogoRoute} className="flex items-center min-w-1/3 cursor-pointer">
-           
+
             <Image
               src={"/RheinlandEnlarged.png"}
               alt="Logo"
@@ -39,7 +39,7 @@ const Header = () => {
               width={110}
               sizes="(max-width: 768px) 100vw, 33vw"
             />
-            
+
           </div>
 
 
@@ -55,15 +55,14 @@ const Header = () => {
 
       {(!account.token || !account.id) && (
         <div className="sm:w-3/6 flex items-center justify-end gap-3 font-light">
-          <Link href={"/login"} className="rounded-sm px-3 py-2 text-rheinland-red">
+          <div onClick={() => router.replace('/login')} className="rounded-sm px-3 py-2 text-rheinland-red cursor-pointer">
             Login
-          </Link>
-          <Link
-            href={"/create-account"}
-            className="rounded-sm bg-rheinland-red text-white px-3 py-2"
+          </div>
+          <div onClick={() => router.replace('/create-account')}
+            className="rounded-sm bg-rheinland-red text-white px-3 py-2 cursor-pointer"
           >
             Sign Up
-          </Link>
+          </div>
         </div>
       )}
 

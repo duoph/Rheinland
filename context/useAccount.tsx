@@ -48,15 +48,33 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
     const router = useRouter();
 
     const LogOut = async () => {
-        const res = await axios.get('/api/logout')
-        if (res.data.success) {
-            localStorage.removeItem('currentAccount');
-            localStorage.removeItem('savedJobs');
-            setAccount({ id: "", token: "", type: "" });
-            toast.success('Logged Out')
-            router.push('/login');
+        try {
+            // Call the logout API to remove cookies
+            const res = await axios.get('/api/logout');
+
+            // Check if the logout was successful and cookies were removed
+            if (res.data.success) {
+                // Verify if the cookies were successfully deleted
+                const tokenCookie = document.cookie.includes("token=");
+                const accountTypeCookie = document.cookie.includes("accountType=");
+
+                if (!tokenCookie && !accountTypeCookie) {
+                    // If cookies are removed, clear local storage and update the account state
+                    localStorage.removeItem('currentAccount');
+                    localStorage.removeItem('savedJobs');
+                    setAccount({ id: "", token: "", type: "" });
+                    toast.success('Logged Out');
+                    router.push('/login');
+                } else {
+                    toast.error('Logout failed. Cookies were not removed.');
+                }
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+            toast.error('Logout failed.');
         }
     };
+
 
     return (
         <AccountContext.Provider value={{ account, setAccountData, LogOut }}>
