@@ -59,7 +59,6 @@ export const AccountProvider: FC<AccountProviderProps> = ({ children }) => {
                 const accountTypeCookie = document.cookie.includes("accountType=");
 
                 if (!tokenCookie && !accountTypeCookie) {
-                    // If cookies are removed, clear local storage and update the account state
                     localStorage.removeItem('currentAccount');
                     localStorage.removeItem('savedJobs');
                     setAccount({ id: "", token: "", type: "" });
