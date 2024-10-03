@@ -375,7 +375,7 @@ export const locations = [
     { id: 374, name: 'Uelzen' },
     { id: 375, name: 'Ulm' },
     { id: 376, name: 'Unna' },
-    { id: 377, name: 'Unterhaching' },
+    { id: 377, name: 'Unterhaching'},
     { id: 378, name: 'Usingen' },
     { id: 379, name: 'Vechta' },
     { id: 380, name: 'Viernheim' },
