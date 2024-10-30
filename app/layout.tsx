@@ -16,6 +16,8 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
+
+
 export const metadata: Metadata = {
   title: "Rheinland Jobs: Your Trusted Partner for German Career Opportunities",
   description:
@@ -32,6 +34,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Rheinland Jobs",
+              "url": "https://www.rheinlandconsultancy.com/",
+              "logo": "https://www.rheinlandconsultancy.com/favicon.ico",
+              "description": "Rheinland Jobs: Your Gateway to Careers in Germany. Connecting talent with top German employers through personalized career guidance and expert recruitment services."
+            })
+          }}
+        />
+      </head>
       <body className={poppins.className}>
         <AccountProvider>
           <Header />
