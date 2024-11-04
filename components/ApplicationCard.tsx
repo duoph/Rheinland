@@ -22,7 +22,7 @@ interface Applicant {
 
 interface ApplicationCardProps {
   applicant: Applicant;
-  isLoading: boolean;
+  isLoading?: boolean;
   jobId: string;
   isShortlisted: boolean;
 }

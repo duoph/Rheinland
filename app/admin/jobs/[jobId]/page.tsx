@@ -17,7 +17,7 @@ import ApplicationCard from "@/components/ApplicationCard";
 
 const SingleJobPage: React.FC = () => {
 
-    const { jobId } = useParams();
+    const { jobId } = useParams() as { jobId: string };
 
     const [job, setJob] = useState<Job | null>(null);
     const [appliedUsers, setAppliedUsers] = useState<any>(null);
