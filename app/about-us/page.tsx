@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const AboutPage = () => {
+    
     return (
         <div className="min-h-screen pt-[90px] bg-gray-50 text-gray-800">
             <header className="flex flex-col items-center justify-center py-2">
