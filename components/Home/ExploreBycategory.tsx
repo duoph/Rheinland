@@ -5,7 +5,7 @@ import CategoryCard from "../CategoryCard"
 import { jobCategories } from "@/data/jobData"
 import { useRouter } from "next/navigation"
 
-const ExploteBycategory = () => {
+const ExploreByCategory = () => {
 
 
 
@@ -37,4 +37,4 @@ const ExploteBycategory = () => {
     )
 }
 
-export default ExploteBycategory
+export default ExploreByCategory
