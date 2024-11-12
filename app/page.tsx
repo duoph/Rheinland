@@ -2,7 +2,7 @@ import CompanySignUpBanner from "@/components/Home/CompanySignUpBanner";
 import NewAndFeaturedJobs from "@/components/Home/NewAndFeaturedJobs";
 import HelpedCompanies from "@/components/Home/HelpedCompanies";
 import HeroContainer from "@/components/Home/HeroContainer";
-import ExploreByCategory from "@/components/Home/ExploreByCategory";
+import ExploreByCategory from "@/components/Home/ExploreBycategory";
 
 
 export const metadata = {
