@@ -4,6 +4,7 @@ import HelpedCompanies from "@/components/Home/HelpedCompanies";
 import HeroContainer from "@/components/Home/HeroContainer";
 import ExploreByCategory from "@/components/Home/ExploreByCategory";
 
+
 export const metadata = {
   title: "Rheinland Jobs | Find Your Dream Job in Germany",
   description: "Explore job opportunities in Germany with Rheinland Jobs. We connect skilled professionals with top German companies. Find your dream job today!",
