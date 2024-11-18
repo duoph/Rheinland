@@ -4,10 +4,10 @@ import HelpedCompanies from "@/components/Home/HelpedCompanies";
 import HeroContainer from "@/components/Home/HeroContainer";
 import ExploreByCategory from "@/components/Home/ExploreBycategory";
 
-
 export const metadata = {
   title: "Rheinland Jobs | Find Your Dream Job in Germany",
-  description: "Explore job opportunities in Germany with Rheinland Jobs. We connect skilled professionals with top German companies. Find your dream job today!",
+  description:
+    "Explore job opportunities in Germany with Rheinland Jobs. We connect skilled professionals with top German companies. Find your dream job today!",
   keywords: [
     "German jobs",
     "jobs in Germany",
@@ -16,10 +16,17 @@ export const metadata = {
     "career opportunities Germany",
     "recruitment Germany",
     "top employers Germany",
+    "German job market",
+    "jobs for foreigners in Germany",
+    "expat jobs Germany",
+    "work in Germany",
   ],
+  robots: "index, follow", // Ensure pages are indexed and followed
+  canonical: "https://www.rheinlandconsultancy.com/", // Avoid duplicate content issues
   openGraph: {
-    title: "Rheinland Jobs | Find Your Dream Job in Germany",
-    description: "Explore job opportunities in Germany with Rheinland Jobs. Start your career journey today!",
+    title: "Rheinland Consultancy | Find Your Dream Job in Germany",
+    description:
+      "Explore job opportunities in Germany with Rheinland Jobs. Start your career journey today!",
     url: "https://www.rheinlandconsultancy.com/",
     images: [
       {
@@ -35,7 +42,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rheinland Jobs | Find Your Dream Job in Germany",
-    description: "Find your ideal job in Germany with Rheinland Jobs. We connect skilled professionals with reputable German employers.",
+    description:
+      "Find your ideal job in Germany with Rheinland Jobs. We connect skilled professionals with reputable German employers.",
     images: ["https://www.rheinlandconsultancy.com/RheinlandLogoHeader.png"],
   },
 };
@@ -73,12 +81,21 @@ export default function Home() {
           }),
         }}
       />
+
+      {/* Hero Section */}
       <HeroContainer />
+      
+      {/* Helped Companies Section */}
       <HelpedCompanies />
+
+      {/* Explore Jobs by Category Section */}
       <ExploreByCategory />
+
+      {/* Company Sign Up Banner */}
       <CompanySignUpBanner />
+
+      {/* New and Featured Jobs Section */}
       <NewAndFeaturedJobs />
     </main>
   );
 }
-
