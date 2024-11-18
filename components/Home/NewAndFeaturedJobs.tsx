@@ -47,7 +47,7 @@ const [jobs, setJobs] = useState<Job[]>([]);
     return (
         <div className='flex flex-col items-center justify-center w-full px-2 lg:px-32 md:px-20 md:py-10 py-6 gap-4'>
             {/* Featured Jobs Section */}
-            <div className='flex flex-col items-center justify-center w-full  md:py-5 py-2 gap-4'>
+            <div className='flex flex-col items-center justify-center w-full  md:py-5 py-2 gap-4 max-w-7xl mx-auto'>
                 <div className='flex items-center justify-center w-full'>
                     <h1 className="lg:text-[40px] text-[35px] font-semibold"> Featured <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>
@@ -72,7 +72,7 @@ const [jobs, setJobs] = useState<Job[]>([]);
             </div>
 
             {/* New Jobs Section */}
-            <div className='flex flex-col items-center justify-center w-full md:py-5 py-2 gap-4'>
+            <div className='flex flex-col items-center justify-center w-full md:py-5 py-2 gap-4  max-w-7xl mx-auto'>
                 <div className='flex items-center justify-center w-full'>
                     <h1 className="lg:text-[40px] text-[35px] font-semibold">New <span className="text-rheinland-yellow">Jobs</span></h1>
                 </div>

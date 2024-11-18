@@ -56,7 +56,7 @@ const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
                 toast.success("Applied successfully");
                 setIsApplied(true);
             } else {
-                toast.error("Failed to apply");
+                toast.error(response.data.message || "Error");
             }
         } catch (error) {
             toast.error("Error applying to job");
@@ -74,7 +74,7 @@ const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
                 setIsSaved((prev) => !prev);
                 toast.success(isSaved ? "Job removed from saved" : "Job saved");
             } else {
-                toast.error("Error saving job");
+                toast.error(response.data.message || "Error");
             }
         } catch (error) {
             toast.error("Error saving job");

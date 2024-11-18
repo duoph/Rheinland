@@ -12,9 +12,17 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
     const { id } = await getDataFromToken(req);
     const { jobId } = params;
 
-    if (!id || !jobId) {
+    if (!id) {
       return NextResponse.json({
-        message: "Missing user ID or job ID",
+        message: "Login to save jobs",
+        success: false,
+        status: 400,
+      });
+    }
+
+    if (!jobId) {
+      return NextResponse.json({
+        message: "Error",
         success: false,
         status: 400,
       });

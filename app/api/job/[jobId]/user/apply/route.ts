@@ -1,3 +1,4 @@
+
 import { getDataFromToken } from "@/actions/getDataFromToken";
 import connectMongoDB from "@/lib/dbConnect";
 import jobModel from "@/models/jobSchema";
@@ -14,8 +15,12 @@ export async function PUT(req: NextRequest, { params }: { params: { jobId: strin
         const { id } = await getDataFromToken(req);
 
         if (!id) {
-            return NextResponse.json({ error: 'User ID not found in token', success: false, status: 400 });
-        }
+            return NextResponse.json({
+              message: "Login to apply",
+              success: false,
+              status: 400,
+            });
+          }
 
         await userModel.findByIdAndUpdate(id, { $addToSet: { appliedJobs: jobId } });
 

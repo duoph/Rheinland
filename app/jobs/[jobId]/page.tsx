@@ -23,29 +23,6 @@ async function getJob(jobId: string) {
   }
 }
 
-// async function getUserData(token: string | null) {
-//   if (!token) return { savedJobs: [], appliedJobs: [] };
-//   try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
-//       headers: { Authorization: `Bearer ${token}` },
-//       next: { revalidate: 60 }
-//     });
-//     if (!response.ok) {
-//       throw new Error('Failed to fetch user data');
-//     }
-//     const data = await response.json();
-//     if (data.success) {
-//       return {
-//         savedJobs: data.user.savedJobs || [],
-//         appliedJobs: data.user.appliedJobs || []
-//       };
-//     }
-//     throw new Error("Failed to load user data.");
-//   } catch (error) {
-//     console.error("Error fetching user data:", error);
-//     return { savedJobs: [], appliedJobs: [] };
-//   }
-// }
 
 export default async function SingleJobPage({ params }: { params: { jobId: string } }) {
   const job: Job | null = await getJob(params.jobId);
@@ -104,7 +81,10 @@ export default async function SingleJobPage({ params }: { params: { jobId: strin
         </span>
       </div>
 
-      <div className="flex flex-col items-start justify-center w-full gap-3">
+      <div className="flex flex-col items-start justify-center w-full pt-2">
+
+     <h3 className="font-semibold">Skills :</h3>
+
         <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
           {job.skills && job.skills.length > 0 ? (
             job.skills
