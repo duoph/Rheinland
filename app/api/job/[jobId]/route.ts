@@ -39,6 +39,7 @@ export async function PUT(req: NextRequest, { params }: any) {
             gender,
             salary,
             skills,
+            qualifications,
             jobType,
             numberOfOpenings,
             languageLevel,
@@ -47,6 +48,8 @@ export async function PUT(req: NextRequest, { params }: any) {
         if (!title || !description || !category) {
             return NextResponse.json({ error: 'Missing required fields', success: false, status: 400 });
         }
+
+        console.log(qualifications)
 
         const updatedJob = await jobModel.findByIdAndUpdate(params.jobId, {
             title,
@@ -58,6 +61,7 @@ export async function PUT(req: NextRequest, { params }: any) {
             jobType,
             salary,
             skills,
+            qualifications,
             numberOfOpenings,
             languageLevel,
 

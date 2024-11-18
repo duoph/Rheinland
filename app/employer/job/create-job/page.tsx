@@ -49,9 +49,10 @@ const CreateJob = () => {
             jobData.skills = skillsArray;
         }
 
-        const qualificationsArray: any = qualifications.length > 0 && qualifications.split(',').map(skill => qualifications.trim()).filter(skill => qualifications !== '');
+        const qualificationsArray: any = qualifications.length > 0 && qualifications.split(',').map(qualification => qualification.trim()).filter(qualification => qualification !== '');
         if (skillsArray?.length > 0) {
             jobData.qualifications = qualificationsArray;
+            console.log(qualificationsArray)
         }
 
         try {

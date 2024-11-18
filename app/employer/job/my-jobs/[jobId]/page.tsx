@@ -13,6 +13,7 @@ const EditJob = () => {
     const [category, setCategory] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [skills, setSkills] = useState<string>('');
+    const [qualifications, setQualifications] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [salary, setSalary] = useState<string>('');
     const [gender, setGender] = useState<string>('');
@@ -32,13 +33,14 @@ const EditJob = () => {
             setTitle(jobData.title);
             setCategory(jobData.category);
             setDescription(jobData.description);
-            setSkills(jobData.skills.join(', '));
-            setLocation(jobData.location);
-            setSalary(jobData.salary);
-            setGender(jobData.gender);
-            setLanguageLevel(jobData.languageLevel);
-            setJobType(jobData.jobType);
-            setNumberOfOpenings(jobData.numberOfOpenings);
+            setSkills(jobData?.skills?.join(', '));
+            setQualifications(jobData?.qualifications?.join(', '));
+            setLocation(jobData?.location);
+            setSalary(jobData?.salary);
+            setGender(jobData?.gender);
+            setLanguageLevel(jobData?.languageLevel);
+            setJobType(jobData?.jobType);
+            setNumberOfOpenings(jobData?.numberOfOpenings);
         } catch (error) {
             console.error('Error fetching job details:', error);
         }
@@ -72,6 +74,14 @@ const EditJob = () => {
         if (skillsArray?.length > 0) {
             jobData.skills = skillsArray;
         }
+        
+        const qualificationsArray: any = qualifications.length > 0 && qualifications.split(',').map(qualification => qualification.trim()).filter(qualification => qualification !== '');
+        if (skillsArray?.length > 0) {
+            jobData.qualifications = qualificationsArray;
+        }
+
+        console.log(qualificationsArray)
+
 
         try {
             await axios.put(`/api/job/${jobId}`, jobData);
@@ -159,7 +169,6 @@ const EditJob = () => {
                     <select
                         value={gender}
                         onChange={(e) => setGender(e.target.value)}
-                        required
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     >
                         <option value='' disabled>Select Gender</option>
@@ -175,7 +184,7 @@ const EditJob = () => {
                     <select
                         value={numberOfOpenings}
                         onChange={(e) => setNumberOfOpenings(e.target.value)}
-                        required
+                        
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     >
                         <option value="" disabled>Select Number of Openings</option>
@@ -199,7 +208,7 @@ const EditJob = () => {
                     <select
                         value={languageLevel}
                         onChange={(e) => setLanguageLevel(e.target.value)}
-                        required
+                        
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     >
                         <option value='' disabled>Select Minimum Language Level</option>
@@ -219,6 +228,18 @@ const EditJob = () => {
                         type='text'
                         value={skills}
                         onChange={(e) => setSkills(e.target.value)}
+                        placeholder='Enter skills (comma-separated) (e.g., Python, Java, C++)'
+                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    />
+                </div>
+
+                {/* qulification Input */}
+                <div className='flex flex-col w-full'>
+                    <label className='text-sm font-medium text-rheinland-gray'>Qualification</label>
+                    <input
+                        type='text'
+                        value={qualifications}
+                        onChange={(e) => setQualifications(e.target.value)}
                         placeholder='Enter skills (comma-separated) (e.g., Python, Java, C++)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
