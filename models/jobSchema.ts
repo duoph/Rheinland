@@ -7,6 +7,7 @@ const jobSchema = new Schema({
     categoryId: { type: String, required: true },
     description: { type: String, required: true },
     skills: [{ type: String }],
+    qualifications: [{ type: String }],
     minAge: { type: String },
     maxAge: { type: String },
     jobType: { type: String },

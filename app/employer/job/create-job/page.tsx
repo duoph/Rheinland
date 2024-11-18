@@ -13,6 +13,7 @@ const CreateJob = () => {
     const [category, setCategory] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [skills, setSkills] = useState<string>('');
+    const [qualifications, setQualifications] = useState<string>('');
     const [location, setLocation] = useState<string>('');
     const [salary, setSalary] = useState<string>('');
     const [gender, setGender] = useState<string>('');
@@ -46,6 +47,11 @@ const CreateJob = () => {
         const skillsArray: any = skills.length > 0 && skills.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
         if (skillsArray?.length > 0) {
             jobData.skills = skillsArray;
+        }
+
+        const qualificationsArray: any = qualifications.length > 0 && qualifications.split(',').map(skill => qualifications.trim()).filter(skill => qualifications !== '');
+        if (skillsArray?.length > 0) {
+            jobData.qualifications = qualificationsArray;
         }
 
         try {
@@ -197,6 +203,18 @@ const CreateJob = () => {
                         value={skills}
                         onChange={(e) => setSkills(e.target.value)}
                         placeholder='Enter skills (comma-separated)'
+                        className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
+                    />
+                </div>
+
+                {/* qualification Input */}
+                <div className='flex flex-col w-full'>
+                    <label className='text-sm font-medium text-rheinland-gray'>Qualifications (e.g.,Computer Science Degree,Good Communication,etc...)</label>
+                    <input
+                        type='text'
+                        value={qualifications}
+                        onChange={(e) => setQualifications(e.target.value)}
+                        placeholder='Enter Qualifications (comma-separated)'
                         className="w-full border px-3 py-3 border-b rounded-sm focus:outline-none"
                     />
                 </div>
