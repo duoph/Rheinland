@@ -22,7 +22,9 @@ export const jobCategories = [
     { id: 21, name: "Construction", description: "Jobs in building and infrastructure development, including site management." },
     { id: 22, name: "Arts and Entertainment", description: "Roles in performing arts, music, film, and other entertainment industries." },
     { id: 23, name: "Research and Development", description: "Positions focused on innovation, research, and development of new products and technologies." },
-    { id: 24, name: "Public Administration", description: "Careers in government and public sector roles, including policy making and administration." }
+    { id: 24, name: "Public Administration", description: "Careers in government and public sector roles, including policy making and administration." },
+    { id: 24, name: "Ausbildung", description: "Vocational training or apprenticeship." },
+
 ];
 
 
