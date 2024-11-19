@@ -15,12 +15,12 @@ const ContactPage = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-rheinland-red mb-2">Contact Us</h1>
-          <p className="text-gray-600">We'd love to hear from you</p>
+          <p className="text-gray-600">We&apos;d love to hear from you</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Rheinland Consultancy Card */}
-          <div className="bg-white rounded-lg shadow-lg  transition-shadow p-6">
+          <div className="bg-white rounded-lg shadow-lg transition-shadow p-6">
             <div className="flex items-center space-x-2 mb-6">
               <Building2 className="w-6 h-6 text-rheinland-red" />
               <h2 className="text-xl font-semibold text-rheinland-red">Rheinland Consultancy</h2>
@@ -56,7 +56,7 @@ const ContactPage = () => {
           </div>
 
           {/* Rheinland German School Card */}
-          <div className="bg-white rounded-lg shadow-lg  transition-shadow p-6 mb-10">
+          <div className="bg-white rounded-lg shadow-lg transition-shadow p-6 mb-10">
             <div className="flex items-center space-x-2 mb-6">
               <School2 className="w-6 h-6 text-rheinland-red" />
               <h2 className="text-xl font-semibold text-rheinland-red">Rheinland German School</h2>
