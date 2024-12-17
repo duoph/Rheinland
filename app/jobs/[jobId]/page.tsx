@@ -4,13 +4,15 @@ import { CiLocationOn, CiUser } from "react-icons/ci";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { SlCalender } from "react-icons/sl";
-import JobActions from '@/components/JobApplyButton';
+import JobActions from "@/components/JobApplyButton";
 
 async function getJob(jobId: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/job/${jobId}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${process.env.API_URL}/api/job/${jobId}`, {
+      next: { revalidate: 60 },
+    });
     if (!response.ok) {
-      throw new Error('Failed to fetch job data');
+      throw new Error("Failed to fetch job data");
     }
     const data = await response.json();
     if (data.success) {
@@ -23,8 +25,11 @@ async function getJob(jobId: string) {
   }
 }
 
-
-export default async function SingleJobPage({ params }: { params: { jobId: string } }) {
+export default async function SingleJobPage({
+  params,
+}: {
+  params: { jobId: string };
+}) {
   const job: Job | null = await getJob(params.jobId);
   // const { savedJobs, appliedJobs } = await getUserData(null); // Replace null with the actual token when available
 
@@ -36,10 +41,12 @@ export default async function SingleJobPage({ params }: { params: { jobId: strin
     );
   }
 
-  const formattedDate = job.createdAt ? format(new Date(job.createdAt), "dd/MM/yyyy") : "Date data failed to load";
+  const formattedDate = job.createdAt
+    ? format(new Date(job.createdAt), "dd/MM/yyyy")
+    : "Date data failed to load";
 
   const formatTextWithLineBreaks = (text: string) => {
-    return text.replace(/\n/g, '<br>');
+    return text.replace(/\n/g, "<br>");
   };
 
   return (
@@ -82,31 +89,56 @@ export default async function SingleJobPage({ params }: { params: { jobId: strin
       </div>
 
       <div className="flex flex-col items-start justify-center w-full pt-2">
+        {job?.skills && (
+          <div className="flex flex-col items-start justify-center w-full pt-2">
+            <h3 className="font-semibold">Skills</h3>
+            <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
+              {job.skills
+                .filter((skill) => skill !== "")
+                .slice(0, 10)
+                .map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-3 bg-rheinland-blue rounded-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+            </div>
+          </div>
+        )}
 
-     <h3 className="font-semibold">Skills :</h3>
-
-        <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
-          {job.skills && job.skills.length > 0 ? (
-            job.skills
-              .filter(skill => skill !== "")
-              .slice(0, 10)
-              .map((skill, index) => (
-                <span key={index} className="px-3 py-3 bg-rheinland-blue rounded-sm">
-                  {skill}
-                </span>
-              ))
-          ) : (
-            <p>No skills listed</p>
-          )}
-        </div>
+        {job?.qualifications && (
+          <div className="flex flex-col items-start justify-center w-full pt-2">
+            <h3 className="font-semibold">Qualifications</h3>
+            <div className="font-light text-sm text-white flex flex-wrap gap-2 py-3">
+              {job.qualifications
+                .filter((qualification) => qualification !== "")
+                .slice(0, 10)
+                .map((qualification, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-3 bg-rheinland-blue rounded-sm"
+                  >
+                    {qualification}
+                  </span>
+                ))}
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col gap-2 items-start justify-center w-full">
-          <p className="font-light" dangerouslySetInnerHTML={{ __html: formatTextWithLineBreaks(job.description || "No description available") }} />
+          <p
+            className="font-light"
+            dangerouslySetInnerHTML={{
+              __html: formatTextWithLineBreaks(
+                job.description || "No description available"
+              ),
+            }}
+          />
         </div>
 
-        <JobActions
-          jobId={job._id}
-        />
+        <JobActions jobId={job._id} jobName={job.title} />
       </div>
     </div>
   );

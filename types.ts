@@ -12,6 +12,7 @@ export interface Job {
     maxAge?: string;
     location: string;
     state?: string;
+    qualifications?: string[];
     requirements?: string;
     gender?: string;
     appliedUsers: string[];

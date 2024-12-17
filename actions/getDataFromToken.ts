@@ -8,7 +8,6 @@ export const getDataFromToken: any = async (req: NextRequest) => {
 
         const token = req.cookies?.get('token')?.value;
 
-
         if (!token) {
             console.log('Authorization token not found in cookies');
         }

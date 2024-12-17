@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "Rheinland Jobs | Find Your Dream Job in Germany",
     description:
       "Find your ideal job in Germany with Rheinland Jobs. We connect skilled professionals with reputable German employers.",
-    images: ["https://www.rheinlandconsultancy.com/favicon.ico"],
+          images: ["https://www.rheinlandconsultancy.com/favicon.ico"],
   },
 };
 

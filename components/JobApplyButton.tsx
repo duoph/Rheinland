@@ -7,9 +7,10 @@ import toast from 'react-hot-toast';
 
 interface JobActionsProps {
     jobId: string;
+    jobName?: string;
 }
 
-const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
+const JobActions: React.FC<JobActionsProps> = ({ jobId ,jobName}) => {
     const [applying, setApplying] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
     const [isApplied, setIsApplied] = useState(false);
@@ -45,6 +46,19 @@ const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
         }
     }
 
+    const sendAppliedNotification = async () => {
+        try {
+          const response = await axios.post("/api/job/notifyEmail", {
+            jobId: jobId,
+            jobName: jobName, 
+          });
+          console.log("Email notification response:", response.data);
+        } catch (error) {
+          console.error("Error sending email notification:", error);
+        }
+      };
+    
+
     const handleApply = async () => {
         if (isApplied) return;
 
@@ -54,6 +68,7 @@ const JobActions: React.FC<JobActionsProps> = ({ jobId }) => {
 
             if (response.data.success) {
                 toast.success("Applied successfully");
+                sendAppliedNotification()
                 setIsApplied(true);
             } else {
                 toast.error(response.data.message || "Error");
